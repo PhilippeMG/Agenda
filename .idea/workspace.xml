@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="f266d6c3-ad2d-4194-9dc4-3878ec68606a" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="f266d6c3-ad2d-4194-9dc4-3878ec68606a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
+>>>>>>> 882a3f2eadd7203b92c6f8597cd72cc1c4b7fefa
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,6 +19,27 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+=======
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/agenda/main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+>>>>>>> 882a3f2eadd7203b92c6f8597cd72cc1c4b7fefa
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -27,8 +54,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/agenda/main.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="69">
               <caret line="3" column="4" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+=======
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+>>>>>>> 882a3f2eadd7203b92c6f8597cd72cc1c4b7fefa
             </state>
           </provider>
         </entry>
@@ -43,26 +75,31 @@
     <option name="width" value="902" />
     <option name="height" value="484" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="PackagesPane" />
       <pane id="Scope" />
+=======
+>>>>>>> 882a3f2eadd7203b92c6f8597cd72cc1c4b7fefa
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="IdeaProyects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IdeaProyects" type="462c0819:PsiDirectoryNode" />
+              <item name="Agenda" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Agenda" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="IdeaProyects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IdeaProyects" type="462c0819:PsiDirectoryNode" />
+              <item name="Agenda" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Agenda" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
+<<<<<<< HEAD
               <item name="IdeaProyects" type="b2602c69:ProjectViewProjectNode" />
               <item name="IdeaProyects" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
@@ -83,10 +120,19 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="agenda" type="462c0819:PsiDirectoryNode" />
             </path>
+=======
+              <item name="Agenda" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Agenda" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+>>>>>>> 882a3f2eadd7203b92c6f8597cd72cc1c4b7fefa
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="RunDashboard">
@@ -115,10 +161,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="41" y="25" width="1325" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2533229" />
+=======
+    <frame x="0" y="0" width="1366" height="732" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25378788" />
+>>>>>>> 882a3f2eadd7203b92c6f8597cd72cc1c4b7fefa
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -146,10 +198,23 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/agenda/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
+<<<<<<< HEAD
       <provider editor-type-id="text-editor">
         <state relative-caret-position="46">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
+=======
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+>>>>>>> 882a3f2eadd7203b92c6f8597cd72cc1c4b7fefa
         </state>
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
