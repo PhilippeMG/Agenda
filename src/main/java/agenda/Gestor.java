@@ -1,5 +1,5 @@
 package agenda;
 
-public class main {
+public class Gestor {
     //Comentario de prueba.
 }

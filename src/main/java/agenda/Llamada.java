@@ -8,6 +8,4 @@ public class Llamada {
     int duracion;
     Date fechaLlamada;
 
-
-
 }
