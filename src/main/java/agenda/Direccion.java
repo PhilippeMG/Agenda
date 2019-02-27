@@ -10,4 +10,13 @@ public class Direccion {
         this.provincia = provincia;
         this.poblacion = poblacion;
     }
+
+    @Override
+    public String toString() {
+        return "Direccion{" +
+                "CP=" + CP +
+                ", provincia='" + provincia + '\'' +
+                ", poblacion='" + poblacion + '\'' +
+                '}';
+    }
 }

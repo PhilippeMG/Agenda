@@ -11,8 +11,9 @@ public class Cliente {
     Date fechaDeAlta;
     int tipoTarifa;
     Factura[] facturas;
+    Llamada[] llamadas;
 
-    public Cliente(String nombre, String nif, Direccion direccion, String correo, Date fechaDeAlta, int tipoTarifa, Factura[] facturas) {
+    public Cliente(String nombre, String nif, Direccion direccion, String correo, int tipoTarifa) {
         this.nombre = nombre;
         this.nif = nif;
         this.direccion = direccion;
@@ -20,11 +21,20 @@ public class Cliente {
         this.fechaDeAlta = new Date();
         this.tipoTarifa = tipoTarifa;
         this.facturas = null;
+        this.llamadas = null;
+    }
+    public Date getFecha(){
+        return this.fechaDeAlta;
     }
 
-    public static void main (String [ ] args) {
-
-        Cliente cliente = new Cliente("Pepe", "2332X");
-        System.out.printf(cliente.toString());
+    @Override
+    public String toString() {
+        return "Cliente:" +
+                "nombre='" + nombre + '\'' +
+                ", nif='" + nif + '\'' +
+                ", direccion=" + direccion.toString() +
+                ", correo='" + correo + '\'' +
+                ", fechaDeAlta=" + fechaDeAlta +
+                ", tipoTarifa=" + tipoTarifa ;
     }
 }

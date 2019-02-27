@@ -3,8 +3,8 @@ package agenda;
 public class Particular extends Cliente{
     String apellidos;
 
-    public Particular(String nombre, String nif, String apellidos) {
-        super(nombre, nif);
+    public Particular(String nombre, String nif, Direccion direccion, String correo, int tipoTarifa, String apellidos) {
+        super(nombre, nif, direccion, correo, tipoTarifa);
         this.apellidos = apellidos;
     }
 }
