@@ -4,9 +4,11 @@ import es.uji.www.GeneradorDatosINE;
 
 import java.util.*;
 
+import static agenda.Factura.*;
+
 public class Gestor {
     HashMap<String, Cliente> clientes = new HashMap<>();
-    HashMap<String, Factura> facturas = new HashMap<>();
+    static HashMap<Integer, Factura> facturas = new HashMap<>();
 
     //>>>CLIENTE<<<<
     public void añadirCliente(Cliente cliente){
@@ -51,7 +53,22 @@ public class Gestor {
         gestor.mostrarClientes();
 
         //Crear llamadas
+
         Llamada llamada = new Llamada(654078311,120,new Date());
+        Llamada llamada2 = new Llamada(654078551,120,new Date());
+        cliente1.llamadas.add(llamada);
+        cliente1.llamadas.add(llamada2);
+        Factura.calcularFactura(cliente1,new Date(),new Date(),facturas);
+        Factura.calcularFactura(cliente1,new Date(),new Date(),facturas);
+
+        System.out.println("Facturas Cliente 1");
+
+        for(int i =0; i<cliente1.facturas.size();i++){
+            LinkedList<Factura> fact=cliente1.facturas;
+            System.out.println(fact.get(i).toString());
+        }
+
+
 
     }
 }

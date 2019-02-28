@@ -29,21 +29,21 @@ public class Factura {
                 ", importe=" + importe +
                 '}';
     }
-    public void calcularFactura(Cliente cliente, Date inicio, Date finalizacion,  HashMap<Integer, Factura> factures){
+    public static  void calcularFactura(Cliente cliente, Date inicio, Date finalizacion,  HashMap<Integer, Factura> facturasMap){
         double valor=0;
         LinkedList llamadas=cliente.llamadas;
         LinkedList facturas=cliente.facturas;
         for(int i=0; i<llamadas.size();i++){
             Llamada llamada= (Llamada) llamadas.get(i);
-            if(llamada.fechaLlamada.after(inicio) && llamada.fechaLlamada.before(finalizacion)){
-                valor+=llamada.duracion*tipoTarifa;
+            if(llamada.fechaLlamada.after(inicio) || llamada.fechaLlamada.before(finalizacion)){//MODIFICAR!!!
+                valor+=llamada.duracion*cliente.tipoTarifa;
             }
 
         }
         //Como hacemos lo del periodo??
-        Factura factura = new Factura(tipoTarifa,new Date(),inicio,valor);
+        Factura factura = new Factura(cliente.tipoTarifa,new Date(),inicio,valor);
         facturas.add(factura);
-        factures.put((int)factura.cod,factura);
+        facturasMap.put((int)factura.cod,factura);
 
     }
     public Factura buscarFactura(HashMap<String, Factura> facturas,String codigo){
