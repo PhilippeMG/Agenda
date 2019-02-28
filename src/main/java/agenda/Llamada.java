@@ -5,13 +5,12 @@ import java.util.LinkedList;
 
 public class Llamada {
     int numDestino;
-    Date hora;
     int duracion;
     Date fechaLlamada;
 
-    public Llamada(int numDestino, Date hora, int duracion, Date fechaLlamada) {
+    public Llamada(int numDestino, int duracion, Date fechaLlamada) {
         this.numDestino = numDestino;
-        this.hora = hora;
+
         this.duracion = duracion;
         this.fechaLlamada = fechaLlamada;
     }
@@ -20,7 +19,6 @@ public class Llamada {
     public String toString() {
         return "Llamada{" +
                 "numDestino=" + numDestino +
-                ", hora=" + hora +
                 ", duracion=" + duracion +
                 ", fechaLlamada=" + fechaLlamada +
                 '}';

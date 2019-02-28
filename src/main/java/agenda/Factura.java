@@ -6,15 +6,15 @@ import java.util.LinkedList;
 
 public class Factura {
     int tipoTarifa;
-    int cod;
+    static  int cod=0;
     Date emision;
     Date periodo;
     Double importe;
 
 
-    public Factura(int tipoTarifa, int cod, Date emision, Date periodo, Double importe) {
+    public Factura(int tipoTarifa, Date emision, Date periodo, Double importe) {
         this.tipoTarifa = tipoTarifa;
-        this.cod = cod;
+        this.cod = cod++;
         this.emision = emision;
         this.periodo = periodo;
         this.importe = importe;
@@ -41,7 +41,7 @@ public class Factura {
 
         }
         //Como hacemos lo del periodo??
-        Factura factura = new Factura(tipoTarifa,2,new Date(),inicio,valor);
+        Factura factura = new Factura(tipoTarifa,new Date(),inicio,valor);
         facturas.add(factura);
         factures.put((int)factura.cod,factura);
 

@@ -2,10 +2,7 @@ package agenda;
 
 import es.uji.www.GeneradorDatosINE;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Gestor {
     HashMap<String, Cliente> clientes = new HashMap<>();
@@ -53,6 +50,8 @@ public class Gestor {
         System.out.println("CLIENTES AÑADIDOS");
         gestor.mostrarClientes();
 
+        //Crear llamadas
+        Llamada llamada = new Llamada(654078311,120,new Date());
 
     }
 }
