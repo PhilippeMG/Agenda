@@ -37,17 +37,5 @@ public class Cliente {
                 ", fechaDeAlta=" + fechaDeAlta +
                 ", tipoTarifa=" + tipoTarifa ;
     }
-    public void calcularFactura(Date inicio, Date finalizacion){
-        double valor=0;
-        for(int i=0; i<llamadas.size();i++){
-            Llamada llamada=llamadas.get(i);
-            if(llamada.fechaLlamada.compareTo(inicio)>=0 && llamada.fechaLlamada.compareTo(finalizacion)>=1){
-                valor+=llamada.duracion*tipoTarifa;
-            }
 
-        }
-        Factura factura = new Factura(tipoTarifa,2,new Date(),inicio,valor);
-        facturas.add(factura);
-
-    }
 }
