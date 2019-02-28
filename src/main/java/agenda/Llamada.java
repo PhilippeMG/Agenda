@@ -26,7 +26,8 @@ public class Llamada {
                 '}';
     }
 
-    public void imprimirListado(LinkedList<Llamada> llamadas ){
+    public void listadoLlamadas(Cliente cliente){
+        LinkedList<Llamada> llamadas=cliente.llamadas;
         for( int i=0; i< llamadas.size();i++){
             llamadas.get(i).toString();
         }

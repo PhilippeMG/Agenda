@@ -29,8 +29,10 @@ public class Factura {
                 ", importe=" + importe +
                 '}';
     }
-    public void calcularFactura(Date inicio, Date finalizacion, LinkedList llamadas, LinkedList facturas, HashMap<Integer, Factura> factures){
+    public void calcularFactura(Cliente cliente, Date inicio, Date finalizacion,  HashMap<Integer, Factura> factures){
         double valor=0;
+        LinkedList llamadas=cliente.llamadas;
+        LinkedList facturas=cliente.facturas;
         for(int i=0; i<llamadas.size();i++){
             Llamada llamada= (Llamada) llamadas.get(i);
             if(llamada.fechaLlamada.compareTo(inicio)>=0 && llamada.fechaLlamada.compareTo(finalizacion)>=1){
