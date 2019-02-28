@@ -35,7 +35,7 @@ public class Factura {
         LinkedList facturas=cliente.facturas;
         for(int i=0; i<llamadas.size();i++){
             Llamada llamada= (Llamada) llamadas.get(i);
-            if(llamada.fechaLlamada.compareTo(inicio)>=0 && llamada.fechaLlamada.compareTo(finalizacion)>=1){
+            if(llamada.fechaLlamada.after(inicio) && llamada.fechaLlamada.before(finalizacion)){
                 valor+=llamada.duracion*tipoTarifa;
             }
 
