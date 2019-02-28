@@ -1,5 +1,7 @@
 package agenda;
 
+import es.uji.www.GeneradorDatosINE;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -39,7 +41,9 @@ public class Gestor {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
         Cliente cliente1 = new Cliente("Marcos", "23325634T", direccion1, "al375909@uji.es", 1);
         Cliente cliente2 = new Cliente("Philippe", "53627507v", direccion1, "al375923@uji.es", 1);
-
+        GeneradorDatosINE generador = new GeneradorDatosINE();
+        String dni = generador.getNIF();
+        System.out.println(dni);
         System.out.println("Cliente creado:");
         System.out.println(cliente1.toString());
         System.out.println("Añadiendo cliente...");
