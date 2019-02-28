@@ -29,12 +29,13 @@ public class Cliente {
 
     @Override
     public String toString() {
+        Fecha fecha= new Fecha(fechaDeAlta);
         return "Cliente:" +
                 "nombre='" + nombre + '\'' +
                 ", nif='" + nif + '\'' +
                 ", direccion=" + direccion.toString() +
                 ", correo='" + correo + '\'' +
-                ", fechaDeAlta=" + fechaDeAlta +
+                ", fechaDeAlta=" + fecha.toString() +
                 ", tipoTarifa=" + tipoTarifa ;
     }
 
