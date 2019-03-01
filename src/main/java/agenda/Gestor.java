@@ -10,6 +10,41 @@ public class Gestor {
     HashMap<String, Cliente> clientes = new HashMap<>();
     static HashMap<Integer, Factura> facturas = new HashMap<>();
 
+    //>>>MENU<<<<
+    public enum OpcionesMenu {
+        AÑADIR_CLIENTE("Añadir cliente"),
+        BORRAR_CLIENTE("Borrar cliente"),
+        CAMBIAR_TARIFA_CLIENTE("Modificar tarifa cliente"),
+        DATOS_CLIENTE("Mostrar información cliente"),
+        LISTAR_CLIENTES("Listar clientes"),
+        AÑADIR_LLAMADA("Añadir llamada"),
+        LISTAR_LLAMADAS_CLIENTE("Mostrar llamadas de un cliente"),
+        EMITIR_FACTURA_CLIENTE("Emitir factura de un cliente"),
+        RECUPERAR_FACTURA("Mostrar Factura"),
+        FACTURAS_CLIENTE("Mostrar conjunto facturas de un cliente");
+
+        private String descripcion;
+
+        private OpcionesMenu(String descripcion) {
+            this.descripcion = descripcion;
+        }
+
+        public String getDescripcion() {
+            return descripcion;
+        }
+
+        public static String getMenu(){
+            StringBuilder sb = new StringBuilder();
+            System.out.println("¿Qué operación desea realizar?");
+            for(OpcionesMenu opcion : OpcionesMenu.values()){
+                sb.append(opcion.ordinal());
+                sb.append(".-");
+                sb.append(opcion.getDescripcion());
+                sb.append("\n");
+            }
+            return sb.toString();
+        }
+    }
     //>>>CLIENTE<<<<
     public void añadirCliente(Cliente cliente){
         if(!clientes.containsKey(cliente.nif)){
@@ -35,7 +70,9 @@ public class Gestor {
     }
 
     public static void main(String[] args) {
-        System.out.println("¿Qué operación desea realizar?");
+        System.out.println(OpcionesMenu.getMenu());
+
+/*
         Gestor gestor = new Gestor();
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
         Cliente cliente1 = new Cliente("Marcos", "23325634T", direccion1, "al375909@uji.es", 1);
@@ -67,7 +104,7 @@ public class Gestor {
             LinkedList<Factura> fact=cliente1.facturas;
             System.out.println(fact.get(i).toString());
         }
-
+*/
 
 
     }
