@@ -86,7 +86,7 @@ public class Gestor {
 
     //>>>LLAMADAS<<<<
     public void añadirLlamada(String NIF, Llamada llamada){
-        if(!clientes.containsKey(NIF)){
+        if(clientes.containsKey(NIF)){
             clientes.get(NIF).añadirLlamada(llamada);
         }else{
             throw new IllegalArgumentException();
@@ -107,20 +107,21 @@ public class Gestor {
             throw new IllegalArgumentException();
         }
     }
-    public void emitirFactura(String NIF, LocalDate ini, LocalDate fin) {
+    public Factura emitirFactura(String NIF, LocalDate ini, LocalDate fin) {
         //Guardar tando en el vector de Cliente como en el mapa de Gestor.
         if (clientes.containsKey(NIF)) {
             Cliente cliente = clientes.get(NIF);
             Factura factura = new Factura(cliente, ini, fin);
             cliente.añadirFactura(factura);
-
-            factura.toString();
+            añadirFactura(factura);
+            return factura;
         } else {
             throw new IllegalArgumentException();
         }
     }
 
     public static void main(String[] args) {
+        /*
         System.out.println(OpcionesMenu.getMenu());
         Scanner scanner = new Scanner(System.in);
         System.out.print("Elije una opción: ");
@@ -145,16 +146,18 @@ public class Gestor {
                 break;
 
         }
-/*      >>>POSIBLE COPY PASTE PARA TEST<<<
+        >>>POSIBLE COPY PASTE PARA TEST<<<
+*/
         Gestor gestor = new Gestor();
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
         Cliente cliente1 = new Cliente("Marcos", "23325634T", direccion1, "al375909@uji.es", 1);
         Cliente cliente2 = new Cliente("Philippe", "53627507v", direccion1, "al375923@uji.es", 1);
-        GeneradorDatosINE generador = new GeneradorDatosINE();
-        String dni = generador.getNIF();
-        System.out.println(dni);
+
+//        GeneradorDatosINE generador = new GeneradorDatosINE();
+//        String dni = generador.getNIF();
+//        System.out.println(dni);
+
         System.out.println("Cliente creado:");
-        System.out.println(cliente1.toString());
         System.out.println("Añadiendo cliente...");
         gestor.añadirCliente(cliente1);
         gestor.añadirCliente(cliente2);
@@ -164,20 +167,19 @@ public class Gestor {
 
         //Crear llamadas
 
-        Llamada llamada = new Llamada(654078311,120,new Date());
-        Llamada llamada2 = new Llamada(654078551,120,new Date());
-        cliente1.llamadas.add(llamada);
-        cliente1.llamadas.add(llamada2);
-        Factura.calcularFactura(cliente1,new Date(),new Date(),facturas);
-        Factura.calcularFactura(cliente1,new Date(),new Date(),facturas);
+        Llamada llamada = new Llamada(654078311,120,LocalDate.of(2019, Month.FEBRUARY, 3));
+        Llamada llamada2 = new Llamada(654078311,120,LocalDate.of(2019, Month.FEBRUARY, 15));
+        Llamada llamada3 = new Llamada(654078311,120,LocalDate.of(2019, Month.FEBRUARY, 14));
+        gestor.añadirLlamada(cliente1.nif,llamada);
+        gestor.añadirLlamada(cliente1.nif,llamada2);
+        gestor.añadirLlamada(cliente1.nif,llamada3);
 
-        System.out.println("Facturas Cliente 1");
+        System.out.println("Llamadas realizadas por: " + cliente1.nombre);
+        gestor.mostrarLlamadas(cliente1.nif);
 
-        for(int i =0; i<cliente1.facturas.size();i++){
-            LinkedList<Factura> fact=cliente1.facturas;
-            System.out.println(fact.get(i).toString());
-        }
-*/
+        System.out.println("Factura Cliente 1");
+        Factura factura = gestor.emitirFactura(cliente1.nif,LocalDate.of(2019, Month.FEBRUARY, 1), LocalDate.now());
+        System.out.println(factura);
 
 
     }
