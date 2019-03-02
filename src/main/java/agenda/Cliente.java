@@ -23,8 +23,13 @@ public class Cliente {
         this.tipoTarifa = tipoTarifa;
 
     }
+
     public Date getFecha(){
         return this.fechaDeAlta;
+    }
+
+    public void cambiarTarifa(int nuevaTarifa){
+        this.tipoTarifa = nuevaTarifa;
     }
 
     @Override

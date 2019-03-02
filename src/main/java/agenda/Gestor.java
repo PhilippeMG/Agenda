@@ -29,6 +29,10 @@ public class Gestor {
             this.descripcion = descripcion;
         }
 
+        public static OpcionesMenu getOpcion(int opcion) {
+            return values()[opcion];
+        }
+
         public String getDescripcion() {
             return descripcion;
         }
@@ -58,9 +62,7 @@ public class Gestor {
         clientes.remove(cliente.nif);
     }
 
-    public void cambiarTarifa(Cliente cliente, int nuevaTarifa){
-        cliente.tipoTarifa = nuevaTarifa;
-    }
+
 
     public void mostrarClientes(){
         Iterator<Cliente> clientela = clientes.values().iterator();//.entrySet().iterator();
@@ -71,7 +73,29 @@ public class Gestor {
 
     public static void main(String[] args) {
         System.out.println(OpcionesMenu.getMenu());
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Elije una opción:");
+        int valor = scanner.nextInt();
+        OpcionesMenu opcion = OpcionesMenu.getOpcion(valor);
+        switch (opcion){
+            case AÑADIR_CLIENTE:
+                System.out.println("0.-Particular");
+                System.out.println("1.-Empresa");
+                System.out.println("Tipo de cliente:");
+                int cliente = scanner.nextInt();
+                switch (cliente){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                }
+                break;
+            case BORRAR_CLIENTE:
+                break;
+            case CAMBIAR_TARIFA_CLIENTE:
+                break;
 
+        }
 /*
         Gestor gestor = new Gestor();
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
