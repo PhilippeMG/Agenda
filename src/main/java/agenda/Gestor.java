@@ -134,7 +134,6 @@ public class Gestor {
     }
 
     public static void main(String[] args) {
-        /*
         System.out.println(OpcionesMenu.getMenu());
         Scanner scanner = new Scanner(System.in);
         System.out.print("Elije una opción: ");
@@ -159,47 +158,41 @@ public class Gestor {
                 break;
 
         }
-        >>>POSIBLE COPY PASTE PARA TEST<<<
-*/
+/*      >>>POSIBLE COPY PASTE PARA TEST<<<
+
         Gestor gestor = new Gestor();
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
         Cliente cliente1 = new Cliente("Marcos", "23325634T", direccion1, "al375909@uji.es", 1);
         Cliente cliente2 = new Cliente("Philippe", "53627507v", direccion1, "al375923@uji.es", 1);
-
-//        GeneradorDatosINE generador = new GeneradorDatosINE();
-//        String dni = generador.getNIF();
-//        System.out.println(dni);
-
+        GeneradorDatosINE generador = new GeneradorDatosINE();
+        String dni = generador.getNIF();
+        System.out.println(dni);
         System.out.println("Cliente creado:");
         System.out.println("Añadiendo cliente...");
         gestor.añadirCliente(cliente1);
         gestor.añadirCliente(cliente2);
-
         System.out.println("CLIENTES AÑADIDOS");
         gestor.mostrarClientes();
 
         //Crear llamadas
-
         Llamada llamada = new Llamada(654078311,14,LocalDate.of(2019, Month.JANUARY, 3));
         Llamada llamada2 = new Llamada(654078311,1,LocalDate.of(2019, Month.FEBRUARY, 15));
         Llamada llamada3 = new Llamada(654078311,0.9,LocalDate.of(2019, Month.MARCH, 1));
         gestor.añadirLlamada(cliente1.getNif(),llamada);
         gestor.añadirLlamada(cliente1.getNif(),llamada2);
         gestor.añadirLlamada(cliente1.getNif(),llamada3);
-/*
+
         Llamada llamada4 = new Llamada(654078311,20.5,LocalDate.of(2019, Month.MARCH, 1));
         Llamada llamada5 = new Llamada(654078311,120,LocalDate.of(2019, Month.MARCH, 16));
         Llamada llamada6 = new Llamada(654078311,120,LocalDate.of(2019, Month.MARCH, 24));
         gestor.añadirLlamada(cliente2.getNif(),llamada4);
         gestor.añadirLlamada(cliente2.getNif(),llamada5);
         gestor.añadirLlamada(cliente2.getNif(),llamada6);
-*/
 
         System.out.println("Llamadas realizadas por: " + cliente1.nombre);
         gestor.mostrarLlamadas(cliente1.getNif());
         System.out.println("Llamadas realizadas por: " + cliente2.nombre);
         gestor.mostrarLlamadas(cliente2.getNif());
-
 
         System.out.println("Factura " + cliente1.getNombre());
         gestor.emitirFactura(cliente1.nif,LocalDate.of(2019, Month.JANUARY, 1), LocalDate.of(2019, Month.JANUARY, 31));
@@ -211,7 +204,7 @@ public class Gestor {
         gestor.mostrarFactura(2);
         gestor.mostrarFactura(3);
 
-
+*/
 
     }
 }
