@@ -32,6 +32,18 @@ public class Cliente {
         this.tipoTarifa = nuevaTarifa;
     }
 
+    public void añadirLlamada(Llamada llamada) {
+        llamadas.add(llamada);
+    }
+
+    public void mostrarLlamadas() {
+        int contador=0;
+        for (Llamada llamada : llamadas) {
+            System.out.println(contador + ": " + llamada.toString());
+            contador++;
+        }
+    }
+
     @Override
     public String toString() {
         Fecha fecha= new Fecha(fechaDeAlta);

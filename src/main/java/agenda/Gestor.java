@@ -59,13 +59,40 @@ public class Gestor {
     }
 
     public void borrarCliente(String NIF){
-        clientes.remove(NIF);
+        if(clientes.containsKey(NIF)){
+            clientes.remove(NIF);
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void mostrarCliente(String NIF){
+        if(clientes.containsKey(NIF)){
+            clientes.get(NIF).toString(); //LLama a toString de cliente.
+        }else{
+            throw new IllegalArgumentException();
+        }
     }
 
     public void mostrarClientes(){
         Iterator<Cliente> clientela = clientes.values().iterator();//.entrySet().iterator();
         while (clientela.hasNext()){
             System.out.println(clientela.next().toString());
+        }
+    }
+
+    //>>>LLAMADAS<<<<
+    public void añadirLlamada(String NIF, Llamada llamada){
+        if(clientes.containsKey(NIF)){
+            clientes.get(NIF).añadirLlamada(llamada);
+        }else{
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void mostrarLlamadas(String NIF) {
+        if(clientes.containsKey(NIF)){
+            clientes.get(NIF).mostrarLlamadas();
         }
     }
 
