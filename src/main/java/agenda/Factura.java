@@ -15,8 +15,9 @@ public class Factura {
 
 
     public Factura(Cliente cliente, LocalDate inico, LocalDate fin) {
+
         this.tipoTarifa = cliente.tipoTarifa;
-        this.cod = cod++;
+        this.cod += 1;
         this.inicio = inico;
         this.fin = fin;
         this.importe = importe(cliente, inicio, fin);
@@ -31,7 +32,7 @@ public class Factura {
         double importe=0; //€/min
         for (Llamada llamada : cliente.llamadas) {
             //si es igual a inicio o a fin o posterior a inicio o anteror a fin.
-            if(llamada.fechaLlamada.equals(inicio) || llamada.fechaLlamada.equals(fin) || llamada.fechaLlamada.isAfter(inicio) || llamada.fechaLlamada.isBefore(fin)){
+            if((llamada.fechaLlamada.equals(inicio)  || llamada.fechaLlamada.isAfter(inicio)) && (llamada.fechaLlamada.equals(fin) || llamada.fechaLlamada.isBefore(fin))){
                 importe += cliente.tipoTarifa * llamada.duracion;
             }
         }

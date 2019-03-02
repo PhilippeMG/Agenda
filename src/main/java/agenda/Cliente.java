@@ -29,6 +29,22 @@ public class Cliente {
         return this.fechaDeAlta;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getNif() {
+        return nif;
+    }
+
+    public LocalDate getFechaDeAlta() {
+        return fechaDeAlta;
+    }
+
+    public int getTipoTarifa() {
+        return tipoTarifa;
+    }
+
     public void cambiarTarifa(int nuevaTarifa){
         this.tipoTarifa = nuevaTarifa;
     }
@@ -46,6 +62,13 @@ public class Cliente {
         int contador=0;
         for (Llamada llamada : llamadas) {
             System.out.println(contador + ": " + llamada.toString());
+            contador++;
+        }
+    }
+    public void mostrarFacturas() {
+        int contador=0;
+        for (Factura factura : facturas.values()) {
+            System.out.println(contador + ": " + factura.toString());
             contador++;
         }
     }

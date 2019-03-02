@@ -100,22 +100,35 @@ public class Gestor {
     }
 
     //>>>FACTURAS<<<<
-    public void añadirFactura(Factura factura) {
-        if(!facturas.containsKey(factura.getCod())) {
-            facturas.put(factura.getCod(), factura);
-        }else{
-            throw new IllegalArgumentException();
-        }
-    }
-    public Factura emitirFactura(String NIF, LocalDate ini, LocalDate fin) {
+        public Factura emitirFactura(String NIF, LocalDate ini, LocalDate fin) {
         //Guardar tando en el vector de Cliente como en el mapa de Gestor.
         if (clientes.containsKey(NIF)) {
             Cliente cliente = clientes.get(NIF);
             Factura factura = new Factura(cliente, ini, fin);
             cliente.añadirFactura(factura);
-            añadirFactura(factura);
+            if(!facturas.containsKey(factura.getCod())){
+                facturas.put(factura.getCod(),factura);
+            }else {
+                throw new IllegalArgumentException();
+            }
             return factura;
         } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void mostrarFactura(int codigo) {
+        if (facturas.containsKey(codigo)) {
+            System.out.println(facturas.get(codigo).toString());
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void mostrarFacturas(String NIF) {
+        if (clientes.containsKey(NIF)) {
+            clientes.get(NIF).mostrarFacturas();
+        }else{
             throw new IllegalArgumentException();
         }
     }
@@ -167,19 +180,37 @@ public class Gestor {
 
         //Crear llamadas
 
-        Llamada llamada = new Llamada(654078311,120,LocalDate.of(2019, Month.FEBRUARY, 3));
-        Llamada llamada2 = new Llamada(654078311,120,LocalDate.of(2019, Month.FEBRUARY, 15));
-        Llamada llamada3 = new Llamada(654078311,120,LocalDate.of(2019, Month.FEBRUARY, 14));
-        gestor.añadirLlamada(cliente1.nif,llamada);
-        gestor.añadirLlamada(cliente1.nif,llamada2);
-        gestor.añadirLlamada(cliente1.nif,llamada3);
+        Llamada llamada = new Llamada(654078311,14,LocalDate.of(2019, Month.JANUARY, 3));
+        Llamada llamada2 = new Llamada(654078311,1,LocalDate.of(2019, Month.FEBRUARY, 15));
+        Llamada llamada3 = new Llamada(654078311,0.9,LocalDate.of(2019, Month.MARCH, 1));
+        gestor.añadirLlamada(cliente1.getNif(),llamada);
+        gestor.añadirLlamada(cliente1.getNif(),llamada2);
+        gestor.añadirLlamada(cliente1.getNif(),llamada3);
+/*
+        Llamada llamada4 = new Llamada(654078311,20.5,LocalDate.of(2019, Month.MARCH, 1));
+        Llamada llamada5 = new Llamada(654078311,120,LocalDate.of(2019, Month.MARCH, 16));
+        Llamada llamada6 = new Llamada(654078311,120,LocalDate.of(2019, Month.MARCH, 24));
+        gestor.añadirLlamada(cliente2.getNif(),llamada4);
+        gestor.añadirLlamada(cliente2.getNif(),llamada5);
+        gestor.añadirLlamada(cliente2.getNif(),llamada6);
+*/
 
         System.out.println("Llamadas realizadas por: " + cliente1.nombre);
-        gestor.mostrarLlamadas(cliente1.nif);
+        gestor.mostrarLlamadas(cliente1.getNif());
+        System.out.println("Llamadas realizadas por: " + cliente2.nombre);
+        gestor.mostrarLlamadas(cliente2.getNif());
 
-        System.out.println("Factura Cliente 1");
-        Factura factura = gestor.emitirFactura(cliente1.nif,LocalDate.of(2019, Month.FEBRUARY, 1), LocalDate.now());
-        System.out.println(factura);
+
+        System.out.println("Factura " + cliente1.getNombre());
+        gestor.emitirFactura(cliente1.nif,LocalDate.of(2019, Month.JANUARY, 1), LocalDate.of(2019, Month.JANUARY, 31));
+        gestor.emitirFactura(cliente1.nif,LocalDate.of(2019, Month.FEBRUARY, 1), LocalDate.of(2019, Month.FEBRUARY, 28));
+        gestor.emitirFactura(cliente1.nif,LocalDate.of(2019, Month.MARCH, 1), LocalDate.of(2019, Month.MARCH, 31));
+        //System.out.println(factura);
+        System.out.println("HAY " + facturas.keySet().size() + " FACTURAS");
+        gestor.mostrarFactura(1);
+        gestor.mostrarFactura(2);
+        gestor.mostrarFactura(3);
+
 
 
     }

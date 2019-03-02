@@ -6,10 +6,10 @@ import java.util.LinkedList;
 
 public class Llamada {
     int numDestino;
-    int duracion;
+    double duracion;
     LocalDate fechaLlamada;
 
-    public Llamada(int numDestino, int duracion, LocalDate fechaLlamada) {
+    public Llamada(int numDestino, double duracion, LocalDate fechaLlamada) {
         this.numDestino = numDestino;
         this.duracion = duracion;
         this.fechaLlamada = fechaLlamada;
