@@ -1,55 +1,51 @@
 package agenda;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Factura {
     int tipoTarifa;
-    static  int cod=0;
-    Date emision;
-    Date periodo;
+    static int cod=0;
+    LocalDate inicio;
+    LocalDate fin;
+    LocalDate emision;
     Double importe;
 
 
-    public Factura(int tipoTarifa, Date emision, Date periodo, Double importe) {
-        this.tipoTarifa = tipoTarifa;
+    public Factura(Cliente cliente, LocalDate inico, LocalDate fin) {
+        this.tipoTarifa = cliente.tipoTarifa;
         this.cod = cod++;
-        this.emision = emision;
-        this.periodo = periodo;
-        this.importe = importe;
+        this.inicio = inico;
+        this.fin = fin;
+        this.importe = importe(cliente, inicio, fin);
+        this.emision = LocalDate.now();
     }
+
+    public static int getCod() {
+        return cod;
+    }
+
+    public Double importe(Cliente cliente, LocalDate inicio, LocalDate fin) {
+        double importe=0; //€/min
+        for (Llamada llamada : cliente.llamadas) {
+            //si es igual a inicio o a fin o posterior a inicio o anteror a fin.
+            if(llamada.fechaLlamada.equals(inicio) || llamada.fechaLlamada.equals(fin) || llamada.fechaLlamada.isAfter(inicio) || llamada.fechaLlamada.isBefore(fin)){
+                importe += cliente.tipoTarifa * llamada.duracion;
+            }
+        }
+        return importe;
+    }
+
     @Override
     public String toString() {
         return "Factura{" +
-                "tipoTarifa=" + tipoTarifa +
-                ", cod=" + cod +
-                ", emision=" + emision +
-                ", periodo=" + periodo +
-                ", importe=" + importe +
+                "tipoTarifa=" + this.tipoTarifa +
+                ", cod=" + this.cod +
+                ", inicio=" + this.inicio +
+                ", fin=" + this.fin +
+                ", importe=" + this.importe +
                 '}';
-    }
-    public static  void calcularFactura(Cliente cliente, Date inicio, Date finalizacion,  HashMap<Integer, Factura> facturasMap){
-        double valor=0;
-        LinkedList llamadas=cliente.llamadas;
-        LinkedList facturas=cliente.facturas;
-        for(int i=0; i<llamadas.size();i++){
-            Llamada llamada= (Llamada) llamadas.get(i);
-            if(llamada.fechaLlamada.after(inicio) || llamada.fechaLlamada.before(finalizacion)){//MODIFICAR!!!
-                valor+=llamada.duracion*cliente.tipoTarifa;
-            }
-
-        }
-        //Como hacemos lo del periodo??
-        Factura factura = new Factura(cliente.tipoTarifa,new Date(),inicio,valor);
-        facturas.add(factura);
-        facturasMap.put((int)factura.cod,factura);
-
-    }
-    public Factura buscarFactura(HashMap<String, Factura> facturas,String codigo){
-       return facturas.get(codigo);
-    }
-    public LinkedList<Factura> recuperarFacturasCliente(Cliente cliente){
-        return cliente.facturas;
     }
 }

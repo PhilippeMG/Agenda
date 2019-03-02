@@ -1,14 +1,16 @@
 package agenda;
 
+import com.sun.security.ntlm.Client;
 import es.uji.www.GeneradorDatosINE;
+import java.time.*;
+import java.time.format.*;
 
 import java.util.*;
 
-import static agenda.Factura.*;
-
 public class Gestor {
-    HashMap<String, Cliente> clientes = new HashMap<>();
+    static HashMap<String, Cliente> clientes = new HashMap<>();
     static HashMap<Integer, Factura> facturas = new HashMap<>();
+
 
     //>>>MENU<<<<
     public enum OpcionesMenu {
@@ -49,6 +51,7 @@ public class Gestor {
             return sb.toString();
         }
     }
+
     //>>>CLIENTE<<<<
     public void añadirCliente(Cliente cliente){
         if(!clientes.containsKey(cliente.nif)){
@@ -83,7 +86,7 @@ public class Gestor {
 
     //>>>LLAMADAS<<<<
     public void añadirLlamada(String NIF, Llamada llamada){
-        if(clientes.containsKey(NIF)){
+        if(!clientes.containsKey(NIF)){
             clientes.get(NIF).añadirLlamada(llamada);
         }else{
             throw new IllegalArgumentException();
@@ -96,17 +99,38 @@ public class Gestor {
         }
     }
 
+    //>>>FACTURAS<<<<
+    public void añadirFactura(Factura factura) {
+        if(!facturas.containsKey(factura.getCod())) {
+            facturas.put(factura.getCod(), factura);
+        }else{
+            throw new IllegalArgumentException();
+        }
+    }
+    public void emitirFactura(String NIF, LocalDate ini, LocalDate fin) {
+        //Guardar tando en el vector de Cliente como en el mapa de Gestor.
+        if (clientes.containsKey(NIF)) {
+            Cliente cliente = clientes.get(NIF);
+            Factura factura = new Factura(cliente, ini, fin);
+            cliente.añadirFactura(factura);
+
+            factura.toString();
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(OpcionesMenu.getMenu());
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Elije una opción:");
+        System.out.print("Elije una opción: ");
         int valor = scanner.nextInt();
         OpcionesMenu opcion = OpcionesMenu.getOpcion(valor);
         switch (opcion){
             case AÑADIR_CLIENTE:
                 System.out.println("0.-Particular");
                 System.out.println("1.-Empresa");
-                System.out.println("Tipo de cliente:");
+                System.out.print("Tipo de cliente:");
                 int cliente = scanner.nextInt();
                 switch (cliente){
                     case 0:
@@ -121,7 +145,7 @@ public class Gestor {
                 break;
 
         }
-/*
+/*      >>>POSIBLE COPY PASTE PARA TEST<<<
         Gestor gestor = new Gestor();
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
         Cliente cliente1 = new Cliente("Marcos", "23325634T", direccion1, "al375909@uji.es", 1);

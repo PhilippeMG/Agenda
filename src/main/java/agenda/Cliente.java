@@ -1,7 +1,9 @@
 package agenda;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Cliente {
@@ -9,9 +11,9 @@ public class Cliente {
     String nif;
     Direccion direccion;
     String correo;
-    Date fechaDeAlta;
+    LocalDate fechaDeAlta;
     int tipoTarifa;
-    LinkedList <Factura> facturas =new LinkedList<>();
+    HashMap<Integer, Factura> facturas = new HashMap<>();
     LinkedList <Llamada> llamadas =new LinkedList<>();
 
     public Cliente(String nombre, String nif, Direccion direccion, String correo, int tipoTarifa) {
@@ -19,12 +21,11 @@ public class Cliente {
         this.nif = nif;
         this.direccion = direccion;
         this.correo = correo;
-        this.fechaDeAlta = new Date();
+        this.fechaDeAlta = LocalDate.now();
         this.tipoTarifa = tipoTarifa;
-
     }
 
-    public Date getFecha(){
+    public LocalDate getFecha(){
         return this.fechaDeAlta;
     }
 
@@ -36,6 +37,11 @@ public class Cliente {
         llamadas.add(llamada);
     }
 
+    public void añadirFactura(Factura factura) {
+        facturas.put(factura.getCod(), factura);
+    }
+
+
     public void mostrarLlamadas() {
         int contador=0;
         for (Llamada llamada : llamadas) {
@@ -46,14 +52,12 @@ public class Cliente {
 
     @Override
     public String toString() {
-        Fecha fecha= new Fecha(fechaDeAlta);
         return "Cliente:" +
                 "nombre='" + nombre + '\'' +
                 ", nif='" + nif + '\'' +
                 ", direccion=" + direccion.toString() +
                 ", correo='" + correo + '\'' +
-                ", fechaDeAlta=" + fecha.toString() +
+                ", fechaDeAlta=" + fechaDeAlta +
                 ", tipoTarifa=" + tipoTarifa ;
     }
-
 }

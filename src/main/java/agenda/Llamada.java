@@ -1,16 +1,16 @@
 package agenda;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
 
 public class Llamada {
     int numDestino;
     int duracion;
-    Date fechaLlamada;
+    LocalDate fechaLlamada;
 
-    public Llamada(int numDestino, int duracion, Date fechaLlamada) {
+    public Llamada(int numDestino, int duracion, LocalDate fechaLlamada) {
         this.numDestino = numDestino;
-
         this.duracion = duracion;
         this.fechaLlamada = fechaLlamada;
     }
