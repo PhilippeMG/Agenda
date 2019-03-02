@@ -58,11 +58,9 @@ public class Gestor {
         }
     }
 
-    public void borrarCliente(Cliente cliente){
-        clientes.remove(cliente.nif);
+    public void borrarCliente(String NIF){
+        clientes.remove(NIF);
     }
-
-
 
     public void mostrarClientes(){
         Iterator<Cliente> clientela = clientes.values().iterator();//.entrySet().iterator();
