@@ -10,7 +10,7 @@ public class Particular extends Cliente{
 
     @Override
     public String toString() {
-        return "Particular{" +
+        return "Particular: " +
                   "nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", nif='" + nif + '\'' +
@@ -18,8 +18,6 @@ public class Particular extends Cliente{
                 ", correo='" + correo + '\'' +
                 ", fechaDeAlta=" + fechaDeAlta +
                 ", tipoTarifa=" + tipoTarifa +
-                ", facturas=" + facturas +
-                ", llamadas=" + llamadas +
                 '}';
     }
 }

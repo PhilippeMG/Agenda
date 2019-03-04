@@ -13,10 +13,8 @@ public class Direccion {
 
     @Override
     public String toString() {
-        return "Direccion{" +
-                "CP=" + CP +
+        return  "CP=" + CP +
                 ", provincia='" + provincia + '\'' +
-                ", poblacion='" + poblacion + '\'' +
-                '}';
+                ", poblacion='" + poblacion;
     }
 }

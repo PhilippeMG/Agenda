@@ -75,10 +75,10 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente:" +
+        return "Cliente: " +
                 "nombre='" + nombre + '\'' +
                 ", nif='" + nif + '\'' +
-                ", direccion=" + direccion.toString() +
+                ", Direccion: " + direccion.toString() +
                 ", correo='" + correo + '\'' +
                 ", fechaDeAlta=" + fechaDeAlta +
                 ", tipoTarifa=" + tipoTarifa ;
