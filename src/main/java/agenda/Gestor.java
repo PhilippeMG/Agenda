@@ -53,7 +53,7 @@ public class Gestor {
     }
 
     //>>>CLIENTE<<<<
-    public void añadirCliente(Cliente cliente){
+    public static void añadirCliente(Cliente cliente){
         if(!clientes.containsKey(cliente.nif)){
             clientes.put(cliente.nif,cliente);
         }else{
@@ -61,7 +61,7 @@ public class Gestor {
         }
     }
 
-    public void borrarCliente(String NIF){
+    public static void borrarCliente(String NIF){
         if(clientes.containsKey(NIF)){
             clientes.remove(NIF);
         } else {
@@ -69,7 +69,7 @@ public class Gestor {
         }
     }
 
-    public void mostrarCliente(String NIF){
+    public static void mostrarCliente(String NIF){
         if(clientes.containsKey(NIF)){
             clientes.get(NIF).toString(); //LLama a toString de cliente.
         }else{
@@ -77,7 +77,7 @@ public class Gestor {
         }
     }
 
-    public void mostrarClientes(){
+    public static void mostrarClientes(){
         Iterator<Cliente> clientela = clientes.values().iterator();//.entrySet().iterator();
         while (clientela.hasNext()){
             System.out.println(clientela.next().toString());
@@ -125,20 +125,88 @@ public class Gestor {
         }
     }
 
-    public void mostrarFacturas(String NIF) {
+    public static void mostrarFacturas(String NIF) {
         if (clientes.containsKey(NIF)) {
             clientes.get(NIF).mostrarFacturas();
         }else{
             throw new IllegalArgumentException();
         }
     }
+    public static void cambiarTarifa(String NIF, int tarifa){
 
-    public static void main(String[] args) {
+        if (clientes.containsKey(NIF)) {
+            Cliente client = clientes.get(NIF);
+            System.out.print("Nueva tarifa para el cliente: ");
+            client.cambiarTarifa(tarifa);
+        } else{
+            throw new IllegalArgumentException();
+        }
+    }
+    public static void nuevoParticular(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nombre del cliente: ");
+
+        String nombre= scanner.next();
+        System.out.print("Apellidos del cliente: ");
+        String apellidos= scanner.nextLine();
+
+        nombre=nombre+" "+apellidos;
+        System.out.print("NIF del cliente: ");
+        String nif=scanner.next();
+
+        System.out.println("Dirección del cliente: ");
+        System.out.print("CP: ");
+        int CP=scanner.nextInt();
+        System.out.print("Provincia: ");
+        String provincia=scanner.next();
+
+        System.out.print("Población: ");
+        String poblacion=scanner.next();
+
+
+        Direccion direccion =new Direccion(CP,provincia,poblacion);
+        System.out.print("Correo: ");
+        String correo =scanner.next();
+        System.out.print("Tarifa: ");
+        int tipoTarifa=scanner.nextInt();
+        Cliente nuevo = new Cliente(nombre, nif,direccion,correo,tipoTarifa);
+        añadirCliente(nuevo);
+    }
+    public static void nuevoEmpresa(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nombre del cliente: ");
+
+        String nombre= scanner.next();
+
+        System.out.print("NIF del cliente: ");
+        String nif=scanner.next();
+
+        System.out.println("Dirección del cliente: ");
+        System.out.print("CP: ");
+        int CP=scanner.nextInt();
+        System.out.print("Provincia: ");
+        String provincia=scanner.next();
+
+        System.out.print("Población: ");
+        String poblacion=scanner.next();
+
+
+        Direccion direccion =new Direccion(CP,provincia,poblacion);
+        System.out.print("Correo: ");
+        String correo =scanner.next();
+        System.out.print("Tarifa: ");
+        int tipoTarifa=scanner.nextInt();
+        Cliente nuevo = new Empresa(nombre, nif,direccion,correo,tipoTarifa);
+        añadirCliente(nuevo);
+
+    }
+        public static void main(String[] args) {
         System.out.println(OpcionesMenu.getMenu());
         Scanner scanner = new Scanner(System.in);
         System.out.print("Elije una opción: ");
         int valor = scanner.nextInt();
         OpcionesMenu opcion = OpcionesMenu.getOpcion(valor);
+        String nif;
         switch (opcion){
             case AÑADIR_CLIENTE:
                 System.out.println("0.-Particular");
@@ -147,14 +215,38 @@ public class Gestor {
                 int cliente = scanner.nextInt();
                 switch (cliente){
                     case 0:
+                        nuevoParticular();
                         break;
                     case 1:
+                        nuevoEmpresa();
                         break;
                 }
                 break;
             case BORRAR_CLIENTE:
+                System.out.print("NIF del cliente que quieres eliminar: ");
+                nif = scanner.next();
+                borrarCliente(nif);
                 break;
+
             case CAMBIAR_TARIFA_CLIENTE:
+                System.out.print("NIF del cliente que quieres eliminar: ");
+                nif = scanner.next();
+                System.out.print("Nueva tarifa para el cliente: ");
+                int tarifa = scanner.nextInt();
+                cambiarTarifa(nif,tarifa);
+                break;
+            case DATOS_CLIENTE:
+                System.out.print("NIF del cliente que quieres eliminar: ");
+                nif = scanner.next();
+                mostrarCliente(nif);
+                break;
+            case EMITIR_FACTURA_CLIENTE:
+                System.out.print("NIF del cliente que quieres eliminar: ");
+                nif = scanner.next();
+                mostrarFacturas(nif);
+                break;
+            case LISTAR_CLIENTES:
+                mostrarClientes();
                 break;
 
         }
@@ -207,4 +299,5 @@ public class Gestor {
 */
 
     }
+
 }
