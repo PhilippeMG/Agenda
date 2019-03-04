@@ -11,7 +11,7 @@ public class Factura {
     LocalDate inicio;
     LocalDate fin;
     LocalDate emision;
-    Double importe;
+    Double importe=0.0;
 
 
     public Factura(Cliente cliente, LocalDate inico, LocalDate fin) {
@@ -28,6 +28,10 @@ public class Factura {
         return cod;
     }
 
+    public Double getImporte() {
+        return importe;
+    }
+
     public Double importe(Cliente cliente, LocalDate inicio, LocalDate fin) {
         double importe=0; //€/min
         for (Llamada llamada : cliente.llamadas) {
@@ -41,12 +45,11 @@ public class Factura {
 
     @Override
     public String toString() {
-        return "Factura{" +
+        return "Factura :" +
                 "tipoTarifa=" + this.tipoTarifa +
                 ", cod=" + this.cod +
                 ", inicio=" + this.inicio +
                 ", fin=" + this.fin +
-                ", importe=" + this.importe +
-                '}';
+                ", importe=" + this.importe;
     }
 }

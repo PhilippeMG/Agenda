@@ -1,5 +1,7 @@
-package agenda;
+package agenda.test;
 
+import agenda.Cliente;
+import agenda.Direccion;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,8 +33,7 @@ public class ClienteTest {
     }
     @Test
     public void cambiarTarifa() {
-        int tarifa=1;
-        assertEquals(cliente.getTipoTarifa(), tarifa);
+        assertEquals(cliente.getTipoTarifa(), 1);
 
     }
 

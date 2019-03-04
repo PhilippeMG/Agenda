@@ -60,17 +60,20 @@ public class Gestor {
     }
 
     //>>>CLIENTE<<<<
-    public static void añadirCliente(Cliente cliente) {
+    public static boolean añadirCliente(Cliente cliente) {
         if (!clientes.containsKey(cliente.nif)) {
             clientes.put(cliente.nif, cliente);
+            return true;
         } else {
             throw new IllegalArgumentException();
+
         }
     }
 
-    public static void borrarCliente(String NIF) {
+    public static boolean borrarCliente(String NIF) {
         if (clientes.containsKey(NIF)) {
             clientes.remove(NIF);
+            return true;
         } else {
             throw new IllegalArgumentException();
         }
@@ -92,9 +95,10 @@ public class Gestor {
     }
 
     //>>>LLAMADAS<<<<
-    public static void añadirLlamada(String NIF, Llamada llamada) {
+    public static boolean añadirLlamada(String NIF, Llamada llamada) {
         if (clientes.containsKey(NIF)) {
             clientes.get(NIF).añadirLlamada(llamada);
+            return true;
         } else {
             throw new IllegalArgumentException();
         }
@@ -124,17 +128,19 @@ public class Gestor {
         }
     }
 
-    public static void mostrarFactura(int codigo) {
+    public static boolean mostrarFactura(int codigo) {
         if (facturas.containsKey(codigo)) {
             System.out.println(facturas.get(codigo).toString());
+            return true;
         } else {
             throw new IllegalArgumentException();
         }
     }
 
-    public static void mostrarFacturas(String NIF) {
+    public static boolean mostrarFacturas(String NIF) {
         if (clientes.containsKey(NIF)) {
             clientes.get(NIF).mostrarFacturas();
+            return true;
         } else {
             throw new IllegalArgumentException();
         }
@@ -313,54 +319,6 @@ public class Gestor {
                     break;
             }
         } while (terminar == false);
-
-/*      >>>POSIBLE COPY PASTE PARA TEST<<<
-
-        Gestor gestor = new Gestor();
-        Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
-        Cliente cliente1 = new Cliente("Marcos", "0001", direccion1, "al375909@uji.es", 1);
-        Cliente cliente2 = new Cliente("Philippe", "0002", direccion1, "al375923@uji.es", 1);
-        GeneradorDatosINE generador = new GeneradorDatosINE();
-        String dni = generador.getNIF();
-        System.out.println(dni);
-        System.out.println("Cliente creado:");
-        System.out.println("Añadiendo cliente...");
-        gestor.añadirCliente(cliente1);
-        gestor.añadirCliente(cliente2);
-        System.out.println("CLIENTES AÑADIDOS");
-        gestor.mostrarClientes();
-
-        //Crear llamadas
-        Llamada llamada = new Llamada(654078311,14,LocalDate.of(2019, Month.JANUARY, 3));
-        Llamada llamada2 = new Llamada(654078311,1,LocalDate.of(2019, Month.FEBRUARY, 15));
-        Llamada llamada3 = new Llamada(654078311,0.9,LocalDate.of(2019, Month.MARCH, 1));
-        gestor.añadirLlamada(cliente1.getNif(),llamada);
-        gestor.añadirLlamada(cliente1.getNif(),llamada2);
-        gestor.añadirLlamada(cliente1.getNif(),llamada3);
-
-        Llamada llamada4 = new Llamada(654078311,20.5,LocalDate.of(2019, Month.MARCH, 1));
-        Llamada llamada5 = new Llamada(654078311,120,LocalDate.of(2019, Month.MARCH, 16));
-        Llamada llamada6 = new Llamada(654078311,120,LocalDate.of(2019, Month.MARCH, 24));
-        gestor.añadirLlamada(cliente2.getNif(),llamada4);
-        gestor.añadirLlamada(cliente2.getNif(),llamada5);
-        gestor.añadirLlamada(cliente2.getNif(),llamada6);
-
-        System.out.println("Llamadas realizadas por: " + cliente1.nombre);
-        gestor.mostrarLlamadas(cliente1.getNif());
-        System.out.println("Llamadas realizadas por: " + cliente2.nombre);
-        gestor.mostrarLlamadas(cliente2.getNif());
-
-        System.out.println("Factura " + cliente1.getNombre());
-        gestor.emitirFactura(cliente1.nif,LocalDate.of(2019, Month.JANUARY, 1), LocalDate.of(2019, Month.JANUARY, 31));
-        gestor.emitirFactura(cliente1.nif,LocalDate.of(2019, Month.FEBRUARY, 1), LocalDate.of(2019, Month.FEBRUARY, 28));
-        gestor.emitirFactura(cliente1.nif,LocalDate.of(2019, Month.MARCH, 1), LocalDate.of(2019, Month.MARCH, 31));
-        //System.out.println(factura);
-        System.out.println("HAY " + facturas.keySet().size() + " FACTURAS");
-        gestor.mostrarFactura(1);
-        gestor.mostrarFactura(2);
-        gestor.mostrarFactura(3);
-
-*/
 
     }
 
