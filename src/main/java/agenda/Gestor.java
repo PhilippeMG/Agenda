@@ -155,14 +155,8 @@ public class Gestor {
         }
     }
 
-    public static void nuevoParticular() {
+    public static void nuevoCliente(int opcion) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Nombre del cliente: ");
-
-        String nombre = scanner.nextLine();
-        System.out.print("Apellidos del cliente: ");
-        String apellidos = scanner.nextLine();
-
         System.out.print("NIF del cliente: ");
         String nif = scanner.next();
 
@@ -171,18 +165,27 @@ public class Gestor {
         int CP = scanner.nextInt();
         System.out.print("Provincia: ");
         String provincia = scanner.next();
-
         System.out.print("Población: ");
         String poblacion = scanner.next();
-
-
         Direccion direccion = new Direccion(CP, provincia, poblacion);
+
         System.out.print("Correo: ");
         String correo = scanner.next();
         System.out.print("Tarifa: ");
         int tipoTarifa = scanner.nextInt();
-        Cliente nuevo = new Particular(nombre, nif, direccion, correo, tipoTarifa, apellidos);
-        añadirCliente(nuevo);
+
+        System.out.print("Nombre del cliente: ");
+        String nombre = scanner.nextLine();
+
+        if(opcion==0) { //Particular
+            System.out.println("Apellidos del cliente");
+            String apellidos = scanner.nextLine();
+            Cliente nuevo = new Particular(nombre, nif, direccion, correo, tipoTarifa, apellidos);
+            añadirCliente(nuevo);
+        }else{
+            Cliente nuevo = new Empresa(nombre, nif, direccion, correo, tipoTarifa);
+            añadirCliente(nuevo);
+        }
     }
 
     public static LocalDate crearFecha() {
@@ -196,35 +199,6 @@ public class Gestor {
 
         LocalDate fecha = LocalDate.of(año, mes, dia);
         return fecha;
-    }
-
-    public static void nuevoEmpresa() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Nombre del cliente: ");
-
-        String nombre = scanner.nextLine();
-
-        System.out.print("NIF del cliente: ");
-        String nif = scanner.next();
-
-        System.out.println("Dirección del cliente: ");
-        System.out.print("CP: ");
-        int CP = scanner.nextInt();
-        System.out.print("Provincia: ");
-        String provincia = scanner.next();
-
-        System.out.print("Población: ");
-        String poblacion = scanner.next();
-
-
-        Direccion direccion = new Direccion(CP, provincia, poblacion);
-        System.out.print("Correo: ");
-        String correo = scanner.next();
-        System.out.print("Tarifa: ");
-        int tipoTarifa = scanner.nextInt();
-        Cliente nuevo = new Empresa(nombre, nif, direccion, correo, tipoTarifa);
-        añadirCliente(nuevo);
-
     }
 
     public static void main(String[] args) {
@@ -248,16 +222,10 @@ public class Gestor {
                     System.out.println("0.-Particular");
                     System.out.println("1.-Empresa");
                     System.out.print("Tipo de cliente: ");
-                    int cliente = scanner.nextInt();
-                    switch (cliente) {
-                        case 0:
-                            nuevoParticular();
-                            break;
-                        case 1:
-                            nuevoEmpresa();
-                            break;
-                    }
+                    int tipo = scanner.nextInt();
+                    nuevoCliente(tipo);
                     break;
+
                 case BORRAR_CLIENTE:
                     System.out.print("NIF del cliente que quieres eliminar: ");
                     nif = scanner.next();
