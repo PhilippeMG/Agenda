@@ -1,6 +1,8 @@
 package agenda;
 
-public class Direccion {
+import java.io.Serializable;
+
+public class Direccion implements Serializable {
     int CP;
     String provincia;
     String poblacion;

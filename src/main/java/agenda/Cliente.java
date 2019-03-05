@@ -1,12 +1,13 @@
 package agenda;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class Cliente {
+public class Cliente implements Serializable {
     String nombre;
     String nif;
     Direccion direccion;
