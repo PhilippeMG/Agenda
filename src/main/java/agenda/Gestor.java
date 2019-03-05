@@ -5,9 +5,7 @@ import es.uji.www.GeneradorDatosINE;
 
 import java.time.*;
 import java.time.format.*;
-
 import java.util.*;
-
 import static agenda.Gestor.OpcionesMenu.SALIR;
 
 public class Gestor {
@@ -17,6 +15,7 @@ public class Gestor {
 
     //>>>MENU<<<<
     public enum OpcionesMenu {
+
         AÑADIR_CLIENTE("Añadir cliente"),
         BORRAR_CLIENTE("Borrar cliente"),
         LISTAR_CLIENTES("Listar clientes"),
