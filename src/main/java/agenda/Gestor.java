@@ -3,14 +3,17 @@ package agenda;
 import com.sun.security.ntlm.Client;
 import es.uji.www.GeneradorDatosINE;
 
+import java.io.*;
 import java.time.*;
 import java.time.format.*;
 import java.util.*;
+
 import static agenda.Gestor.OpcionesMenu.SALIR;
 
-public class Gestor {
+public class Gestor implements Serializable {
     static HashMap<String, Cliente> clientes = new HashMap<>();
     static HashMap<Integer, Factura> facturas = new HashMap<>();
+    private static FileOutputStream FileOutputStreamfos;
 
 
     //>>>MENU<<<<
@@ -56,6 +59,28 @@ public class Gestor {
             }
             return sb.toString();
         }
+    }
+
+    //>>>Fichero<<<<
+    public static void escribirDatos() throws IOException {
+        FileOutputStream fos = new FileOutputStream("datosClientes.bin");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(clientes);
+        oos.close();
+        fos = new FileOutputStream("datosFacturas.bin");
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(facturas);
+        oos.close();
+    }
+
+    public static void leerDatos() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream("datosClientes.bin");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        clientes = (HashMap<String, Cliente>) ois.readObject();
+        fis = new FileInputStream("datosFacturas.bin");
+        ois = new ObjectInputStream(fis);
+        facturas = (HashMap<Integer, Factura>) ois.readObject();
+        ois.close();
     }
 
     //>>>CLIENTE<<<<
@@ -177,12 +202,12 @@ public class Gestor {
         System.out.print("Nombre del cliente: ");
         String nombre = scanner.nextLine();
 
-        if(opcion==0) { //Particular
+        if (opcion == 0) { //Particular
             System.out.println("Apellidos del cliente");
             String apellidos = scanner.nextLine();
             Cliente nuevo = new Particular(nombre, nif, direccion, correo, tipoTarifa, apellidos);
             añadirCliente(nuevo);
-        }else{
+        } else {
             Cliente nuevo = new Empresa(nombre, nif, direccion, correo, tipoTarifa);
             añadirCliente(nuevo);
         }
@@ -201,20 +226,21 @@ public class Gestor {
         return fecha;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         boolean terminar = false;
         String nif;
-        Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
+       Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
 
-        Cliente cliente1 = new Cliente("Marcos", "0001", direccion1, "al375909@uji.es", 1);
+       /* Cliente cliente1 = new Cliente("Marcos", "0001", direccion1, "al375909@uji.es", 1);
         Cliente cliente2 = new Cliente("Philippe", "0002", direccion1, "al375923@uji.es", 1);
         añadirCliente(cliente1);
-        añadirCliente(cliente2);
+        añadirCliente(cliente2);*/
+        leerDatos();
 
         do {
             System.out.println(OpcionesMenu.getMenu());
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Elije una opción: ");
+            System.out.print("\nElije una opción: ");
             int valor = scanner.nextInt();
             OpcionesMenu opcion = OpcionesMenu.getOpcion(valor);
             switch (opcion) {
@@ -283,6 +309,7 @@ public class Gestor {
                     break;
                 case SALIR:
                     terminar = true;
+                    escribirDatos();
                     break;
             }
         } while (terminar == false);

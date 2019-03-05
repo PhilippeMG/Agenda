@@ -1,6 +1,5 @@
 package agenda;
 
-import groovy.ui.SystemOutputInterceptor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
