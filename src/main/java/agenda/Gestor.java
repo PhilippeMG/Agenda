@@ -182,12 +182,20 @@ public class Gestor implements Serializable {
 
     public static void nuevoCliente(int opcion) {
         Scanner scanner = new Scanner(System.in);
+        Scanner scannerEntero = new Scanner(System.in);
+
         System.out.print("NIF del cliente: ");
         String nif = scanner.next();
-
+        System.out.print("Nombre del cliente: ");
+        String nombre = scannerEntero.next();
+        String apellidos="";
+        if (opcion == 0) { //Particular
+            System.out.print("Apellidos del cliente");
+            apellidos = scanner.next();
+        }
         System.out.println("Dirección del cliente: ");
         System.out.print("CP: ");
-        int CP = scanner.nextInt();
+        int CP = scannerEntero.nextInt();
         System.out.print("Provincia: ");
         String provincia = scanner.next();
         System.out.print("Población: ");
@@ -197,14 +205,10 @@ public class Gestor implements Serializable {
         System.out.print("Correo: ");
         String correo = scanner.next();
         System.out.print("Tarifa: ");
-        int tipoTarifa = scanner.nextInt();
+        int tipoTarifa = scannerEntero.nextInt();
 
-        System.out.print("Nombre del cliente: ");
-        String nombre = scanner.nextLine();
 
-        if (opcion == 0) { //Particular
-            System.out.println("Apellidos del cliente");
-            String apellidos = scanner.nextLine();
+        if (opcion == 0) {
             Cliente nuevo = new Particular(nombre, nif, direccion, correo, tipoTarifa, apellidos);
             añadirCliente(nuevo);
         } else {
