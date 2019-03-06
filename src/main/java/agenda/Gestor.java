@@ -39,6 +39,7 @@ public class Gestor implements Serializable {
         }
 
         public static OpcionesMenu getOpcion(int opcion) {
+            if (opcion >= values().length || opcion < 0) return values()[11];
             return values()[opcion];
         }
 
@@ -115,16 +116,17 @@ public class Gestor implements Serializable {
             System.out.println(clientela.next().toString());
         }
     }
-    public static HashMap<String,Cliente> devolverClientesEntreFechas( HashMap<String, Cliente> clientesMap, LocalDate inicio, LocalDate fin) {
+
+    public static HashMap<String, Cliente> devolverClientesEntreFechas(HashMap<String, Cliente> clientesMap, LocalDate inicio, LocalDate fin) {
         Iterator<Cliente> conjuntos = clientesMap.values().iterator();//.entrySet().iterator();
         HashMap<String, Cliente> clientesEntreFechas = new HashMap<>();
 
         while (conjuntos.hasNext()) {
-            Cliente client=conjuntos.next();
-            if ((client.getFecha().isAfter(inicio)|| client.getFecha().equals(inicio))&&
-                    (client.getFecha().isBefore(fin)|| client.getFecha().equals(fin))){
+            Cliente client = conjuntos.next();
+            if ((client.getFecha().isAfter(inicio) || client.getFecha().equals(inicio)) &&
+                    (client.getFecha().isBefore(fin) || client.getFecha().equals(fin))) {
 
-                clientesEntreFechas.put(client.getNif(),client);
+                clientesEntreFechas.put(client.getNif(), client);
             }
 
 
@@ -132,6 +134,7 @@ public class Gestor implements Serializable {
         return clientesEntreFechas;
 
     }
+
     //>>>LLAMADAS<<<<
     public static boolean añadirLlamada(String NIF, Llamada llamada) {
         if (clientes.containsKey(NIF)) {
@@ -161,7 +164,7 @@ public class Gestor implements Serializable {
                 } else {
                     throw new IllegalArgumentException();
                 }
-            }catch(IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
             }
             return factura;
         } else {
@@ -205,9 +208,9 @@ public class Gestor implements Serializable {
         String nif = scanner.next();
         System.out.print("Nombre del cliente: ");
         String nombre = scannerEntero.next();
-        String apellidos="";
+        String apellidos = "";
         if (opcion == 0) { //Particular
-            System.out.print("Apellidos del cliente");
+            System.out.print("Apellidos del cliente: ");
             apellidos = scanner.next();
         }
         System.out.println("Dirección del cliente: ");
@@ -223,8 +226,7 @@ public class Gestor implements Serializable {
         String correo = scanner.next();
         System.out.print("Tarifa: ");
         int tipoTarifa = scannerEntero.nextInt();
-        scanner.close();
-        scannerEntero.close();
+
 
 
         if (opcion == 0) {
@@ -249,90 +251,151 @@ public class Gestor implements Serializable {
         return fecha;
     }
 
+    //Menu
+    public static void opcionAñadirCliente() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("0.-Particular");
+        System.out.println("1.-Empresa");
+        System.out.print("Tipo de cliente: ");
+        int tipo = scanner.nextInt();
+        nuevoCliente(tipo);
+        //scanner.close();
+    }
+
+    public static void opcionBorrarCliente() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("NIF del cliente que quieres eliminar: ");
+        String nif = scanner.next();
+        borrarCliente(nif);
+    }
+
+    public static void opcionCambiarTarifa() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("NIF del cliente: ");
+        String nif = scanner.next();
+        System.out.print("Nueva tarifa para el cliente: ");
+        int tarifa = scanner.nextInt();
+        cambiarTarifa(nif, tarifa);
+    }
+
+    public static void opcionDatosClientes() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("NIF del cliente: ");
+        String nif = scanner.next();
+        mostrarCliente(nif);
+    }
+
+    public static void opcionListarLlamadasCliente() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("NIF del cliente: ");
+        String nif = scanner.next();
+        mostrarLlamadas(nif);
+    }
+
+    public static void opcionEmitirFacturaCLiente() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("NIF del cliente: ");
+        String nif = scanner.next();
+        System.out.printf(emitirFactura(nif, crearFecha(), crearFecha()).toString());
+    }
+
+    public static void opcionAñadirLlamada() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("NIF del cliente: ");
+        String nif = scanner.next();
+
+        System.out.print("Numero destino: ");
+        int numDestino = scanner.nextInt();
+        System.out.print("Dureción: ");
+        double duracion = scanner.nextDouble();
+
+
+        LocalDate fechaLlamada = crearFecha();
+        Llamada llamada = new Llamada(numDestino, duracion, fechaLlamada);
+        añadirLlamada(nif, llamada);
+    }
+
+    public static void opcionRecuperarFactura() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Codigo de la factura: ");
+        int codigo = scanner.nextInt();
+        mostrarFactura(codigo);
+    }
+
+    public static void opcionFacturasCLiente() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("NIF del cliente: ");
+        String nif = scanner.next();
+        mostrarFacturas(nif);
+    }
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         boolean terminar = false;
-        String nif;
-       //Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
+
+        //Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
 
        /* Cliente cliente1 = new Cliente("Marcos", "0001", direccion1, "al375909@uji.es", 1);
         Cliente cliente2 = new Cliente("Philippe", "0002", direccion1, "al375923@uji.es", 1);
         añadirCliente(cliente1);
         añadirCliente(cliente2);*/
         leerDatos();
-        Scanner scanner = new Scanner(System.in);
+        Scanner scannerMenu = new Scanner(System.in);
 
         do {
+
             System.out.println(OpcionesMenu.getMenu());
+
             System.out.print("\nElije una opción: ");
-            int valor = scanner.nextInt();
+            int  valor = scannerMenu.nextInt();
+
+
             OpcionesMenu opcion = OpcionesMenu.getOpcion(valor);
             switch (opcion) {
                 case AÑADIR_CLIENTE:
                     System.out.println("0.-Particular");
                     System.out.println("1.-Empresa");
                     System.out.print("Tipo de cliente: ");
-                    int tipo = scanner.nextInt();
+                    int tipo = scannerMenu.nextInt();
                     nuevoCliente(tipo);
                     break;
-
                 case BORRAR_CLIENTE:
-                    System.out.print("NIF del cliente que quieres eliminar: ");
-                    nif = scanner.next();
-                    borrarCliente(nif);
+                    opcionBorrarCliente();
                     break;
-
                 case CAMBIAR_TARIFA_CLIENTE:
-                    System.out.print("NIF del cliente: ");
-                    nif = scanner.next();
-                    System.out.print("Nueva tarifa para el cliente: ");
-                    int tarifa = scanner.nextInt();
-                    cambiarTarifa(nif, tarifa);
+                    opcionCambiarTarifa();
                     break;
                 case DATOS_CLIENTE:
-                    System.out.print("NIF del cliente: ");
-                    nif = scanner.next();
-                    mostrarCliente(nif);
+                    opcionDatosClientes();
                     break;
                 case LISTAR_LLAMADAS_CLIENTE:
-                    System.out.print("NIF del cliente: ");
-                    nif = scanner.next();
-                    mostrarLlamadas(nif);
+                    opcionListarLlamadasCliente();
                     break;
                 case LISTAR_CLIENTES_ENTRE_FECHAS:
-                    HashMap<String, Cliente> listadoClientes =devolverClientesEntreFechas(clientes,crearFecha(),crearFecha());
+                    HashMap<String, Cliente> listadoClientes = devolverClientesEntreFechas(clientes, crearFecha(), crearFecha());
                     mostrarClientes(listadoClientes);
                     break;
                 case EMITIR_FACTURA_CLIENTE:
-                    System.out.print("NIF del cliente: ");
-                    nif = scanner.next();
-                    System.out.printf(emitirFactura(nif, crearFecha(), crearFecha()).toString());
+                    opcionEmitirFacturaCLiente();
                     break;
                 case LISTAR_CLIENTES:
                     mostrarClientes(clientes);
                     break;
                 case AÑADIR_LLAMADA:
-                    System.out.print("NIF del cliente: ");
-                    nif = scanner.next();
-
-                    System.out.print("Numero destino: ");
-                    int numDestino = scanner.nextInt();
-                    System.out.print("Dureción: ");
-                    double duracion = scanner.nextDouble();
-
-
-                    LocalDate fechaLlamada = crearFecha();
-                    Llamada llamada = new Llamada(numDestino, duracion, fechaLlamada);
-                    añadirLlamada(nif, llamada);
+                    opcionAñadirLlamada();
                     break;
                 case RECUPERAR_FACTURA:
-                    System.out.print("Codigo de la factura: ");
-                    int codigo = scanner.nextInt();
-                    mostrarFactura(codigo);
+                    opcionRecuperarFactura();
                     break;
                 case FACTURAS_CLIENTE:
-                    System.out.print("NIF del cliente: ");
-                    nif = scanner.next();
-                    mostrarFacturas(nif);
+                    opcionFacturasCLiente();
                     break;
                 case SALIR:
                     terminar = true;
@@ -341,7 +404,7 @@ public class Gestor implements Serializable {
             }
 
         } while (terminar == false);
-        scanner.close();
+        //  scanner.close();
     }
 
 }
