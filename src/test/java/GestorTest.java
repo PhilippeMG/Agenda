@@ -1,5 +1,3 @@
-package agenda.test.java.java;
-
 import agenda.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -20,7 +18,7 @@ public class GestorTest {
 
     public static void init() {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
-        cliente = new Cliente("Marcos", "0001", direccion1, "al375909@uji.es", 1);
+        cliente = new Cliente("Marcos", "0001", direccion1, "al375909@uji.es", new Tarifa(1));
         Llamada llamada3 = new Llamada(654078311,0.9, LocalDate.of(2017, Month.MARCH, 1));
         cliente.añadirLlamada(llamada3);
         Factura factura = new Factura(cliente,LocalDate.of(2017,Month.MARCH, 1),LocalDate.of(2019,Month.MARCH, 3));

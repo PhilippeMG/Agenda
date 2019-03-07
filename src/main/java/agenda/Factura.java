@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Factura implements Serializable {
-    int tipoTarifa;
+    Tarifa tipoTarifa;
     static int cod=0;
     LocalDate inicio;
     LocalDate fin;
@@ -42,7 +42,7 @@ public class Factura implements Serializable {
         for (Llamada llamada : cliente.llamadas) {
             //si es igual a inicio o a fin o posterior a inicio o anteror a fin.
             if((llamada.fechaLlamada.equals(inicio)  || llamada.fechaLlamada.isAfter(inicio)) && (llamada.fechaLlamada.equals(fin) || llamada.fechaLlamada.isBefore(fin))){
-                importe += cliente.tipoTarifa * llamada.duracion;
+                importe += cliente.tipoTarifa.getTarifa() * llamada.duracion;
             }
         }
         return importe;

@@ -13,11 +13,11 @@ public class Cliente implements Serializable {
     Direccion direccion;
     String correo;
     LocalDate fechaDeAlta;
-    int tipoTarifa;
+    Tarifa tipoTarifa;
     HashMap<Integer, Factura> facturas = new HashMap<>();
     LinkedList <Llamada> llamadas =new LinkedList<>();
 
-    public Cliente(String nombre, String nif, Direccion direccion, String correo, int tipoTarifa) {
+    public Cliente(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa) {
         this.nombre = nombre;
         this.nif = nif;
         this.direccion = direccion;
@@ -43,11 +43,11 @@ public class Cliente implements Serializable {
     }
 
     public int getTipoTarifa() {
-        return tipoTarifa;
+        return tipoTarifa.getTarifa();
     }
 
     public void cambiarTarifa(int nuevaTarifa){
-        this.tipoTarifa = nuevaTarifa;
+        tipoTarifa.setTarifa(nuevaTarifa);
     }
 
     public void añadirLlamada(Llamada llamada) {
@@ -77,11 +77,11 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "Cliente: " +
-                "nombre='" + nombre + '\'' +
-                ", nif='" + nif + '\'' +
+                "nombre= '" + nombre + '\'' +
+                ", nif= '" + nif + '\'' +
                 ", Direccion: " + direccion.toString() +
-                ", correo='" + correo + '\'' +
-                ", fechaDeAlta=" + fechaDeAlta +
-                ", tipoTarifa=" + tipoTarifa ;
+                ", correo= '" + correo + '\'' +
+                ", fechaDeAlta= " + fechaDeAlta +
+                ", tipoTarifa= " + tipoTarifa.getTarifa() ;
     }
 }

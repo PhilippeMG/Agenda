@@ -226,14 +226,13 @@ public class Gestor implements Serializable {
         String correo = scanner.next();
         System.out.print("Tarifa: ");
         int tipoTarifa = scannerEntero.nextInt();
-
-
+        Tarifa tarifa= new Tarifa(tipoTarifa);
 
         if (opcion == 0) {
-            Cliente nuevo = new Particular(nombre, nif, direccion, correo, tipoTarifa, apellidos);
+            Cliente nuevo = new Particular(nombre, nif, direccion, correo, tarifa, apellidos);
             añadirCliente(nuevo);
         } else {
-            Cliente nuevo = new Empresa(nombre, nif, direccion, correo, tipoTarifa);
+            Cliente nuevo = new Empresa(nombre, nif, direccion, correo, tarifa);
             añadirCliente(nuevo);
         }
     }

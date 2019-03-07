@@ -3,7 +3,7 @@ package agenda;
 public class Particular extends Cliente{
     String apellidos;
 
-    public Particular(String nombre, String nif, Direccion direccion, String correo, int tipoTarifa, String apellidos) {
+    public Particular(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa, String apellidos) {
         super(nombre, nif, direccion, correo, tipoTarifa);
         this.apellidos = apellidos;
     }
@@ -17,7 +17,7 @@ public class Particular extends Cliente{
                 ", direccion=" + direccion +
                 ", correo='" + correo + '\'' +
                 ", fechaDeAlta=" + fechaDeAlta +
-                ", tipoTarifa=" + tipoTarifa +
+                ", tipoTarifa=" + tipoTarifa.getTarifa() +
                 '}';
     }
 }
