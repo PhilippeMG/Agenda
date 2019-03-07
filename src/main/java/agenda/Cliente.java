@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class Cliente implements Serializable {
+public class  Cliente implements Serializable {
     String nombre;
     String nif;
     Direccion direccion;
@@ -50,11 +50,11 @@ public class Cliente implements Serializable {
         tipoTarifa.setTarifa(nuevaTarifa);
     }
 
-    public void añadirLlamada(Llamada llamada) {
+    public void insertarLlamada(Llamada llamada) {
         llamadas.add(llamada);
     }
 
-    public void añadirFactura(Factura factura) {
+    public void insertarFactura(Factura factura) {
         facturas.put(factura.getCod(), factura);
     }
 

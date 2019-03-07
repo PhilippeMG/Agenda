@@ -19,13 +19,13 @@ public class Gestor implements Serializable {
     //>>>MENU<<<<
     public enum OpcionesMenu {
 
-        AÑADIR_CLIENTE("Añadir cliente"),
+        INSERTAR_CLIENTE("Insertar cliente"),
         BORRAR_CLIENTE("Borrar cliente"),
         LISTAR_CLIENTES("Listar clientes"),
         LISTAR_CLIENTES_ENTRE_FECHAS("Listar clientes entre dos fechas"),
         DATOS_CLIENTE("Mostrar información cliente"),
         CAMBIAR_TARIFA_CLIENTE("Modificar tarifa cliente"),
-        AÑADIR_LLAMADA("Añadir llamada"),
+        INSERTAR_LLAMADA("Insertar llamada"),
         LISTAR_LLAMADAS_CLIENTE("Mostrar llamadas de un cliente"),
         EMITIR_FACTURA_CLIENTE("Emitir factura de un cliente"),
         FACTURAS_CLIENTE("Mostrar conjunto facturas de un cliente"),
@@ -39,7 +39,10 @@ public class Gestor implements Serializable {
         }
 
         public static OpcionesMenu getOpcion(int opcion) {
-            if (opcion >= values().length || opcion < 0) return values()[11];
+            if (opcion >= values().length || opcion < 0){
+                System.out.printf("Opcion no valida");
+                return values()[11];
+            }
             return values()[opcion];
         }
 
@@ -83,7 +86,7 @@ public class Gestor implements Serializable {
     }
 
     //>>>CLIENTE<<<<
-    public static boolean añadirCliente(Cliente cliente) {
+    public static boolean insertarCliente(Cliente cliente) {
         if (!clientes.containsKey(cliente.nif)) {
             clientes.put(cliente.nif, cliente);
             return true;
@@ -136,9 +139,9 @@ public class Gestor implements Serializable {
     }
 
     //>>>LLAMADAS<<<<
-    public static boolean añadirLlamada(String NIF, Llamada llamada) {
+    public static boolean insertarLlamada(String NIF, Llamada llamada) {
         if (clientes.containsKey(NIF)) {
-            clientes.get(NIF).añadirLlamada(llamada);
+            clientes.get(NIF).insertarLlamada(llamada);
             return true;
         } else {
             throw new IllegalArgumentException();
@@ -157,7 +160,7 @@ public class Gestor implements Serializable {
         if (clientes.containsKey(NIF)) {
             Cliente cliente = clientes.get(NIF);
             Factura factura = new Factura(cliente, ini, fin);
-            cliente.añadirFactura(factura);
+            cliente.insertarFactura(factura);
             try {
                 if (!facturas.containsKey(factura.getCod())) {
                     facturas.put(factura.getCod(), factura);
@@ -230,10 +233,10 @@ public class Gestor implements Serializable {
 
         if (opcion == 0) {
             Cliente nuevo = new Particular(nombre, nif, direccion, correo, tarifa, apellidos);
-            añadirCliente(nuevo);
+            insertarCliente(nuevo);
         } else {
             Cliente nuevo = new Empresa(nombre, nif, direccion, correo, tarifa);
-            añadirCliente(nuevo);
+            insertarCliente(nuevo);
         }
     }
 
@@ -251,7 +254,7 @@ public class Gestor implements Serializable {
     }
 
     //Menu
-    public static void opcionAñadirCliente() {
+    public static void opcionInsertarCliente() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("0.-Particular");
@@ -303,7 +306,7 @@ public class Gestor implements Serializable {
         System.out.printf(emitirFactura(nif, crearFecha(), crearFecha()).toString());
     }
 
-    public static void opcionAñadirLlamada() {
+    public static void opcionInsertarLlamada() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("NIF del cliente: ");
@@ -317,7 +320,7 @@ public class Gestor implements Serializable {
 
         LocalDate fechaLlamada = crearFecha();
         Llamada llamada = new Llamada(numDestino, duracion, fechaLlamada);
-        añadirLlamada(nif, llamada);
+        insertarLlamada(nif, llamada);
     }
 
     public static void opcionRecuperarFactura() {
@@ -343,8 +346,8 @@ public class Gestor implements Serializable {
 
        /* Cliente cliente1 = new Cliente("Marcos", "0001", direccion1, "al375909@uji.es", 1);
         Cliente cliente2 = new Cliente("Philippe", "0002", direccion1, "al375923@uji.es", 1);
-        añadirCliente(cliente1);
-        añadirCliente(cliente2);*/
+        insertarCliente(cliente1);
+        insertarCliente(cliente2);*/
         leerDatos();
         Scanner scannerMenu = new Scanner(System.in);
 
@@ -358,7 +361,7 @@ public class Gestor implements Serializable {
 
             OpcionesMenu opcion = OpcionesMenu.getOpcion(valor);
             switch (opcion) {
-                case AÑADIR_CLIENTE:
+                case INSERTAR_CLIENTE:
                     System.out.println("0.-Particular");
                     System.out.println("1.-Empresa");
                     System.out.print("Tipo de cliente: ");
@@ -387,8 +390,8 @@ public class Gestor implements Serializable {
                 case LISTAR_CLIENTES:
                     mostrarClientes(clientes);
                     break;
-                case AÑADIR_LLAMADA:
-                    opcionAñadirLlamada();
+                case INSERTAR_LLAMADA:
+                    opcionInsertarLlamada();
                     break;
                 case RECUPERAR_FACTURA:
                     opcionRecuperarFactura();
