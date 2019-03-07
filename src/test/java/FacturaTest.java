@@ -1,4 +1,4 @@
-package agenda.test;
+package agenda.test.java.java;
 
 import agenda.Cliente;
 import agenda.Direccion;
