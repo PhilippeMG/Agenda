@@ -8,60 +8,12 @@ import java.time.*;
 import java.time.format.*;
 import java.util.*;
 
-import static agenda.Gestor.OpcionesMenu.SALIR;
 
 public class Gestor implements Serializable {
     static HashMap<String, Cliente> clientes = new HashMap<>();
     static HashMap<Integer, Factura> facturas = new HashMap<>();
-    private static FileOutputStream FileOutputStreamfos;
 
 
-    //>>>MENU<<<<
-    public enum OpcionesMenu {
-
-        INSERTAR_CLIENTE("Insertar cliente"),
-        BORRAR_CLIENTE("Borrar cliente"),
-        LISTAR_CLIENTES("Listar clientes"),
-        LISTAR_CLIENTES_ENTRE_FECHAS("Listar clientes entre dos fechas"),
-        DATOS_CLIENTE("Mostrar información cliente"),
-        CAMBIAR_TARIFA_CLIENTE("Modificar tarifa cliente"),
-        INSERTAR_LLAMADA("Insertar llamada"),
-        LISTAR_LLAMADAS_CLIENTE("Mostrar llamadas de un cliente"),
-        EMITIR_FACTURA_CLIENTE("Emitir factura de un cliente"),
-        FACTURAS_CLIENTE("Mostrar conjunto facturas de un cliente"),
-        RECUPERAR_FACTURA("Mostrar Factura"),
-        SALIR("Salir del Menú");
-
-        private String descripcion;
-
-        private OpcionesMenu(String descripcion) {
-            this.descripcion = descripcion;
-        }
-
-        public static OpcionesMenu getOpcion(int opcion) {
-            if (opcion >= values().length || opcion < 0){
-                System.out.printf("Opcion no valida");
-                return values()[11];
-            }
-            return values()[opcion];
-        }
-
-        public String getDescripcion() {
-            return descripcion;
-        }
-
-        public static String getMenu() {
-            StringBuilder sb = new StringBuilder();
-            System.out.println("¿Qué operación desea realizar?");
-            for (OpcionesMenu opcion : OpcionesMenu.values()) {
-                sb.append(opcion.ordinal());
-                sb.append(".-");
-                sb.append(opcion.getDescripcion());
-                sb.append("\n");
-            }
-            return sb.toString();
-        }
-    }
 
     //>>>Fichero<<<<
     public static void escribirDatos() throws IOException {
@@ -338,6 +290,47 @@ public class Gestor implements Serializable {
         String nif = scanner.next();
         mostrarFacturas(nif);
     }
+    public static void subMenuCLientes() throws IOException {
+        Scanner scannerMenu = new Scanner(System.in);
+        boolean terminar =false;
+        do {
+
+            System.out.println(Menu.OpcionesSubMenuClientes.getMenu());
+
+            System.out.print("\nElije una opción: ");
+            int  valor = scannerMenu.nextInt();
+
+
+            Menu.OpcionesSubMenuClientes opcion = Menu.OpcionesSubMenuClientes.getOpcion(valor);
+            switch (opcion) {
+                case INSERTAR_CLIENTE:
+                    opcionInsertarCliente();
+                    break;
+                case BORRAR_CLIENTE:
+                    opcionBorrarCliente();
+                    break;
+
+                case DATOS_CLIENTE:
+                    opcionDatosClientes();
+                   break;
+
+                case LISTAR_CLIENTES_ENTRE_FECHAS:
+                    HashMap<String, Cliente> listadoClientes = devolverClientesEntreFechas(clientes, crearFecha(), crearFecha());
+                    mostrarClientes(listadoClientes);
+                    break;
+
+                case LISTAR_CLIENTES:
+                    mostrarClientes(clientes);
+                    break;
+
+                case SALIR:
+                    terminar = true;
+                    escribirDatos();
+                    break;
+            }
+
+        } while (terminar == false);
+    }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         boolean terminar = false;
@@ -353,40 +346,40 @@ public class Gestor implements Serializable {
 
         do {
 
-            System.out.println(OpcionesMenu.getMenu());
+            System.out.println(Menu.OpcionesMenuPrincipal.getMenu());
 
             System.out.print("\nElije una opción: ");
             int  valor = scannerMenu.nextInt();
 
 
-            OpcionesMenu opcion = OpcionesMenu.getOpcion(valor);
+            Menu.OpcionesMenuPrincipal opcion = Menu.OpcionesMenuPrincipal.getOpcion(valor);
             switch (opcion) {
-                case INSERTAR_CLIENTE:
-                    opcionInsertarCliente();
+                case GESTIONAR_CLIENTES:
+                    subMenuCLientes();
                     break;
-                case BORRAR_CLIENTE:
+               /* case BORRAR_CLIENTE:
                     opcionBorrarCliente();
                     break;
-                case CAMBIAR_TARIFA_CLIENTE:
+               */ case CAMBIAR_TARIFA_CLIENTE:
                     opcionCambiarTarifa();
                     break;
-                case DATOS_CLIENTE:
+               /* case DATOS_CLIENTE:
                     opcionDatosClientes();
-                    break;
-                case LISTAR_LLAMADAS_CLIENTE:
+                   break;
+                */ case LISTAR_LLAMADAS_CLIENTE:
                     opcionListarLlamadasCliente();
                     break;
-                case LISTAR_CLIENTES_ENTRE_FECHAS:
+               /* case LISTAR_CLIENTES_ENTRE_FECHAS:
                     HashMap<String, Cliente> listadoClientes = devolverClientesEntreFechas(clientes, crearFecha(), crearFecha());
                     mostrarClientes(listadoClientes);
                     break;
-                case EMITIR_FACTURA_CLIENTE:
+               */ case EMITIR_FACTURA_CLIENTE:
                     opcionEmitirFacturaCLiente();
                     break;
-                case LISTAR_CLIENTES:
+               /* case LISTAR_CLIENTES:
                     mostrarClientes(clientes);
                     break;
-                case INSERTAR_LLAMADA:
+               */ case INSERTAR_LLAMADA:
                     opcionInsertarLlamada();
                     break;
                 case RECUPERAR_FACTURA:
