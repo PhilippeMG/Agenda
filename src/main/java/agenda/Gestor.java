@@ -362,11 +362,7 @@ public class Gestor implements Serializable {
             OpcionesMenu opcion = OpcionesMenu.getOpcion(valor);
             switch (opcion) {
                 case INSERTAR_CLIENTE:
-                    System.out.println("0.-Particular");
-                    System.out.println("1.-Empresa");
-                    System.out.print("Tipo de cliente: ");
-                    int tipo = scannerMenu.nextInt();
-                    nuevoCliente(tipo);
+                    opcionInsertarCliente();
                     break;
                 case BORRAR_CLIENTE:
                     opcionBorrarCliente();
