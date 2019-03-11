@@ -32,4 +32,12 @@ public class Llamada implements Serializable {
         }
 
     }
+
+    public LocalDate getFecha() {
+        return fechaLlamada;
+    }
+
+    public void setFechaLlamada(LocalDate fechaLlamada) {
+        this.fechaLlamada = fechaLlamada;
+    }
 }

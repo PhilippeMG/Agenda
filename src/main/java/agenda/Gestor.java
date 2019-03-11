@@ -88,7 +88,22 @@ public class Gestor implements Serializable {
         return clientesEntreFechas;
 
     }
+    public static  LinkedList <Llamada> devolverLlamadasEntreFechas(Cliente cliente, LocalDate inicio, LocalDate fin) {
+        LinkedList <Llamada> llamadaEntreFecha =new LinkedList<>();
 
+        LinkedList <Llamada> llamadas= cliente.llamadas;
+        Llamada llamada;
+        for (int i =0; i<llamadas.size();i++){
+            llamada=llamadas.get(i);
+            if ((llamada.getFecha().isAfter(inicio) || llamada.getFecha().equals(inicio)) &&
+                    (llamada.getFecha().isBefore(fin) || llamada.getFecha().equals(fin))) {
+                llamadaEntreFecha.add(llamada);
+            }
+
+        }
+        return llamadaEntreFecha;
+
+    }
     //>>>LLAMADAS<<<<
     public static boolean insertarLlamada(String NIF, Llamada llamada) {
         if (clientes.containsKey(NIF)) {
@@ -289,7 +304,20 @@ public class Gestor implements Serializable {
         String nif = scanner.next();
         mostrarFacturas(nif);
     }
+    public static void opcionDevolverLlamadasEntreFechas(){
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.print("NIF del cliente: ");
+        String nif = scanner.next();
+
+        if (clientes.containsKey(nif)) {
+            Cliente cliente =clientes.get(nif);
+            LinkedList<Llamada> llamadas=devolverLlamadasEntreFechas(cliente,crearFecha(),crearFecha());
+            System.out.printf(llamadas.toString());
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
     public static void subMenuCLientes() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
         boolean terminar = false;
@@ -358,7 +386,9 @@ public class Gestor implements Serializable {
                 case LISTAR_LLAMADAS_CLIENTE:
                     opcionListarLlamadasCliente();
                     break;
-
+                case LISTAR_LLAMADAS_ENTRE_FECHAS:
+                    opcionDevolverLlamadasEntreFechas();
+                    break;
                 case SALIR:
                     terminar = true;
                     escribirDatos();

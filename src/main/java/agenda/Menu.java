@@ -92,6 +92,8 @@ public class Menu {
 
         INSERTAR_LLAMADA("Insertar llamada"),
         LISTAR_LLAMADAS_CLIENTE("Mostrar llamadas de un cliente"),
+        LISTAR_LLAMADAS_ENTRE_FECHAS("Listar llamadas entre dos fechas"),
+
 
         SALIR("Salir del Menú");
 
