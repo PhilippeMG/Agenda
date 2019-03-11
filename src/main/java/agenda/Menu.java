@@ -23,8 +23,8 @@ public class Menu {
 
         public static OpcionesMenuPrincipal getOpcion(int opcion) {
             if (opcion >= values().length || opcion < 0){
-                System.out.printf("Opcion no valida");
-                return values()[11];
+                System.out.println("Opcion no valida");
+                return values()[3];
             }
             return values()[opcion];
         }
@@ -66,7 +66,7 @@ public class Menu {
         public static OpcionesSubMenuClientes getOpcion(int opcion) {
             if (opcion >= values().length || opcion < 0){
                 System.out.printf("Opcion no valida");
-                return values()[11];
+                return values()[6];
             }
             return values()[opcion];
         }
@@ -104,7 +104,7 @@ public class Menu {
         public static OpcionesSubMenuLlamadas getOpcion(int opcion) {
             if (opcion >= values().length || opcion < 0){
                 System.out.printf("Opcion no valida");
-                return values()[11];
+                return values()[2];
             }
             return values()[opcion];
         }
@@ -141,7 +141,7 @@ public class Menu {
         public static OpcionesSubMenuFacturas getOpcion(int opcion) {
             if (opcion >= values().length || opcion < 0){
                 System.out.printf("Opcion no valida");
-                return values()[11];
+                return values()[3];
             }
             return values()[opcion];
         }

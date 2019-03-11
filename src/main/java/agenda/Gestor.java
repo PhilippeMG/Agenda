@@ -330,6 +330,9 @@ public class Gestor implements Serializable {
                     terminar = true;
                     escribirDatos();
                     break;
+                default:
+                    System.out.printf("Opcion no valida");
+                    break;
             }
 
         } while (terminar == false);
