@@ -344,7 +344,7 @@ public class Gestor implements Serializable {
     }
     public  void subMenuCLientes() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
-        boolean terminar = false;
+        Menu.OpcionesSubMenuClientes opcionCliente;
         do {
 
             System.out.println(Menu.OpcionesSubMenuClientes.getMenu());
@@ -353,8 +353,8 @@ public class Gestor implements Serializable {
             int valor = scannerMenu.nextInt();
 
 
-            Menu.OpcionesSubMenuClientes opcion = Menu.OpcionesSubMenuClientes.getOpcion(valor);
-            switch (opcion) {
+            opcionCliente = Menu.OpcionesSubMenuClientes.getOpcion(valor);
+            switch (opcionCliente) {
                 case INSERTAR_CLIENTE:
                     opcionInsertarCliente();
                     break;
@@ -378,7 +378,6 @@ public class Gestor implements Serializable {
                     break;
 
                 case SALIR:
-                    terminar = true;
                     escribirDatos();
                     break;
                 default:
@@ -386,12 +385,12 @@ public class Gestor implements Serializable {
                     break;
             }
 
-        } while (terminar == false);
+        } while (!opcionCliente.name().equals("SALIR"));
     }
 
     public  void subMenuLlamadas() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
-        Menu.OpcionesSubMenuLlamadas opcion;
+        Menu.OpcionesSubMenuLlamadas opcionLlamada;
         do {
 
             System.out.println(Menu.OpcionesSubMenuLlamadas.getMenu());
@@ -400,8 +399,8 @@ public class Gestor implements Serializable {
             int valor = scannerMenu.nextInt();
 
 
-            opcion = Menu.OpcionesSubMenuLlamadas.getOpcion(valor);
-            switch (opcion) {
+            opcionLlamada = Menu.OpcionesSubMenuLlamadas.getOpcion(valor);
+            switch (opcionLlamada) {
                 case INSERTAR_LLAMADA:
                     opcionInsertarLlamada();
                     break;
@@ -417,12 +416,12 @@ public class Gestor implements Serializable {
                     break;
             }
 
-        } while (opcion.name().equals("SALIR"));
+        } while (!opcionLlamada.name().equals("SALIR"));
     }
 
     public  void subMenuFacturas() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
-        Menu.OpcionesSubMenuFacturas opcion;
+        Menu.OpcionesSubMenuFacturas opcionFactura;
         do {
 
             System.out.println(Menu.OpcionesSubMenuFacturas.getMenu());
@@ -431,8 +430,8 @@ public class Gestor implements Serializable {
             int valor = scannerMenu.nextInt();
 
 
-            opcion = Menu.OpcionesSubMenuFacturas.getOpcion(valor);
-            switch (opcion) {
+            opcionFactura = Menu.OpcionesSubMenuFacturas.getOpcion(valor);
+            switch (opcionFactura) {
                 case EMITIR_FACTURA_CLIENTE:
                     opcionEmitirFacturaCLiente();
                     break;
@@ -450,7 +449,7 @@ public class Gestor implements Serializable {
                     break;
             }
 
-        } while (opcion.name().equals("SALIR"));
+        } while (!opcionFactura.name().equals("SALIR"));
     }
     public  void menuPrincipal() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
@@ -479,12 +478,12 @@ public class Gestor implements Serializable {
                     break;
             }
 
-        } while (opcion.name().equals("SALIR"));
+        } while (!opcion.name().equals("SALIR"));
     }
 
 
         public  void ejecutar() throws IOException, ClassNotFoundException {
-        //leerDatos();
+        leerDatos();
         menuPrincipal();
 
     }
