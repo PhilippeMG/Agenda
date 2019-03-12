@@ -96,6 +96,6 @@ public abstract class Cliente implements Serializable {
                 ", Direccion: " + direccion.toString() +
                 ", correo= '" + correo + '\'' +
                 ", fechaDeAlta= " + fechaDeAlta +
-                ", tipoTarifa= " + tarifa.getTarifa() ;
+                ", tipoTarifa= " + tarifa.getTipoTarifa() ;
     }
 }
