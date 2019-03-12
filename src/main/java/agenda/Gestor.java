@@ -474,11 +474,9 @@ public class Gestor implements Serializable {
 
         } while (terminar == false);
     }
-
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        boolean terminar = false;
-        leerDatos();
+    public static void menuPrincipal() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
+        boolean terminar = false;
 
         do {
 
@@ -506,6 +504,12 @@ public class Gestor implements Serializable {
             }
 
         } while (terminar == false);
+    }
+
+
+        public static void main(String[] args) throws IOException, ClassNotFoundException {
+        leerDatos();
+        menuPrincipal();
 
     }
 
