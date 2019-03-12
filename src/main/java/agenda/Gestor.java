@@ -426,7 +426,7 @@ public class Gestor implements Serializable {
 
     public  void subMenuLlamadas() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
-        boolean terminar = false;
+        Menu.OpcionesSubMenuLlamadas opcion;
         do {
 
             System.out.println(Menu.OpcionesSubMenuLlamadas.getMenu());
@@ -435,7 +435,7 @@ public class Gestor implements Serializable {
             int valor = scannerMenu.nextInt();
 
 
-            Menu.OpcionesSubMenuLlamadas opcion = Menu.OpcionesSubMenuLlamadas.getOpcion(valor);
+            opcion = Menu.OpcionesSubMenuLlamadas.getOpcion(valor);
             switch (opcion) {
                 case INSERTAR_LLAMADA:
                     opcionInsertarLlamada();
@@ -448,17 +448,16 @@ public class Gestor implements Serializable {
                     opcionDevolverLlamadasEntreFechas();
                     break;
                 case SALIR:
-                    terminar = true;
                     escribirDatos();
                     break;
             }
 
-        } while (terminar == false);
+        } while (opcion.name().equals("SALIR"));
     }
 
     public  void subMenuFacturas() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
-        boolean terminar = false;
+        Menu.OpcionesSubMenuFacturas opcion;
         do {
 
             System.out.println(Menu.OpcionesSubMenuFacturas.getMenu());
@@ -467,7 +466,7 @@ public class Gestor implements Serializable {
             int valor = scannerMenu.nextInt();
 
 
-            Menu.OpcionesSubMenuFacturas opcion = Menu.OpcionesSubMenuFacturas.getOpcion(valor);
+            opcion = Menu.OpcionesSubMenuFacturas.getOpcion(valor);
             switch (opcion) {
                 case EMITIR_FACTURA_CLIENTE:
                     opcionEmitirFacturaCLiente();
@@ -482,17 +481,15 @@ public class Gestor implements Serializable {
                     opcionDevolverFacturasEntreFechas();
                     break;
                 case SALIR:
-                    terminar = true;
                     escribirDatos();
                     break;
             }
 
-        } while (terminar == false);
+        } while (opcion.name().equals("SALIR"));
     }
     public  void menuPrincipal() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
-        boolean terminar = false;
-
+        Menu.OpcionesMenuPrincipal opcion;
         do {
 
             System.out.println(Menu.OpcionesMenuPrincipal.getMenu());
@@ -501,7 +498,7 @@ public class Gestor implements Serializable {
             int valor = scannerMenu.nextInt();
 
 
-            Menu.OpcionesMenuPrincipal opcion = Menu.OpcionesMenuPrincipal.getOpcion(valor);
+            opcion = Menu.OpcionesMenuPrincipal.getOpcion(valor);
             switch (opcion) {
                 case GESTIONAR_CLIENTES:
                     subMenuCLientes();
@@ -513,12 +510,11 @@ public class Gestor implements Serializable {
                     subMenuFacturas();
                     break;
                 case SALIR:
-                    terminar = true;
                     escribirDatos();
                     break;
             }
 
-        } while (terminar == false);
+        } while (opcion.name().equals("SALIR"));
     }
 
 
