@@ -30,7 +30,7 @@ public class ClienteTest {
     }
     @Test
     public void cambiarTarifa() {
-        assertEquals(cliente.getTipoTarifa(), 1);
+        assertEquals(cliente.getTipoTarifa(), 1.0, 0);
 
     }
 

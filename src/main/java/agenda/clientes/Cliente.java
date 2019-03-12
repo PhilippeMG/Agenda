@@ -59,6 +59,8 @@ public abstract class Cliente implements Serializable {
         return tarifa;
     }
 
+    public double getTipoTarifa(){ return tarifa.getTipoTarifa(); }
+
     //>>>METODOS<<
     public void cambiarTarifa(int nuevaTarifa){
         tarifa.setTarifa(nuevaTarifa);
