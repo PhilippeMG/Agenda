@@ -36,6 +36,10 @@ public class Factura implements Serializable {
         return importe;
     }
 
+    public LocalDate getFecha() {
+        return emision;
+    }
+
     public Double importe(Cliente cliente, LocalDate inicio, LocalDate fin) {
         double importe=0; //€/min
         if (cliente==null || cliente.llamadas== null) return 0.0;

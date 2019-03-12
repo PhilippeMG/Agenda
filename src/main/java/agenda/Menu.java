@@ -105,7 +105,7 @@ public class Menu {
 
         public static OpcionesSubMenuLlamadas getOpcion(int opcion) {
             if (opcion >= values().length || opcion < 0){
-                System.out.printf("Opcion no valida");
+                System.out.println("Opcion no valida");
                 return values()[2];
             }
             return values()[opcion];
@@ -132,6 +132,8 @@ public class Menu {
         EMITIR_FACTURA_CLIENTE("Emitir factura de un cliente"),
         FACTURAS_CLIENTE("Mostrar conjunto facturas de un cliente"),
         RECUPERAR_FACTURA("Mostrar Factura"),
+        LISTAR_FACTURAS_ENTRE_FECHAS("Listar facturas entre dos fechas"),
+
         SALIR("Salir del Menú");
 
         private String descripcion;
@@ -142,8 +144,8 @@ public class Menu {
 
         public static OpcionesSubMenuFacturas getOpcion(int opcion) {
             if (opcion >= values().length || opcion < 0){
-                System.out.printf("Opcion no valida");
-                return values()[3];
+                System.out.println("Opcion no valida");
+                return values()[4];
             }
             return values()[opcion];
         }
