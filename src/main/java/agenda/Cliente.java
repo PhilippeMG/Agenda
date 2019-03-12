@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class  Cliente implements Serializable {
+public abstract class    Cliente implements Serializable {
     String nombre;
     String nif;
     Direccion direccion;
