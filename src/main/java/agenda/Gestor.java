@@ -1,6 +1,5 @@
 package agenda;
 
-import com.sun.security.ntlm.Client;
 import es.uji.www.GeneradorDatosINE;
 
 import java.io.*;
@@ -10,12 +9,15 @@ import java.util.*;
 
 
 public class Gestor implements Serializable {
-    static HashMap<String, Cliente> clientes = new HashMap<>();
-    static HashMap<Integer, Factura> facturas = new HashMap<>();
+     private HashMap<String, Cliente> clientes = new HashMap<>();
+     private HashMap<Integer, Factura> facturas = new HashMap<>();
 
+    public Gestor() {
+        super();
+    }
 
     //>>>Fichero<<<<
-    public static void escribirDatos() throws IOException {
+    public  void escribirDatos() throws IOException {
         FileOutputStream fos = new FileOutputStream("datosClientes.bin");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(clientes);
@@ -26,7 +28,7 @@ public class Gestor implements Serializable {
         oos.close();
     }
 
-    public static void leerDatos() throws IOException, ClassNotFoundException {
+    public  void leerDatos() throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream("datosClientes.bin");
         ObjectInputStream ois = new ObjectInputStream(fis);
         clientes = (HashMap<String, Cliente>) ois.readObject();
@@ -37,7 +39,7 @@ public class Gestor implements Serializable {
     }
 
     //>>>CLIENTE<<<<
-    public static boolean insertarCliente(Cliente cliente) {
+    public  boolean insertarCliente(Cliente cliente) {
         if (!clientes.containsKey(cliente.nif)) {
             clientes.put(cliente.nif, cliente);
             return true;
@@ -47,7 +49,7 @@ public class Gestor implements Serializable {
         }
     }
 
-    public static boolean borrarCliente(String NIF) {
+    public  boolean borrarCliente(String NIF) {
         if (clientes.containsKey(NIF)) {
             clientes.remove(NIF);
             return true;
@@ -56,7 +58,7 @@ public class Gestor implements Serializable {
         }
     }
 
-    public static void mostrarCliente(String NIF) {
+    public  void mostrarCliente(String NIF) {
         if (clientes.containsKey(NIF)) {
             System.out.println(clientes.get(NIF).toString()); //LLama a toString de cliente.
         } else {
@@ -75,14 +77,14 @@ public class Gestor implements Serializable {
            return null;
         }
     }
-    public static void mostrarClientes(HashMap<String, Cliente> clientesMap) {
+    public  void mostrarClientes(HashMap<String, Cliente> clientesMap) {
         Iterator<Cliente> clientela = clientesMap.values().iterator();//.entrySet().iterator();
         while (clientela.hasNext()) {
             System.out.println(clientela.next().toString());
         }
     }
 
-    public static HashMap<String, Cliente> devolverClientesEntreFechas(HashMap<String, Cliente> clientesMap, LocalDate inicio, LocalDate fin) {
+    public  HashMap<String, Cliente> devolverClientesEntreFechas(HashMap<String, Cliente> clientesMap, LocalDate inicio, LocalDate fin) {
         Iterator<Cliente> conjuntos = clientesMap.values().iterator();//.entrySet().iterator();
         HashMap<String, Cliente> clientesEntreFechas = new HashMap<>();
 
@@ -99,7 +101,7 @@ public class Gestor implements Serializable {
         return clientesEntreFechas;
 
     }
-    public static  LinkedList <Llamada> devolverLlamadasEntreFechas(Cliente cliente, LocalDate inicio, LocalDate fin) {
+    public   LinkedList <Llamada> devolverLlamadasEntreFechas(Cliente cliente, LocalDate inicio, LocalDate fin) {
         LinkedList <Llamada> llamadaEntreFecha =new LinkedList<>();
 
         LinkedList <Llamada> llamadas= cliente.llamadas;
@@ -116,7 +118,7 @@ public class Gestor implements Serializable {
 
     }
     //>>>LLAMADAS<<<<
-    public static boolean insertarLlamada(String NIF, Llamada llamada) {
+    public  boolean insertarLlamada(String NIF, Llamada llamada) {
         if (clientes.containsKey(NIF)) {
             clientes.get(NIF).insertarLlamada(llamada);
             return true;
@@ -125,14 +127,26 @@ public class Gestor implements Serializable {
         }
     }
 
-    public static void mostrarLlamadas(String NIF) {
+    public  void mostrarLlamadas(String NIF) {
         if (clientes.containsKey(NIF)) {
             clientes.get(NIF).mostrarLlamadas();
         }
     }
+   /* public static  LinkedList <Object> devolverEntreFechas(LinkedList <Object> lista, LocalDate inicio, LocalDate fin) {
+        LinkedList<Object> devolver = new LinkedList<>();
 
+        for (int i =0; i<lista.size();i++){
+            llamada=llamadas.get(i);
+            if ((llamada.getFecha().isAfter(inicio) || llamada.getFecha().equals(inicio)) &&
+                    (llamada.getFecha().isBefore(fin) || llamada.getFecha().equals(fin))) {
+                llamadaEntreFecha.add(llamada);
+            }
+
+        }
+        return devolver;
+    }*/
     //>>>FACTURAS<<<<
-    public static  LinkedList <Factura> devolverFacturasEntreFechas(Cliente cliente, LocalDate inicio, LocalDate fin) {
+    public   LinkedList <Factura> devolverFacturasEntreFechas(Cliente cliente, LocalDate inicio, LocalDate fin) {
         LinkedList<Factura> facturaEntreFecha = new LinkedList<>();
         Iterator<Factura> conjuntoFacturas = cliente.facturas.values().iterator();//.entrySet().iterator();
 
@@ -149,7 +163,7 @@ public class Gestor implements Serializable {
         }
         return facturaEntreFecha;
     }
-    public static Factura emitirFactura(String NIF, LocalDate ini, LocalDate fin) {
+    public  Factura emitirFactura(String NIF, LocalDate ini, LocalDate fin) {
         //Guardar tando en el vector de Cliente como en el mapa de Gestor.
         if (clientes.containsKey(NIF)) {
             Cliente cliente = clientes.get(NIF);
@@ -169,7 +183,7 @@ public class Gestor implements Serializable {
         }
     }
 
-    public static boolean mostrarFactura(int codigo) {
+    public  boolean mostrarFactura(int codigo) {
         if (facturas.containsKey(codigo)) {
             System.out.println(facturas.get(codigo).toString());
             return true;
@@ -178,7 +192,7 @@ public class Gestor implements Serializable {
         }
     }
 
-    public static boolean mostrarFacturas(String NIF) {
+    public  boolean mostrarFacturas(String NIF) {
         if (clientes.containsKey(NIF)) {
             clientes.get(NIF).mostrarFacturas();
             return true;
@@ -187,7 +201,7 @@ public class Gestor implements Serializable {
         }
     }
 
-    public static void cambiarTarifa(String NIF, int tarifa) {
+    public  void cambiarTarifa(String NIF, int tarifa) {
 
         if (clientes.containsKey(NIF)) {
             Cliente client = clientes.get(NIF);
@@ -197,7 +211,7 @@ public class Gestor implements Serializable {
         }
     }
 
-    public static void nuevoCliente(int opcion) {
+    public  void nuevoCliente(int opcion) {
         Scanner scanner = new Scanner(System.in);
         Scanner scannerEntero = new Scanner(System.in);
 
@@ -234,7 +248,7 @@ public class Gestor implements Serializable {
         }
     }
 
-    public static LocalDate crearFecha() {
+    public  LocalDate crearFecha() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Dia Mes Año: ");
@@ -248,7 +262,7 @@ public class Gestor implements Serializable {
     }
 
     //Menu
-    public static void opcionInsertarCliente() {
+    public  void opcionInsertarCliente() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("0.-Particular");
@@ -259,7 +273,7 @@ public class Gestor implements Serializable {
         //scanner.close();
     }
 
-    public static void opcionBorrarCliente() {
+    public  void opcionBorrarCliente() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("NIF del cliente que quieres eliminar: ");
@@ -267,7 +281,7 @@ public class Gestor implements Serializable {
         borrarCliente(nif);
     }
 
-    public static void opcionCambiarTarifa() {
+    public  void opcionCambiarTarifa() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("NIF del cliente: ");
@@ -277,7 +291,7 @@ public class Gestor implements Serializable {
         cambiarTarifa(nif, tarifa);
     }
 
-    public static void opcionDatosClientes() {
+    public  void opcionDatosClientes() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("NIF del cliente: ");
@@ -285,7 +299,7 @@ public class Gestor implements Serializable {
         mostrarCliente(nif);
     }
 
-    public static void opcionListarLlamadasCliente() {
+    public  void opcionListarLlamadasCliente() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("NIF del cliente: ");
 
@@ -293,7 +307,7 @@ public class Gestor implements Serializable {
         mostrarLlamadas(nif);
     }
 
-    public static void opcionEmitirFacturaCLiente() {
+    public  void opcionEmitirFacturaCLiente() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("NIF del cliente: ");
@@ -301,7 +315,7 @@ public class Gestor implements Serializable {
         System.out.printf(emitirFactura(nif, crearFecha(), crearFecha()).toString());
     }
 
-    public static void opcionInsertarLlamada() {
+    public  void opcionInsertarLlamada() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("NIF del cliente: ");
@@ -318,7 +332,7 @@ public class Gestor implements Serializable {
         insertarLlamada(nif, llamada);
     }
 
-    public static void opcionRecuperarFactura() {
+    public  void opcionRecuperarFactura() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Codigo de la factura: ");
@@ -326,14 +340,14 @@ public class Gestor implements Serializable {
         mostrarFactura(codigo);
     }
 
-    public static void opcionFacturasCLiente() {
+    public  void opcionFacturasCLiente() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("NIF del cliente: ");
         String nif = scanner.next();
         mostrarFacturas(nif);
     }
-    public static void opcionDevolverLlamadasEntreFechas(){
+    public  void opcionDevolverLlamadasEntreFechas(){
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("NIF del cliente: ");
@@ -347,7 +361,7 @@ public class Gestor implements Serializable {
             throw new IllegalArgumentException();
         }
     }
-    public static void opcionDevolverFacturasEntreFechas(){
+    public  void opcionDevolverFacturasEntreFechas(){
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("NIF del cliente: ");
@@ -361,7 +375,7 @@ public class Gestor implements Serializable {
             throw new IllegalArgumentException();
         }
     }
-    public static void subMenuCLientes() throws IOException {
+    public  void subMenuCLientes() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
         boolean terminar = false;
         do {
@@ -409,7 +423,7 @@ public class Gestor implements Serializable {
         } while (terminar == false);
     }
 
-    public static void subMenuLlamadas() throws IOException {
+    public  void subMenuLlamadas() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
         boolean terminar = false;
         do {
@@ -441,7 +455,7 @@ public class Gestor implements Serializable {
         } while (terminar == false);
     }
 
-    public static void subMenuFacturas() throws IOException {
+    public  void subMenuFacturas() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
         boolean terminar = false;
         do {
@@ -474,7 +488,7 @@ public class Gestor implements Serializable {
 
         } while (terminar == false);
     }
-    public static void menuPrincipal() throws IOException {
+    public  void menuPrincipal() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
         boolean terminar = false;
 
@@ -507,7 +521,7 @@ public class Gestor implements Serializable {
     }
 
 
-        public static void main(String[] args) throws IOException, ClassNotFoundException {
+        public  void ejecutar() throws IOException, ClassNotFoundException {
         leerDatos();
         menuPrincipal();
 
