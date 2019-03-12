@@ -1,12 +1,13 @@
 package agenda;
 
 import agenda.clientes.Cliente;
+import agenda.clientes.GetFecha;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
-public class Llamada implements Serializable {
+public class Llamada implements Serializable, GetFecha {
     int numDestino;
     double duracion;
     LocalDate fechaLlamada;

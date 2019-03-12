@@ -86,39 +86,7 @@ public class Gestor implements Serializable {
         }
     }
 
-    public  HashMap<String, Cliente> devolverClientesEntreFechas(HashMap<String, Cliente> clientesMap, LocalDate inicio, LocalDate fin) {
-        Iterator<Cliente> conjuntos = clientesMap.values().iterator();//.entrySet().iterator();
-        HashMap<String, Cliente> clientesEntreFechas = new HashMap<>();
 
-        while (conjuntos.hasNext()) {
-            Cliente client = conjuntos.next();
-            if ((client.getFecha().isAfter(inicio) || client.getFecha().equals(inicio)) &&
-                    (client.getFecha().isBefore(fin) || client.getFecha().equals(fin))) {
-
-                clientesEntreFechas.put(client.getNif(), client);
-            }
-
-
-        }
-        return clientesEntreFechas;
-
-    }
-    public   LinkedList <Llamada> devolverLlamadasEntreFechas(Cliente cliente, LocalDate inicio, LocalDate fin) {
-        LinkedList <Llamada> llamadaEntreFecha =new LinkedList<>();
-
-        LinkedList <Llamada> llamadas= cliente.getLlamadas();
-        Llamada llamada;
-        for (int i =0; i<llamadas.size();i++){
-            llamada=llamadas.get(i);
-            if ((llamada.getFecha().isAfter(inicio) || llamada.getFecha().equals(inicio)) &&
-                    (llamada.getFecha().isBefore(fin) || llamada.getFecha().equals(fin))) {
-                llamadaEntreFecha.add(llamada);
-            }
-
-        }
-        return llamadaEntreFecha;
-
-    }
     //>>>LLAMADAS<<<<
     public  boolean insertarLlamada(String NIF, Llamada llamada) {
         if (clientes.containsKey(NIF)) {
@@ -147,23 +115,7 @@ public class Gestor implements Serializable {
         return devolver;
     }
     //>>>FACTURAS<<<<
-    public   LinkedList <Factura> devolverFacturasEntreFechas(Cliente cliente, LocalDate inicio, LocalDate fin) {
-        LinkedList<Factura> facturaEntreFecha = new LinkedList<>();
-        Iterator<Factura> conjuntoFacturas = cliente.getFacturas().values().iterator();//.entrySet().iterator();
 
-        Factura factura;
-        while (conjuntoFacturas.hasNext()) {
-            factura = conjuntoFacturas.next();
-            if ((factura.getFecha().isAfter(inicio) || factura.getFecha().equals(inicio)) &&
-                    (factura.getFecha().isBefore(fin) || factura.getFecha().equals(fin))) {
-
-                facturaEntreFecha.add(factura);
-            }
-
-
-        }
-        return facturaEntreFecha;
-    }
     public  Factura emitirFactura(String NIF, LocalDate ini, LocalDate fin) {
         //Guardar tando en el vector de Cliente como en el mapa de Gestor.
         if (clientes.containsKey(NIF)) {
@@ -356,7 +308,7 @@ public class Gestor implements Serializable {
 
         if (clientes.containsKey(nif)) {
             Cliente cliente =clientes.get(nif);
-            LinkedList<Llamada> llamadas=devolverLlamadasEntreFechas(cliente,crearFecha(),crearFecha());
+            LinkedList<Llamada> llamadas=devolverEntreFechas(cliente.getLlamadas(),crearFecha(),crearFecha());
             System.out.printf(llamadas.toString());
         } else {
             throw new IllegalArgumentException();
@@ -370,11 +322,25 @@ public class Gestor implements Serializable {
 
         if (clientes.containsKey(nif)) {
             Cliente cliente =clientes.get(nif);
-            LinkedList<Factura> facturasEntreFechas=devolverFacturasEntreFechas(cliente,crearFecha(),crearFecha());
+
+            Collection<Factura> myCollection =cliente.getFacturas().values();
+            List<Factura> list = new LinkedList<>(myCollection);
+            LinkedList<Factura> facturasEntreFechas=devolverEntreFechas(list,crearFecha(),crearFecha());
             System.out.printf(facturasEntreFechas.toString());
         } else {
             throw new IllegalArgumentException();
         }
+    }
+    public  void opcionDevolverCLientesEntreFechas(){
+        Scanner scanner = new Scanner(System.in);
+
+
+
+            Collection<Cliente> myCollection =clientes.values();
+            List<Cliente> list = new LinkedList<>(myCollection);
+            LinkedList<Cliente> clienteEntreFechas=devolverEntreFechas(list,crearFecha(),crearFecha());
+            System.out.printf(clienteEntreFechas.toString());
+
     }
     public  void subMenuCLientes() throws IOException {
         Scanner scannerMenu = new Scanner(System.in);
@@ -401,8 +367,7 @@ public class Gestor implements Serializable {
                     break;
 
                 case LISTAR_CLIENTES_ENTRE_FECHAS:
-                    HashMap<String, Cliente> listadoClientes = devolverClientesEntreFechas(clientes, crearFecha(), crearFecha());
-                    mostrarClientes(listadoClientes);
+                    opcionDevolverCLientesEntreFechas();
                     break;
 
                 case LISTAR_CLIENTES:

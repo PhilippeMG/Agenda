@@ -2,11 +2,12 @@ package agenda;
 
 
 import agenda.clientes.Cliente;
+import agenda.clientes.GetFecha;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Factura implements Serializable {
+public class Factura implements Serializable, GetFecha {
     Tarifa tipoTarifa;
     static int cod=0;
     LocalDate inicio;
