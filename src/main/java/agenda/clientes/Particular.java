@@ -1,4 +1,7 @@
-package agenda;
+package agenda.clientes;
+
+import agenda.Direccion;
+import agenda.Tarifa;
 
 public class Particular extends Cliente{
     String apellidos;

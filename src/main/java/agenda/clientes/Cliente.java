@@ -1,4 +1,9 @@
-package agenda;
+package agenda.clientes;
+
+import agenda.Direccion;
+import agenda.Factura;
+import agenda.Llamada;
+import agenda.Tarifa;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -7,23 +12,31 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public abstract class    Cliente implements Serializable {
+public abstract class Cliente implements Serializable {
     String nombre;
     String nif;
     Direccion direccion;
     String correo;
     LocalDate fechaDeAlta;
-    Tarifa tipoTarifa;
+    Tarifa tarifa;
     HashMap<Integer, Factura> facturas = new HashMap<>();
     LinkedList <Llamada> llamadas =new LinkedList<>();
 
-    public Cliente(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa) {
+    public Cliente(String nombre, String nif, Direccion direccion, String correo, Tarifa tarifa) {
         this.nombre = nombre;
         this.nif = nif;
         this.direccion = direccion;
         this.correo = correo;
         this.fechaDeAlta = LocalDate.now();
-        this.tipoTarifa = tipoTarifa;
+        this.tarifa = tarifa;
+    }
+    //>>>GETTERS<<<
+    public HashMap<Integer, Factura> getFacturas() {
+        return facturas;
+    }
+
+    public LinkedList<Llamada> getLlamadas() {
+        return llamadas;
     }
 
     public LocalDate getFecha(){
@@ -42,12 +55,13 @@ public abstract class    Cliente implements Serializable {
         return fechaDeAlta;
     }
 
-    public int getTipoTarifa() {
-        return tipoTarifa.getTarifa();
+    public Tarifa getTarifa() {
+        return tarifa;
     }
 
+    //>>>METODOS<<
     public void cambiarTarifa(int nuevaTarifa){
-        tipoTarifa.setTarifa(nuevaTarifa);
+        tarifa.setTarifa(nuevaTarifa);
     }
 
     public void insertarLlamada(Llamada llamada) {
@@ -82,6 +96,6 @@ public abstract class    Cliente implements Serializable {
                 ", Direccion: " + direccion.toString() +
                 ", correo= '" + correo + '\'' +
                 ", fechaDeAlta= " + fechaDeAlta +
-                ", tipoTarifa= " + tipoTarifa.getTarifa() ;
+                ", tipoTarifa= " + tarifa.getTarifa() ;
     }
 }

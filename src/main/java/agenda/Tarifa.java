@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Tarifa implements Serializable {
-    int tarifa;
+    double tarifa;
+
     public Tarifa(int tarifa){
         this.tarifa=tarifa;
     }
 
-    public int getTarifa() {
+    public double getTipoTarifa() {
         return tarifa;
     }
 

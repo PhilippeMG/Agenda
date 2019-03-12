@@ -1,10 +1,11 @@
 package agenda;
 
-import es.uji.www.GeneradorDatosINE;
+import agenda.clientes.Cliente;
+import agenda.clientes.Empresa;
+import agenda.clientes.Particular;
 
 import java.io.*;
 import java.time.*;
-import java.time.format.*;
 import java.util.*;
 
 
@@ -40,8 +41,8 @@ public class Gestor implements Serializable {
 
     //>>>CLIENTE<<<<
     public  boolean insertarCliente(Cliente cliente) {
-        if (!clientes.containsKey(cliente.nif)) {
-            clientes.put(cliente.nif, cliente);
+        if (!clientes.containsKey(cliente.getNif())) {
+            clientes.put(cliente.getNif(), cliente);
             return true;
         } else {
             throw new IllegalArgumentException();
@@ -104,7 +105,7 @@ public class Gestor implements Serializable {
     public   LinkedList <Llamada> devolverLlamadasEntreFechas(Cliente cliente, LocalDate inicio, LocalDate fin) {
         LinkedList <Llamada> llamadaEntreFecha =new LinkedList<>();
 
-        LinkedList <Llamada> llamadas= cliente.llamadas;
+        LinkedList <Llamada> llamadas= cliente.getLlamadas();
         Llamada llamada;
         for (int i =0; i<llamadas.size();i++){
             llamada=llamadas.get(i);
@@ -148,7 +149,7 @@ public class Gestor implements Serializable {
     //>>>FACTURAS<<<<
     public   LinkedList <Factura> devolverFacturasEntreFechas(Cliente cliente, LocalDate inicio, LocalDate fin) {
         LinkedList<Factura> facturaEntreFecha = new LinkedList<>();
-        Iterator<Factura> conjuntoFacturas = cliente.facturas.values().iterator();//.entrySet().iterator();
+        Iterator<Factura> conjuntoFacturas = cliente.getFacturas().values().iterator();//.entrySet().iterator();
 
         Factura factura;
         while (conjuntoFacturas.hasNext()) {

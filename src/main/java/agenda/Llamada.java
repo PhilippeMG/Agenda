@@ -1,8 +1,9 @@
 package agenda;
 
+import agenda.clientes.Cliente;
+
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedList;
 
 public class Llamada implements Serializable {
@@ -26,7 +27,7 @@ public class Llamada implements Serializable {
     }
 
     public void listadoLlamadas(Cliente cliente){
-        LinkedList<Llamada> llamadas=cliente.llamadas;
+        LinkedList<Llamada> llamadas=cliente.getLlamadas();
         for( int i=0; i< llamadas.size();i++){
             llamadas.get(i).toString();
         }
