@@ -13,11 +13,10 @@ import static org.junit.Assert.*;
 public class GestorTest {
     private static Cliente cliente;
     private static Factura factura;
-    private static Gestor gestor;
+    private static Gestor gestor = new Gestor();
 
 
     @BeforeClass
-
     public static void init() {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
         cliente = new Empresa("Marcos", "0001", direccion1, "al375909@uji.es", new Tarifa(1));
@@ -34,11 +33,10 @@ public class GestorTest {
     }
     @Test
     public void insertarCliente() {
-
             try{
                 gestor.insertarCliente(cliente);
-
                 fail("No debe llegar");
+
             }catch (IllegalArgumentException e){
                 //System.out.println("Salto la excepcion");
             }
