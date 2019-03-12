@@ -2,6 +2,7 @@ package agenda;
 
 import agenda.clientes.Cliente;
 import agenda.clientes.Empresa;
+import agenda.clientes.GetFecha;
 import agenda.clientes.Particular;
 
 import java.io.*;
@@ -133,19 +134,18 @@ public class Gestor implements Serializable {
             clientes.get(NIF).mostrarLlamadas();
         }
     }
-   /* public static  LinkedList <Object> devolverEntreFechas(LinkedList <Object> lista, LocalDate inicio, LocalDate fin) {
-        LinkedList<Object> devolver = new LinkedList<>();
+   public  <T extends GetFecha> LinkedList <T> devolverEntreFechas(List <T> lista, LocalDate inicio, LocalDate fin) {
+        LinkedList<T> devolver = new LinkedList<>();
 
-        for (int i =0; i<lista.size();i++){
-            llamada=llamadas.get(i);
-            if ((llamada.getFecha().isAfter(inicio) || llamada.getFecha().equals(inicio)) &&
-                    (llamada.getFecha().isBefore(fin) || llamada.getFecha().equals(fin))) {
-                llamadaEntreFecha.add(llamada);
+        for(T elemento: lista) {
+            if ((elemento.getFecha().isAfter(inicio) || elemento.getFecha().equals(inicio)) &&
+                    (elemento.getFecha().isBefore(fin) || elemento.getFecha().equals(fin))) {
+                devolver.add(elemento);
             }
-
         }
+
         return devolver;
-    }*/
+    }
     //>>>FACTURAS<<<<
     public   LinkedList <Factura> devolverFacturasEntreFechas(Cliente cliente, LocalDate inicio, LocalDate fin) {
         LinkedList<Factura> facturaEntreFecha = new LinkedList<>();
@@ -519,7 +519,7 @@ public class Gestor implements Serializable {
 
 
         public  void ejecutar() throws IOException, ClassNotFoundException {
-        leerDatos();
+        //leerDatos();
         menuPrincipal();
 
     }

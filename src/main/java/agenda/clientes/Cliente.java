@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public abstract class Cliente implements Serializable {
+public abstract class Cliente implements Serializable, GetFecha {
     String nombre;
     String nif;
     Direccion direccion;
@@ -39,6 +39,7 @@ public abstract class Cliente implements Serializable {
         return llamadas;
     }
 
+    @Override
     public LocalDate getFecha(){
         return this.fechaDeAlta;
     }
