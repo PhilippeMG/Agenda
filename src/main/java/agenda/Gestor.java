@@ -116,8 +116,8 @@ public class Gestor implements Serializable {
 
         return devolver;
     }
-    //>>>FACTURAS<<<<
 
+    //>>>FACTURAS<<<<
     public Factura emitirFactura(String NIF, LocalDate ini, LocalDate fin) throws Exception {
         //Guardar tando en el vector de Cliente como en el mapa de Gestor.
         if (clientes.containsKey(NIF)) {
