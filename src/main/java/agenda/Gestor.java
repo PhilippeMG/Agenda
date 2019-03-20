@@ -6,41 +6,37 @@ import agenda.clientes.GetFecha;
 import agenda.clientes.Particular;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
-import com.sun.security.ntlm.Client;
+import agenda.menu.Menu;
+import agenda.menu.OpcionesMenu;
 
 import java.io.*;
 import java.time.*;
 import java.util.*;
 
 
-public class Gestor implements Serializable {
-    private HashMap<String, Cliente> clientes = new HashMap<>();
-    private HashMap<Integer, Factura> facturas = new HashMap<>();
+public class Gestor extends Fichero implements Serializable {
+    private static HashMap<String, Cliente> clientes = new HashMap<>();
+    private static HashMap<Integer, Factura> facturas = new HashMap<>();
+    Fichero save= new Fichero();
 
     public Gestor() {
         super();
     }
 
-    //>>>Fichero<<<<
-    public void escribirDatos() throws IOException {
-        FileOutputStream fos = new FileOutputStream("datosClientes.bin");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(clientes);
-        oos.close();
-        fos = new FileOutputStream("datosFacturas.bin");
-        oos = new ObjectOutputStream(fos);
-        oos.writeObject(facturas);
-        oos.close();
+    public static HashMap<String, Cliente> getClientes() {
+        return clientes;
     }
 
-    public void leerDatos() throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream("datosClientes.bin");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        clientes = (HashMap<String, Cliente>) ois.readObject();
-        fis = new FileInputStream("datosFacturas.bin");
-        ois = new ObjectInputStream(fis);
-        facturas = (HashMap<Integer, Factura>) ois.readObject();
-        ois.close();
+    public static void setClientes(HashMap<String, Cliente> clientes) {
+        Gestor.clientes = clientes;
+    }
+
+    public static HashMap<Integer, Factura> getFacturas() {
+        return facturas;
+    }
+
+    public static void setFacturas(HashMap<Integer, Factura> facturas) {
+        Gestor.facturas = facturas;
     }
 
     //>>>CLIENTE<<<<
@@ -119,7 +115,7 @@ public class Gestor implements Serializable {
 
     //>>>FACTURAS<<<<
     public Factura emitirFactura(String NIF, LocalDate ini, LocalDate fin) throws Exception {
-        //Guardar tando en el vector de Cliente como en el mapa de Gestor.
+        //Fichero tando en el vector de Cliente como en el mapa de Gestor.
         if (clientes.containsKey(NIF)) {
             Cliente cliente = clientes.get(NIF);
             Factura factura = new Factura(cliente, ini, fin);
@@ -382,7 +378,7 @@ public class Gestor implements Serializable {
                     break;
 
                 case SALIR:
-                    escribirDatos();
+                    save.escribirDatos();
                     break;
                 default:
                     System.out.printf("Opcion no valida");
@@ -392,7 +388,7 @@ public class Gestor implements Serializable {
         } while (!opcionCliente.name().equals("SALIR"));
     }
 
-    public void subMenuLlamadas() throws Exception {
+ /*   public void subMenuLlamadas() throws Exception {
         Scanner scannerMenu = new Scanner(System.in);
         Menu.OpcionesSubMenuLlamadas opcionLlamada;
         do {
@@ -421,75 +417,76 @@ public class Gestor implements Serializable {
             }
 
         } while (!opcionLlamada.name().equals("SALIR"));
-    }
+    }*/
 
-    public void subMenuFacturas() throws Exception {
-        Scanner scannerMenu = new Scanner(System.in);
-        Menu.OpcionesSubMenuFacturas opcionFactura;
-        do {
+//    public void subMenuFacturas() throws Exception {
+//        Scanner scannerMenu = new Scanner(System.in);
+//        Menu.OpcionesSubMenuFacturas opcionFactura;
+//        do {
+//
+//            System.out.println(Menu.OpcionesSubMenuFacturas.getMenu());
+//
+//            System.out.print("\nElije una opción: ");
+//            int valor = scannerMenu.nextInt();
+//
+//
+//            opcionFactura = Menu.OpcionesSubMenuFacturas.getOpcion(valor);
+//            switch (opcionFactura) {
+//                case EMITIR_FACTURA_CLIENTE:
+//                    opcionEmitirFacturaCLiente();
+//                    break;
+//                case RECUPERAR_FACTURA:
+//                    opcionRecuperarFactura();
+//                    break;
+//                case FACTURAS_CLIENTE:
+//                    opcionFacturasCLiente();
+//                    break;
+//                case LISTAR_FACTURAS_ENTRE_FECHAS:
+//                    opcionDevolverFacturasEntreFechas();
+//                    break;
+//                case SALIR:
+//                    escribirDatos();
+//                    break;
+//            }
+//
+//        } while (!opcionFactura.name().equals("SALIR"));
+//    }
 
-            System.out.println(Menu.OpcionesSubMenuFacturas.getMenu());
-
-            System.out.print("\nElije una opción: ");
-            int valor = scannerMenu.nextInt();
-
-
-            opcionFactura = Menu.OpcionesSubMenuFacturas.getOpcion(valor);
-            switch (opcionFactura) {
-                case EMITIR_FACTURA_CLIENTE:
-                    opcionEmitirFacturaCLiente();
-                    break;
-                case RECUPERAR_FACTURA:
-                    opcionRecuperarFactura();
-                    break;
-                case FACTURAS_CLIENTE:
-                    opcionFacturasCLiente();
-                    break;
-                case LISTAR_FACTURAS_ENTRE_FECHAS:
-                    opcionDevolverFacturasEntreFechas();
-                    break;
-                case SALIR:
-                    escribirDatos();
-                    break;
-            }
-
-        } while (!opcionFactura.name().equals("SALIR"));
-    }
-
-    public void menuPrincipal() throws Exception {
-        Scanner scannerMenu = new Scanner(System.in);
-        Menu.OpcionesMenuPrincipal opcion;
-        do {
-
-            System.out.println(Menu.OpcionesMenuPrincipal.getMenu());
-
-            System.out.print("\nElije una opción: ");
-            int valor = scannerMenu.nextInt();
-
-
-            opcion = Menu.OpcionesMenuPrincipal.getOpcion(valor);
-            switch (opcion) {
-                case GESTIONAR_CLIENTES:
-                    subMenuCLientes();
-                    break;
-                case GESTIONAR_LLAMADAS:
-                    subMenuLlamadas();
-                    break;
-                case GESTIONAR_FACTURAS:
-                    subMenuFacturas();
-                    break;
-                case SALIR:
-                    escribirDatos();
-                    break;
-            }
-
-        } while (!opcion.name().equals("SALIR"));
-    }
+//    public void menuPrincipal() throws Exception {
+//        Scanner scannerMenu = new Scanner(System.in);
+//        Menu.OpcionesMenuPrincipal opcion;
+//        do {
+//
+//            System.out.println(Menu.OpcionesMenuPrincipal.getMenu());
+//
+//            System.out.print("\nElije una opción: ");
+//            int valor = scannerMenu.nextInt();
+//
+//
+//            opcion = Menu.OpcionesMenuPrincipal.getOpcion(valor);
+//            switch (opcion) {
+//                case GESTIONAR_CLIENTES:
+//                    subMenuCLientes();
+//                    break;
+//                case GESTIONAR_LLAMADAS:
+//                    subMenuLlamadas();
+//                    break;
+//                case GESTIONAR_FACTURAS:
+//                    subMenuFacturas();
+//                    break;
+//                case SALIR:
+//                    escribirDatos();
+//                    break;
+//            }
+//
+//        } while (!opcion.name().equals("SALIR"));
+//    }
 
 
     public void ejecutar() throws Exception {
+        OpcionesMenu op=new OpcionesMenu();
         leerDatos();
-        menuPrincipal();
+        op.menuPrincipal();
 
     }
 

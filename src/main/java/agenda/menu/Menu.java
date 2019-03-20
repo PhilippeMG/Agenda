@@ -1,4 +1,4 @@
-package agenda;
+package agenda.menu;
 
 public class Menu {
     //>>>MENU<<<<
