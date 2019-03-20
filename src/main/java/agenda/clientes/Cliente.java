@@ -13,14 +13,14 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public abstract class Cliente implements Serializable, GetFecha {
-    String nombre;
-    String nif;
-    Direccion direccion;
-    String correo;
-    LocalDate fechaDeAlta;
-    Tarifa tarifa;
-    HashMap<Integer, Factura> facturas = new HashMap<>();
-    LinkedList <Llamada> llamadas =new LinkedList<>();
+    private String nombre;
+    private String nif;
+    private Direccion direccion;
+    private String correo;
+    private LocalDate fechaDeAlta;
+    private Tarifa tarifa;
+    private HashMap<Integer, Factura> facturas = new HashMap<>();
+    private LinkedList<Llamada> llamadas = new LinkedList<>();
 
     public Cliente(String nombre, String nif, Direccion direccion, String correo, Tarifa tarifa) {
         this.nombre = nombre;
@@ -30,6 +30,7 @@ public abstract class Cliente implements Serializable, GetFecha {
         this.fechaDeAlta = LocalDate.now();
         this.tarifa = tarifa;
     }
+
     //>>>GETTERS<<<
     public HashMap<Integer, Factura> getFacturas() {
         return facturas;
@@ -40,7 +41,7 @@ public abstract class Cliente implements Serializable, GetFecha {
     }
 
     @Override
-    public LocalDate getFecha(){
+    public LocalDate getFecha() {
         return this.fechaDeAlta;
     }
 
@@ -60,10 +61,16 @@ public abstract class Cliente implements Serializable, GetFecha {
         return tarifa;
     }
 
-    public double getTipoTarifa(){ return tarifa.getTipoTarifa(); }
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
 
     //>>>METODOS<<
-    public void cambiarTarifa(int nuevaTarifa){
+    public void cambiarTarifa(int nuevaTarifa) {
         tarifa.setTarifa(nuevaTarifa);
     }
 
@@ -75,16 +82,16 @@ public abstract class Cliente implements Serializable, GetFecha {
         facturas.put(factura.getCod(), factura);
     }
 
-
     public void mostrarLlamadas() {
-        int contador=0;
+        int contador = 0;
         for (Llamada llamada : llamadas) {
             System.out.println(contador + ": " + llamada.toString());
             contador++;
         }
     }
+
     public void mostrarFacturas() {
-        int contador=0;
+        int contador = 0;
         for (Factura factura : facturas.values()) {
             System.out.println(contador + ": " + factura.toString());
             contador++;
@@ -99,6 +106,6 @@ public abstract class Cliente implements Serializable, GetFecha {
                 ", Direccion: " + direccion.toString() +
                 ", correo= '" + correo + '\'' +
                 ", fechaDeAlta= " + fechaDeAlta +
-                ", tipoTarifa= " + tarifa.getTipoTarifa() ;
+                ", tipoTarifa= " + tarifa.getTipoTarifa();
     }
 }

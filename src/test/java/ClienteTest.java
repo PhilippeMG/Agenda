@@ -12,6 +12,7 @@ import static junit.framework.TestCase.fail;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertEquals;
+
 public class ClienteTest {
     private static Cliente cliente;
 
@@ -28,9 +29,10 @@ public class ClienteTest {
     public static void finish() {
         cliente = null;
     }
+
     @Test
     public void cambiarTarifa() {
-        assertEquals(cliente.getTipoTarifa(), 1.0, 0);
+        assertEquals(cliente.getTarifa().getTipoTarifa(), 1.0, 0);
 
     }
 

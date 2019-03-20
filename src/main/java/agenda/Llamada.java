@@ -27,9 +27,9 @@ public class Llamada implements Serializable, GetFecha {
                 '}';
     }
 
-    public void listadoLlamadas(Cliente cliente){
-        LinkedList<Llamada> llamadas=cliente.getLlamadas();
-        for( int i=0; i< llamadas.size();i++){
+    public void listadoLlamadas(Cliente cliente) {
+        LinkedList<Llamada> llamadas = cliente.getLlamadas();
+        for (int i = 0; i < llamadas.size(); i++) {
             llamadas.get(i).toString();
         }
 

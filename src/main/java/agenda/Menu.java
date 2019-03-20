@@ -8,12 +8,12 @@ public class Menu {
         GESTIONAR_LLAMADAS("Gestionar llamadas"),
         GESTIONAR_FACTURAS("Gestionar facturas"),
 
-      /*  INSERTAR_LLAMADA("Insertar llamada"),
-        LISTAR_LLAMADAS_CLIENTE("Mostrar llamadas de un cliente"),
-      EMITIR_FACTURA_CLIENTE("Emitir factura de un cliente"),
-        FACTURAS_CLIENTE("Mostrar conjunto facturas de un cliente"),
-        RECUPERAR_FACTURA("Mostrar Factura"),
-      */  SALIR("Salir del Menú");
+        /*  INSERTAR_LLAMADA("Insertar llamada"),
+          LISTAR_LLAMADAS_CLIENTE("Mostrar llamadas de un cliente"),
+        EMITIR_FACTURA_CLIENTE("Emitir factura de un cliente"),
+          FACTURAS_CLIENTE("Mostrar conjunto facturas de un cliente"),
+          RECUPERAR_FACTURA("Mostrar Factura"),
+        */  SALIR("Salir del Menú");
 
         private String descripcion;
 
@@ -22,7 +22,7 @@ public class Menu {
         }
 
         public static OpcionesMenuPrincipal getOpcion(int opcion) {
-            if (opcion >= values().length || opcion < 0){
+            if (opcion >= values().length || opcion < 0) {
                 System.out.println("Opcion no valida");
                 return values()[3];
             }
@@ -45,6 +45,7 @@ public class Menu {
             return sb.toString();
         }
     }
+
     //>>>SubMenuCLientes<<<<
     public enum OpcionesSubMenuClientes {
 
@@ -64,7 +65,7 @@ public class Menu {
         }
 
         public static OpcionesSubMenuClientes getOpcion(int opcion) {
-            if (opcion >= values().length || opcion < 0){
+            if (opcion >= values().length || opcion < 0) {
                 System.out.printf("Opcion no valida");
                 return values()[6];
             }
@@ -87,6 +88,7 @@ public class Menu {
             return sb.toString();
         }
     }
+
     //>>>SubMenuCLientes<<<<
     public enum OpcionesSubMenuLlamadas {
 
@@ -104,7 +106,7 @@ public class Menu {
         }
 
         public static OpcionesSubMenuLlamadas getOpcion(int opcion) {
-            if (opcion >= values().length || opcion < 0){
+            if (opcion >= values().length || opcion < 0) {
                 System.out.println("Opcion no valida");
                 return values()[2];
             }
@@ -127,6 +129,7 @@ public class Menu {
             return sb.toString();
         }
     }
+
     public enum OpcionesSubMenuFacturas {
 
         EMITIR_FACTURA_CLIENTE("Emitir factura de un cliente"),
@@ -143,7 +146,7 @@ public class Menu {
         }
 
         public static OpcionesSubMenuFacturas getOpcion(int opcion) {
-            if (opcion >= values().length || opcion < 0){
+            if (opcion >= values().length || opcion < 0) {
                 System.out.println("Opcion no valida");
                 return values()[4];
             }

@@ -9,11 +9,11 @@ import java.time.LocalDate;
 
 public class Factura implements Serializable, GetFecha {
     Tarifa tipoTarifa;
-    static int cod=0;
+    static int cod = 0;
     LocalDate inicio;
     LocalDate fin;
     LocalDate emision;
-    Double importe=0.0;
+    Double importe = 0.0;
 
 
     public Factura(Cliente cliente, LocalDate inico, LocalDate fin) {
@@ -31,7 +31,7 @@ public class Factura implements Serializable, GetFecha {
     }
 
     public Double getImporte() {
-        if (importe==null) return 0.0;
+        if (importe == null) return 0.0;
         return importe;
     }
 
@@ -40,11 +40,11 @@ public class Factura implements Serializable, GetFecha {
     }
 
     public Double importe(Cliente cliente, LocalDate inicio, LocalDate fin) {
-        double importe=0; //€/min
-        if (cliente==null || cliente.getLlamadas()== null) return 0.0;
+        double importe = 0; //€/min
+        if (cliente == null || cliente.getLlamadas() == null) return 0.0;
         for (Llamada llamada : cliente.getLlamadas()) {
             //si es igual a inicio o a fin o posterior a inicio o anteror a fin.
-            if((llamada.fechaLlamada.equals(inicio)  || llamada.fechaLlamada.isAfter(inicio)) && (llamada.fechaLlamada.equals(fin) || llamada.fechaLlamada.isBefore(fin))){
+            if ((llamada.fechaLlamada.equals(inicio) || llamada.fechaLlamada.isAfter(inicio)) && (llamada.fechaLlamada.equals(fin) || llamada.fechaLlamada.isBefore(fin))) {
                 importe += cliente.getTarifa().getTipoTarifa() * llamada.duracion;
             }
         }

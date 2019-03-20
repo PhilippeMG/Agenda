@@ -6,8 +6,8 @@ import java.util.Date;
 public class Tarifa implements Serializable {
     double tarifa;
 
-    public Tarifa(int tarifa){
-        this.tarifa=tarifa;
+    public Tarifa(int tarifa) {
+        this.tarifa = tarifa;
     }
 
     public double getTipoTarifa() {
