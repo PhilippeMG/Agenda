@@ -17,10 +17,9 @@ public class Particular extends Cliente{
                   "nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", nif='" + nif + '\'' +
-                ", direccion=" + direccion +
+                ", Direccion: " + direccion +
                 ", correo='" + correo + '\'' +
                 ", fechaDeAlta=" + fechaDeAlta +
-                ", tipoTarifa=" + tarifa.getTipoTarifa() +
-                '}';
+                ", tipoTarifa=" + tarifa.getTipoTarifa();
     }
 }

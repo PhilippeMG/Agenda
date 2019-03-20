@@ -17,6 +17,6 @@ public class Direccion implements Serializable {
     public String toString() {
         return  "CP=" + CP +
                 ", provincia='" + provincia + '\'' +
-                ", poblacion='" + poblacion;
+                ", poblacion='" + poblacion + "'";
     }
 }
