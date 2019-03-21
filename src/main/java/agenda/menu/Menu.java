@@ -89,7 +89,7 @@ public class Menu {
         }
     }
 
-    //>>>SubMenuCLientes<<<<
+    //>>>SubMenuLlamadas<<<<
     public enum OpcionesSubMenuLlamadas {
 
         INSERTAR_LLAMADA("Insertar llamada"),
@@ -130,6 +130,7 @@ public class Menu {
         }
     }
 
+    //>>>SubMenuFacturas<<<<
     public enum OpcionesSubMenuFacturas {
 
         EMITIR_FACTURA_CLIENTE("Emitir factura de un cliente"),
