@@ -4,11 +4,14 @@ import agenda.Direccion;
 import agenda.Tarifa;
 
 public class Particular extends Cliente {
-    String apellidos;
+    private String apellidos;
 
     public Particular(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa, String apellidos) {
         super(nombre, nif, direccion, correo, tipoTarifa);
         this.apellidos = apellidos;
+    }
+    public String getApellidos() {
+        return this.apellidos;
     }
 
     @Override
