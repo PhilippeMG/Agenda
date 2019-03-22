@@ -6,7 +6,7 @@ import agenda.clientes.GetFecha;
 import agenda.clientes.Particular;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
-import agenda.menu.Menu;
+import agenda.excepciones.InvalidArguments;
 import agenda.menu.OpcionesMenu;
 
 import java.io.*;
@@ -30,21 +30,21 @@ public class Gestor extends Fichero implements Serializable {
         this.facturas = facturas;
     }
 
-    public  HashMap<String, Cliente> getClientes() {
+    public HashMap<String, Cliente> getClientes() {
         return clientes;
     }
 
 
-    public  HashMap<Integer, Factura> getFacturas() {
+    public HashMap<Integer, Factura> getFacturas() {
         return facturas;
     }
 
     //>>>CLIENTE<<<<
-    public void insertarCliente(Cliente cliente) {
+    public void insertarCliente(Cliente cliente) throws InvalidArguments {
         if (!clientes.containsKey(cliente.getNif())) {
             clientes.put(cliente.getNif(), cliente);
         } else {
-            throw new IllegalArgumentException();
+            throw new InvalidArguments();
 
         }
     }
@@ -85,6 +85,44 @@ public class Gestor extends Fichero implements Serializable {
     }
 
 
+    public void nuevoCliente(int opcion) throws InvalidArguments {
+        Scanner scanner = new Scanner(System.in);
+        Scanner scannerEntero = new Scanner(System.in);
+
+        System.out.print("NIF del cliente: ");
+        String nif = scanner.next();
+        System.out.print("Nombre del cliente: ");
+        String nombre = scannerEntero.next();
+        String apellidos = "";
+        if (opcion == 0) { //Particular
+            System.out.print("Apellidos del cliente: ");
+            apellidos = scanner.next();
+        }
+        System.out.println("Dirección del cliente: ");
+        System.out.print("CP: ");
+        int CP = scannerEntero.nextInt();
+        System.out.print("Provincia: ");
+        String provincia = scanner.next();
+        System.out.print("Población: ");
+        String poblacion = scanner.next();
+        Direccion direccion = new Direccion(CP, provincia, poblacion);
+
+        System.out.print("Correo: ");
+        String correo = scanner.next();
+        System.out.print("Tarifa: ");
+        int tipoTarifa = scannerEntero.nextInt();
+        Tarifa tarifa = new Tarifa(tipoTarifa);
+
+        if (opcion == 0) {
+            Cliente nuevo = new Particular(nombre, nif, direccion, correo, tarifa, apellidos);
+            insertarCliente(nuevo);
+        } else {
+            Cliente nuevo = new Empresa(nombre, nif, direccion, correo, tarifa);
+            insertarCliente(nuevo);
+        }
+    }
+
+
     //>>>LLAMADAS<<<<
     public void insertarLlamada(String NIF, Llamada llamada) throws ClientNotFound {
         if (clientes.containsKey(NIF)) {
@@ -102,14 +140,12 @@ public class Gestor extends Fichero implements Serializable {
 
     public <T extends GetFecha> LinkedList<T> devolverEntreFechas(List<T> lista, LocalDate inicio, LocalDate fin) {
         LinkedList<T> devolver = new LinkedList<>();
-
         for (T elemento : lista) {
             if ((elemento.getFecha().isAfter(inicio) || elemento.getFecha().equals(inicio)) &&
                     (elemento.getFecha().isBefore(fin) || elemento.getFecha().equals(fin))) {
                 devolver.add(elemento);
             }
         }
-
         return devolver;
     }
 
@@ -151,50 +187,13 @@ public class Gestor extends Fichero implements Serializable {
         }
     }
 
-    public void cambiarTarifa(String NIF, int tarifa) {
+    public void cambiarTarifa(String NIF, int tarifa) throws ClientNotFound {
 
         if (clientes.containsKey(NIF)) {
             Cliente client = clientes.get(NIF);
             client.cambiarTarifa(tarifa);
         } else {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public void nuevoCliente(int opcion) {
-        Scanner scanner = new Scanner(System.in);
-        Scanner scannerEntero = new Scanner(System.in);
-
-        System.out.print("NIF del cliente: ");
-        String nif = scanner.next();
-        System.out.print("Nombre del cliente: ");
-        String nombre = scannerEntero.next();
-        String apellidos = "";
-        if (opcion == 0) { //Particular
-            System.out.print("Apellidos del cliente: ");
-            apellidos = scanner.next();
-        }
-        System.out.println("Dirección del cliente: ");
-        System.out.print("CP: ");
-        int CP = scannerEntero.nextInt();
-        System.out.print("Provincia: ");
-        String provincia = scanner.next();
-        System.out.print("Población: ");
-        String poblacion = scanner.next();
-        Direccion direccion = new Direccion(CP, provincia, poblacion);
-
-        System.out.print("Correo: ");
-        String correo = scanner.next();
-        System.out.print("Tarifa: ");
-        int tipoTarifa = scannerEntero.nextInt();
-        Tarifa tarifa = new Tarifa(tipoTarifa);
-
-        if (opcion == 0) {
-            Cliente nuevo = new Particular(nombre, nif, direccion, correo, tarifa, apellidos);
-            insertarCliente(nuevo);
-        } else {
-            Cliente nuevo = new Empresa(nombre, nif, direccion, correo, tarifa);
-            insertarCliente(nuevo);
+            throw new ClientNotFound();
         }
     }
 
@@ -212,16 +211,13 @@ public class Gestor extends Fichero implements Serializable {
     }
 
 
-
-
-    public  void ejecutar() throws Exception {
-
+    public void ejecutar() throws Exception {
         System.out.println("Cargando datos...");
         leerDatos();
-        OpcionesMenu op=new OpcionesMenu();
+        OpcionesMenu op = new OpcionesMenu();
         op.menuPrincipal();
 
-       System.out.printf("Guardando datos...");
+        System.out.printf("Guardando datos...");
     }
 
 }

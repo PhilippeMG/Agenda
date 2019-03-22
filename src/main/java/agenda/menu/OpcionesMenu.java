@@ -1,12 +1,12 @@
 package agenda.menu;
 
 import agenda.Factura;
-import agenda.Fichero;
 import agenda.Gestor;
 import agenda.Llamada;
 import agenda.clientes.Cliente;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
+import agenda.excepciones.InvalidArguments;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 public class OpcionesMenu extends Gestor {
 
+    //>>>MENU PRINCIPAL<<<<
     public void menuPrincipal() throws Exception {
         Scanner scannerMenu = new Scanner(System.in);
         Menu.OpcionesMenuPrincipal opcion;
@@ -46,6 +47,7 @@ public class OpcionesMenu extends Gestor {
         } while (!opcion.name().equals("SALIR"));
     }
 
+    //>>>MENU FACTURAS<<<<
     public void subMenuFacturas() throws Exception {
         Scanner scannerMenu = new Scanner(System.in);
         Menu.OpcionesSubMenuFacturas opcionFactura;
@@ -72,13 +74,14 @@ public class OpcionesMenu extends Gestor {
                     opcionDevolverFacturasEntreFechas();
                     break;
                 case SALIR:
-                   escribirDatos();
+                    escribirDatos();
                     break;
             }
 
         } while (!opcionFactura.name().equals("SALIR"));
     }
 
+    //>>>MENU LLAMADAS<<<<
     public void subMenuLlamadas() throws Exception {
         Scanner scannerMenu = new Scanner(System.in);
         Menu.OpcionesSubMenuLlamadas opcionLlamada;
@@ -103,13 +106,14 @@ public class OpcionesMenu extends Gestor {
                     opcionDevolverLlamadasEntreFechas();
                     break;
                 case SALIR:
-                   escribirDatos();
+                    escribirDatos();
                     break;
             }
 
         } while (!opcionLlamada.name().equals("SALIR"));
     }
 
+    //>>>MENU CLIENTES<<<<
     public void subMenuCLientes() throws Exception {
         Scanner scannerMenu = new Scanner(System.in);
         Menu.OpcionesSubMenuClientes opcionCliente;
@@ -155,9 +159,9 @@ public class OpcionesMenu extends Gestor {
 
         } while (!opcionCliente.name().equals("SALIR"));
     }
-//Metodos
 
-    //Menu
+    //METODOS DE LAS OPCIONES DEL MENU QUE LLAMAN A METODOS DE GESTOR MEDIANTE: extendeds Gestor
+    //>>>OPCION CLIENTE<<<<
     public void opcionInsertarCliente() {
         Scanner scanner = new Scanner(System.in);
 
@@ -165,50 +169,66 @@ public class OpcionesMenu extends Gestor {
         System.out.println("1.-Empresa");
         System.out.print("Tipo de cliente: ");
         int tipo = scanner.nextInt();
-        nuevoCliente(tipo);
-        //scanner.close();
+        try {
+            nuevoCliente(tipo);
+        } catch (InvalidArguments e) {
+            System.out.println("YA HAY UN CLIENTE CON EL MISMO DNI");
+        }
     }
 
-    public void opcionBorrarCliente() throws ClientNotFound {
+    public void opcionBorrarCliente() {
         Scanner scanner = new Scanner(System.in);
-
         System.out.print("NIF del cliente que quieres eliminar: ");
         String nif = scanner.next();
-        borrarCliente(nif);
+        try {
+            borrarCliente(nif);
+        } catch (ClientNotFound e) {
+            System.out.println(e.getMessage().toUpperCase());
+        }
+    }
+
+    public void opcionDatosClientes() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("NIF del cliente: ");
+        String nif = scanner.next();
+        try {
+            mostrarCliente(nif);
+        } catch (ClientNotFound e) {
+            System.out.println("NO HAY CLIENTE CON NIF EXPECIFICADO");
+        }
+    }
+
+    public void opcionDevolverCLientesEntreFechas() {
+        Collection<Cliente> myCollection = getClientes().values();
+        List<Cliente> list = new LinkedList<>(myCollection);
+        LinkedList<Cliente> clienteEntreFechas = devolverEntreFechas(list, crearFecha(), crearFecha());
+        if (clienteEntreFechas.isEmpty()) {
+            System.out.println("NO HAY CLIENTES ENTRE ESAS FECHAS");
+        } else {
+            System.out.println(clienteEntreFechas.toString());
+        }
     }
 
     public void opcionCambiarTarifa() {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.print("NIF del cliente: ");
-        String nif = scanner.next();
         System.out.print("Nueva tarifa para el cliente: ");
         int tarifa = scanner.nextInt();
-        cambiarTarifa(nif, tarifa);
-    }
-
-    public void opcionDatosClientes() throws ClientNotFound {
-        Scanner scanner = new Scanner(System.in);
-
         System.out.print("NIF del cliente: ");
         String nif = scanner.next();
-        mostrarCliente(nif);
+        try {
+            cambiarTarifa(nif, tarifa);
+        } catch (ClientNotFound e) {
+            System.out.println(e.getMessage().toUpperCase());
+        }
     }
 
+    //>>>OPCION LLAMADAS<<<<
     public void opcionListarLlamadasCliente() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("NIF del cliente: ");
 
         String nif = scanner.next();
         mostrarLlamadas(nif);
-    }
-
-    public void opcionEmitirFacturaCLiente() throws Exception {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("NIF del cliente: ");
-        String nif = scanner.next();
-        System.out.printf(emitirFactura(nif, crearFecha(), crearFecha()).toString());
     }
 
     public void opcionInsertarLlamada() throws ClientNotFound {
@@ -228,22 +248,6 @@ public class OpcionesMenu extends Gestor {
         insertarLlamada(nif, llamada);
     }
 
-    public void opcionRecuperarFactura() throws FacturaNotFound {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Codigo de la factura: ");
-        int codigo = scanner.nextInt();
-        mostrarFactura(codigo);
-    }
-
-    public void opcionFacturasCLiente() throws ClientNotFound {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("NIF del cliente: ");
-        String nif = scanner.next();
-        mostrarFacturas(nif);
-    }
-
     public void opcionDevolverLlamadasEntreFechas() {
         Scanner scanner = new Scanner(System.in);
 
@@ -259,6 +263,30 @@ public class OpcionesMenu extends Gestor {
         }
     }
 
+    //>>>OPCION FACTURA<<<<
+    public void opcionEmitirFacturaCLiente() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("NIF del cliente: ");
+        String nif = scanner.next();
+        System.out.printf(emitirFactura(nif, crearFecha(), crearFecha()).toString());
+    }
+
+    public void opcionRecuperarFactura() throws FacturaNotFound {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Codigo de la factura: ");
+        int codigo = scanner.nextInt();
+        mostrarFactura(codigo);
+    }
+
+    public void opcionFacturasCLiente() throws ClientNotFound {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("NIF del cliente: ");
+        String nif = scanner.next();
+        mostrarFacturas(nif);
+    }
 
     public void opcionDevolverFacturasEntreFechas() {
         Scanner scanner = new Scanner(System.in);
@@ -277,14 +305,4 @@ public class OpcionesMenu extends Gestor {
             throw new IllegalArgumentException();
         }
     }
-
-
-    public void opcionDevolverCLientesEntreFechas() {
-        Collection<Cliente> myCollection = getClientes().values();
-        List<Cliente> list = new LinkedList<>(myCollection);
-        LinkedList<Cliente> clienteEntreFechas = devolverEntreFechas(list, crearFecha(), crearFecha());
-        System.out.printf(clienteEntreFechas.toString());
-
-    }
-
 }

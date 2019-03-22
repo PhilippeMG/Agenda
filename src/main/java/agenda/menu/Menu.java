@@ -56,7 +56,7 @@ public class Menu {
         DATOS_CLIENTE("Mostrar información cliente"),
         CAMBIAR_TARIFA_CLIENTE("Modificar tarifa cliente"),
 
-        SALIR("Salir del Menú");
+        SALIR("Voler menú principal");
 
         private String descripcion;
 

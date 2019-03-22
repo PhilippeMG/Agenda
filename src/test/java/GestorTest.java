@@ -3,6 +3,7 @@ import agenda.clientes.Cliente;
 import agenda.clientes.Empresa;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
+import agenda.excepciones.InvalidArguments;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class GestorTest {
 
 
     @BeforeClass
-    public static void init() {
+    public static void init() throws InvalidArguments {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
         cliente = new Empresa("Marcos", "0001", direccion1, "al375909@uji.es", new Tarifa(1));
         Llamada llamada3 = new Llamada(654078311, 0.9, LocalDate.of(2017, Month.MARCH, 1));
@@ -40,7 +41,7 @@ public class GestorTest {
             gestor.insertarCliente(cliente);
             fail("No debe llegar");
 
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidArguments e) {
             //System.out.println("Salto la excepcion");
         }
     }
