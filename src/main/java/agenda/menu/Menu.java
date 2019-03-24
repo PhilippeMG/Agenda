@@ -1,5 +1,7 @@
 package agenda.menu;
 
+import agenda.excepciones.OptionNotFound;
+
 public class Menu {
     //>>>MENU<<<<
     public enum OpcionesMenuPrincipal {
@@ -21,11 +23,9 @@ public class Menu {
             this.descripcion = descripcion;
         }
 
-        public static OpcionesMenuPrincipal getOpcion(int opcion) {
-            if (opcion >= values().length || opcion < 0) {
-                System.out.println("Opcion no valida");
-                return values()[3];
-            }
+        public static OpcionesMenuPrincipal getOpcion(int opcion) throws OptionNotFound {
+            if(opcion>= values().length) throw new OptionNotFound();
+
             return values()[opcion];
         }
 
@@ -64,11 +64,9 @@ public class Menu {
             this.descripcion = descripcion;
         }
 
-        public static OpcionesSubMenuClientes getOpcion(int opcion) {
-            if (opcion >= values().length || opcion < 0) {
-                System.out.printf("Opcion no valida");
-                return values()[6];
-            }
+        public static OpcionesSubMenuClientes getOpcion(int opcion) throws OptionNotFound {
+            if(opcion>= values().length) throw new OptionNotFound();
+
             return values()[opcion];
         }
 
@@ -105,11 +103,8 @@ public class Menu {
             this.descripcion = descripcion;
         }
 
-        public static OpcionesSubMenuLlamadas getOpcion(int opcion) {
-            if (opcion >= values().length || opcion < 0) {
-                System.out.println("Opcion no valida");
-                return values()[2];
-            }
+        public static OpcionesSubMenuLlamadas getOpcion(int opcion) throws OptionNotFound {
+            if(opcion>= values().length) throw new OptionNotFound();
             return values()[opcion];
         }
 
@@ -146,11 +141,9 @@ public class Menu {
             this.descripcion = descripcion;
         }
 
-        public static OpcionesSubMenuFacturas getOpcion(int opcion) {
-            if (opcion >= values().length || opcion < 0) {
-                System.out.println("Opcion no valida");
-                return values()[4];
-            }
+        public static OpcionesSubMenuFacturas getOpcion(int opcion) throws OptionNotFound {
+            if(opcion>= values().length) throw new OptionNotFound();
+
             return values()[opcion];
         }
 

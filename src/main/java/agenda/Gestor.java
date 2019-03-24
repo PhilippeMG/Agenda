@@ -14,9 +14,9 @@ import java.time.*;
 import java.util.*;
 
 
-public class Gestor extends Fichero implements Serializable {
-    private static HashMap<String, Cliente> clientes = new HashMap<>();
-    private static HashMap<Integer, Factura> facturas = new HashMap<>();
+public class Gestor implements Serializable {
+    private    HashMap<String, Cliente> clientes = new HashMap<>();
+    private    HashMap<Integer, Factura> facturas = new HashMap<>();
 
     public Gestor() {
         super();
@@ -211,11 +211,32 @@ public class Gestor extends Fichero implements Serializable {
 
         return fecha;
     }
-
+    public void cargarDatos() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream("datosClientes.bin");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        setClientes((HashMap<String, Cliente>) ois.readObject());
+        fis = new FileInputStream("datosFacturas.bin");
+        ois = new ObjectInputStream(fis);
+        setFacturas((HashMap<Integer, Factura>) ois.readObject());
+        ois.close();
+    }
+    public  void guardarDatos() throws IOException {
+        //Clientes
+        FileOutputStream fos = new FileOutputStream("datosClientes.bin");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(new Gestor().getClientes());
+        oos.close();
+        //Facturas
+        fos = new FileOutputStream("datosFacturas.bin");
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(new Gestor().getFacturas());
+        oos.close();
+    }
 
     public void ejecutar() throws Exception {
         System.out.println("Cargando datos...");
-        leerDatos();
+       // leerDatos();
+
         OpcionesMenu op = new OpcionesMenu();
         op.menuPrincipal();
 
