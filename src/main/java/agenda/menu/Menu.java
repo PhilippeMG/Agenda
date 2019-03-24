@@ -93,9 +93,7 @@ public class Menu {
         INSERTAR_LLAMADA("Insertar llamada"),
         LISTAR_LLAMADAS_CLIENTE("Mostrar llamadas de un cliente"),
         LISTAR_LLAMADAS_ENTRE_FECHAS("Listar llamadas entre dos fechas"),
-
-
-        SALIR("Salir del Menú");
+        SALIR("Voler menú principal");
 
         private String descripcion;
 
@@ -132,8 +130,7 @@ public class Menu {
         FACTURAS_CLIENTE("Mostrar conjunto facturas de un cliente"),
         RECUPERAR_FACTURA("Mostrar Factura"),
         LISTAR_FACTURAS_ENTRE_FECHAS("Listar facturas entre dos fechas"),
-
-        SALIR("Salir del Menú");
+        SALIR("Voler menú principal");
 
         private String descripcion;
 
