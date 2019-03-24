@@ -228,7 +228,11 @@ public class OpcionesMenu extends Gestor {
         System.out.print("NIF del cliente: ");
 
         String nif = scanner.next();
-        mostrarLlamadas(nif);
+        try {
+            mostrarLlamadas(nif);
+        } catch (ClientNotFound e) {
+            System.out.println(e.getMessage().toUpperCase());
+        }
     }
 
     public void opcionInsertarLlamada() throws ClientNotFound {
@@ -245,7 +249,11 @@ public class OpcionesMenu extends Gestor {
 
         LocalDate fechaLlamada = crearFecha();
         Llamada llamada = new Llamada(numDestino, duracion, fechaLlamada);
+        try {
         insertarLlamada(nif, llamada);
+        } catch (ClientNotFound e) {
+            System.out.println(e.getMessage().toUpperCase());
+        }
     }
 
     public void opcionDevolverLlamadasEntreFechas() {

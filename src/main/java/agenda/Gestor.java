@@ -132,9 +132,11 @@ public class Gestor extends Fichero implements Serializable {
         }
     }
 
-    public void mostrarLlamadas(String NIF) {
+    public void mostrarLlamadas(String NIF) throws ClientNotFound{
         if (clientes.containsKey(NIF)) {
             clientes.get(NIF).mostrarLlamadas();
+        }else{
+            throw new ClientNotFound();
         }
     }
 
