@@ -15,8 +15,8 @@ import java.util.*;
 
 
 public class Gestor implements Serializable {
-    private    HashMap<String, Cliente> clientes = new HashMap<>();
-    private    HashMap<Integer, Factura> facturas = new HashMap<>();
+    private static HashMap<String, Cliente> clientes = new HashMap<>();
+    private static HashMap<Integer, Factura> facturas = new HashMap<>();
 
     public Gestor() {
         super();
@@ -212,9 +212,11 @@ public class Gestor implements Serializable {
         return fecha;
     }
     public void cargarDatos() throws IOException, ClassNotFoundException {
+        //Clientes
         FileInputStream fis = new FileInputStream("datosClientes.bin");
         ObjectInputStream ois = new ObjectInputStream(fis);
         setClientes((HashMap<String, Cliente>) ois.readObject());
+        //Facturas
         fis = new FileInputStream("datosFacturas.bin");
         ois = new ObjectInputStream(fis);
         setFacturas((HashMap<Integer, Factura>) ois.readObject());
@@ -235,7 +237,6 @@ public class Gestor implements Serializable {
 
     public void ejecutar() throws Exception {
         System.out.println("Cargando datos...");
-       // leerDatos();
 
         OpcionesMenu op = new OpcionesMenu();
         op.menuPrincipal();
