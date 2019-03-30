@@ -2,8 +2,8 @@
 import agenda.*;
 import agenda.clientes.Cliente;
 import agenda.clientes.Empresa;
-import agenda.excepciones.ClientNotFound;
-import com.sun.security.ntlm.Client;
+//import agenda.excepciones.ClientNotFound;
+//import com.sun.security.ntlm.Client;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
