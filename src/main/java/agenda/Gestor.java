@@ -15,8 +15,8 @@ import java.util.*;
 
 
 public class Gestor implements Serializable {
-    private static HashMap<String, Cliente> clientes = new HashMap<>();
-    private static HashMap<Integer, Factura> facturas = new HashMap<>();
+    private  HashMap<String, Cliente> clientes = new HashMap<>();
+    private  HashMap<Integer, Factura> facturas = new HashMap<>();
 
     public Gestor() {
         super();
@@ -233,22 +233,15 @@ public class Gestor implements Serializable {
         //Clientes
         FileOutputStream fos = new FileOutputStream("datosClientes.bin");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(new Gestor().getClientes());
+        oos.writeObject(getClientes());
         oos.close();
         //Facturas
         fos = new FileOutputStream("datosFacturas.bin");
         oos = new ObjectOutputStream(fos);
-        oos.writeObject(new Gestor().getFacturas());
+        oos.writeObject(getFacturas());
         oos.close();
     }
 
-    public void ejecutar() throws Exception {
-        System.out.println("Cargando datos...");
 
-        OpcionesMenu op = new OpcionesMenu();
-        op.menuPrincipal();
-
-        System.out.printf("Guardando datos...");
-    }
 
 }

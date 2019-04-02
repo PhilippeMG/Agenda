@@ -44,7 +44,8 @@ public class OpcionesMenu extends Gestor {
                         subMenuFacturas();
                         break;
                     case SALIR:
-                        guardarDatos();                        break;
+                        guardarDatos();
+                        break;
                 }
             } catch (OptionNotFound e) {
                 System.out.println(e.getMessage().toUpperCase());
