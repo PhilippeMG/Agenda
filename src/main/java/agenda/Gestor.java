@@ -15,8 +15,8 @@ import java.util.*;
 
 
 public class Gestor implements Serializable {
-    private  HashMap<String, Cliente> clientes = new HashMap<>();
-    private   HashMap<Integer, Factura> facturas = new HashMap<>();
+    private static HashMap<String, Cliente> clientes = new HashMap<>();
+    private static HashMap<Integer, Factura> facturas = new HashMap<>();
 
     public Gestor() {
         super();
@@ -132,10 +132,10 @@ public class Gestor implements Serializable {
         }
     }
 
-    public void mostrarLlamadas(String NIF) throws ClientNotFound{
+    public void mostrarLlamadas(String NIF) throws ClientNotFound {
         if (clientes.containsKey(NIF)) {
             clientes.get(NIF).mostrarLlamadas();
-        }else{
+        } else {
             throw new ClientNotFound();
         }
     }
@@ -211,7 +211,8 @@ public class Gestor implements Serializable {
 
         return fecha;
     }
-    public void cargarDatos() throws  ClassNotFoundException {
+
+    public void cargarDatos() throws ClassNotFoundException {
         //Clientes
         try {
             FileInputStream fis = new FileInputStream("datosClientes.bin");
@@ -222,12 +223,13 @@ public class Gestor implements Serializable {
             ois = new ObjectInputStream(fis);
             setFacturas((HashMap<Integer, Factura>) ois.readObject());
             ois.close();
-        }catch (IOException e){
-                System.out.println("No hay datos guardados");
+        } catch (IOException e) {
+            System.out.println("No hay datos guardados");
 
         }
     }
-    public  void guardarDatos() throws IOException {
+
+    public void guardarDatos() throws IOException {
         //Clientes
         FileOutputStream fos = new FileOutputStream("datosClientes.bin");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
