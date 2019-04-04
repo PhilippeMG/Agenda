@@ -59,7 +59,12 @@ public abstract class Cliente implements Serializable, GetFecha {
     public Tarifa getTarifa() {
         return tarifa;
     }
+    public int getPrecioLlamada(){
+        int precio=0;
 
+        return precio;
+
+    }
     public Direccion getDireccion() {
         return direccion;
     }
