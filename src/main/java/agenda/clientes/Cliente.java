@@ -7,6 +7,7 @@ import agenda.tarifa.Tarifa;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -39,8 +40,8 @@ public abstract class Cliente implements Serializable, GetFecha {
     }
 
     @Override
-    public LocalDate getFecha() {
-        return this.fechaDeAlta;
+    public LocalDateTime getFecha() {
+        return LocalDateTime.from(this.fechaDeAlta);
     }
 
     public String getNombre() {
@@ -69,7 +70,7 @@ public abstract class Cliente implements Serializable, GetFecha {
 
     //>>>METODOS<<
     public void cambiarTarifa(int nuevaTarifa) {
-        tarifa.setTarifa(nuevaTarifa);
+        tarifa.setPrecio(nuevaTarifa);
     }
 
     public void insertarLlamada(Llamada llamada) {
@@ -104,6 +105,6 @@ public abstract class Cliente implements Serializable, GetFecha {
                 ", Direccion: " + direccion.toString() +
                 ", correo= '" + correo + '\'' +
                 ", fechaDeAlta= " + fechaDeAlta +
-                ", tipoTarifa= " + tarifa.getTipoTarifa();
+                ", tipoTarifa= " + tarifa.getPrecio();
     }
 }

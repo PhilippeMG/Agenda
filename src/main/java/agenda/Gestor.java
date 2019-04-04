@@ -8,8 +8,9 @@ import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
 import agenda.excepciones.InvalidArguments;
 import agenda.tarifa.Tarifa;
-import agenda.tarifa.TarifaDiaGratis;
-import agenda.tarifa.TarifaEspecial;
+import agenda.tarifa.TarifaDomingosGratis;
+import agenda.tarifa.TarifaTardesGratis;
+import agenda.tarifa.TarifaBasica;
 
 import java.io.*;
 import java.time.*;
@@ -114,17 +115,23 @@ public class Gestor implements Serializable {
         //TODO Marcos mira lo de las tarifas, Tarifa es abstract y hay dos que tenemos que usar
         int tipo=-1;
         while (tipo<0 ||tipo>1) {
-            System.out.printf("Tipo de Tarifa:\n 0- Tarifa Especial o 1- Un dia Gratis?: ");
+            System.out.printf("Tipo de Tarifa:\n 0- Tarifa Especial o 1- Tarifa Un dia Gratis: ");
              tipo = scannerEntero.nextInt();
         }
         System.out.print("Tarifa: ");
         int tipoTarifa = scannerEntero.nextInt();
+        Tarifa tarifas;
         Tarifa tarifa;
+
         if (tipo==1){
-             tarifa = new TarifaEspecial(tipoTarifa);
+             tarifas = new TarifaBasica(tipoTarifa);
+            tarifa = new TarifaTardesGratis(tarifas,tipoTarifa);
+
 
         }else{
-             tarifa = new TarifaDiaGratis(tipoTarifa);
+             tarifas = new TarifaBasica(tipoTarifa);
+            tarifa = new TarifaDomingosGratis(tarifas,tipoTarifa);
+
 
         }
 
@@ -156,7 +163,7 @@ public class Gestor implements Serializable {
         }
     }
 
-    public <T extends GetFecha> LinkedList<T> devolverEntreFechas(List<T> lista, LocalDate inicio, LocalDate fin) {
+    public <T extends GetFecha> LinkedList<T> devolverEntreFechas(List<T> lista, LocalDateTime inicio, LocalDateTime fin) {
         LinkedList<T> devolver = new LinkedList<>();
         for (T elemento : lista) {
             if ((elemento.getFecha().isAfter(inicio) || elemento.getFecha().equals(inicio)) &&
@@ -168,7 +175,7 @@ public class Gestor implements Serializable {
     }
 
     //>>>FACTURAS<<<<
-    public Factura emitirFactura(String NIF, LocalDate ini, LocalDate fin) throws Exception {
+    public Factura emitirFactura(String NIF, LocalDateTime ini, LocalDateTime fin) throws Exception {
         //Fichero tando en el vector de Cliente como en el mapa de Gestor.
         if (clientes.containsKey(NIF)) {
             Cliente cliente = clientes.get(NIF);
@@ -215,17 +222,18 @@ public class Gestor implements Serializable {
         }
     }
 
-    public LocalDate crearFecha() {
+    public LocalDateTime crearFecha() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Dia Mes Año: ");
         int dia = scanner.nextInt();
         int mes = scanner.nextInt();
         int año = scanner.nextInt();
-
+        LocalTime hora= LocalTime.now();
         LocalDate fecha = LocalDate.of(año, mes, dia);
+        LocalDateTime data= LocalDateTime.of(fecha,hora);
 
-        return fecha;
+        return data;
     }
 
     public void cargarDatos() throws ClassNotFoundException {

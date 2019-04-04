@@ -10,6 +10,7 @@ import agenda.excepciones.InvalidArguments;
 import agenda.excepciones.OptionNotFound;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -264,7 +265,7 @@ public class OpcionesMenu extends Gestor {
         double duracion = scanner.nextDouble();
 
 
-        LocalDate fechaLlamada = crearFecha();
+        LocalDateTime fechaLlamada = crearFecha();
         Llamada llamada = new Llamada(numDestino, duracion, fechaLlamada);
         try {
             insertarLlamada(nif, llamada);

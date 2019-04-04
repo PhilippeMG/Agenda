@@ -1,26 +1,25 @@
 package agenda.tarifa;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public abstract class Tarifa  implements Serializable{
-    private double tarifa;
+    private int precio;
 
     public Tarifa(int tarifa) {
-        this.tarifa = tarifa;
+        this.precio = tarifa;
     }
 
-    public double getTipoTarifa() {
-        return tarifa;
+    public int getPrecio() {
+        return precio;
     }
 
-    public void setTarifa(int tarifa) {
-        this.tarifa = tarifa;
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
 
     @Override
     public String toString() {
-        return "Tarifa= " + tarifa;
+        return "Tarifa= " + precio;
     }
     public abstract String descripcion();
 }

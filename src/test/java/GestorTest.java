@@ -4,13 +4,14 @@ import agenda.clientes.Empresa;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
 import agenda.excepciones.InvalidArguments;
-import agenda.tarifa.Tarifa;
-import agenda.tarifa.TarifaEspecial;
+import agenda.tarifa.TarifaBasica;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Month;
 
 import static org.junit.Assert.*;
@@ -24,8 +25,12 @@ public class GestorTest {
     @BeforeClass
     public static void init() throws InvalidArguments {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
-        cliente = new Empresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaEspecial(1));
-        Llamada llamada3 = new Llamada(654078311, 0.9, LocalDate.of(2017, Month.MARCH, 1));
+        cliente = new Empresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaBasica(1));
+        LocalTime hora= LocalTime.now();
+        LocalDate fecha = LocalDate.of(2017, 4, 1);
+        LocalDateTime data= LocalDateTime.of(fecha,hora);
+
+        Llamada llamada3 = new Llamada(654078311, 0.9,data);
         cliente.insertarLlamada(llamada3);
         //Factura factura = new Factura(cliente,LocalDate.of(2017,Month.MARCH, 1),LocalDate.of(2019,Month.MARCH, 3));
         gestor.insertarCliente(cliente);

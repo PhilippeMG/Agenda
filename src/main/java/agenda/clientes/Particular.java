@@ -23,6 +23,6 @@ public class Particular extends Cliente {
                 ", Direccion: " + super.getDireccion() +
                 ", correo='" + super.getCorreo() + '\'' +
                 ", fechaDeAlta=" + getFechaDeAlta() +
-                ", tipoTarifa=" + super.getTarifa().getTipoTarifa();
+                ", tipoTarifa=" + super.getTarifa().getPrecio();
     }
 }
