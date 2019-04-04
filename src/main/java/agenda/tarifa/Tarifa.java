@@ -1,10 +1,10 @@
-package agenda;
+package agenda.tarifa;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class Tarifa implements Serializable {
-    double tarifa;
+public abstract class Tarifa  implements Serializable{
+    private double tarifa;
 
     public Tarifa(int tarifa) {
         this.tarifa = tarifa;
@@ -22,4 +22,5 @@ public class Tarifa implements Serializable {
     public String toString() {
         return "Tarifa= " + tarifa;
     }
+    public abstract String descripcion();
 }

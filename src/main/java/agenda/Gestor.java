@@ -7,7 +7,9 @@ import agenda.clientes.Particular;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
 import agenda.excepciones.InvalidArguments;
-import agenda.menu.OpcionesMenu;
+import agenda.tarifa.Tarifa;
+import agenda.tarifa.TarifaDiaGratis;
+import agenda.tarifa.TarifaEspecial;
 
 import java.io.*;
 import java.time.*;
@@ -99,19 +101,33 @@ public class Gestor implements Serializable {
             apellidos = scanner.next();
         }
         System.out.println("Dirección del cliente: ");
-        System.out.print("CP: ");
+        System.out.print("\tCP: ");
         int CP = scannerEntero.nextInt();
-        System.out.print("Provincia: ");
+        System.out.print("\tProvincia: ");
         String provincia = scanner.next();
-        System.out.print("Población: ");
+        System.out.print("\tPoblación: ");
         String poblacion = scanner.next();
         Direccion direccion = new Direccion(CP, provincia, poblacion);
 
         System.out.print("Correo: ");
         String correo = scanner.next();
+        //TODO Marcos mira lo de las tarifas, Tarifa es abstract y hay dos que tenemos que usar
+        int tipo=-1;
+        while (tipo<0 ||tipo>1) {
+            System.out.printf("Tipo de Tarifa:\n 0- Tarifa Especial o 1- Un dia Gratis?: ");
+             tipo = scannerEntero.nextInt();
+        }
         System.out.print("Tarifa: ");
         int tipoTarifa = scannerEntero.nextInt();
-        Tarifa tarifa = new Tarifa(tipoTarifa);
+        Tarifa tarifa;
+        if (tipo==1){
+             tarifa = new TarifaEspecial(tipoTarifa);
+
+        }else{
+             tarifa = new TarifaDiaGratis(tipoTarifa);
+
+        }
+
 
         if (opcion == 0) {
             Cliente nuevo = new Particular(nombre, nif, direccion, correo, tarifa, apellidos);

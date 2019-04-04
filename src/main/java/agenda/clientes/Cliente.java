@@ -3,12 +3,10 @@ package agenda.clientes;
 import agenda.Direccion;
 import agenda.Factura;
 import agenda.Llamada;
-import agenda.Tarifa;
+import agenda.tarifa.Tarifa;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 

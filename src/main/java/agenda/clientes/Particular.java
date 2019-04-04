@@ -1,7 +1,7 @@
 package agenda.clientes;
 
 import agenda.Direccion;
-import agenda.Tarifa;
+import agenda.tarifa.Tarifa;
 
 public class Particular extends Cliente {
     private String apellidos;

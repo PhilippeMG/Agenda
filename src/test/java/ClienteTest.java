@@ -2,6 +2,8 @@
 import agenda.*;
 import agenda.clientes.Cliente;
 import agenda.clientes.Empresa;
+import agenda.tarifa.Tarifa;
+import agenda.tarifa.TarifaEspecial;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,7 +22,7 @@ public class ClienteTest {
 
     public static void init() {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
-        cliente = new Empresa("Marcos", "0001", direccion1, "al375909@uji.es", new Tarifa(1));
+        cliente = new Empresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaEspecial(1));
     }
 
     @AfterClass

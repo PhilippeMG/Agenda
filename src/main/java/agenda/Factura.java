@@ -3,6 +3,7 @@ package agenda;
 
 import agenda.clientes.Cliente;
 import agenda.clientes.GetFecha;
+import agenda.tarifa.Tarifa;
 
 import java.io.Serializable;
 import java.time.LocalDate;
