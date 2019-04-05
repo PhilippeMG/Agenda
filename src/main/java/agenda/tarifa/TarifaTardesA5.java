@@ -11,7 +11,7 @@ public class TarifaTardesA5 extends Tarifa{
     }
     @Override
     public String descripcion(){
-        return tarifa.descripcion()+" con Tardes Gratis";
+        return tarifa.descripcion()+" con Tardes a 5 cent";
     }
 
     public  int getPrecio(LocalDateTime fecha){
