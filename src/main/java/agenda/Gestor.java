@@ -9,7 +9,7 @@ import agenda.excepciones.FacturaNotFound;
 import agenda.excepciones.InvalidArguments;
 import agenda.tarifa.Tarifa;
 import agenda.tarifa.TarifaDomingosGratis;
-import agenda.tarifa.TarifaTardesGratis;
+import agenda.tarifa.TarifaTardesA5;
 import agenda.tarifa.TarifaBasica;
 
 import java.io.*;
@@ -114,23 +114,27 @@ public class Gestor implements Serializable {
         String correo = scanner.next();
         //TODO Marcos mira lo de las tarifas, Tarifa es abstract y hay dos que tenemos que usar
         int tipo=-1;
-        while (tipo<0 ||tipo>1) {
-            System.out.printf("Tipo de Tarifa:\n 0- Tarifa Especial o 1- Tarifa Un dia Gratis: ");
+        while (tipo<0 ||tipo>2) {
+            System.out.printf("Tipo de Tarifa:\n 0- Tarifa Tardes o 1- Tarifa Domingo Gratis o 2- Ambas: ");
              tipo = scannerEntero.nextInt();
         }
         System.out.print("Tarifa: ");
         int tipoTarifa = scannerEntero.nextInt();
-        Tarifa tarifas;
+        Tarifa  tarifas = new TarifaBasica(tipoTarifa);
+
         Tarifa tarifa;
 
-        if (tipo==1){
-             tarifas = new TarifaBasica(tipoTarifa);
-            tarifa = new TarifaTardesGratis(tarifas,tipoTarifa);
+        if (tipo==0){
+            tarifa = new TarifaTardesA5(tarifas);
+
+
+        }else if(tipo==1){
+            tarifa = new TarifaDomingosGratis(tarifas);
 
 
         }else{
-             tarifas = new TarifaBasica(tipoTarifa);
-            tarifa = new TarifaDomingosGratis(tarifas,tipoTarifa);
+            Tarifa tarde = new TarifaTardesA5(tarifas);
+            tarifa = new TarifaDomingosGratis(tarde);
 
 
         }

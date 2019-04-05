@@ -47,7 +47,7 @@ public class Factura implements Serializable, GetFecha {
         for (Llamada llamada : cliente.getLlamadas()) {
             //si es igual a inicio o a fin o posterior a inicio o anteror a fin.
             if ((llamada.fechaLlamada.equals(inicio) || llamada.fechaLlamada.isAfter(inicio)) && (llamada.fechaLlamada.equals(fin) || llamada.fechaLlamada.isBefore(fin))) {
-                importe += cliente.getTarifa().getPrecio() * llamada.duracion;
+                importe += cliente.getTarifa().getPrecio(llamada.fechaLlamada) * llamada.duracion;
             }
         }
         return importe;
@@ -56,11 +56,11 @@ public class Factura implements Serializable, GetFecha {
     @Override
     public String toString() {
         return "Factura :" +
-                "tipoTarifa=" + this.tipoTarifa +
-                ", cod=" + this.cod +
-                ", inicio=" + this.inicio +
-                ", fin=" + this.fin +
-                ", importe=" + this.importe;
+                "Tarifa: " + this.tipoTarifa +
+                ", cod: " + this.cod +
+                ", inicio: " + this.inicio +
+                ", fin: " + this.fin +
+                ", importe: " + this.importe;
     }
 
 }

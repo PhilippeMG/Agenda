@@ -6,27 +6,27 @@ public class TarifaDomingosGratis extends Tarifa{
 
     private Tarifa tarifa;
 
-    public TarifaDomingosGratis(Tarifa tarifa, int tipo){
-        super(tipo);
+    public TarifaDomingosGratis(Tarifa tarifa){
+        super(0);
         this.tarifa=tarifa;
 
     }
     @Override
     public String descripcion(){
-        return tarifa.descripcion()+"con Tarifa Especial";
+        return tarifa.descripcion()+" con Tarifa Domingos Gratis";
     }
 
     public  int getPrecio(LocalDateTime fecha){
-        int money=tarifa.getPrecio();
+        int money=tarifa.getPrecio(fecha);
+        int precio=money;
 
         if (esDomingo(fecha)){
-            System.out.println("Es domingo");
-            money=super.getPrecio();
+            money=super.getPrecio(fecha);
         }
-        if (money<tarifa.getPrecio()){
+        if (money<precio){
             return money;
         }
-        return tarifa.getPrecio();
+        return precio;
     }
     public  boolean esDomingo(LocalDateTime fecha){
         if(fecha.getDayOfWeek().getValue()==7) return true;

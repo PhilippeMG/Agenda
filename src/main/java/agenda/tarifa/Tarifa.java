@@ -19,7 +19,7 @@ public abstract class Tarifa  implements Serializable{
 
     @Override
     public String toString() {
-        return "Tarifa= " + precio;
+        return  descripcion();
     }
     public abstract String descripcion();
 
