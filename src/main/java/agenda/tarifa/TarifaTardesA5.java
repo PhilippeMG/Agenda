@@ -1,5 +1,7 @@
 package agenda.tarifa;
 
+import agenda.Llamada;
+
 import java.time.LocalDateTime;
 
 public class TarifaTardesA5 extends Tarifa{
@@ -14,19 +16,21 @@ public class TarifaTardesA5 extends Tarifa{
         return tarifa.descripcion()+" con Tardes a 5 cent";
     }
 
-    public  int getPrecio(LocalDateTime fecha){
-        int money=tarifa.getPrecio();
-        int precio=money;
+    public  double calculaPrecio(Llamada llamada){
+        LocalDateTime fecha=llamada.getFecha();
+        double money=tarifa.calculaPrecio(llamada);
+        double precio=money;
 
         if (esTarde(fecha)){
 
-            money= super.getPrecio(fecha);
+            money=super.getPrecio()*llamada.getDuracion() ;
         }
         if (money<precio){
             return money;
         }
         return precio;
     }
+
     public  boolean esTarde(LocalDateTime fecha){
         if (fecha.getHour()>=17 && fecha.getHour()<=19){
             return true;

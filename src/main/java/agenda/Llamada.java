@@ -19,6 +19,10 @@ public class Llamada implements Serializable, GetFecha {
         this.fechaLlamada = fechaLlamada;
     }
 
+    public double getDuracion() {
+        return duracion;
+    }
+
     @Override
     public String toString() {
         return "Llamada{" +
