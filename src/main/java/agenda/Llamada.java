@@ -2,16 +2,15 @@ package agenda;
 
 import agenda.clientes.Cliente;
 import agenda.clientes.GetFecha;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 public class Llamada implements Serializable, GetFecha {
-    int numDestino;
-    double duracion;
-    LocalDateTime fechaLlamada;
+    private int numDestino;
+    private double duracion;
+    private LocalDateTime fechaLlamada;
 
     public Llamada(int numDestino, double duracion, LocalDateTime fechaLlamada) {
         this.numDestino = numDestino;
@@ -23,14 +22,17 @@ public class Llamada implements Serializable, GetFecha {
         return duracion;
     }
 
-    @Override
-    public String toString() {
-        return "Llamada{" +
-                "numDestino=" + numDestino +
-                ", duracion=" + duracion +
-                ", fechaLlamada=" + fechaLlamada +
+    public int getNumDestino() {
+        return numDestino;
+    }
 
-                '}';
+
+    public LocalDateTime getFecha() {
+        return fechaLlamada;
+    }
+
+    public void setFechaLlamada(LocalDateTime fechaLlamada) {
+        this.fechaLlamada = fechaLlamada;
     }
 
     public void listadoLlamadas(Cliente cliente) {
@@ -41,11 +43,12 @@ public class Llamada implements Serializable, GetFecha {
 
     }
 
-    public LocalDateTime getFecha() {
-        return fechaLlamada;
-    }
-
-    public void setFechaLlamada(LocalDateTime fechaLlamada) {
-        this.fechaLlamada = fechaLlamada;
+    @Override
+    public String toString() {
+        return "Llamada{" +
+                "numDestino=" + getNumDestino() +
+                ", duracion=" + getDuracion()+
+                ", fechaLlamada=" + getFecha() +
+                '}';
     }
 }
