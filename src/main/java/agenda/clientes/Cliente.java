@@ -103,13 +103,5 @@ public abstract class Cliente implements Serializable, GetFecha {
     }
 
     @Override
-    public String toString() {
-        return "Cliente: " +
-                "nombre= '" + nombre + '\'' +
-                ", nif= '" + nif + '\'' +
-                ", Direccion: " + direccion.toString() +
-                ", correo= '" + correo + '\'' +
-                ", fechaDeAlta= " + fechaDeAlta +
-                ", tipoTarifa= " + tarifa.getPrecio();
-    }
+    public abstract String toString() ;
 }

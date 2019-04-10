@@ -81,9 +81,14 @@ public class Gestor implements Serializable {
     }
 
     public void mostrarClientes(HashMap<String, Cliente> clientesMap) {
-        Iterator<Cliente> clientela = clientesMap.values().iterator();//.entrySet().iterator();
-        while (clientela.hasNext()) {
-            System.out.println(clientela.next().toString());
+        Collection<Cliente> clientela = clientesMap.values();
+        if (clientela.isEmpty()) {
+            System.out.println("No hay clientes");
+        }else {
+            Iterator<Cliente> iterClientela = clientela.iterator();//.entrySet().iterator();
+            while (iterClientela.hasNext()) {
+                System.out.println(iterClientela.next().toString());
+            }
         }
     }
 

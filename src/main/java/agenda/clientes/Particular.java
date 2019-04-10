@@ -20,9 +20,9 @@ public class Particular extends Cliente {
                 "nombre='" + super.getNombre() + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", nif='" + super.getNif() + '\'' +
-                ", Direccion: " + super.getDireccion() +
+                ", Direccion: [" + super.getDireccion() + ']' +
                 ", correo='" + super.getCorreo() + '\'' +
-                ", fechaDeAlta=" + getFechaDeAlta() +
-                ", tipoTarifa=" + super.getTarifa().getPrecio();
+                ", fechaDeAlta='" + getFechaDeAlta() + '\'' +
+                ", infoTarifa='" + super.getTarifa().descripcion() + '\'';
     }
 }

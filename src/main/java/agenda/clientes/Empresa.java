@@ -8,4 +8,15 @@ public class Empresa extends Cliente {
         super(nombre, nif, direccion, correo, tipoTarifa);
     }
 
+    @Override
+    public String toString() {
+        return "Particular: " +
+                "nombre='" + super.getNombre() + '\'' +
+                ", nif='" + super.getNif() + '\'' +
+                ", Direccion: [" + super.getDireccion() + ']' +
+                ", correo='" + super.getCorreo() + '\'' +
+                ", fechaDeAlta='" + getFechaDeAlta() + '\'' +
+                ", infoTarifa='" + super.getTarifa().descripcion() + '\'';
+    }
+
 }

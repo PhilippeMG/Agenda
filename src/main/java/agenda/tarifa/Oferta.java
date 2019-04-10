@@ -13,4 +13,5 @@ public abstract class Oferta extends Tarifa {
         super(i);
     }
 
+    public abstract String descripcion();
 }

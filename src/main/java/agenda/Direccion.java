@@ -15,7 +15,7 @@ public class Direccion implements Serializable {
 
     @Override
     public String toString() {
-        return "CP=" + CP +
+        return "CP='" + CP + '\'' +
                 ", provincia='" + provincia + '\'' +
                 ", poblacion='" + poblacion + "'";
     }
