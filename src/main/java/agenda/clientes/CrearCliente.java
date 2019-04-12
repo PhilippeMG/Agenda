@@ -3,9 +3,9 @@ package agenda.clientes;
 import agenda.Direccion;
 import agenda.tarifa.Tarifa;
 
-public class crearCliente implements crearUsuario{
+public class CrearCliente implements FabricarCliente {
 
-    public  crearCliente(){
+    public CrearCliente(){
         super();
     }
     @Override

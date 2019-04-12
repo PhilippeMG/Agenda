@@ -1,6 +1,8 @@
 import agenda.*;
 import agenda.clientes.Cliente;
+import agenda.clientes.CrearCliente;
 import agenda.clientes.Empresa;
+import agenda.clientes.FabricarCliente;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
 import agenda.excepciones.InvalidArguments;
@@ -20,12 +22,15 @@ public class GestorTest {
     private static Cliente cliente;
     // private static Factura factura;
     private static Gestor gestor = new Gestor();
+    private static  FabricarCliente creador;
 
 
     @BeforeClass
     public static void init() throws InvalidArguments {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
-        cliente = new Empresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaBasica(1));
+          creador=new CrearCliente();
+         cliente = creador.getCLienteEmpresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaBasica(1));
+
         LocalTime hora= LocalTime.now();
         LocalDate fecha = LocalDate.of(2017, 4, 1);
         LocalDateTime data= LocalDateTime.of(fecha,hora);

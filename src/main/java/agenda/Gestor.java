@@ -4,10 +4,7 @@ import agenda.clientes.*;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
 import agenda.excepciones.InvalidArguments;
-import agenda.tarifa.Tarifa;
-import agenda.tarifa.TarifaDomingosGratis;
-import agenda.tarifa.TarifaTardesA5;
-import agenda.tarifa.TarifaBasica;
+import agenda.tarifa.*;
 
 import java.io.*;
 import java.time.*;
@@ -122,26 +119,27 @@ public class Gestor implements Serializable {
         }
         System.out.print("Tarifa: ");
         int tipoTarifa = scannerEntero.nextInt();
-        Tarifa  tarifas = new TarifaBasica(tipoTarifa);
+        FabricarTarifa creadorTarifas=new CrearTarifa();
+        Tarifa  tarifas = creadorTarifas.getTarifaBasica(tipoTarifa);
 
         Tarifa tarifa;
 
         if (tipo==0){
-            tarifa = new TarifaTardesA5(tarifas);
+            tarifa = creadorTarifas.getTarifaTardes(tarifas);
 
 
         }else if(tipo==1){
-            tarifa = new TarifaDomingosGratis(tarifas);
+            tarifa = creadorTarifas.getTarifaDomingos(tarifas);
 
 
         }else{
-            Tarifa tarde = new TarifaTardesA5(tarifas);
-            tarifa = new TarifaDomingosGratis(tarde);
+            Tarifa tarde = creadorTarifas.getTarifaTardes(tarifas);
+            tarifa = creadorTarifas.getTarifaDomingos(tarde);
 
 
         }
         //TODO uso el patron de diseño FACTORIA
-        crearUsuario creador=new crearCliente();
+        FabricarCliente creador=new CrearCliente();
 
         if (opcion == 0) {
             Cliente nuevo = creador.getCLienteParticular(nombre, nif, direccion, correo, tarifa, apellidos);
