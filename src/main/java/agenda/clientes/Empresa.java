@@ -8,6 +8,9 @@ public class Empresa extends Cliente {
         super(nombre, nif, direccion, correo, tipoTarifa);
     }
 
+    public Empresa() {
+    }
+
     @Override
     public String toString() {
         return "Particular: " +

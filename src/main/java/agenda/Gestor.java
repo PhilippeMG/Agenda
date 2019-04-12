@@ -1,9 +1,6 @@
 package agenda;
 
-import agenda.clientes.Cliente;
-import agenda.clientes.Empresa;
-import agenda.clientes.GetFecha;
-import agenda.clientes.Particular;
+import agenda.clientes.*;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
 import agenda.excepciones.InvalidArguments;
@@ -143,13 +140,14 @@ public class Gestor implements Serializable {
 
 
         }
-
+        //TODO uso el patron de diseño FACTORIA
+        crearUsuario creador=new crearCliente();
 
         if (opcion == 0) {
-            Cliente nuevo = new Particular(nombre, nif, direccion, correo, tarifa, apellidos);
+            Cliente nuevo = creador.getCLienteParticular(nombre, nif, direccion, correo, tarifa, apellidos);
             insertarCliente(nuevo);
         } else {
-            Cliente nuevo = new Empresa(nombre, nif, direccion, correo, tarifa);
+            Cliente nuevo = creador.getCLienteEmpresa(nombre, nif, direccion, correo, tarifa);
             insertarCliente(nuevo);
         }
     }

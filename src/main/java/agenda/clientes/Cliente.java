@@ -30,6 +30,9 @@ public abstract class Cliente implements Serializable, GetFecha {
         this.tarifa = tarifa;
     }
 
+    public Cliente() {
+    }
+
     //>>>GETTERS<<<
     public HashMap<Integer, Factura> getFacturas() {
         return facturas;
