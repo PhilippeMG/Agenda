@@ -10,12 +10,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Factura implements Serializable, GetFecha {
-    Tarifa tipoTarifa;
-    static int cod = 0;
-    LocalDateTime inicio;
-    LocalDateTime fin;
-    LocalDateTime emision;
-    Double importe = 0.0;
+    private Tarifa tipoTarifa;
+    private static int cod = 0;
+    private LocalDateTime inicio;
+    private LocalDateTime fin;
+    private LocalDateTime emision;
+    private Double importe = 0.0;
 
 
     public Factura(Cliente cliente, LocalDateTime inico, LocalDateTime fin) {

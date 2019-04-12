@@ -3,7 +3,7 @@ package agenda.tarifa;
 import agenda.Llamada;
 
 public abstract class Oferta extends Tarifa {
-    Tarifa tarifa;
+    private Tarifa tarifa;
     public Oferta(Tarifa tarifa,int precio){
         super(precio);
         this.tarifa=tarifa;
