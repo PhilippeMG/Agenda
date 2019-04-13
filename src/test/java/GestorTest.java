@@ -1,12 +1,11 @@
 import agenda.*;
 import agenda.clientes.Cliente;
 import agenda.clientes.CrearCliente;
-import agenda.clientes.Empresa;
 import agenda.clientes.FabricarCliente;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
 import agenda.excepciones.InvalidArguments;
-import agenda.tarifa.TarifaBasica;
+import agenda.tarifa.OfertaBasica;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,7 +13,6 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Month;
 
 import static org.junit.Assert.*;
 
@@ -29,7 +27,7 @@ public class GestorTest {
     public static void init() throws InvalidArguments {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
           creador=new CrearCliente();
-         cliente = creador.getCLienteEmpresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaBasica(1));
+         cliente = creador.getCLienteEmpresa("Marcos", "0001", direccion1, "al375909@uji.es", new OfertaBasica(1));
 
         LocalTime hora= LocalTime.now();
         LocalDate fecha = LocalDate.of(2017, 4, 1);

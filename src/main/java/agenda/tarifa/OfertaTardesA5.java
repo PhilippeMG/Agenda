@@ -4,10 +4,10 @@ import agenda.Llamada;
 
 import java.time.LocalDateTime;
 
-public class TarifaTardesA5 extends Tarifa{
+public class OfertaTardesA5 extends Oferta{
     private Tarifa tarifa;
 
-    public TarifaTardesA5(Tarifa tarifa){
+    public OfertaTardesA5(Tarifa tarifa){
         super(5);
         this.tarifa=tarifa;
     }

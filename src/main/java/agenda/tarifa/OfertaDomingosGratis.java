@@ -4,10 +4,10 @@ import agenda.Llamada;
 
 import java.time.LocalDateTime;
 
-public class TarifaDomingosGratis extends Oferta {
+public class OfertaDomingosGratis extends Oferta {
     private Tarifa tarifa;
 
-    public TarifaDomingosGratis(Tarifa tarifa) {
+    public OfertaDomingosGratis(Tarifa tarifa) {
         super(0);
         this.tarifa = tarifa;
     }

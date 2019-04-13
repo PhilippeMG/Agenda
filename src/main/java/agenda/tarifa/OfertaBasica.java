@@ -4,8 +4,8 @@ import agenda.Llamada;
 
 import java.time.LocalDateTime;
 
-public class TarifaBasica extends Tarifa{
-    public TarifaBasica(int tipo){
+public class OfertaBasica extends Oferta{
+    public OfertaBasica(int tipo){
         super(tipo);
 
     }
