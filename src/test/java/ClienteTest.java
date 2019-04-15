@@ -3,7 +3,7 @@ import agenda.*;
 import agenda.clientes.Cliente;
 import agenda.clientes.CrearCliente;
 import agenda.clientes.FabricarCliente;
-import agenda.tarifa.OfertaBasica;
+import agenda.tarifa.TarifaBasica;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,7 +23,7 @@ public class ClienteTest {
     public static void init() {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
         FabricarCliente creador=new CrearCliente();
-        cliente = creador.getCLienteEmpresa("Marcos", "0001", direccion1, "al375909@uji.es", new OfertaBasica(1));
+        cliente = creador.getCLienteEmpresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaBasica(1));
     }
 
     @AfterClass

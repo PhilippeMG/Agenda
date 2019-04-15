@@ -3,7 +3,7 @@ package agenda.tarifa;
 public class CrearTarifa implements FabricarTarifa {
     @Override
     public Tarifa getTarifaBasica(int precio) {
-        return new OfertaBasica(precio);
+        return new TarifaBasica(precio);
     }
 
     @Override
