@@ -125,16 +125,16 @@ public class Gestor implements Serializable {
         Tarifa tarifa;
 
         if (tipo==0){
-            tarifa = creadorTarifas.getTarifaTardes(tarifas);
+            tarifa = creadorTarifas.getOfertaTardes(tarifas);
 
 
         }else if(tipo==1){
-            tarifa = creadorTarifas.getTarifaDomingos(tarifas);
+            tarifa = creadorTarifas.getOfertaDomingos(tarifas);
 
 
         }else{
-            Tarifa tarde = creadorTarifas.getTarifaTardes(tarifas);
-            tarifa = creadorTarifas.getTarifaDomingos(tarde);
+            Tarifa tarde = creadorTarifas.getOfertaTardes(tarifas);
+            tarifa = creadorTarifas.getOfertaDomingos(tarde);
 
 
         }

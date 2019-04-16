@@ -7,12 +7,12 @@ public class CrearTarifa implements FabricarTarifa {
     }
 
     @Override
-    public Tarifa getTarifaDomingos(Tarifa tarifa) {
+    public Tarifa getOfertaDomingos(Tarifa tarifa) {
         return new OfertaDomingosGratis(tarifa);
     }
 
     @Override
-    public Tarifa getTarifaTardes(Tarifa tarifa) {
+    public Tarifa getOfertaTardes(Tarifa tarifa) {
         return new OfertaTardesA5(tarifa);
     }
 }

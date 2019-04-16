@@ -1,6 +1,4 @@
-import agenda.Direccion;
 import agenda.Llamada;
-import agenda.clientes.Empresa;
 import agenda.tarifa.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -19,7 +17,6 @@ public class TarifaTest {
     private static FabricarTarifa creador=new CrearTarifa();
 
     @BeforeClass
-
     public static void init() {
         LocalTime hora = LocalTime.of(19, 56, 23);
 
@@ -42,7 +39,6 @@ public class TarifaTest {
 
     }
 
-
     @AfterClass
     public static void finish() {
         data = data2=data3=null;
@@ -53,45 +49,45 @@ public class TarifaTest {
     @Test
     public void tarifaDomingos() {
 
-        Tarifa domingo = creador.getTarifaDomingos(tarifa);
+        Tarifa domingo = creador.getOfertaDomingos(tarifa);
         assertEquals(domingo.calculaPrecio(llamada1),0,0);
     }
    @Test
     public void tarifaTardes() {
 
-        Tarifa tardes = creador.getTarifaTardes(tarifa);
+        Tarifa tardes = creador.getOfertaTardes(tarifa);
         assertEquals(tardes.calculaPrecio(llamada4),90,0);
 
     }
     @Test
     public void tarifaNoTardes() {
 
-        Tarifa noTardes = creador.getTarifaTardes(tarifa);
+        Tarifa noTardes = creador.getOfertaTardes(tarifa);
         assertEquals(noTardes.calculaPrecio(llamada2),90,0);
 
     }
     @Test
     public void tarifaTardesNoDomingoSi(){
-        Tarifa domingo = creador.getTarifaDomingos(tarifa);
-        Tarifa todo = creador.getTarifaTardes(domingo);
+        Tarifa domingo = creador.getOfertaDomingos(tarifa);
+        Tarifa todo = creador.getOfertaTardes(domingo);
         assertEquals(todo.calculaPrecio(llamada1),0,0);
     }
     @Test
     public void tarifaDomingoNoTardesSi(){
-        Tarifa tardes = creador.getTarifaTardes(tarifa);
-        Tarifa todo = creador.getTarifaDomingos(tardes);
+        Tarifa tardes = creador.getOfertaTardes(tarifa);
+        Tarifa todo = creador.getOfertaDomingos(tardes);
         assertEquals(todo.calculaPrecio(llamada3),50,0);
     }
     @Test
     public void tarifaDomingoSiTardesSi(){
-        Tarifa tardes = creador.getTarifaTardes(tarifa);
-        Tarifa todo = creador.getTarifaDomingos(tardes);
+        Tarifa tardes = creador.getOfertaTardes(tarifa);
+        Tarifa todo = creador.getOfertaDomingos(tardes);
         assertEquals(todo.calculaPrecio(llamada1),0,0);
     }
     @Test
     public void tarifaDomingoNoTardesNo(){
-        Tarifa tardes = creador.getTarifaTardes(tarifa);
-        Tarifa todo = creador.getTarifaDomingos(tardes);
+        Tarifa tardes = creador.getOfertaTardes(tarifa);
+        Tarifa todo = creador.getOfertaDomingos(tardes);
         assertEquals(todo.calculaPrecio(llamada2),90,0);
     }
 }
