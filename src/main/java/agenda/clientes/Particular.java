@@ -13,7 +13,7 @@ public class Particular extends Cliente {
     public Particular() {
         super();
     }
-    @Override
+
     public String getApellidos() {
         return this.apellidos;
     }

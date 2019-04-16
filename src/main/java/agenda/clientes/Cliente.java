@@ -72,9 +72,7 @@ public abstract class Cliente implements Serializable, GetFecha {
     public String getCorreo() {
         return correo;
     }
-
-    public abstract String getApellidos();
-
+    
     //>>>METODOS<<
     public void cambiarTarifa(int nuevaTarifa) {
         tarifa.setPrecio(nuevaTarifa);
