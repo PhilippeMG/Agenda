@@ -9,12 +9,12 @@ public class CrearCliente implements FabricarCliente {
         super();
     }
     @Override
-    public Cliente getCLienteParticular(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa, String apellidos) {
+    public Cliente getClienteParticular(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa, String apellidos) {
         return new Particular(nombre, nif, direccion, correo, tipoTarifa,apellidos);
     }
 
     @Override
-    public Cliente getCLienteEmpresa(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa) {
+    public Cliente getClienteEmpresa(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa) {
         return new Empresa(nombre, nif, direccion, correo, tipoTarifa);
     }
 }

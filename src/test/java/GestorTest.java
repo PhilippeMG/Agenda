@@ -27,7 +27,7 @@ public class GestorTest {
     public static void init() throws InvalidArguments {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
           creador=new CrearCliente();
-         cliente = creador.getCLienteEmpresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaBasica(1));
+         cliente = creador.getClienteEmpresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaBasica(1));
 
         LocalTime hora= LocalTime.now();
         LocalDate fecha = LocalDate.of(2017, 4, 1);

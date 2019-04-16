@@ -23,7 +23,7 @@ public class ClienteTest {
     public static void init() {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
         FabricarCliente creador=new CrearCliente();
-        cliente = creador.getCLienteEmpresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaBasica(1));
+        cliente = creador.getClienteEmpresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaBasica(1));
     }
 
     @AfterClass

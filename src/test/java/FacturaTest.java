@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class FacturaTest {
     private static Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
     private static FabricarCliente creador=new CrearCliente();
-    private static Cliente cliente = creador.getCLienteEmpresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaBasica(1));
+    private static Cliente cliente = creador.getClienteEmpresa("Marcos", "0001", direccion1, "al375909@uji.es", new TarifaBasica(1));
     static LocalTime hora= LocalTime.now();
     static LocalDate fecha = LocalDate.of(2014, 3, 2);
    static LocalDateTime data= LocalDateTime.of(fecha,hora);

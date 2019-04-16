@@ -4,6 +4,6 @@ import agenda.Direccion;
 import agenda.tarifa.Tarifa;
 
 public interface FabricarCliente {
-    Cliente getCLienteParticular(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa, String apellidos);
-    Cliente getCLienteEmpresa(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa);
+    Cliente getClienteParticular(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa, String apellidos);
+    Cliente getClienteEmpresa(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa);
 }

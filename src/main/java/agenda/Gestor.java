@@ -142,10 +142,10 @@ public class Gestor implements Serializable {
         FabricarCliente creador=new CrearCliente();
 
         if (opcion == 0) {
-            Cliente nuevo = creador.getCLienteParticular(nombre, nif, direccion, correo, tarifa, apellidos);
+            Cliente nuevo = creador.getClienteParticular(nombre, nif, direccion, correo, tarifa, apellidos);
             insertarCliente(nuevo);
         } else {
-            Cliente nuevo = creador.getCLienteEmpresa(nombre, nif, direccion, correo, tarifa);
+            Cliente nuevo = creador.getClienteEmpresa(nombre, nif, direccion, correo, tarifa);
             insertarCliente(nuevo);
         }
     }
