@@ -34,6 +34,8 @@ public abstract class Cliente implements Serializable, GetFecha {
     }
 
     //>>>GETTERS<<<
+
+
     public HashMap<Integer, Factura> getFacturas() {
         return facturas;
     }
@@ -62,12 +64,7 @@ public abstract class Cliente implements Serializable, GetFecha {
     public Tarifa getTarifa() {
         return tarifa;
     }
-    public int getPrecioLlamada(){
-        int precio=0;
 
-        return precio;
-
-    }
     public Direccion getDireccion() {
         return direccion;
     }
@@ -75,6 +72,8 @@ public abstract class Cliente implements Serializable, GetFecha {
     public String getCorreo() {
         return correo;
     }
+
+    public abstract String getApellidos();
 
     //>>>METODOS<<
     public void cambiarTarifa(int nuevaTarifa) {
