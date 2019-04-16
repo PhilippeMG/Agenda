@@ -43,7 +43,7 @@ public abstract class Cliente implements Serializable, GetFecha {
     public LinkedList<Llamada> getLlamadas() {
         return llamadas;
     }
-
+    public abstract String getNombreCompleto();
     @Override
     public LocalDateTime getFecha() {
         return LocalDateTime.from(this.fechaDeAlta);

@@ -14,6 +14,11 @@ public class Particular extends Cliente {
         super();
     }
 
+    @Override
+    public String getNombreCompleto() {
+        return getNombre()+" "+getApellidos();
+    }
+
     public String getApellidos() {
         return this.apellidos;
     }

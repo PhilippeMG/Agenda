@@ -12,6 +12,10 @@ public class Empresa extends Cliente {
     }
 
     @Override
+    public String getNombreCompleto() {
+        return getNombre();    }
+
+    @Override
     public String toString() {
         return "Particular: " +
                 "nombre='" + super.getNombre() + '\'' +
