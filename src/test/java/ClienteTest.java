@@ -1,11 +1,10 @@
 
-import agenda.*;
-import agenda.clientes.Cliente;
-import agenda.clientes.CrearCliente;
-import agenda.clientes.FabricarCliente;
-import agenda.tarifa.CrearTarifa;
-import agenda.tarifa.FabricarTarifa;
-import agenda.tarifa.TarifaBasica;
+import agenda.modelo.clientes.Cliente;
+import agenda.modelo.clientes.CrearCliente;
+import agenda.modelo.clientes.FabricarCliente;
+import agenda.modelo.Direccion;
+import agenda.modelo.tarifa.CrearTarifa;
+import agenda.modelo.tarifa.FabricarTarifa;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

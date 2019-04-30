@@ -1,4 +1,4 @@
-package agenda.menu;
+package agenda.modelo.menu;
 
 import agenda.excepciones.OptionNotFound;
 

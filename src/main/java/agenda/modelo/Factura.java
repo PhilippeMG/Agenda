@@ -1,12 +1,11 @@
-package agenda;
+package agenda.modelo;
 
 
-import agenda.clientes.Cliente;
-import agenda.clientes.GetFecha;
-import agenda.tarifa.Tarifa;
+import agenda.modelo.clientes.Cliente;
+import agenda.modelo.clientes.GetFecha;
+import agenda.modelo.tarifa.Tarifa;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Factura implements Serializable, GetFecha {

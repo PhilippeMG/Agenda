@@ -1,7 +1,7 @@
-package agenda.clientes;
+package agenda.modelo.clientes;
 
-import agenda.Direccion;
-import agenda.tarifa.Tarifa;
+import agenda.modelo.Direccion;
+import agenda.modelo.tarifa.Tarifa;
 
 public interface FabricarCliente {
     Cliente getClienteParticular(String nombre, String nif, Direccion direccion, String correo, Tarifa tipoTarifa, String apellidos);

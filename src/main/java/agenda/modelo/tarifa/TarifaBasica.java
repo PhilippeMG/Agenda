@@ -1,8 +1,6 @@
-package agenda.tarifa;
+package agenda.modelo.tarifa;
 
-import agenda.Llamada;
-
-import java.time.LocalDateTime;
+import agenda.modelo.Llamada;
 
 public class TarifaBasica extends Tarifa{
     public TarifaBasica(int tipo){

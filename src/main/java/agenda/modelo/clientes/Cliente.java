@@ -1,9 +1,9 @@
-package agenda.clientes;
+package agenda.modelo.clientes;
 
-import agenda.Direccion;
-import agenda.Factura;
-import agenda.Llamada;
-import agenda.tarifa.Tarifa;
+import agenda.modelo.Direccion;
+import agenda.modelo.Factura;
+import agenda.modelo.Llamada;
+import agenda.modelo.tarifa.Tarifa;
 
 import java.io.Serializable;
 import java.time.LocalDate;

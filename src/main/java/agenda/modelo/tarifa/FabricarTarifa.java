@@ -1,4 +1,4 @@
-package agenda.tarifa;
+package agenda.modelo.tarifa;
 
 public interface FabricarTarifa {
     Tarifa getTarifaBasica(int precio);

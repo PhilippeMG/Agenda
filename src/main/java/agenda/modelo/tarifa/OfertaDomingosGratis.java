@@ -1,6 +1,6 @@
-package agenda.tarifa;
+package agenda.modelo.tarifa;
 
-import agenda.Llamada;
+import agenda.modelo.Llamada;
 
 import java.time.LocalDateTime;
 

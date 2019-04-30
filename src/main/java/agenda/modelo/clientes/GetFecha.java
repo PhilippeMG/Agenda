@@ -1,4 +1,4 @@
-package agenda.clientes;
+package agenda.modelo.clientes;
 
 import java.time.LocalDateTime;
 

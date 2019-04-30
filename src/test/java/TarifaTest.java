@@ -1,5 +1,5 @@
-import agenda.Llamada;
-import agenda.tarifa.*;
+import agenda.modelo.Llamada;
+import agenda.modelo.tarifa.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

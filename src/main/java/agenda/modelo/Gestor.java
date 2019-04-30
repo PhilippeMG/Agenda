@@ -1,10 +1,10 @@
-package agenda;
+package agenda.modelo;
 
-import agenda.clientes.*;
+import agenda.modelo.clientes.*;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
 import agenda.excepciones.InvalidArguments;
-import agenda.tarifa.*;
+import agenda.modelo.tarifa.*;
 
 import java.io.*;
 import java.time.*;

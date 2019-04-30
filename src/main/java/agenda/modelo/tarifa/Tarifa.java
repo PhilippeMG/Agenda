@@ -1,9 +1,8 @@
-package agenda.tarifa;
+package agenda.modelo.tarifa;
 
-import agenda.Llamada;
+import agenda.modelo.Llamada;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 public abstract class Tarifa  implements Serializable{
     private int precio;

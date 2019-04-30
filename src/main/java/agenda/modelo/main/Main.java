@@ -1,6 +1,6 @@
-package agenda.main;
+package agenda.modelo.main;
 
-import agenda.menu.OpcionesMenu;
+import agenda.modelo.menu.OpcionesMenu;
 
 
 public class Main {

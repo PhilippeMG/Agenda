@@ -1,4 +1,4 @@
-package agenda;
+package agenda.modelo;
 
 import java.io.Serializable;
 

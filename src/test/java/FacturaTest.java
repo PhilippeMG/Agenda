@@ -1,11 +1,13 @@
 
-import agenda.*;
-import agenda.clientes.Cliente;
-import agenda.clientes.CrearCliente;
+import agenda.modelo.clientes.Cliente;
+import agenda.modelo.clientes.CrearCliente;
 //import agenda.excepciones.ClientNotFound;
 //import com.sun.security.ntlm.Client;
-import agenda.clientes.FabricarCliente;
-import agenda.tarifa.TarifaBasica;
+import agenda.modelo.clientes.FabricarCliente;
+import agenda.modelo.Direccion;
+import agenda.modelo.Factura;
+import agenda.modelo.Llamada;
+import agenda.modelo.tarifa.TarifaBasica;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

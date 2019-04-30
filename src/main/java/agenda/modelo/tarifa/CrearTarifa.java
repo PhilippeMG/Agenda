@@ -1,4 +1,4 @@
-package agenda.tarifa;
+package agenda.modelo.tarifa;
 
 public class CrearTarifa implements FabricarTarifa {
     @Override

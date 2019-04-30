@@ -1,15 +1,14 @@
-package agenda.menu;
+package agenda.modelo.menu;
 
-import agenda.Factura;
-import agenda.Gestor;
-import agenda.Llamada;
-import agenda.clientes.Cliente;
+import agenda.modelo.Factura;
+import agenda.modelo.Gestor;
+import agenda.modelo.Llamada;
+import agenda.modelo.clientes.Cliente;
 import agenda.excepciones.ClientNotFound;
 import agenda.excepciones.FacturaNotFound;
 import agenda.excepciones.InvalidArguments;
 import agenda.excepciones.OptionNotFound;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.LinkedList;

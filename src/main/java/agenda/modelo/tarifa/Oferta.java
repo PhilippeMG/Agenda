@@ -1,6 +1,4 @@
-package agenda.tarifa;
-
-import agenda.Llamada;
+package agenda.modelo.tarifa;
 
 public abstract class Oferta extends Tarifa {
     private Tarifa tarifa;

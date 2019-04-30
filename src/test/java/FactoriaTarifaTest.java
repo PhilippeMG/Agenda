@@ -1,6 +1,6 @@
-import agenda.tarifa.CrearTarifa;
-import agenda.tarifa.FabricarTarifa;
-import agenda.tarifa.Tarifa;
+import agenda.modelo.tarifa.CrearTarifa;
+import agenda.modelo.tarifa.FabricarTarifa;
+import agenda.modelo.tarifa.Tarifa;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

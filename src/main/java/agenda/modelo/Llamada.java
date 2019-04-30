@@ -1,9 +1,8 @@
-package agenda;
+package agenda.modelo;
 
-import agenda.clientes.Cliente;
-import agenda.clientes.GetFecha;
+import agenda.modelo.clientes.Cliente;
+import agenda.modelo.clientes.GetFecha;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
