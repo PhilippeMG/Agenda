@@ -1,4 +1,4 @@
-package agenda.excepciones;
+package agenda.modelo.excepciones;
 
 public class FacturaNotFound extends Exception {
     public FacturaNotFound() {

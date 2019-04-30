@@ -1,9 +1,9 @@
 import agenda.modelo.clientes.Cliente;
 import agenda.modelo.clientes.CrearCliente;
 import agenda.modelo.clientes.FabricarCliente;
-import agenda.excepciones.ClientNotFound;
-import agenda.excepciones.FacturaNotFound;
-import agenda.excepciones.InvalidArguments;
+import agenda.modelo.excepciones.ClientNotFound;
+import agenda.modelo.excepciones.FacturaNotFound;
+import agenda.modelo.excepciones.InvalidArguments;
 import agenda.modelo.Direccion;
 import agenda.modelo.Gestor;
 import agenda.modelo.Llamada;

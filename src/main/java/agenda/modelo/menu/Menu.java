@@ -1,6 +1,6 @@
 package agenda.modelo.menu;
 
-import agenda.excepciones.OptionNotFound;
+import agenda.modelo.excepciones.OptionNotFound;
 
 public class Menu {
     //>>>MENU<<<<

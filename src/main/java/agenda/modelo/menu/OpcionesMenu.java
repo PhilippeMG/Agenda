@@ -4,10 +4,10 @@ import agenda.modelo.Factura;
 import agenda.modelo.Gestor;
 import agenda.modelo.Llamada;
 import agenda.modelo.clientes.Cliente;
-import agenda.excepciones.ClientNotFound;
-import agenda.excepciones.FacturaNotFound;
-import agenda.excepciones.InvalidArguments;
-import agenda.excepciones.OptionNotFound;
+import agenda.modelo.excepciones.ClientNotFound;
+import agenda.modelo.excepciones.FacturaNotFound;
+import agenda.modelo.excepciones.InvalidArguments;
+import agenda.modelo.excepciones.OptionNotFound;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
