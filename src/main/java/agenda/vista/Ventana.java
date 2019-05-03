@@ -5,13 +5,13 @@ import java.awt.*;
 
 class Ventana {
     public static void main(String[] args) {
-        JFrame ventana=new JFrame("Agenda");//cCreamos el JFrame
+        JFrame ventana=new JFrame("Agenda");//Creamos el JFrame
 
+        //Modificamos el icono de la ventana
+        Image icono = Toolkit.getDefaultToolkit().getImage("src/media/icono.png"); //Creamos una IMAGE
+        ventana.setIconImage(icono); //Añadimos la IMAGE creada
 
-        Image icono = Toolkit.getDefaultToolkit().getImage("src/media/icono.png");
-        ventana.setIconImage(icono);
-
-        ventana.setSize(400,500);//Definimos el tamaño
+        ventana.setSize(800,500);//Definimos el tamaño
         ventana.setVisible(true);// hacemos la ventsana visibel
         JTabbedPane pestanyas = new JTabbedPane();
         pestanyas.add("Clentes", new PanelClientes());
