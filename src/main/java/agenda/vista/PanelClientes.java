@@ -7,13 +7,13 @@ import java.awt.event.ActionListener;
 import java.sql.SQLOutput;
 
 public class PanelClientes  extends JPanel{
-    JButton button = new JButton("Click me!, Clientes");
+    JButton button = new JButton("Añadir Cliente");
 
     public PanelClientes() {
         button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                System.out.println("Boton Clientes pulsado ");
-               // JOptionPane.showMessageDialog(null, "You just clicked button");
+                System.out.println("Creamdo cliente...");
+                new FormuarioCliente();
             }
         });
         add(button);
