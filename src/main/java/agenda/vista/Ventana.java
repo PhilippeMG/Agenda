@@ -12,6 +12,7 @@ class Ventana {
         ventana.setIconImage(icono); //Añadimos la IMAGE creada
         JTabbedPane pestanyas = new JTabbedPane();
         pestanyas.add("Clentes", new PanelClientes());
+
         pestanyas.add("Facturas", new PanelFacturas());
         pestanyas.add("Llamadas", new PanelLlamadas());
 
