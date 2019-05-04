@@ -1,6 +1,6 @@
 package agenda.vista;
 
-import agenda.controlador.GestionarCliente;
+import agenda.controlador.GestionarAgenda;
 import agenda.modelo.excepciones.InvalidArguments;
 
 import javax.swing.*;
@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 
 public class FormuarioCliente {
@@ -27,6 +25,8 @@ public class FormuarioCliente {
     String ofertaTardes=null;
     LinkedList <String> ofertas= new LinkedList<String>();
     JButton bAñadir = new JButton("Añadir");
+    JCheckBox tardes=new JCheckBox("Tardes a 5");
+    JCheckBox domingos=new JCheckBox("Domingos gratis");
 
     public FormuarioCliente() {
         JFrame formulario = new JFrame("Añadir Cliente");//Creamos el JFrame
@@ -41,9 +41,7 @@ public class FormuarioCliente {
 
         JPanel panel = new JPanel();//Este panel contiene las ofertas de Tarifa ChexBox.
         // Añadimos los elementos de rellenan por filas de izq a derecha
-        JCheckBox tardes=new JCheckBox("Tardes a 5");
         panel.add(tardes);
-        JCheckBox domingos=new JCheckBox("Domingos gratis");
         panel.add(domingos);
 
         contenedor.add(new JLabel("Nombre:"));
@@ -80,7 +78,7 @@ public class FormuarioCliente {
 
                     System.out.println("Añadiendo...");
 
-                    new GestionarCliente().añadirCliente(nombre.getText(), dni.getText(), CP, provincia.getText(), poblacion.getText(), correo.getText(), apellido.getText(), preu,ofertas);
+                    new GestionarAgenda().añadirCliente(nombre.getText(), dni.getText(), CP, provincia.getText(), poblacion.getText(), correo.getText(), apellido.getText(), preu,ofertas);
 
                 } catch (InvalidArguments invalidArguments) {
                     System.out.println("Error...");
@@ -137,7 +135,7 @@ public class FormuarioCliente {
         ofertaDomingos=null;
         ofertaTardes=null;
         ofertas.clear();
-
+        domingos.setActionCommand("DESELECTED");
 
     }
 

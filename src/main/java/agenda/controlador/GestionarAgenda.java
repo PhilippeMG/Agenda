@@ -4,15 +4,18 @@ import agenda.modelo.Direccion;
 import agenda.modelo.Gestor;
 import agenda.modelo.clientes.Cliente;
 import agenda.modelo.clientes.CrearCliente;
+import agenda.modelo.excepciones.ClientNotFound;
 import agenda.modelo.excepciones.InvalidArguments;
 import agenda.modelo.tarifa.CrearTarifa;
 import agenda.modelo.tarifa.Tarifa;
 import agenda.modelo.tarifa.TarifaBasica;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
-public class GestionarCliente {
-    public GestionarCliente(){
+public class GestionarAgenda {
+    Gestor gestor=new Gestor();
+    public GestionarAgenda(){
 
     }
 
@@ -26,7 +29,7 @@ public class GestionarCliente {
      }else{
          cliente = creadorCliente.getClienteParticular(nombre,nif,direccion,correo,tarifa,apellidos);
      }
-      Gestor gestor=new Gestor();
+
      gestor.insertarCliente(cliente);
      gestor.mostrarClientes(gestor.getClientes());
  }
@@ -41,8 +44,22 @@ public class GestionarCliente {
 
      }
      return tarifa;
+ }
+ public void eliminarCliente(String DNI) throws ClientNotFound {
+        gestor.borrarCliente(DNI);
+        gestor.mostrarClientes(gestor.getClientes());
+ }
+ public void guardarDatos() throws IOException {
+     gestor.guardarDatos();
 
+     System.out.println("Datos guardados: ");
+     gestor.mostrarClientes(gestor.getClientes());
 
+ }
+ public void cargarDatos() throws ClassNotFoundException {
+        gestor.cargarDatos();
+     System.out.println("Datos cargados: ");
+     gestor.mostrarClientes(gestor.getClientes());
 
  }
 }
