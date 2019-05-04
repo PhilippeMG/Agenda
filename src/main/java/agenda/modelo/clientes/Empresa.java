@@ -17,7 +17,7 @@ public class Empresa extends Cliente {
 
     @Override
     public String toString() {
-        return "Particular: " +
+        return "Empresa: " +
                 "nombre='" + super.getNombre() + '\'' +
                 ", nif='" + super.getNif() + '\'' +
                 ", Direccion: [" + super.getDireccion() + ']' +

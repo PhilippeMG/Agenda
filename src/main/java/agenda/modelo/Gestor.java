@@ -12,8 +12,8 @@ import java.util.*;
 
 
 public class Gestor implements Serializable {
-    private  HashMap<String, Cliente> clientes = new HashMap<>();
-    private  HashMap<Integer, Factura> facturas = new HashMap<>();
+    private static HashMap<String, Cliente> clientes = new HashMap<>();
+    private static HashMap<Integer, Factura> facturas = new HashMap<>();
 
     public Gestor() {
         super();
