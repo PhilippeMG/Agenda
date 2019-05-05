@@ -4,11 +4,9 @@ import agenda.controlador.GestionarAgenda;
 import agenda.modelo.excepciones.ClientNotFound;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.SQLOutput;
 
 public class PanelClientes  extends JPanel{
     //JButton button = new JButton("Añadir Cliente");
@@ -19,8 +17,9 @@ public class PanelClientes  extends JPanel{
         JButton bSave = new JButton("Guardar");
 
         JButton bBorrarCliente = new JButton("Borrar Cliente ");
-        JLabel borrar=new JLabel("DNI del cliente para borrar");
-        JTextField dniCliente = new JTextField(20);
+        JLabel borrar=new JLabel("DNI del cliente: ");
+        JTextField dniCliente = new JTextField(10);
+        JButton bEditarCliente = new JButton("Editar Tarifa ");
 
         JPanel panelBorrar= new JPanel();
         panelBorrar.add(borrar);
@@ -32,7 +31,13 @@ public class PanelClientes  extends JPanel{
         bAñadirCliente.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 System.out.println("Creamdo cliente...");
-                new FormuarioCliente();
+                new FormularioCliente();
+            }
+        });
+        bEditarCliente.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                System.out.println("Creando cliente...");
+                new FormularioEditarTarifa();
             }
         });
         bBorrarCliente.addActionListener(new ActionListener(){
@@ -60,6 +65,7 @@ public class PanelClientes  extends JPanel{
         //Añadimos los elementos
         add(bAñadirCliente);
         add(panelBorrar);
+        add(bEditarCliente);
         add(bSave);
     }
 }

@@ -62,4 +62,7 @@ public class GestionarAgenda {
      gestor.mostrarClientes(gestor.getClientes());
 
  }
+ public void modificarTarifa(String dni,int precio) throws ClientNotFound {
+        gestor.cambiarTarifa(dni,precio);
+ }
 }

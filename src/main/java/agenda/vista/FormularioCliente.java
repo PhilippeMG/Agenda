@@ -11,7 +11,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.LinkedList;
 
-public class FormuarioCliente {
+public class FormularioCliente {
     JTextField nombre = new JTextField(20);
     JTextField dni = new JTextField(20);
     JTextField cp = new JTextField(20);
@@ -28,7 +28,7 @@ public class FormuarioCliente {
     JCheckBox tardes=new JCheckBox("Tardes a 5");
     JCheckBox domingos=new JCheckBox("Domingos gratis");
 
-    public FormuarioCliente() {
+    public FormularioCliente() {
         JFrame formulario = new JFrame("Añadir Cliente");//Creamos el JFrame
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/add-user.png"); //Creamos una IMAGE
         formulario.setIconImage(icono); //Añadimos la IMAGE creada
@@ -135,7 +135,6 @@ public class FormuarioCliente {
         ofertaDomingos=null;
         ofertaTardes=null;
         ofertas.clear();
-        domingos.setActionCommand("DESELECTED");
 
     }
 
