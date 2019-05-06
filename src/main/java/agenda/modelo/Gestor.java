@@ -85,7 +85,20 @@ public class Gestor implements Serializable {
             }
         }
     }
-
+    public Vector informacionClientes(HashMap<String, Cliente> clientesMap) {
+        Vector vector = new Vector();
+        Collection<Cliente> clientela = clientesMap.values();
+        if (clientela.isEmpty()) {
+            System.out.println("No hay clientes");
+        }else {
+            Iterator<Cliente> iterClientela = clientela.iterator();//.entrySet().iterator();
+            while (iterClientela.hasNext()) {
+                vector.add(iterClientela.next().información());
+               // System.out.println(iterClientela.next().toString());
+            }
+        }
+        return vector;
+    }
 
     public void nuevoCliente(int opcion) throws InvalidArguments {
         Scanner scanner = new Scanner(System.in);

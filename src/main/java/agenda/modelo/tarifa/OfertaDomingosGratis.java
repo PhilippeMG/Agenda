@@ -17,7 +17,9 @@ public class OfertaDomingosGratis extends Oferta {
     public String descripcion() {
         return tarifa.descripcion() + " con Tarifa Domingos Gratis";
     }
-
+    public int getPrecio(){
+        return tarifa.getPrecio();
+    }
     public double calculaPrecio(Llamada llamada) {
         LocalDateTime fecha = llamada.getFecha();
         double money = tarifa.calculaPrecio(llamada);

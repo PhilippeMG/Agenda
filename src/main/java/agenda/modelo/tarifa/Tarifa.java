@@ -24,5 +24,4 @@ public abstract class Tarifa  implements Serializable{
         return  descripcion();
     }
     public abstract String descripcion();
-
 }

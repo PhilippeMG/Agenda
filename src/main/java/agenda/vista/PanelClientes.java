@@ -1,12 +1,14 @@
 package agenda.vista;
 
 import agenda.controlador.GestionarAgenda;
+import agenda.modelo.Gestor;
 import agenda.modelo.excepciones.ClientNotFound;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Vector;
 
 public class PanelClientes  extends JPanel{
     //JButton button = new JButton("Añadir Cliente");
@@ -26,7 +28,25 @@ public class PanelClientes  extends JPanel{
         panelBorrar.add(dniCliente);
         panelBorrar.add(bBorrarCliente);
 
+        Vector columnas = new Vector();
+        columnas.add("NIF");
+        columnas.add("Nombre");
+        columnas.add("Dirección");
+        columnas.add("Correo");
+        columnas.add("Tarifa");
+        columnas.add("Fecha");
 
+        Vector filas = new Gestor().informacionClientes(new Gestor().getClientes());
+//        Vector fila = new Vector();
+//
+//        fila.add("X");
+//        fila.add("Y");
+//        fila.add("Z");
+//
+//        filas.add(fila);
+
+        JTable tbl = new JTable(filas,columnas);
+        JScrollPane panel =new JScrollPane(tbl);
 
         bAñadirCliente.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -67,5 +87,7 @@ public class PanelClientes  extends JPanel{
         add(panelBorrar);
         add(bEditarCliente);
         add(bSave);
+        add(panel);
+
     }
 }

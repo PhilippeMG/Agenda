@@ -3,8 +3,10 @@ package agenda.modelo.tarifa;
 import agenda.modelo.Llamada;
 
 public class TarifaBasica extends Tarifa{
+    int precio;
     public TarifaBasica(int tipo){
         super(tipo);
+        precio=tipo;
 
     }
 
@@ -14,6 +16,9 @@ public class TarifaBasica extends Tarifa{
     }
 
     @Override
+    public int getPrecio(){
+        return precio;
+    }
     public String descripcion(){
         return "Tarifa Basica";
     }

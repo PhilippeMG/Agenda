@@ -15,6 +15,7 @@ public class OfertaTardesA5 extends Oferta{
     public String descripcion(){
         return tarifa.descripcion()+" con Tardes a 5 cent";
     }
+    public int getPrecio(){return tarifa.getPrecio();}
 
     public  double calculaPrecio(Llamada llamada){
         LocalDateTime fecha=llamada.getFecha();

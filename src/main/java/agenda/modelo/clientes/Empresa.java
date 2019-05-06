@@ -26,4 +26,5 @@ public class Empresa extends Cliente {
                 ", infoTarifa='" + super.getTarifa().descripcion() + '\'';
     }
 
+
 }

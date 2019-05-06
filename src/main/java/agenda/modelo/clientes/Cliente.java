@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Vector;
 
 public abstract class Cliente implements Serializable, GetFecha {
     private String nombre;
@@ -101,7 +102,18 @@ public abstract class Cliente implements Serializable, GetFecha {
             contador++;
         }
     }
+    public Vector información(){
+        Vector vector = new Vector();
+        vector.add(nif);
+        vector.add(nombre);
+        vector.add(direccion);
+        vector.add(correo);
+        vector.add(tarifa.getPrecio());
+        vector.add(fechaDeAlta.toString());
+        return vector;
 
+
+    }
     @Override
     public abstract String toString() ;
 }
