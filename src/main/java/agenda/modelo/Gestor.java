@@ -5,6 +5,7 @@ import agenda.modelo.excepciones.ClientNotFound;
 import agenda.modelo.excepciones.FacturaNotFound;
 import agenda.modelo.excepciones.InvalidArguments;
 import agenda.modelo.tarifa.*;
+import agenda.vista.Ventana;
 
 import java.io.*;
 import java.time.*;
@@ -12,9 +13,9 @@ import java.util.*;
 
 
 public class Gestor implements Serializable {
-    private static HashMap<String, Cliente> clientes = new HashMap<>();
-    private static HashMap<Integer, Factura> facturas = new HashMap<>();
-
+    private  HashMap<String, Cliente> clientes = new HashMap<>();
+    private  HashMap<Integer, Factura> facturas = new HashMap<>();
+    Ventana vista;
     public Gestor() {
         super();
     }
@@ -285,5 +286,7 @@ public class Gestor implements Serializable {
     }
 
 
-
+    public void setVista(Ventana ventana) {
+        vista= ventana;
+            }
 }

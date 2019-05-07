@@ -60,14 +60,17 @@ public class PanelClientes  extends JPanel{
         bBorrarCliente.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 System.out.println("Borrando cliente...");
+                if(dniCliente.getText().length()>0){
                 try {
+
                     new GestionarAgenda().eliminarCliente(dniCliente.getText());
                     dniCliente.setText("");
 
                 } catch (ClientNotFound clientNotFound) {
                     clientNotFound.printStackTrace();
                 }
-            }
+            }else System.out.printf("Dni no introducido");}
+
         });
         bSave.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){

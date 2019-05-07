@@ -71,6 +71,7 @@ public class FormularioCliente {
         limpiarCampos();
         bAñadir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if(nombre.getText().length()>0 && dni.getText().length()>0 && cp.getText().length()>0 && provincia.getText().length()>0 && poblacion.getText().length()>0 && correo.getText().length()>0 && tarifa.getText().length()>0){
                 try {
                     ofertas.add(ofertaDomingos);
                     ofertas.add(ofertaTardes);
@@ -85,7 +86,7 @@ public class FormularioCliente {
                     System.out.println("Error...");
                 }
                 limpiarCampos();
-            }
+            }else System.out.println("Hay campos vacios...");}
         });
         tardes.addItemListener(new ItemListener() {
             @Override

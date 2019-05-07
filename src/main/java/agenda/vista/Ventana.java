@@ -1,16 +1,20 @@
 package agenda.vista;
 
 import agenda.controlador.GestionarAgenda;
-import agenda.modelo.Gestor;
 
 import javax.swing.*;
 import java.awt.*;
 
-class Ventana {
-    public static void main(String[] args) throws ClassNotFoundException {
-        JFrame ventana=new JFrame("Agenda");//Creamos el JFrame
-        GestionarAgenda gestorAgenda=new GestionarAgenda();
-        gestorAgenda.cargarDatos();
+public class Ventana {
+    GestionarAgenda controlador;//=new GestionarAgenda();
+    JFrame ventana=new JFrame("Agenda");//Creamos el JFrame
+
+    public void setControlador(GestionarAgenda gestorAgenda) {
+        this.controlador = gestorAgenda;
+    }
+
+    public void run() throws ClassNotFoundException {
+        controlador.cargarDatos();
 
         //Modificamos el icono de la ventana
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/icono.png"); //Creamos una IMAGE
@@ -23,7 +27,7 @@ class Ventana {
 
         ventana.add(pestanyas);
         ventana.pack();
-       // ventana.setSize(800,500);//Definimos el tamaño
+        // ventana.setSize(800,500);//Definimos el tamaño
         ventana.setVisible(true);// hacemos la ventsana visibel
 
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

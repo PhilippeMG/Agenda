@@ -4,6 +4,7 @@ import agenda.modelo.Direccion;
 import agenda.modelo.Gestor;
 import agenda.modelo.clientes.Cliente;
 import agenda.modelo.clientes.CrearCliente;
+import agenda.modelo.clientes.FabricarCliente;
 import agenda.modelo.excepciones.ClientNotFound;
 import agenda.modelo.excepciones.InvalidArguments;
 import agenda.modelo.tarifa.CrearTarifa;
@@ -14,11 +15,22 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class GestionarAgenda {
-    Gestor gestor=new Gestor();
+    Gestor gestor;//r=new Gestor();
+    CrearCliente creadorCliente;//= new CrearCliente();
+    CrearTarifa creadorTarifa;//= new CrearTarifa();
+
     public GestionarAgenda(){
 
     }
-
+public void setModelo(Gestor modelo){
+        gestor=modelo;
+}
+public void setFabricaClientes(CrearCliente fabrica){
+        creadorCliente=fabrica;
+}
+    public void setFabricaTarifas(CrearTarifa fabrica){
+        creadorTarifa=fabrica;
+    }
  public void añadirCliente(String nombre, String nif, int cp, String provincia, String poblacion, String correo, String apellidos, int precio, LinkedList<String> oferta) throws InvalidArguments {
      CrearCliente creadorCliente= new CrearCliente();
      Tarifa tarifa=TarifaCliente(precio,oferta);
@@ -34,7 +46,6 @@ public class GestionarAgenda {
      gestor.mostrarClientes(gestor.getClientes());
  }
  public Tarifa TarifaCliente(int precio,LinkedList<String> oferta){
-     CrearTarifa creadorTarifa= new CrearTarifa();
      Tarifa tarifa=creadorTarifa.getTarifaBasica(precio);
      if (oferta.contains("Tardes")){
          tarifa=creadorTarifa.getOfertaTardes(tarifa);
