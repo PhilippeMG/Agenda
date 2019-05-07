@@ -20,6 +20,8 @@ public class OfertaDomingosGratis extends Oferta {
     public int getPrecio(){
         return tarifa.getPrecio();
     }
+    public void setPrecio(int preu){ tarifa.setPrecio(preu);}
+
     public double calculaPrecio(Llamada llamada) {
         LocalDateTime fecha = llamada.getFecha();
         double money = tarifa.calculaPrecio(llamada);

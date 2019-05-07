@@ -22,7 +22,8 @@ class Ventana {
         pestanyas.add("Llamadas", new PanelLlamadas());
 
         ventana.add(pestanyas);
-        ventana.setSize(800,500);//Definimos el tamaño
+        ventana.pack();
+       // ventana.setSize(800,500);//Definimos el tamaño
         ventana.setVisible(true);// hacemos la ventsana visibel
 
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

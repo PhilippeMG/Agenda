@@ -38,7 +38,8 @@ public class FormularioEditarTarifa {
 
         contenedor.add(bModificar);
         //ancho por altura
-        formulario.setSize(300, 150);//Definimos el tamaño
+        formulario.pack();
+     //   formulario.setSize(300, 150);//Definimos el tamaño
         formulario.setVisible(true);// hacemos la ventsana visibel
         limpiarCampos();
         bModificar.addActionListener(new ActionListener() {

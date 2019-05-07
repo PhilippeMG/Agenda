@@ -65,7 +65,8 @@ public class FormularioCliente {
 
         contenedor.add(bAñadir);
         //ancho por altura
-        formulario.setSize(600, 400);//Definimos el tamaño
+        formulario.pack();
+      //  formulario.setSize(600, 400);//Definimos el tamaño
         formulario.setVisible(true);// hacemos la ventsana visibel
         limpiarCampos();
         bAñadir.addActionListener(new ActionListener() {

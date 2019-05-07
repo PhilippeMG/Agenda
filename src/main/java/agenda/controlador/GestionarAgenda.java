@@ -46,8 +46,10 @@ public class GestionarAgenda {
      return tarifa;
  }
  public void eliminarCliente(String DNI) throws ClientNotFound {
-        gestor.borrarCliente(DNI);
-        gestor.mostrarClientes(gestor.getClientes());
+
+            gestor.borrarCliente(DNI);
+            gestor.mostrarClientes(gestor.getClientes());
+
  }
  public void guardarDatos() throws IOException {
      gestor.guardarDatos();

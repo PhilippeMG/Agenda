@@ -22,6 +22,9 @@ public class TarifaBasica extends Tarifa{
     public String descripcion(){
         return "Tarifa Basica";
     }
+    public  void setPrecio(int preu){
+        precio=preu;
+    }
 
     //@Override
     //public  int getPrecio(LocalDateTime fecha){

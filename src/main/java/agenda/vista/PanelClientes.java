@@ -5,6 +5,7 @@ import agenda.modelo.Gestor;
 import agenda.modelo.excepciones.ClientNotFound;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -12,7 +13,8 @@ import java.util.Vector;
 
 public class PanelClientes  extends JPanel{
     //JButton button = new JButton("Añadir Cliente");
-
+    JTable tbl;
+    JScrollPane panel ;
     public PanelClientes() {
       // JButton button = new JButton("Añadir Cliente");
         JButton bAñadirCliente = new JButton("Añadir Cliente");
@@ -37,17 +39,12 @@ public class PanelClientes  extends JPanel{
         columnas.add("Fecha");
 
         Vector filas = new Gestor().informacionClientes(new Gestor().getClientes());
-//        Vector fila = new Vector();
-//
-//        fila.add("X");
-//        fila.add("Y");
-//        fila.add("Z");
-//
-//        filas.add(fila);
 
-        JTable tbl = new JTable(filas,columnas);
-        JScrollPane panel =new JScrollPane(tbl);
 
+        JTable tabla = new JTable(filas,columnas);
+        JScrollPane panel =new JScrollPane(tabla);
+        panel.createHorizontalScrollBar();
+        panel.createVerticalScrollBar();
         bAñadirCliente.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 System.out.println("Creamdo cliente...");
@@ -66,6 +63,7 @@ public class PanelClientes  extends JPanel{
                 try {
                     new GestionarAgenda().eliminarCliente(dniCliente.getText());
                     dniCliente.setText("");
+
                 } catch (ClientNotFound clientNotFound) {
                     clientNotFound.printStackTrace();
                 }
@@ -76,6 +74,7 @@ public class PanelClientes  extends JPanel{
                 System.out.println("Guardando Datos...");
                 try {
                     new GestionarAgenda().guardarDatos();
+
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -83,11 +82,18 @@ public class PanelClientes  extends JPanel{
             }
         });
         //Añadimos los elementos
-        add(bAñadirCliente);
-        add(panelBorrar);
-        add(bEditarCliente);
-        add(bSave);
-        add(panel);
+        Container contenedor = new Container();
+        contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.PAGE_AXIS));
+        JPanel panelOption= new JPanel();
+
+        panelOption.add(bAñadirCliente);
+        panelOption.add(panelBorrar);
+        panelOption.add(bEditarCliente);
+        panelOption.add(bSave);
+        contenedor.add(panelOption);
+        contenedor.add(panel, BorderLayout.SOUTH);
+        add(contenedor);
 
     }
+
 }

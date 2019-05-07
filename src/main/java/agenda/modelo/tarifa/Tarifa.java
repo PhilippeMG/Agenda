@@ -7,13 +7,13 @@ import java.io.Serializable;
 public abstract class Tarifa  implements Serializable{
     private int precio;
 
-    public Tarifa(int tarifa) {
-        this.precio = tarifa;
+    public Tarifa(int preu) {
+        this.precio = preu;
     }
 
 
-    public void setPrecio(int precio) {
-        this.precio = precio;
+    public void setPrecio(int preu) {
+        this.precio = preu;
     }
     public int getPrecio(){return precio;}
     //public int getPrecio(LocalDateTime fecha){return precio;}

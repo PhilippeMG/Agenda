@@ -30,20 +30,20 @@ public class FactoriaTarifaTest {
     @Test
     public void precioOfertaDomigos() {
         Tarifa domingos = creador.getOfertaDomingos(tarifa);
-        assertEquals(domingos.getPrecio(), 0,0);
+        assertEquals(domingos.getPrecio(), 15,0);
     }
 
     @Test
     public void precioOfertaTardes() {
         Tarifa tardes = creador.getOfertaTardes(tarifa);
-        assertEquals(tardes.getPrecio(), 5,0);
+        assertEquals(tardes.getPrecio(), 15,0);
     }
 
     @Test
     public void precioOfertaDomigosTardes() {
         Tarifa domingos = creador.getOfertaDomingos(tarifa);
         Tarifa tardesdomingos = creador.getOfertaTardes(domingos);
-        assertEquals(tardesdomingos.getPrecio(), 5,0);
+        assertEquals(tardesdomingos.getPrecio(), 15,0);
     }
 
 }
