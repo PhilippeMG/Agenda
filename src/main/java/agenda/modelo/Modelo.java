@@ -5,18 +5,18 @@ import agenda.modelo.excepciones.ClientNotFound;
 import agenda.modelo.excepciones.FacturaNotFound;
 import agenda.modelo.excepciones.InvalidArguments;
 import agenda.modelo.tarifa.*;
-import agenda.vista.Ventana;
+import agenda.vista.Vista;
 
 import java.io.*;
 import java.time.*;
 import java.util.*;
 
 
-public class Gestor implements Serializable {
+public class Modelo implements Serializable {
     private  HashMap<String, Cliente> clientes = new HashMap<>();
     private  HashMap<Integer, Factura> facturas = new HashMap<>();
-    Ventana vista;
-    public Gestor() {
+    Vista vista;
+    public Modelo() {
         super();
     }
 
@@ -195,7 +195,7 @@ public class Gestor implements Serializable {
 
     //>>>FACTURAS<<<<
     public Factura emitirFactura(String NIF, LocalDateTime ini, LocalDateTime fin) throws Exception {
-        //Fichero tando en el vector de Cliente como en el mapa de Gestor.
+        //Fichero tando en el vector de Cliente como en el mapa de Modelo.
         if (clientes.containsKey(NIF)) {
             Cliente cliente = clientes.get(NIF);
             Factura factura = new Factura(cliente, ini, fin);
@@ -286,7 +286,7 @@ public class Gestor implements Serializable {
     }
 
 
-    public void setVista(Ventana ventana) {
-        vista= ventana;
+    public void setVista(Vista vista) {
+        this.vista = vista;
             }
 }

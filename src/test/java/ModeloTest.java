@@ -5,7 +5,7 @@ import agenda.modelo.excepciones.ClientNotFound;
 import agenda.modelo.excepciones.FacturaNotFound;
 import agenda.modelo.excepciones.InvalidArguments;
 import agenda.modelo.Direccion;
-import agenda.modelo.Gestor;
+import agenda.modelo.Modelo;
 import agenda.modelo.Llamada;
 import agenda.modelo.tarifa.TarifaBasica;
 import org.junit.AfterClass;
@@ -18,10 +18,10 @@ import java.time.LocalTime;
 
 import static org.junit.Assert.*;
 
-public class GestorTest {
+public class ModeloTest {
     private static Cliente cliente;
     // private static Factura factura;
-    private static Gestor gestor = new Gestor();
+    private static Modelo modelo = new Modelo();
     private static  FabricarCliente creador;
 
 
@@ -38,7 +38,7 @@ public class GestorTest {
         Llamada llamada3 = new Llamada(654078311, 0.9,data);
         cliente.insertarLlamada(llamada3);
         //Factura factura = new Factura(cliente,LocalDate.of(2017,Month.MARCH, 1),LocalDate.of(2019,Month.MARCH, 3));
-        gestor.insertarCliente(cliente);
+        modelo.insertarCliente(cliente);
     }
 
     @AfterClass
@@ -50,7 +50,7 @@ public class GestorTest {
     @Test
     public void insertarCliente() {
         try {
-            gestor.insertarCliente(cliente);
+            modelo.insertarCliente(cliente);
             fail("No debe llegar");
 
         } catch (InvalidArguments e) {
@@ -61,7 +61,7 @@ public class GestorTest {
     @Test
     public void obtenerFactura() {
         try {
-            gestor.mostrarFacturas("058393");
+            modelo.mostrarFacturas("058393");
             fail("No debe llegar");
 
         } catch (ClientNotFound e) {
@@ -72,7 +72,7 @@ public class GestorTest {
     @Test
     public void obtenerFacturaCodigo() {
         try {
-            gestor.mostrarFactura(19392921);
+            modelo.mostrarFactura(19392921);
             fail("No debe llegar");
 
         } catch (FacturaNotFound e) {

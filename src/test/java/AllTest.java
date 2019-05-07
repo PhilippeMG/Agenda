@@ -2,7 +2,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ClienteTest.class, FacturaTest.class, TarifaTest.class, GestorTest.class,FactoriaClienteTest.class,FactoriaTarifaTest.class})
+@Suite.SuiteClasses({ClienteTest.class, FacturaTest.class, TarifaTest.class, ModeloTest.class,FactoriaClienteTest.class,FactoriaTarifaTest.class})
 
 public class AllTest {
 }

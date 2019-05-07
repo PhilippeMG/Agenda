@@ -1,6 +1,6 @@
 package agenda.vista;
 
-import agenda.controlador.GestionarAgenda;
+import agenda.controlador.Controlador;
 import agenda.modelo.excepciones.InvalidArguments;
 
 import javax.swing.*;
@@ -28,7 +28,10 @@ public class FormularioCliente {
     JCheckBox tardes=new JCheckBox("Tardes a 5");
     JCheckBox domingos=new JCheckBox("Domingos gratis");
 
-    public FormularioCliente() {
+    Controlador controlador;
+
+    public FormularioCliente(Controlador controlador) {
+        this.controlador = controlador;
         JFrame formulario = new JFrame("Añadir Cliente");//Creamos el JFrame
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/add-user.png"); //Creamos una IMAGE
         formulario.setIconImage(icono); //Añadimos la IMAGE creada
@@ -80,7 +83,7 @@ public class FormularioCliente {
 
                     System.out.println("Añadiendo...");
 
-                    new GestionarAgenda().añadirCliente(nombre.getText(), dni.getText(), CP, provincia.getText(), poblacion.getText(), correo.getText(), apellido.getText(), preu,ofertas);
+                    controlador.añadirCliente(nombre.getText(), dni.getText(), CP, provincia.getText(), poblacion.getText(), correo.getText(), apellido.getText(), preu,ofertas);
 
                 } catch (InvalidArguments invalidArguments) {
                     System.out.println("Error...");

@@ -1,15 +1,18 @@
 package agenda.vista;
 
-import agenda.controlador.GestionarAgenda;
+import agenda.controlador.Controlador;
+import agenda.modelo.Modelo;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Ventana {
-    GestionarAgenda controlador;//=new GestionarAgenda();
+public class Vista {
+    Controlador controlador;//=new Controlador();
+    Modelo modelo;
+
     JFrame ventana=new JFrame("Agenda");//Creamos el JFrame
 
-    public void setControlador(GestionarAgenda gestorAgenda) {
+    public void setControlador(Controlador gestorAgenda) {
         this.controlador = gestorAgenda;
     }
 
@@ -20,7 +23,7 @@ public class Ventana {
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/icono.png"); //Creamos una IMAGE
         ventana.setIconImage(icono); //Añadimos la IMAGE creada
         JTabbedPane pestanyas = new JTabbedPane();
-        pestanyas.add("Clentes", new PanelClientes());
+        pestanyas.add("Clentes", new PanelClientes(controlador, modelo));
 
         pestanyas.add("Facturas", new PanelFacturas());
         pestanyas.add("Llamadas", new PanelLlamadas());
@@ -34,4 +37,7 @@ public class Ventana {
     }
 
 
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
 }

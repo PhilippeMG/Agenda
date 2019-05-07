@@ -1,7 +1,7 @@
 package agenda.modelo.menu;
 
 import agenda.modelo.Factura;
-import agenda.modelo.Gestor;
+import agenda.modelo.Modelo;
 import agenda.modelo.Llamada;
 import agenda.modelo.clientes.Cliente;
 import agenda.modelo.excepciones.ClientNotFound;
@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public class OpcionesMenu extends Gestor {
+public class OpcionesMenu extends Modelo {
 
     //>>>MENU PRINCIPAL<<<<
 
@@ -177,7 +177,7 @@ public class OpcionesMenu extends Gestor {
         } while (!opcionCliente.name().equals("SALIR"));
     }
 
-    //METODOS DE LAS OPCIONES DEL MENU QUE LLAMAN A METODOS DE GESTOR MEDIANTE: extendeds Gestor
+    //METODOS DE LAS OPCIONES DEL MENU QUE LLAMAN A METODOS DE GESTOR MEDIANTE: extendeds Modelo
     //>>>OPCION CLIENTE<<<<
     public void opcionInsertarCliente() {
         Scanner scanner = new Scanner(System.in);

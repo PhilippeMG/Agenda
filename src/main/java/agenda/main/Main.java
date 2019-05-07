@@ -1,32 +1,33 @@
 package agenda.main;
 
-import agenda.controlador.GestionarAgenda;
-import agenda.modelo.Gestor;
+import agenda.controlador.Controlador;
+import agenda.modelo.Modelo;
 import agenda.modelo.clientes.CrearCliente;
-import agenda.modelo.menu.OpcionesMenu;
 import agenda.modelo.tarifa.CrearTarifa;
-import agenda.vista.Ventana;
+import agenda.vista.Vista;
 
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Ventana vista = new Ventana();
+        Vista vista = new Vista();
 
-        GestionarAgenda controlador= new GestionarAgenda();
+        Controlador controlador= new Controlador();
 
         CrearTarifa fabricaTarifa= new CrearTarifa();
         CrearCliente fabricaCliente= new CrearCliente();
 
         controlador.setFabricaClientes(fabricaCliente);
         controlador.setFabricaTarifas(fabricaTarifa);
-        Gestor modelo=new Gestor();
+        controlador.setVista(vista);
+
+        Modelo modelo=new Modelo();
 
         controlador.setModelo(modelo);
 
 
 
         vista.setControlador(controlador);
-
+        vista.setModelo(modelo);
 
 
         modelo.setVista(vista);
