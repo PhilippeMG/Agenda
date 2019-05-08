@@ -17,7 +17,7 @@ public class FormularioEditarTarifa {
     Controlador controlador;
 
     public FormularioEditarTarifa(Controlador controlador) {
-        this.controlador=controlador;
+        this.controlador = controlador;
         JFrame formulario = new JFrame("Editar Tarifa");//Creamos el JFrame
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/add-user.png"); //Creamos una IMAGE
         formulario.setIconImage(icono); //Añadimos la IMAGE creada
@@ -29,34 +29,34 @@ public class FormularioEditarTarifa {
         // contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.PAGE_AXIS));
 
         // Añadimos los elementos de rellenan por filas de izq a derecha
-
         contenedor.add(new JLabel("DNI:"));
         contenedor.add(dni);
         contenedor.add(new JLabel("Tarifa:"));
         contenedor.add(tarifa);
 
-
         contenedor.add(bModificar);
         //ancho por altura
         formulario.pack();
-        //   formulario.setSize(300, 150);//Definimos el tamaño
+        //formulario.setSize(300, 150);//Definimos el tamaño
         formulario.setVisible(true);// hacemos la ventsana visibel
         limpiarCampos();
+
         bModificar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (dni.getText().length() > 0 && tarifa.getText().length() > 0) {
+                    int preu = Integer.valueOf(String.valueOf(tarifa.getText()));
+                    System.out.println("Modificando...");
+                    try {
+                        controlador.modificarTarifa(dni.getText(), preu);
+                        System.out.println("Modificado correctamente");
 
-                int preu = Integer.valueOf(String.valueOf(tarifa.getText()));
-
-                System.out.println("Modificando...");
-
-                try {
-                    controlador.modificarTarifa(dni.getText(), preu);
-                    System.out.println("Modificado correctamente");
-
-                } catch (ClientNotFound clientNotFound) {
-                    clientNotFound.printStackTrace();
+                    } catch (ClientNotFound clientNotFound) {
+                        clientNotFound.printStackTrace();
+                    }
+                    limpiarCampos();
+                } else {
+                    new PopUp("Campo/s Vacio/s");
                 }
-                limpiarCampos();
             }
         });
 
