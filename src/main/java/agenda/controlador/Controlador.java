@@ -19,12 +19,12 @@ public class Controlador implements InterfaceControlador{
     CrearCliente creadorCliente;
     CrearTarifa creadorTarifa;
 
-    public Controlador() {
-
-    }
-
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
+    }
+
+    public void setVista(Vista vista) {
+        this.vista = vista;
     }
 
     public void setFabricaClientes(CrearCliente fabrica) {
@@ -36,7 +36,6 @@ public class Controlador implements InterfaceControlador{
     }
 
     public void añadirCliente(String nombre, String nif, int cp, String provincia, String poblacion, String correo, String apellidos, int precio, LinkedList<String> oferta) throws InvalidArguments {
-        CrearCliente creadorCliente = new CrearCliente();
         Tarifa tarifa = TarifaCliente(precio, oferta);
         Direccion direccion = new Direccion(cp, provincia, poblacion);
         Cliente cliente;
@@ -63,33 +62,24 @@ public class Controlador implements InterfaceControlador{
     }
 
     public void eliminarCliente(String DNI) throws ClientNotFound {
-
         modelo.borrarCliente(DNI);
         modelo.mostrarClientes(modelo.getClientes());
-
     }
 
     public void guardarDatos() throws IOException {
         modelo.guardarDatos();
-
         System.out.println("Datos guardados: ");
         modelo.mostrarClientes(modelo.getClientes());
-
     }
 
     public void cargarDatos() throws ClassNotFoundException {
         modelo.cargarDatos();
         System.out.println("Datos cargados: ");
         modelo.mostrarClientes(modelo.getClientes());
-
     }
 
     public void modificarTarifa(String dni, int precio) throws ClientNotFound {
         modelo.cambiarTarifa(dni, precio);
-    }
-
-    public void setVista(Vista vista) {
-        this.vista = vista;
     }
 
 }
