@@ -46,6 +46,8 @@ public class FormularioListarEntre2Fechas {
         entradas.add(tFechaIn);
         entradas.add(fechaFin);
         entradas.add(tFechaFin);
+        dni.setEnabled(false); //Con esto deshabilitamos la edicion del campo
+        areaDatos.setEnabled(false);
 
 
 

@@ -120,6 +120,9 @@ public class PanelClientes extends JPanel {
         contenedor.add(panelOption);
         contenedor.add(panel);
         add(contenedor);
+        areaDatos.setEnabled(false);
+        areaDatos.
+
 
     }
     public void rellenarInformacion(Vector datos){
