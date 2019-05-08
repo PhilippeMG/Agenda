@@ -1,10 +1,10 @@
 package agenda.controlador;
 
 import agenda.modelo.Direccion;
+import agenda.modelo.Llamada;
 import agenda.modelo.Modelo;
 import agenda.modelo.clientes.Cliente;
 import agenda.modelo.clientes.CrearCliente;
-import agenda.modelo.clientes.GetFecha;
 import agenda.modelo.excepciones.ClientNotFound;
 import agenda.modelo.excepciones.InvalidArguments;
 import agenda.modelo.tarifa.CrearTarifa;
@@ -12,9 +12,7 @@ import agenda.modelo.tarifa.Tarifa;
 import agenda.vista.Vista;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
 
 public class Controlador implements InterfaceControlador{
@@ -86,34 +84,68 @@ public class Controlador implements InterfaceControlador{
         modelo.cambiarTarifa(dni, precio);
     }
 
-    public LinkedList<Cliente>  opcionDevolverClientesEntreFechas(int[] fechaInicio, int[] fechaFinal) {
+    public Vector  opcionDevolverClientesEntreFechas(int[] fechaInicio, int[] fechaFinal) {
         Collection<Cliente> myCollection = modelo.getClientes().values();
         List<Cliente> list = new LinkedList<>(myCollection);
-        LocalTime hora= LocalTime.now();
+        Vector datos=new Vector();
 
-        LocalDate inicio=  LocalDate.of(fechaInicio[0],fechaInicio[1],fechaInicio[2]);
-        LocalDateTime inici= LocalDateTime.of(inicio,hora);
+        LocalDateTime inici=modelo.crearFecha(fechaInicio[0],fechaInicio[1],fechaInicio[2]);
 
-        LocalDate fin = LocalDate.of(fechaFinal[0],fechaFinal[1],fechaFinal[2]);
-        LocalDateTime fi= LocalDateTime.of(fin,hora);
+        System.out.println("inici:"+inici.toString());
+        LocalDateTime fi=modelo.crearFecha(fechaFinal[0],fechaFinal[1],fechaFinal[2]);
+        System.out.println("fi:"+fi.toString());
+        System.out.println("claves: "+list.toString());
 
 
         LinkedList<Cliente> clienteEntreFechas = modelo.devolverEntreFechas(list, inici, fi);
         if (clienteEntreFechas.isEmpty()) {
             System.out.println("NO HAY CLIENTES ENTRE ESAS FECHAS");
         } else {
+            for(Cliente client :clienteEntreFechas){
+                datos.add(client.informacion());
+            }
             System.out.println(clienteEntreFechas.toString());
         }
-        return clienteEntreFechas;
+        return datos;
     }
-    public Vector devolverCliente(String dni){
+    public Vector  opcionDevolverLlamadasEntreFechas(String dni,int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
+         Vector datos=new Vector();
+
+        LocalDateTime inici=modelo.crearFecha(fechaInicio[0],fechaInicio[1],fechaInicio[2]);
+
+        LocalDateTime fi=modelo.crearFecha(fechaFinal[0],fechaFinal[1],fechaFinal[2]);
+        LinkedList<Llamada> llamadas = new LinkedList<>();
+
+            if (modelo.getClientes().containsKey(dni)) {
+                Cliente cliente = modelo.getClientes().get(dni);
+                llamadas = modelo.devolverEntreFechas(cliente.getLlamadas(), inici, fi);
+                System.out.printf(llamadas.toString());
+            } else {
+                throw new ClientNotFound();
+            }
+
+
+        if (llamadas.isEmpty()) {
+            System.out.println("NO HAY CLIENTES ENTRE ESAS FECHAS");
+        } else {
+            for(Llamada llamada :llamadas){
+                datos.add(llamada.informacion());
+            }
+            System.out.println(llamadas.toString());
+        }
+        return datos;
+    }
+
+    public Vector devolverCliente(String dni) throws ClientNotFound {
         Cliente cliente =modelo.getCliente(dni);
-        Vector info=cliente.información();
+
+        Vector info=cliente.informacion();
         info.add(cliente.getNombreCompleto());
 
         System.out.println(info);
 
         return info;
+
 
 
     }

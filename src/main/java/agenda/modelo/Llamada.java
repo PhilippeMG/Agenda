@@ -5,6 +5,7 @@ import agenda.modelo.clientes.GetFecha;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
+import java.util.Vector;
 
 public class Llamada implements Serializable, GetFecha {
     private int numDestino;
@@ -49,5 +50,12 @@ public class Llamada implements Serializable, GetFecha {
                 ", duracion=" + getDuracion()+
                 ", fechaLlamada=" + getFecha() +
                 '}';
+    }
+    public Vector informacion(){
+        Vector vector = new Vector();
+        vector.add(getNumDestino());
+        vector.add(getDuracion());
+        vector.add(getFecha());
+        return vector;
     }
 }

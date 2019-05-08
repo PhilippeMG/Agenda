@@ -53,7 +53,7 @@ public class Menu {
         BORRAR_CLIENTE("Borrar cliente"),
         LISTAR_CLIENTES("Listar clientes"),
         LISTAR_CLIENTES_ENTRE_FECHAS("Listar clientes entre dos fechas"),
-        DATOS_CLIENTE("Mostrar información cliente"),
+        DATOS_CLIENTE("Mostrar informacion cliente"),
         CAMBIAR_TARIFA_CLIENTE("Modificar tarifa cliente"),
 
         SALIR("Voler menú principal");

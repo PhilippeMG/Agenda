@@ -74,12 +74,12 @@ public class Modelo implements Serializable, InterfaceModelo{
             return null;
         }
     }
-    public Cliente getCliente(String dni) {
+    public Cliente getCliente(String dni) throws ClientNotFound {
 
         if (clientes.containsKey(dni)) {
             return clientes.get(dni);
         } else {
-            return null;
+            throw new ClientNotFound();
         }
     }
 
@@ -102,7 +102,7 @@ public class Modelo implements Serializable, InterfaceModelo{
         }else {
             Iterator<Cliente> iterClientela = clientela.iterator();//.entrySet().iterator();
             while (iterClientela.hasNext()) {
-                vector.add(iterClientela.next().información());
+                vector.add(iterClientela.next().informacion());
                // System.out.println(iterClientela.next().toString());
             }
         }
@@ -257,6 +257,14 @@ public class Modelo implements Serializable, InterfaceModelo{
         int año = scanner.nextInt();
         LocalTime hora= LocalTime.now();
         LocalDate fecha = LocalDate.of(año, mes, dia);
+        LocalDateTime data= LocalDateTime.of(fecha,hora);
+
+        return data;
+    }
+    public LocalDateTime crearFecha(int dia,int mes,int any) {
+
+        LocalTime hora= LocalTime.now();
+        LocalDate fecha = LocalDate.of(any, mes, dia);
         LocalDateTime data= LocalDateTime.of(fecha,hora);
 
         return data;

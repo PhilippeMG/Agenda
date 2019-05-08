@@ -17,7 +17,7 @@ public abstract class Cliente implements Serializable, GetFecha {
     private String nif;
     private Direccion direccion;
     private String correo;
-    private LocalDate fechaDeAlta;
+    private LocalDateTime fechaDeAlta;
     private Tarifa tarifa;
     private HashMap<Integer, Factura> facturas = new HashMap<>();
     private LinkedList<Llamada> llamadas = new LinkedList<>();
@@ -27,7 +27,7 @@ public abstract class Cliente implements Serializable, GetFecha {
         this.nif = nif;
         this.direccion = direccion;
         this.correo = correo;
-        this.fechaDeAlta = LocalDate.now();
+        this.fechaDeAlta = LocalDateTime.now();
         this.tarifa = tarifa;
     }
 
@@ -47,7 +47,8 @@ public abstract class Cliente implements Serializable, GetFecha {
     public abstract String getNombreCompleto();
     @Override
     public LocalDateTime getFecha() {
-        return LocalDateTime.from(this.fechaDeAlta);
+        return this.fechaDeAlta;
+
     }
 
     public String getNombre() {
@@ -58,7 +59,7 @@ public abstract class Cliente implements Serializable, GetFecha {
         return nif;
     }
 
-    public LocalDate getFechaDeAlta() {
+    public LocalDateTime getFechaDeAlta() {
         return fechaDeAlta;
     }
 
@@ -102,7 +103,7 @@ public abstract class Cliente implements Serializable, GetFecha {
             contador++;
         }
     }
-    public Vector información(){
+    public Vector informacion(){
         Vector vector = new Vector();
         vector.add(nif);
         vector.add(nombre);

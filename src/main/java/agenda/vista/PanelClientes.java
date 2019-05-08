@@ -18,7 +18,7 @@ public class PanelClientes extends JPanel {
     Controlador controlador;
     Modelo modelo;
     JTextArea areaDatos =new JTextArea(20,10);
-
+    JTextField dniCliente;
     public PanelClientes(Controlador controlador, Modelo modelo) {
         this.controlador = controlador;
         this.modelo = modelo;
@@ -32,7 +32,7 @@ public class PanelClientes extends JPanel {
         JButton bListarEntre2 = new JButton("Listar entre dos Fechas");
 
         JLabel borrar = new JLabel("DNI del cliente: ");
-        JTextField dniCliente = new JTextField(10);
+        dniCliente = new JTextField(10);
 
 
 
@@ -59,9 +59,20 @@ public class PanelClientes extends JPanel {
         bBuscarCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Vector infoCliente=controlador.devolverCliente(dniCliente.getText());
+                if (!dniIsEmpty()) {
 
-                new FormularioBuscarCliente(controlador,infoCliente);
+                    Vector infoCliente = null;
+                    try {
+                        infoCliente = controlador.devolverCliente(dniCliente.getText());
+                    } catch (ClientNotFound clientNotFound) {
+                        new PopUp("El cliente no existe");
+                    }
+
+                    new FormularioBuscarCliente(controlador, infoCliente);
+                }else {
+                    System.out.printf("Dni no introducido");
+                    new PopUp("DNI no introducido");
+                }
             }
         });
 
@@ -87,7 +98,7 @@ public class PanelClientes extends JPanel {
         bBorrarCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Borrando cliente...");
-                if (dniCliente.getText().length() > 0) {
+                if (!dniIsEmpty()) {
                     try {
 
                         controlador.eliminarCliente(dniCliente.getText());
@@ -97,7 +108,8 @@ public class PanelClientes extends JPanel {
                         rellenarInformacion(datos);
 
                     } catch (ClientNotFound clientNotFound) {
-                        clientNotFound.printStackTrace();
+                        new PopUp("Cliente no encontrado");
+
                     }
                 } else {System.out.printf("Dni no introducido");
                     new PopUp("DNI no introducido");
@@ -147,13 +159,16 @@ public class PanelClientes extends JPanel {
     }
     public void rellenarInformacion(Vector datos){
         areaDatos.setText("");
-        areaDatos.append("NIF\tNombre\tCP\tProvincia\tPoblación\tCorreo\tTarifa\tFecha\n");
+        areaDatos.append("NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n");
 
         for(int i=0; i<datos.size();i++){
             Vector dades=(Vector) datos.get(i);
             areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\t"+dades.get(3)+"\t"+dades.get(4)+"\t"+dades.get(5)+"\n");
         }
 
+    }
+    public boolean dniIsEmpty(){
+        return (dniCliente.getText().length() <= 0);
     }
 
 }
