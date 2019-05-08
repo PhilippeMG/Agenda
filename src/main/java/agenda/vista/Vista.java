@@ -7,9 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Vista implements InterfaceVista {
-    Controlador controlador;//=new Controlador();
+    //Atributos
+    Controlador controlador;
     Modelo modelo;
-
     JFrame ventana=new JFrame("Agenda");//Creamos el JFrame
 
     public void setControlador(Controlador gestorAgenda) {
@@ -30,6 +30,7 @@ public class Vista implements InterfaceVista {
 
         ventana.add(pestanyas);
         ventana.pack();
+
         // ventana.setSize(800,500);//Definimos el tamaño
         ventana.setVisible(true);// hacemos la ventsana visibel
 
