@@ -65,8 +65,6 @@ public class FormularioEditarTarifa {
     public void limpiarCampos() {
         dni.setText("");
         tarifa.setText("");
-
-
     }
 
 }

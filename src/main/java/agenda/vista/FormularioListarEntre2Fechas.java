@@ -46,10 +46,8 @@ public class FormularioListarEntre2Fechas {
         entradas.add(tFechaIn);
         entradas.add(fechaFin);
         entradas.add(tFechaFin);
-        dni.setEnabled(false); //Con esto deshabilitamos la edicion del campo
+        dni.setEditable(false); //Con esto deshabilitamos la edicion del campo
         areaDatos.setEnabled(false);
-
-
 
         contenedor.add(options);
         contenedor.add(entradas);
@@ -58,6 +56,7 @@ public class FormularioListarEntre2Fechas {
         formulario.add(contenedor);
         formulario.pack();
         //   formulario.setSize(300, 150);//Definimos el tamaño
+
         formulario.setVisible(true);// hacemos la ventsana visibel
     }
 
