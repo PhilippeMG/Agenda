@@ -33,6 +33,7 @@ public class FormularioCliente {
     public FormularioCliente(Controlador controlador) {
         this.controlador = controlador;
         JFrame formulario = new JFrame("Añadir Cliente");//Creamos el JFrame
+
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/add-user.png"); //Creamos una IMAGE
         formulario.setIconImage(icono); //Añadimos la IMAGE creada
 

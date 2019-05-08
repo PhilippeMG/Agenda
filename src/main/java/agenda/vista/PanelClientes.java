@@ -24,14 +24,17 @@ public class PanelClientes extends JPanel {
         this.modelo = modelo;
 
         // JButton button = new JButton("Añadir Cliente");
+        JButton bBuscarCliente = new JButton("Buscar Cliente");
         JButton bAñadirCliente = new JButton("Añadir Cliente");
         JButton bSave = new JButton("Guardar");
-
         JButton bBorrarCliente = new JButton("Borrar Cliente ");
-        JLabel borrar = new JLabel("DNI del cliente: ");
-        JTextField dniCliente = new JTextField(10);
         JButton bEditarCliente = new JButton("Editar Tarifa ");
         JButton bListarEntre2 = new JButton("Listar entre dos Fechas");
+
+        JLabel borrar = new JLabel("DNI del cliente: ");
+        JTextField dniCliente = new JTextField(10);
+
+
 
         JPanel panelBorrar = new JPanel();
         panelBorrar.add(borrar);
@@ -52,6 +55,14 @@ public class PanelClientes extends JPanel {
         panel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         panel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         rellenarInformacion(datos);
+
+        bBuscarCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                new FormularioBuscarCliente(controlador);
+            }
+        });
+
 
         bAñadirCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -115,14 +126,17 @@ public class PanelClientes extends JPanel {
         contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.PAGE_AXIS));
         JPanel panelOption = new JPanel();
 
+        panelOption.add(bBuscarCliente);
         panelOption.add(bAñadirCliente);
         panelOption.add(panelBorrar);
         panelOption.add(bEditarCliente);
         panelOption.add(bListarEntre2);
         panelOption.add(bSave);
+
         contenedor.add(panelOption);
         contenedor.add(panel);
         add(contenedor);
+
         areaDatos.setForeground(Color.BLACK);
         areaDatos.setEditable(false);
 
