@@ -48,11 +48,11 @@ public class PanelClientes extends JPanel {
 
         Vector datos = modelo.informacionClientes(modelo.getClientes());
 
-      //  JTable tabla = new JTable(datos, cabecera);
         JScrollPane panel = new JScrollPane(areaDatos);
         panel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         panel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         rellenarInformacion(datos);
+
         bAñadirCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Creando cliente...");
@@ -109,6 +109,7 @@ public class PanelClientes extends JPanel {
 
             }
         });
+
         //Añadimos los elementos
         Container contenedor = new Container();
         contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.PAGE_AXIS));

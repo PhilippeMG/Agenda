@@ -25,8 +25,8 @@ public class Vista implements InterfaceVista {
         JTabbedPane pestanyas = new JTabbedPane();
         pestanyas.add("Clentes", new PanelClientes(controlador, modelo));
 
-        pestanyas.add("Facturas", new PanelFacturas());
-        pestanyas.add("Llamadas", new PanelLlamadas());
+        pestanyas.add("Facturas", new PanelFacturas(this.controlador, this.modelo));
+        pestanyas.add("Llamadas", new PanelLlamadas(this.controlador, this.modelo));
 
         ventana.add(pestanyas);
         ventana.pack();
