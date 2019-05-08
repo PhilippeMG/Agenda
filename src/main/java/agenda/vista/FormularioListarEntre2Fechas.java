@@ -16,6 +16,9 @@ public class FormularioListarEntre2Fechas {
     public FormularioListarEntre2Fechas(Controlador controlador) {
         this.controlador = controlador;
         JFrame formulario = new JFrame("Listar Entre Dos Fechas");//Creamos el JFrameJs
+        Image icono = Toolkit.getDefaultToolkit().getImage("src/media/info.png"); //Creamos una IMAGE
+        formulario.setIconImage(icono); //Añadimos la IMAGE creada
+
         JRadioButton rClientes=new JRadioButton("Clientes");
         JRadioButton rLlamadas=new JRadioButton("Llamadas");
         JRadioButton rFacturas=new JRadioButton("Facturas");

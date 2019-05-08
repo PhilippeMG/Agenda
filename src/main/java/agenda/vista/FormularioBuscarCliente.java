@@ -21,6 +21,9 @@ public class FormularioBuscarCliente {
     FormularioBuscarCliente(Controlador controlador, Vector infoCliente){
         this.controlador = controlador;
         JFrame formulario = new JFrame("Buscar Cliente");
+        Image icono = Toolkit.getDefaultToolkit().getImage("src/media/info.png"); //Creamos una IMAGE
+        formulario.setIconImage(icono); //Añadimos la IMAGE creada
+
         formulario.setLayout(new GridLayout(5,2));
         Container contenedor = formulario.getContentPane();
 
