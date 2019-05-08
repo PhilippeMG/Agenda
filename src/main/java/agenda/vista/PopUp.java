@@ -11,6 +11,9 @@ public class PopUp {
         JFrame popup = new JFrame("Error");
         JPanel panel = new JPanel();
         JLabel text = new JLabel(info);
+        Image icono = Toolkit.getDefaultToolkit().getImage("src/media/cancel.png"); //Creamos una IMAGE
+        popup.setIconImage(icono); //Añadimos la IMAGE creada
+
         panel.add(text);
         popup.setSize(250, 80);
         popup.add(panel, BorderLayout.CENTER);
