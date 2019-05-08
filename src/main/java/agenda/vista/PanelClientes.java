@@ -55,13 +55,13 @@ public class PanelClientes extends JPanel {
         rellenarInformacion(datos);
         bAñadirCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Creamdo cliente...");
+                System.out.println("Creando cliente...");
                 new FormularioCliente(controlador);
             }
         });
         bEditarCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Creando cliente...");
+                System.out.println("Editar cliente...");
                 new FormularioEditarTarifa(controlador);
             }
         });
@@ -115,8 +115,8 @@ public class PanelClientes extends JPanel {
         panelOption.add(bAñadirCliente);
         panelOption.add(panelBorrar);
         panelOption.add(bEditarCliente);
-        panelOption.add(bSave);
         panelOption.add(bListarEntre2);
+        panelOption.add(bSave);
         contenedor.add(panelOption);
         contenedor.add(panel);
         add(contenedor);
