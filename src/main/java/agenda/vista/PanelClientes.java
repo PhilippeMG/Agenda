@@ -128,7 +128,7 @@ public class PanelClientes extends JPanel {
     }
     public void rellenarInformacion(Vector datos){
         areaDatos.setText("");
-        areaDatos.append("NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n");
+        areaDatos.append("NIF\tNombre\tCP\tProvincia\tPoblación\tCorreo\tTarifa\tFecha\n");
 
         for(int i=0; i<datos.size();i++){
             Vector dades=(Vector) datos.get(i);

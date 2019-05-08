@@ -3,6 +3,8 @@ package agenda.vista;
 import agenda.controlador.Controlador;
 
 import javax.swing.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class FormularioListarEntre2Fechas {
     Controlador controlador;
@@ -47,7 +49,7 @@ public class FormularioListarEntre2Fechas {
         entradas.add(fechaFin);
         entradas.add(tFechaFin);
         dni.setEditable(false); //Con esto deshabilitamos la edicion del campo
-        areaDatos.setEnabled(false);
+        areaDatos.setEditable(false);
 
         contenedor.add(options);
         contenedor.add(entradas);
@@ -58,7 +60,29 @@ public class FormularioListarEntre2Fechas {
         //   formulario.setSize(300, 150);//Definimos el tamaño
 
         formulario.setVisible(true);// hacemos la ventsana visibel
+
+        rClientes.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                switch(e.getStateChange()) {//Preguntamos al evento
+                    case ItemEvent.SELECTED:
+                        System.out.println("Clientes seleccionado.");
+                        dni.setEditable(false); //Con esto deshabilitamos la edicion del campo
+                        dni.setText("");
+                        break;
+                    case ItemEvent.DESELECTED:
+                        System.out.println("Clientes deseleccionado.");
+                        areaDatos.setEditable(true);
+
+                        dni.setEditable(true); //Con esto deshabilitamos la edicion del campo
+
+                        break;
+                }
+            }
+        });
+
     }
+
 
 
 }
