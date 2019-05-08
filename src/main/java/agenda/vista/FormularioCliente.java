@@ -87,9 +87,14 @@ public class FormularioCliente {
 
                 } catch (InvalidArguments invalidArguments) {
                     System.out.println("Error...");
+                    new PopUp("DNI duplicado...");
+
                 }
                 limpiarCampos();
-            }else System.out.println("Hay campos vacios...");}
+            }else{ System.out.println("Hay campos vacios...");
+                new PopUp("Hay campos vacios...");
+                }
+            }
         });
         tardes.addItemListener(new ItemListener() {
             @Override

@@ -86,7 +86,9 @@ public class PanelClientes extends JPanel {
                     } catch (ClientNotFound clientNotFound) {
                         clientNotFound.printStackTrace();
                     }
-                } else System.out.printf("Dni no introducido");
+                } else {System.out.printf("Dni no introducido");
+                    new PopUp("DNI no introducido");
+                }
             }
 
         });
