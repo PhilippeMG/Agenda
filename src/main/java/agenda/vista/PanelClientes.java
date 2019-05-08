@@ -120,8 +120,9 @@ public class PanelClientes extends JPanel {
         contenedor.add(panelOption);
         contenedor.add(panel);
         add(contenedor);
-        areaDatos.setEnabled(false);
-        areaDatos.
+        areaDatos.setForeground(Color.BLACK);
+        areaDatos.setEditable(false);
+
 
 
     }
@@ -132,7 +133,6 @@ public class PanelClientes extends JPanel {
         for(int i=0; i<datos.size();i++){
             Vector dades=(Vector) datos.get(i);
             areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\t"+dades.get(3)+"\t"+dades.get(4)+"\t"+dades.get(5)+"\n");
-
         }
 
     }
