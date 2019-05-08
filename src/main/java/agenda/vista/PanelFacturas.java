@@ -12,8 +12,6 @@ public class PanelFacturas extends JPanel {
         button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 System.out.println("Boton Facturas pulsado ");
-
-                //JOptionPane.showMessageDialog(null, "You just clicked button");
             }
         });
         add(button);
