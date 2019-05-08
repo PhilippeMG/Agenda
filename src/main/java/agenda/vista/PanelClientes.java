@@ -5,12 +5,11 @@ import agenda.modelo.Modelo;
 import agenda.modelo.excepciones.ClientNotFound;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Vector;
 
 public class PanelClientes extends JPanel {
@@ -18,6 +17,7 @@ public class PanelClientes extends JPanel {
     JScrollPane panel;
     Controlador controlador;
     Modelo modelo;
+    JTextArea areaDatos =new JTextArea(20,10);
 
     public PanelClientes(Controlador controlador, Modelo modelo) {
         this.controlador = controlador;
@@ -47,10 +47,11 @@ public class PanelClientes extends JPanel {
 
         Vector datos = modelo.informacionClientes(modelo.getClientes());
 
-
-        JTable tabla = new JTable(datos, cabecera);
-        JScrollPane panel = new JScrollPane(tabla);
-
+      //  JTable tabla = new JTable(datos, cabecera);
+        JScrollPane panel = new JScrollPane(areaDatos);
+        panel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        panel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        rellenarInformacion(datos);
         bAñadirCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Creamdo cliente...");
@@ -71,6 +72,9 @@ public class PanelClientes extends JPanel {
 
                         controlador.eliminarCliente(dniCliente.getText());
                         dniCliente.setText("");
+                        Vector datos = modelo.informacionClientes(modelo.getClientes());
+
+                        rellenarInformacion(datos);
 
                     } catch (ClientNotFound clientNotFound) {
                         clientNotFound.printStackTrace();
@@ -85,6 +89,10 @@ public class PanelClientes extends JPanel {
                 try {
                     controlador.guardarDatos();
                 //    actualizarTabla(tabla,datos);
+                    Vector datos = modelo.informacionClientes(modelo.getClientes());
+
+                    rellenarInformacion(datos);
+
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -106,9 +114,18 @@ public class PanelClientes extends JPanel {
         add(contenedor);
 
     }
-    public void actualizarTabla(JTable tabla,Vector datos){
-        TableModelEvent evento= new TableModelEvent((TableModel) datos);
-        tabla.tableChanged(evento);
+    public void rellenarInformacion(Vector datos){
+        areaDatos.setText("");
+        areaDatos.append("NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n");
+
+        for(int i=0; i<datos.size();i++){
+            Vector dades=(Vector) datos.get(i);
+            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\t"+dades.get(3)+"\t"+dades.get(4)+"\t"+dades.get(5)+"\n");
+
+        }
+
+
+
     }
 
 }
