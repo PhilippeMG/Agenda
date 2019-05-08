@@ -12,7 +12,7 @@ import java.time.*;
 import java.util.*;
 
 
-public class Modelo implements Serializable {
+public class Modelo implements Serializable, InterfaceModelo{
     private  HashMap<String, Cliente> clientes = new HashMap<>();
     private  HashMap<Integer, Factura> facturas = new HashMap<>();
     Vista vista;

@@ -31,6 +31,7 @@ public class PanelClientes extends JPanel {
         JLabel borrar = new JLabel("DNI del cliente: ");
         JTextField dniCliente = new JTextField(10);
         JButton bEditarCliente = new JButton("Editar Tarifa ");
+        JButton bListarEntre2 = new JButton("Listar entre dos Fechas");
 
         JPanel panelBorrar = new JPanel();
         panelBorrar.add(borrar);
@@ -64,6 +65,12 @@ public class PanelClientes extends JPanel {
                 new FormularioEditarTarifa(controlador);
             }
         });
+        bListarEntre2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new FormularioListarEntre2Fechas(controlador);
+            }
+        });
+
         bBorrarCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Borrando cliente...");
@@ -109,6 +116,7 @@ public class PanelClientes extends JPanel {
         panelOption.add(panelBorrar);
         panelOption.add(bEditarCliente);
         panelOption.add(bSave);
+        panelOption.add(bListarEntre2);
         contenedor.add(panelOption);
         contenedor.add(panel);
         add(contenedor);

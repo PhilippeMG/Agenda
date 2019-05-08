@@ -6,7 +6,7 @@ import agenda.modelo.Modelo;
 import javax.swing.*;
 import java.awt.*;
 
-public class Vista {
+public class Vista implements InterfaceVista {
     Controlador controlador;//=new Controlador();
     Modelo modelo;
 

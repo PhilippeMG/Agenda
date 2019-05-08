@@ -13,7 +13,7 @@ import agenda.vista.Vista;
 import java.io.IOException;
 import java.util.LinkedList;
 
-public class Controlador {
+public class Controlador implements InterfaceControlador{
     Modelo modelo;
     Vista vista;
     CrearCliente creadorCliente;
