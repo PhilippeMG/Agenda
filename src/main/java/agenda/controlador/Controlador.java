@@ -4,6 +4,7 @@ import agenda.modelo.Direccion;
 import agenda.modelo.Modelo;
 import agenda.modelo.clientes.Cliente;
 import agenda.modelo.clientes.CrearCliente;
+import agenda.modelo.clientes.GetFecha;
 import agenda.modelo.excepciones.ClientNotFound;
 import agenda.modelo.excepciones.InvalidArguments;
 import agenda.modelo.tarifa.CrearTarifa;
@@ -11,7 +12,12 @@ import agenda.modelo.tarifa.Tarifa;
 import agenda.vista.Vista;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Controlador implements InterfaceControlador{
     Modelo modelo;
@@ -81,5 +87,24 @@ public class Controlador implements InterfaceControlador{
     public void modificarTarifa(String dni, int precio) throws ClientNotFound {
         modelo.cambiarTarifa(dni, precio);
     }
+    public LinkedList<Cliente>  opcionDevolverClientesEntreFechas(int[] fechaInicio, int[] fechaFinal) {
+        Collection<Cliente> myCollection = modelo.getClientes().values();
+        List<Cliente> list = new LinkedList<>(myCollection);
+        LocalTime hora= LocalTime.now();
 
+        LocalDate inicio=  LocalDate.of(fechaInicio[0],fechaInicio[1],fechaInicio[2]);
+        LocalDateTime inici= LocalDateTime.of(inicio,hora);
+
+        LocalDate fin = LocalDate.of(fechaFinal[0],fechaFinal[1],fechaFinal[2]);
+        LocalDateTime fi= LocalDateTime.of(fin,hora);
+
+
+        LinkedList<Cliente> clienteEntreFechas = modelo.devolverEntreFechas(list, inici, fi);
+        if (clienteEntreFechas.isEmpty()) {
+            System.out.println("NO HAY CLIENTES ENTRE ESAS FECHAS");
+        } else {
+            System.out.println(clienteEntreFechas.toString());
+        }
+        return clienteEntreFechas;
+    }
 }

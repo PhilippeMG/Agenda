@@ -114,7 +114,8 @@ public class Modelo implements Serializable, InterfaceModelo{
             System.out.print("Apellidos del cliente: ");
             apellidos = scanner.next();
         }
-        System.out.println("Dirección del cliente: ");
+        System.out        //TODO Marcos mira lo de las tarifas, Tarifa es abstract y hay dos que tenemos que usar
+.println("Dirección del cliente: ");
         System.out.print("\tCP: ");
         int CP = scannerEntero.nextInt();
         System.out.print("\tProvincia: ");
@@ -125,7 +126,6 @@ public class Modelo implements Serializable, InterfaceModelo{
 
         System.out.print("Correo: ");
         String correo = scanner.next();
-        //TODO Marcos mira lo de las tarifas, Tarifa es abstract y hay dos que tenemos que usar
         int tipo=-1;
         while (tipo<0 ||tipo>2) {
             System.out.printf("Tipo de Tarifa:\n 0- Tarifa Tardes o 1- Tarifa Domingo Gratis o 2- Ambas: ");
@@ -152,7 +152,6 @@ public class Modelo implements Serializable, InterfaceModelo{
 
 
         }
-        //TODO uso el patron de diseño FACTORIA
         FabricarCliente creador=new CrearCliente();
 
         if (opcion == 0) {
