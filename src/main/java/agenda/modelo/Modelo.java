@@ -74,6 +74,14 @@ public class Modelo implements Serializable, InterfaceModelo{
             return null;
         }
     }
+    public Cliente getCliente(String dni) {
+
+        if (clientes.containsKey(dni)) {
+            return clientes.get(dni);
+        } else {
+            return null;
+        }
+    }
 
     public void mostrarClientes(HashMap<String, Cliente> clientesMap) {
         Collection<Cliente> clientela = clientesMap.values();

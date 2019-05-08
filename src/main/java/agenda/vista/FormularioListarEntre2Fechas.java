@@ -22,17 +22,36 @@ public class FormularioListarEntre2Fechas {
         JLabel info = new JLabel("Listar por :");
         JLabel lDNI= new JLabel("DNI:");
         JButton listar= new JButton("Listar");
-        JLabel diaIn = new JLabel("Fecha inicio :");
-        JLabel mesIn = new JLabel("Fecha inicio :");
-        JLabel anyIn = new JLabel("Fecha inicio :");
+
+        JTextField diaIn = new JTextField(3);
+        JTextField mesIn = new JTextField(3);
+        JTextField anyIn = new JTextField(3);
+
         JPanel fechaIn=new JPanel();
+        fechaIn.add(new JLabel("Fecha inicio: "));
+        fechaIn.add(new JLabel("Dia"));
         fechaIn.add(diaIn);
+        fechaIn.add(new JLabel("Mes"));
         fechaIn.add(mesIn);
+        fechaIn.add(new JLabel("Año"));
 
-        JTextField tFechaIn = new JTextField(10);
+        fechaIn.add(anyIn);
 
-        JLabel fechaFin = new JLabel("Fecha fin :");
-        JTextField tFechaFin = new JTextField(10);
+        JTextField diaFi = new JTextField(3);
+        JTextField mesFi = new JTextField(3);
+        JTextField anyFi = new JTextField(3);
+
+        JPanel fechaFi=new JPanel();
+        fechaFi.add(new JLabel("Fecha final: "));
+
+        fechaFi.add(new JLabel("Dia"));
+        fechaFi.add(diaFi);
+        fechaFi.add(new JLabel("Mes"));
+        fechaFi.add(mesFi);
+        fechaFi.add(new JLabel("Año"));
+        fechaFi.add(anyFi);
+
+
 
         JTextField dni = new JTextField(7);
         JScrollPane panel = new JScrollPane(areaDatos);
@@ -55,9 +74,7 @@ public class FormularioListarEntre2Fechas {
         entradas.add(lDNI);
         entradas.add(dni);
         entradas.add(fechaIn);
-        entradas.add(tFechaIn);
-        entradas.add(fechaFin);
-        entradas.add(tFechaFin);
+        entradas.add(fechaFi);
         entradas.add(listar);
 
         dni.setEditable(false); //Con esto deshabilitamos la edicion del campo
@@ -97,6 +114,12 @@ public class FormularioListarEntre2Fechas {
             }
         });
 
+        listar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
     }
 

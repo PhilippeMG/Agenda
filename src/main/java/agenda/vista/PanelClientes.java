@@ -60,6 +60,7 @@ public class PanelClientes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 new FormularioBuscarCliente(controlador);
+                controlador.devolverCliente(dniCliente.getText());
             }
         });
 

@@ -15,9 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Controlador implements InterfaceControlador{
     Modelo modelo;
@@ -87,6 +85,7 @@ public class Controlador implements InterfaceControlador{
     public void modificarTarifa(String dni, int precio) throws ClientNotFound {
         modelo.cambiarTarifa(dni, precio);
     }
+
     public LinkedList<Cliente>  opcionDevolverClientesEntreFechas(int[] fechaInicio, int[] fechaFinal) {
         Collection<Cliente> myCollection = modelo.getClientes().values();
         List<Cliente> list = new LinkedList<>(myCollection);
@@ -106,5 +105,16 @@ public class Controlador implements InterfaceControlador{
             System.out.println(clienteEntreFechas.toString());
         }
         return clienteEntreFechas;
+    }
+    public Vector devolverCliente(String dni){
+        Cliente cliente =modelo.getCliente(dni);
+        Vector info=cliente.información();
+        info.add(cliente.getNombreCompleto());
+
+        System.out.println(info);
+
+        return info;
+
+
     }
 }
