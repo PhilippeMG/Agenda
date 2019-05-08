@@ -59,8 +59,9 @@ public class PanelClientes extends JPanel {
         bBuscarCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new FormularioBuscarCliente(controlador);
-                controlador.devolverCliente(dniCliente.getText());
+                Vector infoCliente=controlador.devolverCliente(dniCliente.getText());
+
+                new FormularioBuscarCliente(controlador,infoCliente);
             }
         });
 
