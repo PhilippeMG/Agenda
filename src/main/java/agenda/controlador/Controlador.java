@@ -180,4 +180,29 @@ public class Controlador implements InterfaceControlador{
 
 
     }
+    public Vector getFacturasCliente(String dni) throws ClientNotFound {
+        Vector datos=new Vector();
+        LinkedList<Factura> facturas = new LinkedList<>();
+
+        if (modelo.getClientes().containsKey(dni)) {
+            Cliente cliente = modelo.getClientes().get(dni);
+            Collection<Factura> myCollection = cliente.getFacturas().values();
+            facturas = new LinkedList<>(myCollection);
+
+        } else {
+            throw new ClientNotFound();
+        }
+
+
+        if (facturas.isEmpty()) {
+            System.out.println("NO HAY FACTURAS ENTRE ESAS FECHAS");
+        } else {
+            for(Factura fact :facturas){
+                datos.add(fact.informacion());
+                System.out.println(fact.informacion());
+            }
+
+        }
+        return datos;
+    }
 }

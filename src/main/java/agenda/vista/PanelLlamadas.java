@@ -21,7 +21,7 @@ public class PanelLlamadas extends JPanel {
             public void actionPerformed(ActionEvent e){
                 System.out.println("Boton Llamadas pulsado ");
 
-               // JOptionPane.showMessageDialog(null, "You just clicked button");
+               // JOptionPane.showMessageDialog(null, "You just clicked bListarFacturas");
             }
         });
         add(button);

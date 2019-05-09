@@ -24,7 +24,7 @@ public class PanelClientes extends JPanel {
         this.controlador = controlador;
         this.modelo = modelo;
         this.vista=vista;
-        // JButton button = new JButton("Añadir Cliente");
+        // JButton bListarFacturas = new JButton("Añadir Cliente");
         JButton bBuscarCliente = new JButton("Buscar Cliente");
         JButton bAñadirCliente = new JButton("Añadir Cliente");
         JButton bSave = new JButton("Guardar");
@@ -32,23 +32,8 @@ public class PanelClientes extends JPanel {
         JButton bEditarCliente = new JButton("Editar Tarifa ");
         JButton bListarEntre2 = new JButton("Listar entre dos Fechas");
 
-        JLabel borrar = new JLabel("DNI del cliente: ");
+        JLabel jDNI = new JLabel("DNI del cliente: ");
         dniCliente = new JTextField(10);
-
-
-
-        JPanel panelBorrar = new JPanel();
-        panelBorrar.add(borrar);
-        panelBorrar.add(dniCliente);
-        panelBorrar.add(bBorrarCliente);
-
-        Vector cabecera = new Vector();
-        cabecera.add("NIF");
-        cabecera.add("Nombre");
-        cabecera.add("Dirección");
-        cabecera.add("Correo");
-        cabecera.add("Tarifa");
-        cabecera.add("Fecha");
 
         Vector datos = modelo.informacionClientes(modelo.getClientes());
 
@@ -138,13 +123,18 @@ public class PanelClientes extends JPanel {
         });
 
         //Añadimos los elementos
+        JPanel panelDNI = new JPanel();
+        panelDNI.add(jDNI);
+        panelDNI.add(dniCliente);
+
         Container contenedor = new Container();
         contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.PAGE_AXIS));
         JPanel panelOption = new JPanel();
 
+        panelOption.add(panelDNI);
         panelOption.add(bBuscarCliente);
         panelOption.add(bAñadirCliente);
-        panelOption.add(panelBorrar);
+        panelOption.add(bBorrarCliente);
         panelOption.add(bEditarCliente);
         panelOption.add(bListarEntre2);
         panelOption.add(bSave);

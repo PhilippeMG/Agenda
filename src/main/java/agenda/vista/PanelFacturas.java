@@ -2,36 +2,111 @@ package agenda.vista;
 
 import agenda.controlador.Controlador;
 import agenda.modelo.Modelo;
+import agenda.modelo.excepciones.ClientNotFound;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class PanelFacturas extends JPanel {
-    JButton button = new JButton();
+    JButton bListarFacturas = new JButton("Listar facturas de un DNI");
+    JButton bEmitirFacturas = new JButton("Emitir factura");
+    JButton bBuscarFactura = new JButton("Buscar factura");
+
     Controlador controlador;
     Modelo modelo;
     JTextArea areaDatos =new JTextArea(20,10);
+    JButton bListarEntre2 = new JButton("Listar entre dos Fechas");
+    JTextField dniCliente;
+    JTextField codFact;
 
-    public PanelFacturas(Controlador controlador, Modelo modelo) {
+    JFrame vista;
+    public PanelFacturas(Controlador controlador, Modelo modelo, JFrame vista) {
         this.controlador = controlador;
         this.modelo = modelo;
+        this.vista=vista;
+        dniCliente = new JTextField(10);
+        codFact = new JTextField(4);
+
+
 
         JPanel panel = new JPanel();
-        panel.add(button);
+        panel.add( new JLabel("DNI del cliente: "));
+        panel.add(dniCliente);
+        panel.add(new JLabel("Codigo factura"));
+        panel.add(codFact);
+        panel.add(bListarFacturas);
+        panel.add(bEmitirFacturas);
+        panel.add(bBuscarFactura);
+        panel.add(bListarEntre2);
 
 
         Container contenedor = new Container();
         contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.PAGE_AXIS));
         contenedor.add(panel);
-        contenedor.add(areaDatos);
+        JScrollPane zonaDatos = new JScrollPane(areaDatos);
+        zonaDatos.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        zonaDatos.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        areaDatos.setEditable(false);
+        contenedor.add(zonaDatos);
+        add(contenedor);
 
-        button.addActionListener(new ActionListener(){
+        bListarFacturas.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                System.out.println("Boton Facturas pulsado ");
+                System.out.println("Boton Listar  Facturas pulsado ");
+                if(!dniIsEmpty()){
+                try {
+                    Vector datos =controlador.getFacturasCliente(dniCliente.getText());
+                    rellenarInformacionFacturas(datos);
+                } catch (ClientNotFound clientNotFound) {
+                    new PopUp("Cliente no encontrado.",vista,true);
+
+                }}else{
+                    new PopUp("EL DNI esta vacio.",vista,true);
+
+                }
+
             }
         });
-        add(contenedor);
+        bListarEntre2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new FormularioListarEntre2Fechas(controlador);
+            }
+        });
+        bBuscarFactura.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(!codFacturaIsEmpty()){
+
+                }else{
+                    new PopUp("EL codigo factura esta vacio.",vista,true);
+
+                }
+                //new FormularioListarEntre2Fechas(controlador);
+
+            }
+        });
+
     }
+
+    public boolean dniIsEmpty(){
+        return (dniCliente.getText().length() <= 0);
+    }
+    public boolean codFacturaIsEmpty(){
+        return (codFact.getText().length() <= 0);
+    }
+
+    public void rellenarInformacionFacturas(Vector datos){
+        areaDatos.setText("");
+        areaDatos.append("Codigo\t Tarifa\tFecha Inicio\t\t\tFecha Final\t\t\tImporte\n");
+
+        for(int i=0; i<datos.size();i++){
+            Vector dades=(Vector) datos.get(i);
+            System.out.println(dades.toString());
+            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\t\t"+dades.get(3)+"\t\t"+dades.get(4)+"\n");
+        }
+
+    }
+
 }
