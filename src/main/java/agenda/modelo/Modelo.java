@@ -202,7 +202,6 @@ public class Modelo implements Serializable, InterfaceModelo{
 
     //>>>FACTURAS<<<<
     public Factura emitirFactura(String NIF, LocalDateTime ini, LocalDateTime fin) throws Exception {
-        //Fichero tando en el vector de Cliente como en el mapa de Modelo.
         if (clientes.containsKey(NIF)) {
             Cliente cliente = clientes.get(NIF);
             Factura factura = new Factura(cliente, ini, fin);

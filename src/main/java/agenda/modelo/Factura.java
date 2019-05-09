@@ -12,6 +12,7 @@ import java.util.Vector;
 public class Factura implements Serializable, GetFecha {
     private Tarifa tipoTarifa;
     private static int cod = 0;
+    private int codFact=0;
     private LocalDateTime inicio;
     private LocalDateTime fin;
     private LocalDateTime emision;
@@ -21,15 +22,16 @@ public class Factura implements Serializable, GetFecha {
     public Factura(Cliente cliente, LocalDateTime inico, LocalDateTime fin) {
 
         this.tipoTarifa = cliente.getTarifa();
-        this.cod += 1;
+        this.codFact=this.cod;
+        this.cod+=1;
         this.inicio = inico;
         this.fin = fin;
         this.importe = importe(cliente, inicio, fin);
         this.emision = LocalDateTime.now();
     }
 
-    public static int getCod() {
-        return cod;
+    public  int getCod() {
+        return codFact;
     }
 
     public Double getImporte() {
@@ -57,15 +59,15 @@ public class Factura implements Serializable, GetFecha {
     public String toString() {
         return "Factura :" +
                 "Tarifa: " + this.tipoTarifa +
-                ", cod: " + this.cod +
+                ", cod: " + getCod()+
                 ", inicio: " + this.inicio +
                 ", fin: " + this.fin +
                 ", importe: " + this.importe;
     }
     public Vector informacion() {
         Vector vector = new Vector();
-        vector.add(this.cod);
-        vector.add(tipoTarifa);
+        vector.add(getCod());
+        vector.add(tipoTarifa.getPrecio());
         vector.add(this.inicio);
         vector.add(this.fin);
         vector.add(this.importe);

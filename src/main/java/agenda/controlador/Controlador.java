@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Controlador implements InterfaceControlador{
+public class Controlador implements InterfaceControlador {
     Modelo modelo;
     Vista vista;
     CrearCliente creadorCliente;
@@ -85,64 +85,66 @@ public class Controlador implements InterfaceControlador{
         modelo.cambiarTarifa(dni, precio);
     }
 
-    public Vector  opcionDevolverClientesEntreFechas(int[] fechaInicio, int[] fechaFinal) {
+    public Vector opcionDevolverClientesEntreFechas(int[] fechaInicio, int[] fechaFinal) {
         Collection<Cliente> myCollection = modelo.getClientes().values();
         List<Cliente> list = new LinkedList<>(myCollection);
-        Vector datos=new Vector();
+        Vector datos = new Vector();
 
-        LocalDateTime inici=modelo.crearFecha(fechaInicio[0],fechaInicio[1],fechaInicio[2]);
+        LocalDateTime inici = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
 
-        System.out.println("inici:"+inici.toString());
-        LocalDateTime fi=modelo.crearFecha(fechaFinal[0],fechaFinal[1],fechaFinal[2]);
-        System.out.println("fi:"+fi.toString());
-        System.out.println("claves: "+list.toString());
+        System.out.println("inici:" + inici.toString());
+        LocalDateTime fi = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
+        System.out.println("fi:" + fi.toString());
+        System.out.println("claves: " + list.toString());
 
 
         LinkedList<Cliente> clienteEntreFechas = modelo.devolverEntreFechas(list, inici, fi);
         if (clienteEntreFechas.isEmpty()) {
             System.out.println("NO HAY CLIENTES ENTRE ESAS FECHAS");
         } else {
-            for(Cliente client :clienteEntreFechas){
+            for (Cliente client : clienteEntreFechas) {
                 datos.add(client.informacion());
             }
             System.out.println(clienteEntreFechas.toString());
         }
         return datos;
     }
-    public Vector  opcionDevolverLlamadasEntreFechas(String dni,int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
-         Vector datos=new Vector();
 
-        LocalDateTime inici=modelo.crearFecha(fechaInicio[0],fechaInicio[1],fechaInicio[2]);
+    public Vector opcionDevolverLlamadasEntreFechas(String dni, int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
+        Vector datos = new Vector();
 
-        LocalDateTime fi=modelo.crearFecha(fechaFinal[0],fechaFinal[1],fechaFinal[2]);
-        LinkedList<Llamada> llamadas = new LinkedList<>();
+        LocalDateTime inici = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
 
-            if (modelo.getClientes().containsKey(dni)) {
-                Cliente cliente = modelo.getClientes().get(dni);
-                llamadas = modelo.devolverEntreFechas(cliente.getLlamadas(), inici, fi);
-                System.out.printf(llamadas.toString());
-            } else {
-                throw new ClientNotFound();
-            }
+        LocalDateTime fi = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
+        LinkedList<Llamada> llamadas;
+
+        if (modelo.getClientes().containsKey(dni)) {
+            Cliente cliente = modelo.getClientes().get(dni);
+            llamadas = modelo.devolverEntreFechas(cliente.getLlamadas(), inici, fi);
+            System.out.printf(llamadas.toString());
+        } else {
+            throw new ClientNotFound();
+        }
 
 
         if (llamadas.isEmpty()) {
             System.out.println("NO HAY LLAMADAS ENTRE ESAS FECHAS");
         } else {
-            for(Llamada llamada :llamadas){
+            for (Llamada llamada : llamadas) {
                 datos.add(llamada.informacion());
             }
             System.out.println(llamadas.toString());
         }
         return datos;
     }
-    public Vector  opcionDevolverFacturaEntreFechas(String dni,int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
-        Vector datos=new Vector();
 
-        LocalDateTime inici=modelo.crearFecha(fechaInicio[0],fechaInicio[1],fechaInicio[2]);
+    public Vector opcionDevolverFacturaEntreFechas(String dni, int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
+        Vector datos = new Vector();
 
-        LocalDateTime fi=modelo.crearFecha(fechaFinal[0],fechaFinal[1],fechaFinal[2]);
-        LinkedList<Factura> facturas = new LinkedList<>();
+        LocalDateTime inici = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
+
+        LocalDateTime fi = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
+        LinkedList<Factura> facturas;
 
         if (modelo.getClientes().containsKey(dni)) {
             Cliente cliente = modelo.getClientes().get(dni);
@@ -158,7 +160,7 @@ public class Controlador implements InterfaceControlador{
         if (facturas.isEmpty()) {
             System.out.println("NO HAY FACTURAS ENTRE ESAS FECHAS");
         } else {
-            for(Factura fact :facturas){
+            for (Factura fact : facturas) {
                 datos.add(fact.informacion());
                 System.out.println(fact.informacion());
             }
@@ -168,9 +170,9 @@ public class Controlador implements InterfaceControlador{
     }
 
     public Vector devolverCliente(String dni) throws ClientNotFound {
-        Cliente cliente =modelo.getCliente(dni);
+        Cliente cliente = modelo.getCliente(dni);
 
-        Vector info=cliente.informacion();
+        Vector info = cliente.informacion();
         info.add(cliente.getNombreCompleto());
 
         System.out.println(info);
@@ -178,11 +180,11 @@ public class Controlador implements InterfaceControlador{
         return info;
 
 
-
     }
+
     public Vector getFacturasCliente(String dni) throws ClientNotFound {
-        Vector datos=new Vector();
-        LinkedList<Factura> facturas = new LinkedList<>();
+        Vector datos = new Vector();
+        LinkedList<Factura> facturas;
 
         if (modelo.getClientes().containsKey(dni)) {
             Cliente cliente = modelo.getClientes().get(dni);
@@ -197,12 +199,26 @@ public class Controlador implements InterfaceControlador{
         if (facturas.isEmpty()) {
             System.out.println("NO HAY FACTURAS ENTRE ESAS FECHAS");
         } else {
-            for(Factura fact :facturas){
+            for (Factura fact : facturas) {
                 datos.add(fact.informacion());
                 System.out.println(fact.informacion());
             }
 
         }
         return datos;
+    }
+
+    public void emitirFacturaCliente(String dni, int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
+
+        LocalDateTime inicio = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
+
+        LocalDateTime fin = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
+        try {
+            modelo.emitirFactura(dni,inicio,fin);
+
+        }catch (Exception e){
+            throw new ClientNotFound();
+        }
+
     }
 }
