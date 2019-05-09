@@ -45,7 +45,7 @@ public class FactoriaClienteTest {
     public void crearParticular() {
         Direccion direccion1 = new Direccion(1234, "Valencia", "Burjassot");
         Cliente client3 =new Particular("Philip", "0002", direccion1, "al375923@uji.es", creaTarifas.getTarifaBasica(15),"Pego");
-        assertEquals(cliente2.toString(), client3.toString());
+        assertEquals(cliente2.getNombre(), client3.getNombre());
     }
     @Test
     public void crearParticular2() {

@@ -7,6 +7,7 @@ import agenda.modelo.tarifa.Tarifa;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Vector;
 
 public class Factura implements Serializable, GetFecha {
     private Tarifa tipoTarifa;
@@ -61,5 +62,14 @@ public class Factura implements Serializable, GetFecha {
                 ", fin: " + this.fin +
                 ", importe: " + this.importe;
     }
+    public Vector informacion() {
+        Vector vector = new Vector();
+        vector.add(this.cod);
+        vector.add(tipoTarifa);
+        vector.add(this.inicio);
+        vector.add(this.fin);
+        vector.add(this.importe);
 
+        return vector;
+    }
 }

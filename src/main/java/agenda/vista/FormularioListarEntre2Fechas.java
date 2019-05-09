@@ -153,7 +153,13 @@ public class FormularioListarEntre2Fechas {
                     }
 
                     if(opcionListar.equals("Facturas")){
-                        rellenarInformacion(datos);
+                          try {
+                            datos = controlador.opcionDevolverFacturaEntreFechas(dni.getText(), inicio, fin);
+
+                            rellenarInformacion(datos);
+                        }catch (ClientNotFound clientNotFound){
+                            new PopUp("Cliente no encontrado");
+                        }
 
                     }
                 } else {
@@ -177,11 +183,11 @@ public class FormularioListarEntre2Fechas {
     }
     public void rellenarInformacion(Vector datos){
         areaDatos.setText("");
-        areaDatos.append("Numero destino\tDuración\tFecha\n");
+        areaDatos.append("Codigo\t Tarifa\tFecha Inicio\tFecha Final\tImporte\n");
 
         for(int i=0; i<datos.size();i++){
             Vector dades=(Vector) datos.get(i);
-            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2));
+            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+dades.get(3)+"\t"+dades.get(4));
         }
 
     }

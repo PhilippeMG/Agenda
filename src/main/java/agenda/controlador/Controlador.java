@@ -1,6 +1,7 @@
 package agenda.controlador;
 
 import agenda.modelo.Direccion;
+import agenda.modelo.Factura;
 import agenda.modelo.Llamada;
 import agenda.modelo.Modelo;
 import agenda.modelo.clientes.Cliente;
@@ -126,12 +127,41 @@ public class Controlador implements InterfaceControlador{
 
 
         if (llamadas.isEmpty()) {
-            System.out.println("NO HAY CLIENTES ENTRE ESAS FECHAS");
+            System.out.println("NO HAY LLAMADAS ENTRE ESAS FECHAS");
         } else {
             for(Llamada llamada :llamadas){
                 datos.add(llamada.informacion());
             }
             System.out.println(llamadas.toString());
+        }
+        return datos;
+    }
+    public Vector  opcionDevolverFacturaEntreFechas(String dni,int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
+        Vector datos=new Vector();
+
+        LocalDateTime inici=modelo.crearFecha(fechaInicio[0],fechaInicio[1],fechaInicio[2]);
+
+        LocalDateTime fi=modelo.crearFecha(fechaFinal[0],fechaFinal[1],fechaFinal[2]);
+        LinkedList<Factura> facturas = new LinkedList<>();
+
+        if (modelo.getClientes().containsKey(dni)) {
+            Cliente cliente = modelo.getClientes().get(dni);
+            Collection<Factura> myCollection = cliente.getFacturas().values();
+            List<Factura> list = new LinkedList<>(myCollection);
+            facturas = modelo.devolverEntreFechas(list, inici, fi);
+            System.out.printf(facturas.toString());
+        } else {
+            throw new ClientNotFound();
+        }
+
+
+        if (facturas.isEmpty()) {
+            System.out.println("NO HAY FACTURAS ENTRE ESAS FECHAS");
+        } else {
+            for(Factura llamada :facturas){
+                datos.add(llamada.toString());
+            }
+            System.out.println(facturas.toString());
         }
         return datos;
     }
