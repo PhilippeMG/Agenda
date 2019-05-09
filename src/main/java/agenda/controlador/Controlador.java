@@ -7,6 +7,7 @@ import agenda.modelo.Modelo;
 import agenda.modelo.clientes.Cliente;
 import agenda.modelo.clientes.CrearCliente;
 import agenda.modelo.excepciones.ClientNotFound;
+import agenda.modelo.excepciones.FacturaNotFound;
 import agenda.modelo.excepciones.InvalidArguments;
 import agenda.modelo.tarifa.CrearTarifa;
 import agenda.modelo.tarifa.Tarifa;
@@ -221,4 +222,15 @@ public class Controlador implements InterfaceControlador {
         }
 
     }
+    public Vector devolverFactura(int codigo) throws FacturaNotFound {
+        Factura fact=null;
+        try {
+             fact=modelo.devolverFactura(codigo);
+        } catch (FacturaNotFound facturaNotFound) {
+            throw new FacturaNotFound();
+        }
+
+        return fact.informacion();
+    }
+
 }

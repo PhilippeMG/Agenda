@@ -228,7 +228,17 @@ public class Modelo implements Serializable, InterfaceModelo{
             throw new FacturaNotFound();
         }
     }
+    public Factura devolverFactura(int codigo) throws FacturaNotFound {
+        Factura factura=null;
+        if (facturas.containsKey(codigo)) {
+             factura=facturas.get(codigo);
+            System.out.println(facturas.get(codigo).toString());
 
+        } else {
+            throw new FacturaNotFound();
+        }
+        return factura;
+    }
     public void mostrarFacturas(String NIF) throws ClientNotFound {
         if (clientes.containsKey(NIF)) {
             clientes.get(NIF).mostrarFacturas();

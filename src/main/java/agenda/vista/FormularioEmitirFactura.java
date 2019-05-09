@@ -58,7 +58,6 @@ public class FormularioEmitirFactura {
         contenedor.add(new JLabel("Fecha inicial"));
         contenedor.add(fechaIn);
         contenedor.add(new JLabel("Fecha final"));
-
         contenedor.add(fechaFi);
         contenedor.add(bEmitir);
         formulario.pack();

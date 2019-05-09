@@ -3,6 +3,7 @@ package agenda.vista;
 import agenda.controlador.Controlador;
 import agenda.modelo.Modelo;
 import agenda.modelo.excepciones.ClientNotFound;
+import agenda.modelo.excepciones.FacturaNotFound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,8 +82,17 @@ public class PanelFacturas extends JPanel {
         bBuscarFactura.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!codFacturaIsEmpty()) {
+
+                    try {
+                        Vector datos = controlador.devolverFactura(convertirAInt(codFact));
+                        new FormularioBuscarFactura(datos);
+
+                    } catch (FacturaNotFound facturaNotFound) {
+                        new PopUp("La factura no existe.", vista, true);
+                    }
+
                 } else {
-                    new PopUp("EL codigo factura esta vacio.", vista, true);
+                    new PopUp("El codigo factura esta vacio.", vista, true);
 
                 }
 
@@ -102,8 +112,6 @@ public class PanelFacturas extends JPanel {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-
-
             }
         });
     }
@@ -126,6 +134,9 @@ public class PanelFacturas extends JPanel {
             areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t\t" + dades.get(3) + "\t\t" + dades.get(4) + "\n");
         }
 
+    }
+    public int convertirAInt(JTextField campo) {
+        return Integer.valueOf(String.valueOf(campo.getText()));
     }
 
 }
