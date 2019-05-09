@@ -148,7 +148,7 @@ public class FormularioListarEntre2Fechas {
 
                             rellenarInformacion(datos);
                         }catch (ClientNotFound clientNotFound){
-                            new PopUp("Cliente no encontrado");
+                            new PopUp("Cliente no encontrado",formulario,true);
                         }
                     }
 
@@ -158,12 +158,12 @@ public class FormularioListarEntre2Fechas {
 
                             rellenarInformacion(datos);
                         }catch (ClientNotFound clientNotFound){
-                            new PopUp("Cliente no encontrado");
+                            new PopUp("Cliente no encontrado",formulario,true);
                         }
 
                     }
                 } else {
-                    new PopUp("Hay campos vacios");
+                    new PopUp("Hay campos vacios",formulario,true);
                 }
             }
         });

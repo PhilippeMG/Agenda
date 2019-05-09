@@ -88,12 +88,12 @@ public class FormularioCliente {
 
                 } catch (InvalidArguments invalidArguments) {
                     System.out.println("Error...");
-                    new PopUp("DNI duplicado...");
+                    new PopUp("DNI duplicado...",formulario,true);
 
                 }
                 limpiarCampos();
             }else{ System.out.println("Hay campos vacios...");
-                new PopUp("Hay campos vacios...");
+                new PopUp("Hay campos vacios...",formulario,true);
                 }
             }
         });

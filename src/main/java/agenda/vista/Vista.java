@@ -23,7 +23,7 @@ public class Vista implements InterfaceVista {
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/icono.png"); //Creamos una IMAGE
         ventana.setIconImage(icono); //Añadimos la IMAGE creada
         JTabbedPane pestanyas = new JTabbedPane();
-        pestanyas.add("Clentes", new PanelClientes(controlador, modelo));
+        pestanyas.add("Clentes", new PanelClientes(controlador, modelo, ventana));
 
         pestanyas.add("Facturas", new PanelFacturas(this.controlador, this.modelo));
         pestanyas.add("Llamadas", new PanelLlamadas(this.controlador, this.modelo));

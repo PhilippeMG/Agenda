@@ -19,10 +19,11 @@ public class PanelClientes extends JPanel {
     Modelo modelo;
     JTextArea areaDatos =new JTextArea(20,10);
     JTextField dniCliente;
-    public PanelClientes(Controlador controlador, Modelo modelo) {
+    JFrame vista;
+    public PanelClientes(Controlador controlador, Modelo modelo,JFrame vista) {
         this.controlador = controlador;
         this.modelo = modelo;
-
+        this.vista=vista;
         // JButton button = new JButton("Añadir Cliente");
         JButton bBuscarCliente = new JButton("Buscar Cliente");
         JButton bAñadirCliente = new JButton("Añadir Cliente");
@@ -65,13 +66,13 @@ public class PanelClientes extends JPanel {
                     try {
                         infoCliente = controlador.devolverCliente(dniCliente.getText());
                     } catch (ClientNotFound clientNotFound) {
-                        new PopUp("El cliente no existe");
+                        new PopUp("El cliente no existe", vista,true);
                     }
 
                     new FormularioBuscarCliente(controlador, infoCliente);
                 }else {
                     System.out.printf("Dni no introducido");
-                    new PopUp("DNI no introducido");
+                    new PopUp("DNI no introducido",vista,true);
                 }
             }
         });
@@ -80,6 +81,7 @@ public class PanelClientes extends JPanel {
         bAñadirCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Creando cliente...");
+
                 new FormularioCliente(controlador);
             }
         });
@@ -108,11 +110,11 @@ public class PanelClientes extends JPanel {
                         rellenarInformacion(datos);
 
                     } catch (ClientNotFound clientNotFound) {
-                        new PopUp("Cliente no encontrado");
+                        new PopUp("Cliente no encontrado",vista,true);
 
                     }
                 } else {System.out.printf("Dni no introducido");
-                    new PopUp("DNI no introducido");
+                    new PopUp("DNI no introducido",vista,true);
                 }
             }
 

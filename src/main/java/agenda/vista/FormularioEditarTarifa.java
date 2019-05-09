@@ -55,7 +55,7 @@ public class FormularioEditarTarifa {
                     }
                     limpiarCampos();
                 } else {
-                    new PopUp("Campo/s Vacio/s");
+                    new PopUp("Campos vacios",formulario,true);
                 }
             }
         });
