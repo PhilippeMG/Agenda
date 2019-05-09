@@ -140,13 +140,13 @@ public class FormularioListarEntre2Fechas {
                     fin[2]=convertirAInt(anyFi);
                     if(opcionListar.equals("Clientes")){
                     datos= controlador.opcionDevolverClientesEntreFechas(inicio,fin);
-                    rellenarInformacion(datos);
+                    rellenarInformacionClientes(datos);
                     }
                     if(opcionListar.equals("Llamadas")){
                         try {
                             datos = controlador.opcionDevolverLlamadasEntreFechas(dni.getText(), inicio, fin);
 
-                            rellenarInformacion(datos);
+                            rellenarInformacionLlamadas(datos);
                         }catch (ClientNotFound clientNotFound){
                             new PopUp("Cliente no encontrado",formulario,true);
                         }
@@ -156,7 +156,7 @@ public class FormularioListarEntre2Fechas {
                           try {
                             datos = controlador.opcionDevolverFacturaEntreFechas(dni.getText(), inicio, fin);
 
-                            rellenarInformacion(datos);
+                            rellenarInformacionFacturas(datos);
                         }catch (ClientNotFound clientNotFound){
                             new PopUp("Cliente no encontrado",formulario,true);
                         }
@@ -181,13 +181,34 @@ public class FormularioListarEntre2Fechas {
     public boolean camposVacios() {
         return (tamanyCampo(diaIn) <= 0 && tamanyCampo(diaFi) <= 0 && tamanyCampo(mesIn) <= 0 && tamanyCampo(mesFi) <= 0 && tamanyCampo(anyIn) <= 0 && tamanyCampo(anyFi) <= 0);
     }
-    public void rellenarInformacion(Vector datos){
+    public void rellenarInformacionLlamadas(Vector datos){
+        areaDatos.setText("");
+        areaDatos.append("Num destino\t Duración\t Fecha de la llamada\n");
+
+        for(int i=0; i<datos.size();i++){
+            Vector dades=(Vector) datos.get(i);
+            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\n");
+        }
+
+    }
+    public void rellenarInformacionClientes(Vector datos){
         areaDatos.setText("");
         areaDatos.append("Codigo\t Tarifa\tFecha Inicio\tFecha Final\tImporte\n");
 
         for(int i=0; i<datos.size();i++){
             Vector dades=(Vector) datos.get(i);
-            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+dades.get(3)+"\t"+dades.get(4));
+            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\t"+dades.get(3)+"\t"+dades.get(4)+"\t"+dades.get(5)+"\n");
+        }
+
+    }
+    public void rellenarInformacionFacturas(Vector datos){
+        areaDatos.setText("");
+        areaDatos.append("Codigo\t Tarifa\tFecha Inicio\t\t\tFecha Final\t\t\tImporte\n");
+
+        for(int i=0; i<datos.size();i++){
+            Vector dades=(Vector) datos.get(i);
+            System.out.println(dades.toString());
+            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\t\t"+dades.get(3)+"\t\t"+dades.get(4)+"\n");
         }
 
     }

@@ -158,10 +158,11 @@ public class Controlador implements InterfaceControlador{
         if (facturas.isEmpty()) {
             System.out.println("NO HAY FACTURAS ENTRE ESAS FECHAS");
         } else {
-            for(Factura llamada :facturas){
-                datos.add(llamada.toString());
+            for(Factura fact :facturas){
+                datos.add(fact.informacion());
+                System.out.println(fact.informacion());
             }
-            System.out.println(facturas.toString());
+
         }
         return datos;
     }
