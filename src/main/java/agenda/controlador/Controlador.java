@@ -198,7 +198,7 @@ public class Controlador implements InterfaceControlador {
 
 
         if (facturas.isEmpty()) {
-            System.out.println("NO HAY FACTURAS ENTRE ESAS FECHAS");
+            System.out.println("NO HAY FACTURAS ");
         } else {
             for (Factura fact : facturas) {
                 datos.add(fact.informacion());
@@ -208,7 +208,31 @@ public class Controlador implements InterfaceControlador {
         }
         return datos;
     }
+    public Vector getLlamadasCliente(String dni) throws ClientNotFound {
+        Vector datos = new Vector();
+        LinkedList<Llamada> llamadas;
 
+        if (modelo.getClientes().containsKey(dni)) {
+            Cliente cliente = modelo.getClientes().get(dni);
+            Collection<Llamada> myCollection = cliente.getLlamadas();
+            llamadas = new LinkedList<>(myCollection);
+
+        } else {
+            throw new ClientNotFound();
+        }
+
+
+        if (llamadas.isEmpty()) {
+            System.out.println("NO HAY LLAMADAS");
+        } else {
+            for (Llamada llamada : llamadas) {
+                datos.add(llamada.informacion());
+                System.out.println(llamada.informacion());
+            }
+
+        }
+        return datos;
+    }
     public void emitirFacturaCliente(String dni, int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
 
         LocalDateTime inicio = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);

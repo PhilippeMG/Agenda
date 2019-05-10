@@ -30,7 +30,7 @@ public class Vista implements InterfaceVista {
         pestanyas.add("Clentes", new PanelClientes(controlador, modelo, ventana));
 
         pestanyas.add("Facturas", new PanelFacturas(this.controlador, this.modelo,ventana));
-        pestanyas.add("Llamadas", new PanelLlamadas(this.controlador, this.modelo));
+        pestanyas.add("Llamadas", new PanelLlamadas(this.controlador, this.modelo,ventana));
 
         ventana.add(pestanyas);
         ventana.pack();
