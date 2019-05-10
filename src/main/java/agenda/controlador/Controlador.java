@@ -208,6 +208,18 @@ public class Controlador implements InterfaceControlador {
         }
         return datos;
     }
+    public  void insertarLlamada(String dni, int[] fecha, int duracio ,int numero) throws ClientNotFound {
+
+        if (modelo.getClientes().containsKey(dni)) {
+           LocalDateTime data= modelo.crearFecha(fecha[0],fecha[1],fecha[2]);
+           modelo.insertarLlamada(dni,new Llamada(numero,duracio,data));
+            System.out.println("Llamada insertada");
+
+
+        } else {
+            throw new ClientNotFound();
+        }
+    }
     public Vector getLlamadasCliente(String dni) throws ClientNotFound {
         Vector datos = new Vector();
         LinkedList<Llamada> llamadas;

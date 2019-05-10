@@ -213,7 +213,7 @@ public class Modelo implements Serializable, InterfaceModelo{
                     throw new FacturaNotFound();
                 }
             } catch (FacturaNotFound e) {
-                System.out.println(e.getMessage());
+                System.out.println("-"+e.getMessage());
             }
             return factura;
         } else {

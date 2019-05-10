@@ -76,10 +76,11 @@ public class FormularioCrearFactura {
                     fin[2]=convertirAInt(anyFi);
                     try {
                         controlador.emitirFacturaCliente(dni.getText(),inicio,fin);
+                        System.out.println("Factura emitida con exito");
+
                     } catch (ClientNotFound clientNotFound) {
                         new PopUp("No existe el cliente.",formulario,true);
                     }
-                    System.out.println("Factura emitida con exito");
                 }else{
                     new PopUp("Hay campos vacios.",formulario,true);
 

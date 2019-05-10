@@ -1,9 +1,12 @@
 package agenda.vista;
 
 import agenda.controlador.Controlador;
+import agenda.modelo.excepciones.ClientNotFound;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FormularioCrearLlamada {
 
@@ -40,7 +43,7 @@ public class FormularioCrearLlamada {
 
 
         JFrame formulario = new JFrame("Crear llamada");//Creamos el JFrameJs
-        Image icono = Toolkit.getDefaultToolkit().getImage("src/media/add-call.png"); //Creamos una IMAGE
+        Image icono = Toolkit.getDefaultToolkit().getImage("src/media/mobile-phone.png"); //Creamos una IMAGE
         formulario.setIconImage(icono); //Añadimos la IMAGE creada
 
         formulario.setLayout(new GridLayout(5, 2));
@@ -50,14 +53,41 @@ public class FormularioCrearLlamada {
 
         contenedor.add(new JLabel("Numero del telefono"));
         contenedor.add(numero);
-        contenedor.add(new JLabel("Fecha inicial"));
+        contenedor.add(new JLabel("Fecha de la llamda"));
         contenedor.add(fechaIn);
         contenedor.add(new JLabel("Duracion de la llamada"));
         contenedor.add(duracion);
         contenedor.add(bEmitir);
         formulario.pack();
         formulario.setVisible(true);
-
+        bEmitir.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(!camposVacios()) {
+                    int[] inicio = new int[3];
+                    inicio[0] = convertirAInt(diaIn);
+                    inicio[1] = convertirAInt(mesIn);
+                    inicio[2] = convertirAInt(anyIn);
+                    try {
+                        controlador.insertarLlamada(dni.getText(),inicio,convertirAInt(duracion),convertirAInt(numero));
+                    } catch (ClientNotFound clientNotFound) {
+                        new PopUp("El dni no existe",formulario,true);
+                    }
+                }else{
+                    new PopUp("Hay campos vacios",formulario,true);
+                }
+            }
+    });
 
     }
+    public int tamanyCampo(JTextField campo) {
+        return campo.getText().length();
+    }
+
+    public boolean camposVacios() {
+        return (tamanyCampo(diaIn) <= 0 && tamanyCampo(dni) <= 0 && tamanyCampo(mesIn) <= 0 && tamanyCampo(numero) <= 0 && tamanyCampo(anyIn) <= 0 && tamanyCampo(duracion)<=0);
+    }
+    public int convertirAInt(JTextField campo) {
+        return Integer.valueOf(String.valueOf(campo.getText()));
+    }
+
 }
