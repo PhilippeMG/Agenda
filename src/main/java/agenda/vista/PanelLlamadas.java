@@ -80,6 +80,12 @@ public class PanelLlamadas extends JPanel {
             }
         });
 
+        bInsetarLlamada.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.print("Creando Llamada");
+                new FormularioCrearLlamada(controlador);
+            }
+        });
     } public boolean dniIsEmpty() {
         return (dni.getText().length() <= 0);
     }

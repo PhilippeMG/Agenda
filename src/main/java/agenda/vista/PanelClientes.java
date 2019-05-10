@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.Vector;
 
 public class PanelClientes extends JPanel {
@@ -67,7 +66,7 @@ public class PanelClientes extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Creando cliente...");
 
-                new FormularioCliente(controlador);
+                new FormularioCrearCliente(controlador);
             }
         });
         bEditarCliente.addActionListener(new ActionListener() {

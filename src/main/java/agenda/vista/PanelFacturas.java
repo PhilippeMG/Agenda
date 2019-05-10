@@ -101,7 +101,7 @@ public class PanelFacturas extends JPanel {
 
         bEmitirFacturas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new FormularioEmitirFactura(controlador);
+                new FormularioCrearFactura(controlador);
 
             }
         });

@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-public class FormularioEmitirFactura {
+public class FormularioCrearFactura {
     JTextField diaIn = new JTextField(3);
     JTextField mesIn = new JTextField(3);
     JTextField anyIn = new JTextField(3);
@@ -19,7 +19,7 @@ public class FormularioEmitirFactura {
     JTextField dni = new JTextField(5);
     Controlador controlador;
     JButton bEmitir=new JButton("Emitir factura");
-    public FormularioEmitirFactura(Controlador controlador) {
+    public FormularioCrearFactura(Controlador controlador) {
         this.controlador= controlador;
         JPanel fechaIn = new JPanel();
         //fechaIn.add(new JLabel("Fecha inicio: "));

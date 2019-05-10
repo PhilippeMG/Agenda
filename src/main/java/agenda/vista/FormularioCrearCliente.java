@@ -11,7 +11,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.LinkedList;
 
-public class FormularioCliente {
+public class FormularioCrearCliente {
     JTextField nombre = new JTextField(20);
     JTextField dni = new JTextField(20);
     JTextField cp = new JTextField(20);
@@ -30,7 +30,7 @@ public class FormularioCliente {
 
     Controlador controlador;
 
-    public FormularioCliente(Controlador controlador) {
+    public FormularioCrearCliente(Controlador controlador) {
         this.controlador = controlador;
         JFrame formulario = new JFrame("Añadir Cliente");//Creamos el JFrame
 
