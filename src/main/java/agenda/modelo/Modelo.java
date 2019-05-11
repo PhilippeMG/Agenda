@@ -12,10 +12,11 @@ import java.time.*;
 import java.util.*;
 
 
-public class Modelo implements Serializable, InterfaceModelo{
-    private  HashMap<String, Cliente> clientes = new HashMap<>();
-    private  HashMap<Integer, Factura> facturas = new HashMap<>();
+public class Modelo implements Serializable, InterfaceModelo {
+    private HashMap<String, Cliente> clientes = new HashMap<>();
+    private HashMap<Integer, Factura> facturas = new HashMap<>();
     Vista vista;
+
     public Modelo() {
         super();
     }
@@ -74,6 +75,7 @@ public class Modelo implements Serializable, InterfaceModelo{
             return null;
         }
     }
+
     public Cliente getCliente(String dni) throws ClientNotFound {
 
         if (clientes.containsKey(dni)) {
@@ -87,23 +89,24 @@ public class Modelo implements Serializable, InterfaceModelo{
         Collection<Cliente> clientela = clientesMap.values();
         if (clientela.isEmpty()) {
             System.out.println("No hay clientes");
-        }else {
+        } else {
             Iterator<Cliente> iterClientela = clientela.iterator();//.entrySet().iterator();
             while (iterClientela.hasNext()) {
                 System.out.println(iterClientela.next().toString());
             }
         }
     }
+
     public Vector informacionClientes(HashMap<String, Cliente> clientesMap) {
         Vector vector = new Vector();
         Collection<Cliente> clientela = clientesMap.values();
         if (clientela.isEmpty()) {
             System.out.println("No hay clientes");
-        }else {
+        } else {
             Iterator<Cliente> iterClientela = clientela.iterator();//.entrySet().iterator();
             while (iterClientela.hasNext()) {
                 vector.add(iterClientela.next().informacion());
-               // System.out.println(iterClientela.next().toString());
+                // System.out.println(iterClientela.next().toString());
             }
         }
         return vector;
@@ -122,8 +125,7 @@ public class Modelo implements Serializable, InterfaceModelo{
             System.out.print("Apellidos del cliente: ");
             apellidos = scanner.next();
         }
-        System.out        //TODO Marcos mira lo de las tarifas, Tarifa es abstract y hay dos que tenemos que usar
-.println("Dirección del cliente: ");
+        System.out.println("Dirección del cliente: ");
         System.out.print("\tCP: ");
         int CP = scannerEntero.nextInt();
         System.out.print("\tProvincia: ");
@@ -134,33 +136,33 @@ public class Modelo implements Serializable, InterfaceModelo{
 
         System.out.print("Correo: ");
         String correo = scanner.next();
-        int tipo=-1;
-        while (tipo<0 ||tipo>2) {
+        int tipo = -1;
+        while (tipo < 0 || tipo > 2) {
             System.out.printf("Tipo de Tarifa:\n 0- Tarifa Tardes o 1- Tarifa Domingo Gratis o 2- Ambas: ");
-             tipo = scannerEntero.nextInt();
+            tipo = scannerEntero.nextInt();
         }
         System.out.print("Tarifa: ");
         int tipoTarifa = scannerEntero.nextInt();
-        FabricarTarifa creadorTarifas=new CrearTarifa();
-        Tarifa  tarifas = creadorTarifas.getTarifaBasica(tipoTarifa);
+        FabricarTarifa creadorTarifas = new CrearTarifa();
+        Tarifa tarifas = creadorTarifas.getTarifaBasica(tipoTarifa);
 
         Tarifa tarifa;
 
-        if (tipo==0){
+        if (tipo == 0) {
             tarifa = creadorTarifas.getOfertaTardes(tarifas);
 
 
-        }else if(tipo==1){
+        } else if (tipo == 1) {
             tarifa = creadorTarifas.getOfertaDomingos(tarifas);
 
 
-        }else{
+        } else {
             Tarifa tarde = creadorTarifas.getOfertaTardes(tarifas);
             tarifa = creadorTarifas.getOfertaDomingos(tarde);
 
 
         }
-        FabricarCliente creador=new CrearCliente();
+        FabricarCliente creador = new CrearCliente();
 
         if (opcion == 0) {
             Cliente nuevo = creador.getClienteParticular(nombre, nif, direccion, correo, tarifa, apellidos);
@@ -213,7 +215,7 @@ public class Modelo implements Serializable, InterfaceModelo{
                     throw new FacturaNotFound();
                 }
             } catch (FacturaNotFound e) {
-                System.out.println("-"+e.getMessage());
+                System.out.println("-" + e.getMessage());
             }
             return factura;
         } else {
@@ -228,10 +230,11 @@ public class Modelo implements Serializable, InterfaceModelo{
             throw new FacturaNotFound();
         }
     }
+
     public Factura devolverFactura(int codigo) throws FacturaNotFound {
-        Factura factura=null;
+        Factura factura = null;
         if (facturas.containsKey(codigo)) {
-             factura=facturas.get(codigo);
+            factura = facturas.get(codigo);
             System.out.println(facturas.get(codigo).toString());
 
         } else {
@@ -239,6 +242,7 @@ public class Modelo implements Serializable, InterfaceModelo{
         }
         return factura;
     }
+
     public void mostrarFacturas(String NIF) throws ClientNotFound {
         if (clientes.containsKey(NIF)) {
             clientes.get(NIF).mostrarFacturas();
@@ -264,17 +268,18 @@ public class Modelo implements Serializable, InterfaceModelo{
         int dia = scanner.nextInt();
         int mes = scanner.nextInt();
         int año = scanner.nextInt();
-        LocalTime hora= LocalTime.now();
+        LocalTime hora = LocalTime.now();
         LocalDate fecha = LocalDate.of(año, mes, dia);
-        LocalDateTime data= LocalDateTime.of(fecha,hora);
+        LocalDateTime data = LocalDateTime.of(fecha, hora);
 
         return data;
     }
-    public LocalDateTime crearFecha(int dia,int mes,int any) {
 
-        LocalTime hora= LocalTime.now();
+    public LocalDateTime crearFecha(int dia, int mes, int any) {
+
+        LocalTime hora = LocalTime.now();
         LocalDate fecha = LocalDate.of(any, mes, dia);
-        LocalDateTime data= LocalDateTime.of(fecha,hora);
+        LocalDateTime data = LocalDateTime.of(fecha, hora);
 
         return data;
     }
@@ -289,7 +294,12 @@ public class Modelo implements Serializable, InterfaceModelo{
             fis = new FileInputStream("datosFacturas.bin");
             ois = new ObjectInputStream(fis);
             setFacturas((HashMap<Integer, Factura>) ois.readObject());
+            //Codigo Facturas
+            fis = new FileInputStream("contadorFacturas.bin");
+            ois = new ObjectInputStream(fis);
+            Factura.setContCod((int) ois.readObject());
             ois.close();
+
         } catch (IOException e) {
             System.out.println("No hay datos guardados");
 
@@ -306,11 +316,15 @@ public class Modelo implements Serializable, InterfaceModelo{
         fos = new FileOutputStream("datosFacturas.bin");
         oos = new ObjectOutputStream(fos);
         oos.writeObject(getFacturas());
+        //Codigo Facturas
+        fos = new FileOutputStream("contadorFacturas.bin");
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject( Factura.getContCod());
         oos.close();
     }
 
 
     public void setVista(Vista vista) {
         this.vista = vista;
-            }
+    }
 }

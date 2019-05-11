@@ -55,6 +55,13 @@ public class Factura implements Serializable, GetFecha {
         return importe;
     }
 
+    public static void setContCod(int cod) {
+        Factura.cod = cod;
+    }
+    public static int getContCod() {
+        return cod;
+    }
+
     @Override
     public String toString() {
         return "Factura :" +
@@ -70,7 +77,7 @@ public class Factura implements Serializable, GetFecha {
         vector.add(tipoTarifa.getPrecio());
         vector.add(this.inicio);
         vector.add(this.fin);
-        vector.add(this.importe);
+        vector.add(getImporte());
 
         return vector;
     }
