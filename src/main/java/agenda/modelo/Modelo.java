@@ -50,12 +50,20 @@ public class Modelo implements Serializable, InterfaceModelo {
 
     public void borrarCliente(String NIF) throws ClientNotFound {
         if (clientes.containsKey(NIF)) {
+            Cliente cliente= clientes.get(NIF);
+            borrarFacturasDelCliente(cliente);
             clientes.remove(NIF);
         } else {
             throw new ClientNotFound();
         }
     }
 
+    public  void borrarFacturasDelCliente(Cliente cliente){
+        Collection<Factura> facturasCliente= cliente.getFacturas().values();
+        for (Factura fact: facturasCliente){
+            facturas.remove(fact.getCod());
+        }
+    }
     public void mostrarCliente(String NIF) throws ClientNotFound {
         if (clientes.containsKey(NIF)) {
             System.out.println(clientes.get(NIF).toString()); //LLama a toString de cliente.
