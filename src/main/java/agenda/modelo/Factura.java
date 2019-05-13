@@ -75,8 +75,8 @@ public class Factura implements Serializable, GetFecha {
         Vector vector = new Vector();
         vector.add(getCod());
         vector.add(tipoTarifa.getPrecio());
-        vector.add(this.inicio);
-        vector.add(this.fin);
+        vector.add(inicio.getDayOfMonth()+" "+inicio.getMonth()+" "+inicio.getYear());
+        vector.add(fin.getDayOfMonth()+" "+fin.getMonth()+" "+fin.getYear());
         vector.add(getImporte());
 
         return vector;

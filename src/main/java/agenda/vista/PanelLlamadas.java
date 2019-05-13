@@ -16,7 +16,7 @@ public class PanelLlamadas extends JPanel {
     Modelo modelo;
     JButton bInsetarLlamada = new JButton("Insertar llamada");
     JButton bListarLlamadas = new JButton("Listar llamadas de un DNI");
-    JButton bListarEntre2 = new JButton("Listar  entre 2 fechas");
+    JButton bListarEntre2 = new JButton("Listar  entre dos fechas");
     JButton bGuardar = new JButton("Guardar");
     JFrame vista;
     JTextArea areaDatos = new JTextArea(20, 10);

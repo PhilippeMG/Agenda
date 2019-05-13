@@ -110,7 +110,7 @@ public abstract class Cliente implements Serializable, GetFecha {
         vector.add(direccion);
         vector.add(correo);
         vector.add(tarifa.getPrecio());
-        vector.add(fechaDeAlta.toString());
+        vector.add(fechaDeAlta.getDayOfMonth()+" "+fechaDeAlta.getMonth()+" "+fechaDeAlta.getYear());
         return vector;
 
 
