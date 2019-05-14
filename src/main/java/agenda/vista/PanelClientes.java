@@ -16,9 +16,10 @@ public class PanelClientes extends JPanel {
     JScrollPane panel;
     Controlador controlador;
     Modelo modelo;
-    JTextArea areaDatos =new JTextArea(20,10);
+    JTextArea areaDatosClientes =new JTextArea(20,10);
     JTextField dniCliente;
     JFrame vista;
+
     public PanelClientes(Controlador controlador, Modelo modelo,JFrame vista) {
         this.controlador = controlador;
         this.modelo = modelo;
@@ -36,7 +37,7 @@ public class PanelClientes extends JPanel {
 
         Vector datos = modelo.informacionClientes(modelo.getClientes());
 
-        JScrollPane panel = new JScrollPane(areaDatos);
+        JScrollPane panel = new JScrollPane(areaDatosClientes);
         panel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         panel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         rellenarInformacion(datos);
@@ -142,19 +143,24 @@ public class PanelClientes extends JPanel {
         contenedor.add(panel);
         add(contenedor);
 
-        areaDatos.setForeground(Color.BLACK);
-        areaDatos.setEditable(false);
+        areaDatosClientes.setForeground(Color.BLACK);
+        areaDatosClientes.setEditable(false);
 
 
 
     }
+
+    public  void actualizarClientes(){
+        Vector datos = modelo.informacionClientes(modelo.getClientes());
+        rellenarInformacion(datos);
+    }
     public void rellenarInformacion(Vector datos){
-        areaDatos.setText("");
-        areaDatos.append("NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n");
+        areaDatosClientes.setText("");
+        areaDatosClientes.append("NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n");
 
         for(int i=0; i<datos.size();i++){
             Vector dades=(Vector) datos.get(i);
-            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\t"+dades.get(3)+"\t"+dades.get(4)+"\t"+dades.get(5)+"\n");
+            areaDatosClientes.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\t"+dades.get(3)+"\t"+dades.get(4)+"\t"+dades.get(5)+"\n");
         }
 
     }

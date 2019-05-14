@@ -37,15 +37,23 @@ public class Modelo implements Serializable, InterfaceModelo {
     public HashMap<Integer, Factura> getFacturas() {
         return facturas;
     }
+    public void setVista(Vista vista) {
+        this.vista = vista;
+    }
 
     //>>>CLIENTE<<<<
     public void insertarCliente(Cliente cliente) throws InvalidArguments {
         if (!clientes.containsKey(cliente.getNif())) {
             clientes.put(cliente.getNif(), cliente);
+
         } else {
             throw new InvalidArguments();
 
         }
+        System.out.println("Actualizando...");
+        vista.actualizar();
+        System.out.println("Actualizado");
+
     }
 
     public void borrarCliente(String NIF) throws ClientNotFound {
@@ -53,6 +61,7 @@ public class Modelo implements Serializable, InterfaceModelo {
             Cliente cliente= clientes.get(NIF);
             borrarFacturasDelCliente(cliente);
             clientes.remove(NIF);
+            vista.actualizar();
         } else {
             throw new ClientNotFound();
         }
@@ -332,7 +341,4 @@ public class Modelo implements Serializable, InterfaceModelo {
     }
 
 
-    public void setVista(Vista vista) {
-        this.vista = vista;
-    }
 }

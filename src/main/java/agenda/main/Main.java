@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        Modelo modelo=new Modelo();
         Vista vista = new Vista();
-
         Controlador controlador= new Controlador();
 
         CrearTarifa fabricaTarifa= new CrearTarifa();
@@ -24,16 +24,10 @@ public class Main {
         controlador.setFabricaClientes(fabricaCliente);
         controlador.setFabricaTarifas(fabricaTarifa);
         controlador.setVista(vista);
-
-        Modelo modelo=new Modelo();
-
         controlador.setModelo(modelo);
-
-
 
         vista.setControlador(controlador);
         vista.setModelo(modelo);
-
 
         modelo.setVista(vista);
 

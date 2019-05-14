@@ -15,7 +15,9 @@ public class Vista implements InterfaceVista {
     Controlador controlador;
     Modelo modelo;
     JFrame ventana=new JFrame("Agenda");//Creamos el JFrame
-
+    PanelClientes vistaClientes;
+    PanelFacturas vistaFacturas;
+    PanelLlamadas vistaLlamadas;
     public void setControlador(Controlador gestorAgenda) {
         this.controlador = gestorAgenda;
     }
@@ -27,10 +29,13 @@ public class Vista implements InterfaceVista {
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/icono.png"); //Creamos una IMAGE
         ventana.setIconImage(icono); //Añadimos la IMAGE creada
         JTabbedPane pestanyas = new JTabbedPane();
-        pestanyas.add("Clentes", new PanelClientes(controlador, modelo, ventana));
+         vistaClientes=new PanelClientes(controlador, modelo, ventana);
+         vistaFacturas=new PanelFacturas(controlador, modelo,ventana);
+         vistaLlamadas=new PanelLlamadas(controlador,modelo,ventana);
+        pestanyas.add("Clentes", vistaClientes);
 
-        pestanyas.add("Facturas", new PanelFacturas(this.controlador, this.modelo,ventana));
-        pestanyas.add("Llamadas", new PanelLlamadas(this.controlador, this.modelo,ventana));
+        pestanyas.add("Facturas", vistaFacturas);
+        pestanyas.add("Llamadas", vistaLlamadas);
 
         ventana.add(pestanyas);
         ventana.pack();
@@ -40,6 +45,10 @@ public class Vista implements InterfaceVista {
 
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+   public void actualizar(){
+        vistaClientes.actualizarClientes();
+   }
 
 
     public void setModelo(Modelo modelo) {
