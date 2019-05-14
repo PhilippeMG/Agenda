@@ -19,8 +19,10 @@ public class FormularioCrearFactura {
     JTextField dni = new JTextField(5);
     Controlador controlador;
     JButton bEmitir=new JButton("Emitir factura");
-    public FormularioCrearFactura(Controlador controlador) {
+    public FormularioCrearFactura(Controlador controlador, String text) {
         this.controlador= controlador;
+        dni.setText(text);
+        dni.setEditable(false);
         JPanel fechaIn = new JPanel();
         //fechaIn.add(new JLabel("Fecha inicio: "));
         fechaIn.add(new JLabel("Dia"));
@@ -75,7 +77,7 @@ public class FormularioCrearFactura {
                     fin[1]=convertirAInt(mesFi);
                     fin[2]=convertirAInt(anyFi);
                     try {
-                        controlador.emitirFacturaCliente(dni.getText(),inicio,fin);
+                        controlador.emitirFacturaCliente(text,inicio,fin);
                         System.out.println("Factura emitida con exito");
 
                     } catch (ClientNotFound clientNotFound) {
@@ -94,7 +96,7 @@ public class FormularioCrearFactura {
     }
 
     public boolean camposVacios() {
-        return (tamanyCampo(diaIn) <= 0 && tamanyCampo(diaFi) <= 0 && tamanyCampo(mesIn) <= 0 && tamanyCampo(mesFi) <= 0 && tamanyCampo(anyIn) <= 0 && tamanyCampo(anyFi) <= 0 && tamanyCampo(dni)<=0);
+        return (tamanyCampo(diaIn) <= 0 && tamanyCampo(diaFi) <= 0 && tamanyCampo(mesIn) <= 0 && tamanyCampo(mesFi) <= 0 && tamanyCampo(anyIn) <= 0 && tamanyCampo(anyFi) <= 0);
     }
     public int convertirAInt(JTextField campo) {
         return Integer.valueOf(String.valueOf(campo.getText()));

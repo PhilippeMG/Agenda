@@ -195,6 +195,7 @@ public class Modelo implements Serializable, InterfaceModelo {
     public void insertarLlamada(String NIF, Llamada llamada) throws ClientNotFound {
         if (clientes.containsKey(NIF)) {
             clientes.get(NIF).insertarLlamada(llamada);
+            vista.actualizar();
         } else {
             throw new ClientNotFound();
         }
@@ -228,6 +229,7 @@ public class Modelo implements Serializable, InterfaceModelo {
             try {
                 if (!facturas.containsKey(factura.getCod())) {
                     facturas.put(factura.getCod(), factura);
+                    vista.actualizar();
                 } else {
                     throw new FacturaNotFound();
                 }
@@ -273,6 +275,7 @@ public class Modelo implements Serializable, InterfaceModelo {
         if (clientes.containsKey(NIF)) {
             Cliente client = clientes.get(NIF);
             client.cambiarTarifa(tarifa);
+            vista.actualizar();
         } else {
             throw new ClientNotFound();
         }

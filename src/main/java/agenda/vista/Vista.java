@@ -5,6 +5,7 @@ import agenda.modelo.Direccion;
 import agenda.modelo.Llamada;
 import agenda.modelo.Modelo;
 import agenda.modelo.clientes.CrearCliente;
+import agenda.modelo.excepciones.ClientNotFound;
 import agenda.modelo.tarifa.CrearTarifa;
 
 import javax.swing.*;
@@ -46,8 +47,11 @@ public class Vista implements InterfaceVista {
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-   public void actualizar(){
+   public void actualizar() {
+
         vistaClientes.actualizarClientes();
+        vistaLlamadas.actualizarLlamadas();
+        vistaFacturas.actualizarFacturas();
    }
 
 

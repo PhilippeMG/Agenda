@@ -45,9 +45,9 @@ public class PanelLlamadas extends JPanel {
         areaDatos.setEditable(false);
         contenedor.add(zonaDatos);
         add(contenedor);
-        bListarLlamadas.addActionListener(new ActionListener(){
+        bListarLlamadas.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 System.out.println("Listando llamadas...");
                 if (!dniIsEmpty()) {
                     try {
@@ -62,7 +62,7 @@ public class PanelLlamadas extends JPanel {
 
                 }
 
-               // JOptionPane.showMessageDialog(null, "You just clicked bListarFacturas");
+                // JOptionPane.showMessageDialog(null, "You just clicked bListarFacturas");
             }
         });
         bListarEntre2.addActionListener(new ActionListener() {
@@ -82,20 +82,36 @@ public class PanelLlamadas extends JPanel {
 
         bInsetarLlamada.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.print("Creando Llamada");
-                new FormularioCrearLlamada(controlador);
+                if (!dniIsEmpty()) {
+
+                    System.out.print("Creando Llamada");
+                    new FormularioCrearLlamada(controlador, dni.getText());
+                } else new PopUp("EL DNI esta vacio.", vista, true);
+
             }
         });
-    } public boolean dniIsEmpty() {
+    }
+
+    public boolean dniIsEmpty() {
         return (dni.getText().length() <= 0);
     }
-    public void rellenarInformacionLlamadas(Vector datos){
+    public void actualizarLlamadas(){
+        if(!dniIsEmpty()) {
+            try {
+                Vector datos = controlador.getLlamadasCliente(dni.getText());
+                rellenarInformacionLlamadas(datos);
+            }catch (ClientNotFound clientNotFound){
+
+            }
+        }
+    }
+    public void rellenarInformacionLlamadas(Vector datos) {
         areaDatos.setText("");
         areaDatos.append("Num destino\t Duración\t Fecha de la llamada\n");
 
-        for(int i=0; i<datos.size();i++){
-            Vector dades=(Vector) datos.get(i);
-            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\n");
+        for (int i = 0; i < datos.size(); i++) {
+            Vector dades = (Vector) datos.get(i);
+            areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\n");
         }
 
     }

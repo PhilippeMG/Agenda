@@ -20,12 +20,13 @@ public class FormularioCrearLlamada {
     Controlador controlador;
     JButton bEmitir=new JButton("Crear llamada");
 
-    public FormularioCrearLlamada(Controlador controlador) {
+    public FormularioCrearLlamada(Controlador controlador, String text) {
         this.controlador= controlador;
         JPanel fechaIn = new JPanel();
         //fechaIn.add(new JLabel("Fecha inicio: "));
         //fechaIn.add(new JLabel("Fecha inicial"));
-
+        dni.setText(text);
+        dni.setEditable(false);
         fechaIn.add(new JLabel("Dia"));
         fechaIn.add(diaIn);
         fechaIn.add(new JLabel("Mes"));
@@ -68,7 +69,7 @@ public class FormularioCrearLlamada {
                     inicio[1] = convertirAInt(mesIn);
                     inicio[2] = convertirAInt(anyIn);
                     try {
-                        controlador.insertarLlamada(dni.getText(),inicio,convertirAInt(duracion),convertirAInt(numero));
+                        controlador.insertarLlamada(text,inicio,convertirAInt(duracion),convertirAInt(numero));
                     } catch (ClientNotFound clientNotFound) {
                         new PopUp("El dni no existe",formulario,true);
                     }
