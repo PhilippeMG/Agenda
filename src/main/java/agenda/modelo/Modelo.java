@@ -254,7 +254,7 @@ public class Modelo implements Serializable, InterfaceModelo {
         Factura factura = null;
         if (facturas.containsKey(codigo)) {
             factura = facturas.get(codigo);
-            System.out.println(facturas.get(codigo).toString());
+          //  System.out.println(facturas.get(codigo).toString());
 
         } else {
             throw new FacturaNotFound();

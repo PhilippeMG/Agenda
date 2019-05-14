@@ -50,7 +50,7 @@ public class Controlador implements InterfaceControlador {
         }
 
         modelo.insertarCliente(cliente);
-        modelo.mostrarClientes(modelo.getClientes());
+       // modelo.mostrarClientes(modelo.getClientes());
     }
 
     public Tarifa TarifaCliente(int precio, LinkedList<String> oferta) {
@@ -67,19 +67,19 @@ public class Controlador implements InterfaceControlador {
 
     public void eliminarCliente(String DNI) throws ClientNotFound {
         modelo.borrarCliente(DNI);
-        modelo.mostrarClientes(modelo.getClientes());
+        //modelo.mostrarClientes(modelo.getClientes());
     }
 
     public void guardarDatos() throws IOException {
         modelo.guardarDatos();
         System.out.println("Datos guardados: ");
-        modelo.mostrarClientes(modelo.getClientes());
+        //modelo.mostrarClientes(modelo.getClientes());
     }
 
     public void cargarDatos() throws ClassNotFoundException {
         modelo.cargarDatos();
         System.out.println("Datos cargados: ");
-        modelo.mostrarClientes(modelo.getClientes());
+      //  modelo.mostrarClientes(modelo.getClientes());
     }
 
     public void modificarTarifa(String dni, int precio) throws ClientNotFound {
@@ -93,10 +93,10 @@ public class Controlador implements InterfaceControlador {
 
         LocalDateTime inici = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
 
-        System.out.println("inici:" + inici.toString());
+        //System.out.println("inici:" + inici.toString());
         LocalDateTime fi = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
-        System.out.println("fi:" + fi.toString());
-        System.out.println("claves: " + list.toString());
+        //System.out.println("fi:" + fi.toString());
+        //System.out.println("claves: " + list.toString());
 
 
         LinkedList<Cliente> clienteEntreFechas = modelo.devolverEntreFechas(list, inici, fi);
@@ -106,7 +106,7 @@ public class Controlador implements InterfaceControlador {
             for (Cliente client : clienteEntreFechas) {
                 datos.add(client.informacion());
             }
-            System.out.println(clienteEntreFechas.toString());
+            //System.out.println(clienteEntreFechas.toString());
         }
         return datos;
     }
@@ -122,7 +122,7 @@ public class Controlador implements InterfaceControlador {
         if (modelo.getClientes().containsKey(dni)) {
             Cliente cliente = modelo.getClientes().get(dni);
             llamadas = modelo.devolverEntreFechas(cliente.getLlamadas(), inici, fi);
-            System.out.printf(llamadas.toString());
+            //System.out.printf(llamadas.toString());
         } else {
             throw new ClientNotFound();
         }
@@ -134,7 +134,7 @@ public class Controlador implements InterfaceControlador {
             for (Llamada llamada : llamadas) {
                 datos.add(llamada.informacion());
             }
-            System.out.println(llamadas.toString());
+            //System.out.println(llamadas.toString());
         }
         return datos;
     }
@@ -152,7 +152,7 @@ public class Controlador implements InterfaceControlador {
             Collection<Factura> myCollection = cliente.getFacturas().values();
             List<Factura> list = new LinkedList<>(myCollection);
             facturas = modelo.devolverEntreFechas(list, inici, fi);
-            System.out.printf(facturas.toString());
+           // System.out.printf(facturas.toString());
         } else {
             throw new ClientNotFound();
         }
@@ -163,7 +163,7 @@ public class Controlador implements InterfaceControlador {
         } else {
             for (Factura fact : facturas) {
                 datos.add(fact.informacion());
-                System.out.println(fact.informacion());
+               // System.out.println(fact.informacion());
             }
 
         }
@@ -176,7 +176,7 @@ public class Controlador implements InterfaceControlador {
         Vector info = cliente.informacion();
         info.add(cliente.getNombreCompleto());
 
-        System.out.println(info);
+        //System.out.println(info);
 
         return info;
 
@@ -202,7 +202,7 @@ public class Controlador implements InterfaceControlador {
         } else {
             for (Factura fact : facturas) {
                 datos.add(fact.informacion());
-                System.out.println(fact.informacion());
+               // System.out.println(fact.informacion());
             }
 
         }
@@ -239,7 +239,7 @@ public class Controlador implements InterfaceControlador {
         } else {
             for (Llamada llamada : llamadas) {
                 datos.add(llamada.informacion());
-                System.out.println(llamada.informacion());
+                //System.out.println(llamada.informacion());
             }
 
         }

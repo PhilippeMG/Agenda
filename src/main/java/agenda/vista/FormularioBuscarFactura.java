@@ -20,7 +20,7 @@ public class FormularioBuscarFactura {
         JFrame formulario = new JFrame("Factura encontrada");
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/factura.png");
         formulario.setIconImage(icono);
-        System.out.println(dades.toString());
+        //System.out.println(dades.toString());
         formulario.setLayout(new GridLayout(5, 1));
         Container contenedor = formulario.getContentPane();
         contenedor.add(new JLabel("Codigo factura"));
