@@ -53,7 +53,7 @@ public class FormularioBuscarCliente {
         contenedor.add(tarifa);
 
         formulario.pack();
-        formulario.setVisible(true);// hacemos la ventsana visibel
+        formulario.setVisible(true);// hacemos la ventana visible
 
 
 

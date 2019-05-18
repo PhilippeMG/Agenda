@@ -87,12 +87,11 @@ public class FormularioCrearCliente {
                     controlador.añadirCliente(nombre.getText(), dni.getText(), CP, provincia.getText(), poblacion.getText(), correo.getText(), apellido.getText(), preu,ofertas);
 
                 } catch (InvalidArguments invalidArguments) {
-                    System.out.println("Error...");
                     new PopUp("DNI duplicado...",formulario,true);
 
                 }
                 limpiarCampos();
-            }else{ System.out.println("Hay campos vacios...");
+            }else{
                 new PopUp("Hay campos vacios...",formulario,true);
                 }
             }

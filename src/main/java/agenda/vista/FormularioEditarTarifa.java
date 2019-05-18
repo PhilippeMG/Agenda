@@ -37,21 +37,20 @@ public class FormularioEditarTarifa {
         contenedor.add(bModificar);
         //ancho por altura
         formulario.pack();
-        //formulario.setSize(300, 150);//Definimos el tamaño
-        formulario.setVisible(true);// hacemos la ventsana visibel
+        formulario.setVisible(true);// hacemos la ventsana visible
         limpiarCampos();
 
         bModificar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (dni.getText().length() > 0 && tarifa.getText().length() > 0) {
-                    int preu = Integer.valueOf(String.valueOf(tarifa.getText()));
+                    int precio = Integer.valueOf(String.valueOf(tarifa.getText()));
                     System.out.println("Modificando...");
                     try {
-                        controlador.modificarTarifa(dni.getText(), preu);
+                        controlador.modificarTarifa(dni.getText(), precio);
                         System.out.println("Modificado correctamente");
 
                     } catch (ClientNotFound clientNotFound) {
-                        clientNotFound.printStackTrace();
+                        new PopUp("Cliente no existente",formulario,true);
                     }
                     limpiarCampos();
                 } else {

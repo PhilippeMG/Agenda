@@ -16,14 +16,14 @@ public class PanelClientes extends JPanel {
     JScrollPane panel;
     Controlador controlador;
     Modelo modelo;
-    JTextArea areaDatosClientes =new JTextArea(20,10);
+    JTextArea areaDatosClientes = new JTextArea(20, 10);
     JTextField dniCliente;
     JFrame vista;
 
-    public PanelClientes(Controlador controlador, Modelo modelo,JFrame vista) {
+    public PanelClientes(Controlador controlador, Modelo modelo, JFrame vista) {
         this.controlador = controlador;
         this.modelo = modelo;
-        this.vista=vista;
+        this.vista = vista;
         // JButton bListarFacturas = new JButton("Añadir Cliente");
         JButton bBuscarCliente = new JButton("Buscar Cliente");
         JButton bAñadirCliente = new JButton("Añadir Cliente");
@@ -51,13 +51,13 @@ public class PanelClientes extends JPanel {
                     try {
                         infoCliente = controlador.devolverCliente(dniCliente.getText());
                     } catch (ClientNotFound clientNotFound) {
-                        new PopUp("El cliente no existe", vista,true);
+                        new PopUp("El cliente no existe", vista, true);
                     }
 
                     new FormularioBuscarCliente(controlador, infoCliente);
-                }else {
-                    System.out.printf("Dni no introducido");
-                    new PopUp("DNI no introducido",vista,true);
+                } else {
+
+                    new PopUp("DNI no introducido", vista, true);
                 }
             }
         });
@@ -84,22 +84,20 @@ public class PanelClientes extends JPanel {
 
         bBorrarCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Borrando cliente...");
                 if (!dniIsEmpty()) {
                     try {
-
                         controlador.eliminarCliente(dniCliente.getText());
                         dniCliente.setText("");
                         Vector datos = modelo.informacionClientes(modelo.getClientes());
-
                         rellenarInformacion(datos);
 
                     } catch (ClientNotFound clientNotFound) {
-                        new PopUp("Cliente no encontrado",vista,true);
+                        new PopUp("Cliente no encontrado", vista, true);
 
                     }
-                } else {System.out.printf("Dni no introducido");
-                    new PopUp("DNI no introducido",vista,true);
+                } else {
+                    System.out.printf("Dni no introducido");
+                    new PopUp("DNI no introducido", vista, true);
                 }
             }
 
@@ -109,7 +107,7 @@ public class PanelClientes extends JPanel {
                 System.out.println("Guardando Datos...");
                 try {
                     controlador.guardarDatos();
-                //    actualizarTabla(tabla,datos);
+                    //    actualizarTabla(tabla,datos);
                     Vector datos = modelo.informacionClientes(modelo.getClientes());
 
                     rellenarInformacion(datos);
@@ -147,24 +145,25 @@ public class PanelClientes extends JPanel {
         areaDatosClientes.setEditable(false);
 
 
-
     }
 
-    public  void actualizarClientes(){
+    public void actualizarClientes() {
         Vector datos = modelo.informacionClientes(modelo.getClientes());
         rellenarInformacion(datos);
     }
-    public void rellenarInformacion(Vector datos){
+
+    public void rellenarInformacion(Vector datos) {
         areaDatosClientes.setText("");
         areaDatosClientes.append("NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n");
 
-        for(int i=0; i<datos.size();i++){
-            Vector dades=(Vector) datos.get(i);
-            areaDatosClientes.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\t"+dades.get(3)+"\t"+dades.get(4)+"\t"+dades.get(5)+"\n");
+        for (int i = 0; i < datos.size(); i++) {
+            Vector dades = (Vector) datos.get(i);
+            areaDatosClientes.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\t" + dades.get(5) + "\n");
         }
 
     }
-    public boolean dniIsEmpty(){
+
+    public boolean dniIsEmpty() {
         return (dniCliente.getText().length() <= 0);
     }
 
