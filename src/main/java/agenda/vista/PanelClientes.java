@@ -50,11 +50,12 @@ public class PanelClientes extends JPanel {
                     Vector infoCliente = null;
                     try {
                         infoCliente = controlador.devolverCliente(dniCliente.getText());
+                        new FormularioBuscarCliente(controlador, infoCliente);
+
                     } catch (ClientNotFound clientNotFound) {
                         new PopUp("El cliente no existe", vista, true);
                     }
 
-                    new FormularioBuscarCliente(controlador, infoCliente);
                 } else {
 
                     new PopUp("DNI no introducido", vista, true);
