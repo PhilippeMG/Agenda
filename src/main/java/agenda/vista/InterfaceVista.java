@@ -5,5 +5,6 @@ import agenda.modelo.Modelo;
 
 public interface InterfaceVista {
     void setControlador(Controlador gestorAgenda);
+
     void setModelo(Modelo modelo);
 }

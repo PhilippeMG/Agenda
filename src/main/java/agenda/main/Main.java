@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Modelo modelo=new Modelo();
+        Modelo modelo = new Modelo();
         Vista vista = new Vista();
-        Controlador controlador= new Controlador();
+        Controlador controlador = new Controlador();
 
-        CrearTarifa fabricaTarifa= new CrearTarifa();
-        CrearCliente fabricaCliente= new CrearCliente();
+        CrearTarifa fabricaTarifa = new CrearTarifa();
+        CrearCliente fabricaCliente = new CrearCliente();
 
         controlador.setFabricaClientes(fabricaCliente);
         controlador.setFabricaTarifas(fabricaTarifa);

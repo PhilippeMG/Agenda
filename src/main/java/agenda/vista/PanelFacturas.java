@@ -102,19 +102,15 @@ public class PanelFacturas extends JPanel {
         bEmitirFacturas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!dniIsEmpty()) {
-                    new FormularioCrearFactura(controlador,dniCliente.getText());
-                }else  new PopUp("EL DNI esta vacio.", vista, true);
+                    new FormularioCrearFactura(controlador, dniCliente.getText());
+                } else new PopUp("EL DNI esta vacio.", vista, true);
 
 
             }
         });
         bGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    controlador.guardarDatos();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                controlador.guardarDatos();
             }
         });
     }
@@ -133,16 +129,18 @@ public class PanelFacturas extends JPanel {
 
         for (int i = 0; i < datos.size(); i++) {
             Vector dades = (Vector) datos.get(i);
-           // System.out.println(dades.toString());
+            // System.out.println(dades.toString());
             areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\n");
         }
 
     }
+
     public int convertirAInt(JTextField campo) {
         return Integer.valueOf(String.valueOf(campo.getText()));
     }
+
     public void actualizarFacturas() {
-        if (!dniIsEmpty()){
+        if (!dniIsEmpty()) {
             try {
                 Vector datos = controlador.getFacturasCliente(dniCliente.getText());
                 rellenarInformacionFacturas(datos);

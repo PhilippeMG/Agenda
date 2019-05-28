@@ -24,15 +24,15 @@ public class FormularioCrearCliente {
     String ofertaDomingos=null;
     String ofertaTardes=null;
     LinkedList <String> ofertas= new LinkedList<String>();
-    JButton bAñadir = new JButton("Añadir");
+    JButton bInsetar = new JButton("Añadir");
     JCheckBox tardes=new JCheckBox("Tardes a 5");
     JCheckBox domingos=new JCheckBox("Domingos gratis");
-
+    JFrame formulario;
     Controlador controlador;
 
     public FormularioCrearCliente(Controlador controlador) {
         this.controlador = controlador;
-        JFrame formulario = new JFrame("Añadir Cliente");//Creamos el JFrame
+        formulario = new JFrame("Añadir Cliente");//Creamos el JFrame
 
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/add-user.png"); //Creamos una IMAGE
         formulario.setIconImage(icono); //Añadimos la IMAGE creada
@@ -67,33 +67,14 @@ public class FormularioCrearCliente {
         contenedor.add(new JLabel("Ofertas:"));
         contenedor.add(panel);
 
-        contenedor.add(bAñadir);
-        //ancho por altura
+        contenedor.add(bInsetar);
         formulario.pack();
-      //  formulario.setSize(600, 400);//Definimos el tamaño
-        formulario.setVisible(true);// hacemos la ventsana visibel
+        formulario.setVisible(true);
         limpiarCampos();
-        bAñadir.addActionListener(new ActionListener() {
+
+        bInsetar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(nombre.getText().length()>0 && dni.getText().length()>0 && cp.getText().length()>0 && provincia.getText().length()>0 && poblacion.getText().length()>0 && correo.getText().length()>0 && tarifa.getText().length()>0){
-                try {
-                    ofertas.add(ofertaDomingos);
-                    ofertas.add(ofertaTardes);
-                    int CP = Integer.valueOf(String.valueOf(cp.getText()));
-                    int preu = Integer.valueOf(String.valueOf(tarifa.getText()));
-
-                    System.out.println("Añadiendo...");
-
-                    controlador.añadirCliente(nombre.getText(), dni.getText(), CP, provincia.getText(), poblacion.getText(), correo.getText(), apellido.getText(), preu,ofertas);
-
-                } catch (InvalidArguments invalidArguments) {
-                    new PopUp("DNI duplicado...",formulario,true);
-
-                }
-                limpiarCampos();
-            }else{
-                new PopUp("Hay campos vacios...",formulario,true);
-                }
+            insetarCliente();
             }
         });
         tardes.addItemListener(new ItemListener() {
@@ -147,5 +128,27 @@ public class FormularioCrearCliente {
         ofertas.clear();
 
     }
+    private void insetarCliente(){
+        if(nombre.getText().length()>0 && dni.getText().length()>0 && cp.getText().length()>0 && provincia.getText().length()>0 && poblacion.getText().length()>0 && correo.getText().length()>0 && tarifa.getText().length()>0){
+            try {
+                ofertas.add(ofertaDomingos);
+                ofertas.add(ofertaTardes);
+                int CP = Integer.valueOf(String.valueOf(cp.getText()));
+                int preu = Integer.valueOf(String.valueOf(tarifa.getText()));
+
+                System.out.println("Añadiendo...");
+
+                controlador.insertarCliente(nombre.getText(), dni.getText(), CP, provincia.getText(), poblacion.getText(), correo.getText(), apellido.getText(), preu,ofertas);
+
+            } catch (InvalidArguments invalidArguments) {
+                new PopUp("DNI duplicado...",formulario,true);
+
+            }
+            limpiarCampos();
+        }else{
+            new PopUp("Hay campos vacios...",formulario,true);
+        }
+    }
+
 
 }

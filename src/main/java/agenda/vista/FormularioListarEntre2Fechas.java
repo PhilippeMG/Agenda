@@ -25,6 +25,7 @@ public class FormularioListarEntre2Fechas {
     JTextField mesFi = new JTextField(3);
     JTextField anyFi = new JTextField(3);
     JTextField dni = new JTextField(7);
+
     public FormularioListarEntre2Fechas(Controlador controlador) {
         this.controlador = controlador;
         JFrame formulario = new JFrame("Listar Entre Dos Fechas");//Creamos el JFrameJs
@@ -59,7 +60,6 @@ public class FormularioListarEntre2Fechas {
         fechaFi.add(mesFi);
         fechaFi.add(new JLabel("Año"));
         fechaFi.add(anyFi);
-
 
 
         JScrollPane panel = new JScrollPane(areaDatos);
@@ -129,41 +129,41 @@ public class FormularioListarEntre2Fechas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!camposVacios()) {
-                    int[] inicio=new int[3];
-                    inicio[0]=convertirAInt(diaIn);
-                    inicio[1]=convertirAInt(mesIn);
-                    inicio[2]=convertirAInt(anyIn);
-                    Vector datos= new Vector();
-                    int[] fin=new int[3];
-                    fin[0]=convertirAInt(diaFi);
-                    fin[1]=convertirAInt(mesFi);
-                    fin[2]=convertirAInt(anyFi);
-                    if(opcionListar.equals("Clientes")){
-                    datos= controlador.opcionDevolverClientesEntreFechas(inicio,fin);
-                    rellenarInformacionClientes(datos);
+                    int[] inicio = new int[3];
+                    inicio[0] = convertirAInt(diaIn);
+                    inicio[1] = convertirAInt(mesIn);
+                    inicio[2] = convertirAInt(anyIn);
+                    Vector datos = new Vector();
+                    int[] fin = new int[3];
+                    fin[0] = convertirAInt(diaFi);
+                    fin[1] = convertirAInt(mesFi);
+                    fin[2] = convertirAInt(anyFi);
+                    if (opcionListar.equals("Clientes")) {
+                        datos = controlador.opcionDevolverClientesEntreFechas(inicio, fin);
+                        rellenarInformacionClientes(datos);
                     }
-                    if(opcionListar.equals("Llamadas")){
+                    if (opcionListar.equals("Llamadas")) {
                         try {
                             datos = controlador.opcionDevolverLlamadasEntreFechas(dni.getText(), inicio, fin);
 
                             rellenarInformacionLlamadas(datos);
-                        }catch (ClientNotFound clientNotFound){
-                            new PopUp("Cliente no encontrado",formulario,true);
+                        } catch (ClientNotFound clientNotFound) {
+                            new PopUp("Cliente no encontrado", formulario, true);
                         }
                     }
 
-                    if(opcionListar.equals("Facturas")){
-                          try {
+                    if (opcionListar.equals("Facturas")) {
+                        try {
                             datos = controlador.opcionDevolverFacturaEntreFechas(dni.getText(), inicio, fin);
 
                             rellenarInformacionFacturas(datos);
-                        }catch (ClientNotFound clientNotFound){
-                            new PopUp("Cliente no encontrado",formulario,true);
+                        } catch (ClientNotFound clientNotFound) {
+                            new PopUp("Cliente no encontrado", formulario, true);
                         }
 
                     }
                 } else {
-                    new PopUp("Hay campos vacios",formulario,true);
+                    new PopUp("Hay campos vacios", formulario, true);
                 }
             }
         });
@@ -181,36 +181,38 @@ public class FormularioListarEntre2Fechas {
     public boolean camposVacios() {
         return (tamanyCampo(diaIn) <= 0 && tamanyCampo(diaFi) <= 0 && tamanyCampo(mesIn) <= 0 && tamanyCampo(mesFi) <= 0 && tamanyCampo(anyIn) <= 0 && tamanyCampo(anyFi) <= 0);
     }
-    public void rellenarInformacionLlamadas(Vector datos){
+
+    public void rellenarInformacionLlamadas(Vector datos) {
         areaDatos.setText("");
         areaDatos.append("Num destino\t Duración\t Fecha de la llamada\n");
 
-        for(int i=0; i<datos.size();i++){
-            Vector dades=(Vector) datos.get(i);
-            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\n");
+        for (int i = 0; i < datos.size(); i++) {
+            Vector dades = (Vector) datos.get(i);
+            areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\n");
         }
 
     }
-    public void rellenarInformacionClientes(Vector datos){
+
+    public void rellenarInformacionClientes(Vector datos) {
         areaDatos.setText("");
         areaDatos.append("NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n");
 
-        for(int i=0; i<datos.size();i++){
-            Vector dades=(Vector) datos.get(i);
-            areaDatos.append(dades.get(0)+"\t"+dades.get(1)+"\t"+dades.get(2)+"\t"+dades.get(3)+"\t"+dades.get(4)+"\t"+dades.get(5)+"\n");
+        for (int i = 0; i < datos.size(); i++) {
+            Vector dades = (Vector) datos.get(i);
+            areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\t" + dades.get(5) + "\n");
         }
 
     }
-    public void rellenarInformacionFacturas(Vector datos){
+
+    public void rellenarInformacionFacturas(Vector datos) {
         areaDatos.setText("");
         areaDatos.append("Codigo\t Tarifa\tFecha Inicio\t\tFecha Final\t\tImporte\n");
 
         for (int i = 0; i < datos.size(); i++) {
             Vector dades = (Vector) datos.get(i);
-          //  System.out.println(dades.toString());
+            //  System.out.println(dades.toString());
             areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\n");
         }
-
 
 
     }

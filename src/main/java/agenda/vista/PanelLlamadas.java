@@ -62,7 +62,6 @@ public class PanelLlamadas extends JPanel {
 
                 }
 
-                // JOptionPane.showMessageDialog(null, "You just clicked bListarFacturas");
             }
         });
         bListarEntre2.addActionListener(new ActionListener() {
@@ -72,11 +71,9 @@ public class PanelLlamadas extends JPanel {
         });
         bGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    controlador.guardarDatos();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+
+                controlador.guardarDatos();
+
             }
         });
 
@@ -95,16 +92,18 @@ public class PanelLlamadas extends JPanel {
     public boolean dniIsEmpty() {
         return (dni.getText().length() <= 0);
     }
-    public void actualizarLlamadas(){
-        if(!dniIsEmpty()) {
+
+    public void actualizarLlamadas() {
+        if (!dniIsEmpty()) {
             try {
                 Vector datos = controlador.getLlamadasCliente(dni.getText());
                 rellenarInformacionLlamadas(datos);
-            }catch (ClientNotFound clientNotFound){
+            } catch (ClientNotFound clientNotFound) {
 
             }
         }
     }
+
     public void rellenarInformacionLlamadas(Vector datos) {
         areaDatos.setText("");
         areaDatos.append("Num destino\t Duración\t Fecha de la llamada\n");

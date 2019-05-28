@@ -50,11 +50,11 @@ public class FormularioEditarTarifa {
                         System.out.println("Modificado correctamente");
 
                     } catch (ClientNotFound clientNotFound) {
-                        new PopUp("Cliente no existente",formulario,true);
+                        new PopUp("Cliente no existente", formulario, true);
                     }
                     limpiarCampos();
                 } else {
-                    new PopUp("Campos vacios",formulario,true);
+                    new PopUp("Campos vacios", formulario, true);
                 }
             }
         });

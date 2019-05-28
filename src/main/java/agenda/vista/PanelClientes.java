@@ -26,7 +26,8 @@ public class PanelClientes extends JPanel {
         this.vista = vista;
         // JButton bListarFacturas = new JButton("Añadir Cliente");
         JButton bBuscarCliente = new JButton("Buscar Cliente");
-        JButton bAñadirCliente = new JButton("Añadir Cliente");
+
+        JButton bInsetarCliente = new JButton("Añadir Cliente");
         JButton bSave = new JButton("Guardar");
         JButton bBorrarCliente = new JButton("Borrar Cliente ");
         JButton bEditarCliente = new JButton("Editar Tarifa ");
@@ -64,7 +65,7 @@ public class PanelClientes extends JPanel {
         });
 
 
-        bAñadirCliente.addActionListener(new ActionListener() {
+        bInsetarCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Creando cliente...");
 
@@ -106,18 +107,11 @@ public class PanelClientes extends JPanel {
         bSave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Guardando Datos...");
-                try {
-                    controlador.guardarDatos();
-                    //    actualizarTabla(tabla,datos);
-                    Vector datos = modelo.informacionClientes(modelo.getClientes());
 
-                    rellenarInformacion(datos);
-
-
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-
+                controlador.guardarDatos();
+                //    actualizarTabla(tabla,datos);
+                Vector datos = modelo.informacionClientes(modelo.getClientes());
+                rellenarInformacion(datos);
             }
         });
 
@@ -132,7 +126,7 @@ public class PanelClientes extends JPanel {
 
         panelOption.add(panelDNI);
         panelOption.add(bBuscarCliente);
-        panelOption.add(bAñadirCliente);
+        panelOption.add(bInsetarCliente);
         panelOption.add(bBorrarCliente);
         panelOption.add(bEditarCliente);
         panelOption.add(bListarEntre2);

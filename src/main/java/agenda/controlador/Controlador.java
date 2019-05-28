@@ -39,7 +39,7 @@ public class Controlador implements InterfaceControlador {
         creadorTarifa = fabrica;
     }
 
-    public void añadirCliente(String nombre, String nif, int cp, String provincia, String poblacion, String correo, String apellidos, int precio, LinkedList<String> oferta) throws InvalidArguments {
+    public void insertarCliente(String nombre, String nif, int cp, String provincia, String poblacion, String correo, String apellidos, int precio, LinkedList<String> oferta) throws InvalidArguments {
         Tarifa tarifa = TarifaCliente(precio, oferta);
         Direccion direccion = new Direccion(cp, provincia, poblacion);
         Cliente cliente;
@@ -70,16 +70,22 @@ public class Controlador implements InterfaceControlador {
         //modelo.mostrarClientes(modelo.getClientes());
     }
 
-    public void guardarDatos() throws IOException {
-        modelo.guardarDatos();
-        System.out.println("Datos guardados: ");
-        //modelo.mostrarClientes(modelo.getClientes());
+    public void guardarDatos(){
+        try {
+            modelo.guardarDatos();
+        }catch (Exception IOException){
+            System.out.println("No se han podido guardar los datos. ");
+
+        }
     }
 
-    public void cargarDatos() throws ClassNotFoundException {
-        modelo.cargarDatos();
-        System.out.println("Datos cargados: ");
-      //  modelo.mostrarClientes(modelo.getClientes());
+    public void cargarDatos(){
+        try {
+            modelo.cargarDatos();
+        }catch (Exception ClassNotFoundException){
+            System.out.println("Error al cargar los datos");
+
+        }
     }
 
     public void modificarTarifa(String dni, int precio) throws ClientNotFound {
