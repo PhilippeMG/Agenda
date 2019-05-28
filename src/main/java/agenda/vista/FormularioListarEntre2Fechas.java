@@ -204,7 +204,7 @@ public class FormularioListarEntre2Fechas extends Formulario{
         for (int i = 0; i < datos.size(); i++) {
             Vector dades = (Vector) datos.get(i);
             //  System.out.println(dades.toString());
-            areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\n");
+            areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t\t" + dades.get(3) + "\t\t" + dades.get(4) + "\n");
         }
 
 
