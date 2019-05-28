@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FormularioCrearLlamada {
+public class FormularioCrearLlamada extends   Formulario{
 
     JTextField diaIn = new JTextField(3);
     JTextField mesIn = new JTextField(3);
@@ -19,10 +19,13 @@ public class FormularioCrearLlamada {
     JTextField numero = new JTextField(5);
     Controlador controlador;
     JButton bEmitir = new JButton("Crear llamada");
+    String nif;
+    JFrame formulario;
 
     public FormularioCrearLlamada(Controlador controlador, String text) {
         this.controlador = controlador;
         JPanel fechaIn = new JPanel();
+        this.nif = text;
         //fechaIn.add(new JLabel("Fecha inicio: "));
         //fechaIn.add(new JLabel("Fecha inicial"));
         dni.setText(text);
@@ -42,7 +45,7 @@ public class FormularioCrearLlamada {
         campoDuracion.add(duracion);
 
 
-        JFrame formulario = new JFrame("Crear llamada");//Creamos el JFrameJs
+        formulario = new JFrame("Crear llamada");//Creamos el JFrameJs
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/mobile-phone.png"); //Creamos una IMAGE
         formulario.setIconImage(icono); //Añadimos la IMAGE creada
 
@@ -60,36 +63,35 @@ public class FormularioCrearLlamada {
         contenedor.add(bEmitir);
         formulario.pack();
         formulario.setVisible(true);
+
         bEmitir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (!camposVacios()) {
-                    int[] inicio = new int[3];
-                    inicio[0] = convertirAInt(diaIn);
-                    inicio[1] = convertirAInt(mesIn);
-                    inicio[2] = convertirAInt(anyIn);
-                    try {
-                        controlador.insertarLlamada(text, inicio, convertirAInt(duracion), convertirAInt(numero));
-                    } catch (ClientNotFound clientNotFound) {
-                        new PopUp("El dni no existe", formulario, true);
-                    }
-                } else {
-                    new PopUp("Hay campos vacios", formulario, true);
-                }
+                emitirLlamada();
             }
         });
 
     }
 
-    public int tamanyCampo(JTextField campo) {
-        return campo.getText().length();
-    }
 
-    public boolean camposVacios() {
+    private boolean camposVacios() {
         return (tamanyCampo(diaIn) <= 0 && tamanyCampo(dni) <= 0 && tamanyCampo(mesIn) <= 0 && tamanyCampo(numero) <= 0 && tamanyCampo(anyIn) <= 0 && tamanyCampo(duracion) <= 0);
     }
 
-    public int convertirAInt(JTextField campo) {
-        return Integer.valueOf(String.valueOf(campo.getText()));
-    }
 
+    private void emitirLlamada() {
+        if (!camposVacios()) {
+            int[] inicio = new int[3];
+            inicio[0] = convertirAInt(diaIn);
+            inicio[1] = convertirAInt(mesIn);
+            inicio[2] = convertirAInt(anyIn);
+            try {
+                controlador.insertarLlamada(nif, inicio, convertirAInt(duracion), convertirAInt(numero));
+            } catch (ClientNotFound clientNotFound) {
+                new PopUp("El dni no existe", formulario, true);
+            }
+        } else {
+            new PopUp("Hay campos vacios", formulario, true);
+        }
+
+    }
 }

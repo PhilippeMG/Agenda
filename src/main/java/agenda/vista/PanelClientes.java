@@ -46,72 +46,38 @@ public class PanelClientes extends JPanel {
         bBuscarCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (!dniIsEmpty()) {
-
-                    Vector infoCliente = null;
-                    try {
-                        infoCliente = controlador.devolverCliente(dniCliente.getText());
-                        new FormularioBuscarCliente(controlador, infoCliente);
-
-                    } catch (ClientNotFound clientNotFound) {
-                        new PopUp("El cliente no existe", vista, true);
-                    }
-
-                } else {
-
-                    new PopUp("DNI no introducido", vista, true);
-                }
+                buscarCliente();
             }
         });
 
 
         bInsetarCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Creando cliente...");
 
                 new FormularioCrearCliente(controlador);
             }
         });
         bEditarCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Editar cliente...");
-                new FormularioEditarTarifa(controlador);
+                editarCliente();
             }
         });
         bListarEntre2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FormularioListarEntre2Fechas(controlador);
+
             }
         });
 
         bBorrarCliente.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (!dniIsEmpty()) {
-                    try {
-                        controlador.eliminarCliente(dniCliente.getText());
-                        dniCliente.setText("");
-                        Vector datos = modelo.informacionClientes(modelo.getClientes());
-                        rellenarInformacion(datos);
-
-                    } catch (ClientNotFound clientNotFound) {
-                        new PopUp("Cliente no encontrado", vista, true);
-
-                    }
-                } else {
-                    System.out.printf("Dni no introducido");
-                    new PopUp("DNI no introducido", vista, true);
-                }
+                eliminarCliente();
             }
 
         });
         bSave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Guardando Datos...");
-
                 controlador.guardarDatos();
-                //    actualizarTabla(tabla,datos);
-                Vector datos = modelo.informacionClientes(modelo.getClientes());
-                rellenarInformacion(datos);
             }
         });
 
@@ -160,6 +126,45 @@ public class PanelClientes extends JPanel {
 
     public boolean dniIsEmpty() {
         return (dniCliente.getText().length() <= 0);
+    }
+
+    private void eliminarCliente() {
+        if (!dniIsEmpty()) {
+            try {
+                controlador.eliminarCliente(dniCliente.getText());
+                dniCliente.setText("");
+
+            } catch (ClientNotFound clientNotFound) {
+                new PopUp("Cliente no encontrado", vista, true);
+
+            }
+        } else {
+            System.out.printf("Dni no introducido");
+            new PopUp("DNI no introducido", vista, true);
+        }
+    }
+
+    private void editarCliente() {
+        if (!dniIsEmpty()) {
+            new FormularioEditarTarifa(controlador, dniCliente.getText());
+        } else {
+            new PopUp("DNI no introducido", vista, true);
+        }
+    }
+
+    private void buscarCliente() {
+        if (!dniIsEmpty()) {
+            Vector infoCliente = null;
+            try {
+                infoCliente = controlador.devolverCliente(dniCliente.getText());
+                new FormularioBuscarCliente(controlador, infoCliente);
+
+            } catch (ClientNotFound clientNotFound) {
+                new PopUp("El cliente no existe", vista, true);
+            }
+        } else {
+            new PopUp("DNI no introducido", vista, true);
+        }
     }
 
 }

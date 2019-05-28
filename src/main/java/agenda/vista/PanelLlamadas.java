@@ -48,7 +48,6 @@ public class PanelLlamadas extends JPanel {
         bListarLlamadas.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Listando llamadas...");
                 if (!dniIsEmpty()) {
                     try {
                         Vector datos = controlador.getLlamadasCliente(dni.getText());
@@ -80,8 +79,6 @@ public class PanelLlamadas extends JPanel {
         bInsetarLlamada.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!dniIsEmpty()) {
-
-                    System.out.print("Creando Llamada");
                     new FormularioCrearLlamada(controlador, dni.getText());
                 } else new PopUp("EL DNI esta vacio.", vista, true);
 

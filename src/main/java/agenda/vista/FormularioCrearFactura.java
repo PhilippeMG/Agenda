@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-public class FormularioCrearFactura {
+public class FormularioCrearFactura extends Formulario {
     JTextField diaIn = new JTextField(3);
     JTextField mesIn = new JTextField(3);
     JTextField anyIn = new JTextField(3);
@@ -19,11 +19,14 @@ public class FormularioCrearFactura {
     JTextField dni = new JTextField(5);
     Controlador controlador;
     JButton bEmitir = new JButton("Emitir factura");
+    String nif;
+    JFrame formulario;
 
     public FormularioCrearFactura(Controlador controlador, String text) {
         this.controlador = controlador;
         dni.setText(text);
         dni.setEditable(false);
+        this.nif = text;
         JPanel fechaIn = new JPanel();
         //fechaIn.add(new JLabel("Fecha inicio: "));
         fechaIn.add(new JLabel("Dia"));
@@ -49,7 +52,7 @@ public class FormularioCrearFactura {
         camposDNI.add(new JLabel("DNI"));
         camposDNI.add(dni);
 
-        JFrame formulario = new JFrame("Emitir factura");//Creamos el JFrameJs
+        formulario = new JFrame("Emitir factura");//Creamos el JFrameJs
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/factura.png"); //Creamos una IMAGE
         formulario.setIconImage(icono); //Añadimos la IMAGE creada
 
@@ -68,42 +71,39 @@ public class FormularioCrearFactura {
 
         bEmitir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (!camposVacios()) {
-                    int[] inicio = new int[3];
-                    inicio[0] = convertirAInt(diaIn);
-                    inicio[1] = convertirAInt(mesIn);
-                    inicio[2] = convertirAInt(anyIn);
-                    int[] fin = new int[3];
-                    fin[0] = convertirAInt(diaFi);
-                    fin[1] = convertirAInt(mesFi);
-                    fin[2] = convertirAInt(anyFi);
-                    try {
-                        controlador.emitirFacturaCliente(text, inicio, fin);
-                        System.out.println("Factura emitida con exito");
-
-                    } catch (ClientNotFound clientNotFound) {
-                        new PopUp("No existe el cliente.", formulario, true);
-                    }
-                } else {
-                    new PopUp("Hay campos vacios.", formulario, true);
-
-                }
+                emitirFactura();
 
             }
         });
     }
 
-    public int tamanyCampo(JTextField campo) {
-        return campo.getText().length();
+    private void emitirFactura() {
+        if (!camposVacios()) {
+            int[] inicio = new int[3];
+            inicio[0] = convertirAInt(diaIn);
+            inicio[1] = convertirAInt(mesIn);
+            inicio[2] = convertirAInt(anyIn);
+            int[] fin = new int[3];
+            fin[0] = convertirAInt(diaFi);
+            fin[1] = convertirAInt(mesFi);
+            fin[2] = convertirAInt(anyFi);
+            try {
+                controlador.emitirFacturaCliente(nif, inicio, fin);
+
+            } catch (ClientNotFound clientNotFound) {
+                new PopUp("No existe el cliente.", formulario, true);
+            }
+        } else {
+            new PopUp("Hay campos vacios.", formulario, true);
+
+        }
     }
+
 
     public boolean camposVacios() {
         return (tamanyCampo(diaIn) <= 0 && tamanyCampo(diaFi) <= 0 && tamanyCampo(mesIn) <= 0 && tamanyCampo(mesFi) <= 0 && tamanyCampo(anyIn) <= 0 && tamanyCampo(anyFi) <= 0);
     }
 
-    public int convertirAInt(JTextField campo) {
-        return Integer.valueOf(String.valueOf(campo.getText()));
-    }
 
 }
 

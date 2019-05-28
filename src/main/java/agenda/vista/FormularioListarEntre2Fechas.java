@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.Vector;
 
-public class FormularioListarEntre2Fechas {
+public class FormularioListarEntre2Fechas extends Formulario{
     Controlador controlador;
     JTextArea areaDatos = new JTextArea(20, 10);
     String opcionListar = "";
@@ -170,13 +170,6 @@ public class FormularioListarEntre2Fechas {
 
     }
 
-    public int convertirAInt(JTextField campo) {
-        return Integer.valueOf(String.valueOf(campo.getText()));
-    }
-
-    public int tamanyCampo(JTextField campo) {
-        return campo.getText().length();
-    }
 
     public boolean camposVacios() {
         return (tamanyCampo(diaIn) <= 0 && tamanyCampo(diaFi) <= 0 && tamanyCampo(mesIn) <= 0 && tamanyCampo(mesFi) <= 0 && tamanyCampo(anyIn) <= 0 && tamanyCampo(anyFi) <= 0);

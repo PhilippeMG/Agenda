@@ -50,9 +50,7 @@ public class Modelo implements Serializable, InterfaceModelo {
             throw new InvalidArguments();
 
         }
-        System.out.println("Actualizando...");
         vista.actualizar();
-        System.out.println("Actualizado");
 
     }
 
@@ -341,6 +339,7 @@ public class Modelo implements Serializable, InterfaceModelo {
         oos = new ObjectOutputStream(fos);
         oos.writeObject( Factura.getContCod());
         oos.close();
+        vista.actualizar();
     }
 
 

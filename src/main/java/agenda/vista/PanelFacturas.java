@@ -58,7 +58,6 @@ public class PanelFacturas extends JPanel {
 
         bListarFacturas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Boton Listar  Facturas pulsado ");
                 if (!dniIsEmpty()) {
                     try {
                         Vector datos = controlador.getFacturasCliente(dniCliente.getText());

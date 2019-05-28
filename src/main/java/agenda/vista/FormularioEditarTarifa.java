@@ -10,60 +10,61 @@ import java.awt.event.ActionListener;
 
 
 public class FormularioEditarTarifa {
-    JTextField dni = new JTextField(10);
+    JTextField cDni = new JTextField(5);
     JTextField tarifa = new JTextField(10);
     JButton bModificar = new JButton("Modificar");
-
+    JFrame formulario;
     Controlador controlador;
+    String dni;
 
-    public FormularioEditarTarifa(Controlador controlador) {
+    public FormularioEditarTarifa(Controlador controlador, String text) {
         this.controlador = controlador;
-        JFrame formulario = new JFrame("Editar Tarifa");//Creamos el JFrame
+        this.dni = text;
+        formulario = new JFrame("Editar Tarifa");//Creamos el JFrame
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/add-user.png"); //Creamos una IMAGE
         formulario.setIconImage(icono); //Añadimos la IMAGE creada
 
-        //Creamos una tabla de filas x columnas
         formulario.setLayout(new GridLayout(4, 2));
-        //nombre, nif, int CP, String provincia, String poblacion, correo, tarifa, apellidos
         Container contenedor = formulario.getContentPane();
-        // contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.PAGE_AXIS));
-
-        // Añadimos los elementos de rellenan por filas de izq a derecha
+        cDni.setText(text);
+        cDni.setEditable(false);
         contenedor.add(new JLabel("DNI:"));
-        contenedor.add(dni);
+        contenedor.add(cDni);
         contenedor.add(new JLabel("Tarifa:"));
         contenedor.add(tarifa);
-
         contenedor.add(bModificar);
-        //ancho por altura
+
         formulario.pack();
-        formulario.setVisible(true);// hacemos la ventsana visible
-        limpiarCampos();
+        formulario.setVisible(true);
 
         bModificar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (dni.getText().length() > 0 && tarifa.getText().length() > 0) {
-                    int precio = Integer.valueOf(String.valueOf(tarifa.getText()));
-                    System.out.println("Modificando...");
-                    try {
-                        controlador.modificarTarifa(dni.getText(), precio);
-                        System.out.println("Modificado correctamente");
+                modificar();
+                formulario.setVisible(false); //ceramos la ventana automaticamente
 
-                    } catch (ClientNotFound clientNotFound) {
-                        new PopUp("Cliente no existente", formulario, true);
-                    }
-                    limpiarCampos();
-                } else {
-                    new PopUp("Campos vacios", formulario, true);
-                }
             }
         });
 
     }
 
     public void limpiarCampos() {
-        dni.setText("");
         tarifa.setText("");
     }
+
+    private void modificar() {
+        if (tarifa.getText().length() > 0) {
+            int precio = Integer.valueOf(String.valueOf(tarifa.getText()));
+            try {
+                controlador.modificarTarifa(dni, precio);
+
+            } catch (ClientNotFound clientNotFound) {
+                new PopUp("Cliente no existente", formulario, true);
+            }
+            limpiarCampos();
+        } else {
+            new PopUp("Campos vacios", formulario, true);
+        }
+    }
+
 
 }

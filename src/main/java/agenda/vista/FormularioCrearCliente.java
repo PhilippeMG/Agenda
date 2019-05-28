@@ -82,11 +82,9 @@ public class FormularioCrearCliente {
             public void itemStateChanged(ItemEvent e) {
                 switch(e.getStateChange()) {//Preguntamos al evento
                     case ItemEvent.SELECTED:
-                        System.out.println("Oferta Tardes seleccionada.");
                         ofertaTardes="Tardes";
                         break;
                     case ItemEvent.DESELECTED:
-                        System.out.println("Oferta Tardes deseleccionada.");
                         ofertaTardes=null;
 
                         break;
@@ -99,12 +97,10 @@ public class FormularioCrearCliente {
             public void itemStateChanged(ItemEvent e) {
                 switch(e.getStateChange()) {//Preguntamos al evento
                     case ItemEvent.SELECTED:
-                        System.out.println("Oferta Domingos seleccionada.");
                         ofertaDomingos="Domingos";
 
                         break;
                     case ItemEvent.DESELECTED:
-                        System.out.println("Oferta Domingos deseleccionada.");
                         ofertaDomingos=null;
 
                         break;

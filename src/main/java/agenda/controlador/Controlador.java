@@ -107,7 +107,6 @@ public class Controlador implements InterfaceControlador {
 
         LinkedList<Cliente> clienteEntreFechas = modelo.devolverEntreFechas(list, inici, fi);
         if (clienteEntreFechas.isEmpty()) {
-            System.out.println("NO HAY CLIENTES ENTRE ESAS FECHAS");
         } else {
             for (Cliente client : clienteEntreFechas) {
                 datos.add(client.informacion());
@@ -135,12 +134,10 @@ public class Controlador implements InterfaceControlador {
 
 
         if (llamadas.isEmpty()) {
-            System.out.println("NO HAY LLAMADAS ENTRE ESAS FECHAS");
-        } else {
+         } else {
             for (Llamada llamada : llamadas) {
                 datos.add(llamada.informacion());
             }
-            //System.out.println(llamadas.toString());
         }
         return datos;
     }
@@ -203,12 +200,9 @@ public class Controlador implements InterfaceControlador {
         }
 
 
-        if (facturas.isEmpty()) {
-            System.out.println("NO HAY FACTURAS ");
-        } else {
+        if (!facturas.isEmpty()) {
             for (Factura fact : facturas) {
                 datos.add(fact.informacion());
-               // System.out.println(fact.informacion());
             }
 
         }
@@ -219,7 +213,6 @@ public class Controlador implements InterfaceControlador {
         if (modelo.getClientes().containsKey(dni)) {
            LocalDateTime data= modelo.crearFecha(fecha[0],fecha[1],fecha[2]);
            modelo.insertarLlamada(dni,new Llamada(numero,duracio,data));
-            System.out.println("Llamada insertada");
 
 
         } else {
@@ -240,9 +233,8 @@ public class Controlador implements InterfaceControlador {
         }
 
 
-        if (llamadas.isEmpty()) {
-            System.out.println("NO HAY LLAMADAS");
-        } else {
+        if (!llamadas.isEmpty()) {
+
             for (Llamada llamada : llamadas) {
                 datos.add(llamada.informacion());
                 //System.out.println(llamada.informacion());
