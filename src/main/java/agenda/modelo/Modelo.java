@@ -37,6 +37,7 @@ public class Modelo implements Serializable, InterfaceModelo {
     public HashMap<Integer, Factura> getFacturas() {
         return facturas;
     }
+
     public void setVista(Vista vista) {
         this.vista = vista;
     }
@@ -56,7 +57,7 @@ public class Modelo implements Serializable, InterfaceModelo {
 
     public void borrarCliente(String NIF) throws ClientNotFound {
         if (clientes.containsKey(NIF)) {
-            Cliente cliente= clientes.get(NIF);
+            Cliente cliente = clientes.get(NIF);
             borrarFacturasDelCliente(cliente);
             clientes.remove(NIF);
             vista.actualizar();
@@ -65,12 +66,13 @@ public class Modelo implements Serializable, InterfaceModelo {
         }
     }
 
-    public  void borrarFacturasDelCliente(Cliente cliente){
-        Collection<Factura> facturasCliente= cliente.getFacturas().values();
-        for (Factura fact: facturasCliente){
+    public void borrarFacturasDelCliente(Cliente cliente) {
+        Collection<Factura> facturasCliente = cliente.getFacturas().values();
+        for (Factura fact : facturasCliente) {
             facturas.remove(fact.getCod());
         }
     }
+
     public void mostrarCliente(String NIF) throws ClientNotFound {
         if (clientes.containsKey(NIF)) {
             System.out.println(clientes.get(NIF).toString()); //LLama a toString de cliente.
@@ -112,19 +114,21 @@ public class Modelo implements Serializable, InterfaceModelo {
         }
     }
 
-    public Vector informacionClientes(HashMap<String, Cliente> clientesMap) {
-        Vector vector = new Vector();
+    public String informacionClientes(HashMap<String, Cliente> clientesMap) {
+        Vector dades = new Vector();
+        String datos = "";
         Collection<Cliente> clientela = clientesMap.values();
         if (clientela.isEmpty()) {
             System.out.println("No hay clientes");
         } else {
             Iterator<Cliente> iterClientela = clientela.iterator();//.entrySet().iterator();
+            datos += "NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n";
             while (iterClientela.hasNext()) {
-                vector.add(iterClientela.next().informacion());
-                // System.out.println(iterClientela.next().toString());
+                dades = (iterClientela.next().informacion());
+                datos += (dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\t" + dades.get(5) + "\n");
             }
         }
-        return vector;
+        return datos;
     }
 
     public void nuevoCliente(int opcion) throws InvalidArguments {
@@ -252,7 +256,7 @@ public class Modelo implements Serializable, InterfaceModelo {
         Factura factura = null;
         if (facturas.containsKey(codigo)) {
             factura = facturas.get(codigo);
-          //  System.out.println(facturas.get(codigo).toString());
+            //  System.out.println(facturas.get(codigo).toString());
 
         } else {
             throw new FacturaNotFound();
@@ -337,7 +341,7 @@ public class Modelo implements Serializable, InterfaceModelo {
         //Codigo Facturas
         fos = new FileOutputStream("contadorFacturas.bin");
         oos = new ObjectOutputStream(fos);
-        oos.writeObject( Factura.getContCod());
+        oos.writeObject(Factura.getContCod());
         oos.close();
         vista.actualizar();
     }

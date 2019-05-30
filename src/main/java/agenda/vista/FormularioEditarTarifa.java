@@ -10,12 +10,12 @@ import java.awt.event.ActionListener;
 
 
 public class FormularioEditarTarifa {
-    JTextField cDni = new JTextField(5);
-    JTextField tarifa = new JTextField(10);
-    JButton bModificar = new JButton("Modificar");
-    JFrame formulario;
-    Controlador controlador;
-    String dni;
+    private JTextField cDni = new JTextField(5);
+    private JTextField tarifa = new JTextField(10);
+    private JButton bModificar = new JButton("Modificar");
+    private JFrame formulario;
+    private Controlador controlador;
+    private String dni;
 
     public FormularioEditarTarifa(Controlador controlador, String text) {
         this.controlador = controlador;

@@ -10,17 +10,17 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 public class FormularioCrearFactura extends Formulario {
-    JTextField diaIn = new JTextField(3);
-    JTextField mesIn = new JTextField(3);
-    JTextField anyIn = new JTextField(3);
-    JTextField diaFi = new JTextField(3);
-    JTextField mesFi = new JTextField(3);
-    JTextField anyFi = new JTextField(3);
-    JTextField dni = new JTextField(5);
-    Controlador controlador;
-    JButton bEmitir = new JButton("Emitir factura");
-    String nif;
-    JFrame formulario;
+    private JTextField diaIn = new JTextField(3);
+    private JTextField mesIn = new JTextField(3);
+    private JTextField anyIn = new JTextField(3);
+    private JTextField diaFi = new JTextField(3);
+    private JTextField mesFi = new JTextField(3);
+    private JTextField anyFi = new JTextField(3);
+    private JTextField dni = new JTextField(5);
+    private Controlador controlador;
+    private JButton bEmitir = new JButton("Emitir factura");
+    private String nif;
+    private JFrame formulario;
 
     public FormularioCrearFactura(Controlador controlador, String text) {
         this.controlador = controlador;
@@ -28,7 +28,6 @@ public class FormularioCrearFactura extends Formulario {
         dni.setEditable(false);
         this.nif = text;
         JPanel fechaIn = new JPanel();
-        //fechaIn.add(new JLabel("Fecha inicio: "));
         fechaIn.add(new JLabel("Dia"));
         fechaIn.add(diaIn);
         fechaIn.add(new JLabel("Mes"));
@@ -39,7 +38,6 @@ public class FormularioCrearFactura extends Formulario {
 
 
         JPanel fechaFi = new JPanel();
-        // fechaFi.add(new JLabel("Fecha final: "));
 
         fechaFi.add(new JLabel("Dia"));
         fechaFi.add(diaFi);

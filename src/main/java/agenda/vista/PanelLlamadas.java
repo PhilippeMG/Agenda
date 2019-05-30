@@ -12,15 +12,15 @@ import java.io.IOException;
 import java.util.Vector;
 
 public class PanelLlamadas extends JPanel {
-    Controlador controlador;
-    Modelo modelo;
-    JButton bInsetarLlamada = new JButton("Insertar llamada");
-    JButton bListarLlamadas = new JButton("Listar llamadas de un DNI");
-    JButton bListarEntre2 = new JButton("Listar  entre dos fechas");
-    JButton bGuardar = new JButton("Guardar");
-    JFrame vista;
-    JTextArea areaDatos = new JTextArea(20, 10);
-    JTextField dni = new JTextField(10);
+    private Controlador controlador;
+    private Modelo modelo;
+    private JButton bInsetarLlamada = new JButton("Insertar llamada");
+    private JButton bListarLlamadas = new JButton("Listar llamadas de un DNI");
+    private JButton bListarEntre2 = new JButton("Listar  entre dos fechas");
+    private JButton bGuardar = new JButton("Guardar");
+    private JFrame vista;
+    private JTextArea areaDatos = new JTextArea(20, 10);
+    private JTextField dni = new JTextField(10);
 
     public PanelLlamadas(Controlador controlador, Modelo modelo, JFrame vista) {
         this.controlador = controlador;
@@ -50,7 +50,7 @@ public class PanelLlamadas extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (!dniIsEmpty()) {
                     try {
-                        Vector datos = controlador.getLlamadasCliente(dni.getText());
+                        String datos = controlador.getLlamadasCliente(dni.getText());
                         rellenarInformacionLlamadas(datos);
                     } catch (ClientNotFound clientNotFound) {
                         new PopUp("Cliente no encontrado.", vista, true);
@@ -93,7 +93,7 @@ public class PanelLlamadas extends JPanel {
     public void actualizarLlamadas() {
         if (!dniIsEmpty()) {
             try {
-                Vector datos = controlador.getLlamadasCliente(dni.getText());
+                String datos = controlador.getLlamadasCliente(dni.getText());
                 rellenarInformacionLlamadas(datos);
             } catch (ClientNotFound clientNotFound) {
 
@@ -101,14 +101,9 @@ public class PanelLlamadas extends JPanel {
         }
     }
 
-    public void rellenarInformacionLlamadas(Vector datos) {
+    public void rellenarInformacionLlamadas(String datos) {
         areaDatos.setText("");
-        areaDatos.append("Num destino\t Duración\t Fecha de la llamada\n");
-
-        for (int i = 0; i < datos.size(); i++) {
-            Vector dades = (Vector) datos.get(i);
-            areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\n");
-        }
+        areaDatos.append(datos);
 
     }
 }

@@ -10,24 +10,23 @@ import java.awt.event.ActionListener;
 
 public class FormularioCrearLlamada extends   Formulario{
 
-    JTextField diaIn = new JTextField(3);
-    JTextField mesIn = new JTextField(3);
-    JTextField anyIn = new JTextField(3);
-    JTextField duracion = new JTextField(3);
-    JTextField dni = new JTextField(5);
+    private JTextField diaIn = new JTextField(3);
+    private JTextField mesIn = new JTextField(3);
+    private JTextField anyIn = new JTextField(3);
+    private JTextField duracion = new JTextField(3);
+    private   JTextField dni = new JTextField(5);
 
-    JTextField numero = new JTextField(5);
-    Controlador controlador;
-    JButton bEmitir = new JButton("Crear llamada");
-    String nif;
-    JFrame formulario;
+    private   JTextField numero = new JTextField(5);
+    private   Controlador controlador;
+    private   JButton bEmitir = new JButton("Crear llamada");
+    private   String nif;
+    private   JFrame formulario;
 
     public FormularioCrearLlamada(Controlador controlador, String text) {
         this.controlador = controlador;
         JPanel fechaIn = new JPanel();
         this.nif = text;
-        //fechaIn.add(new JLabel("Fecha inicio: "));
-        //fechaIn.add(new JLabel("Fecha inicial"));
+
         dni.setText(text);
         dni.setEditable(false);
         fechaIn.add(new JLabel("Dia"));

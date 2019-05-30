@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PopUp extends JDialog {
-    String info;
+    private String info;
 
     PopUp(String info, JFrame padre, boolean bloqueante) {
         super(padre, bloqueante);

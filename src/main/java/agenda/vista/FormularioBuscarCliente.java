@@ -7,24 +7,24 @@ import java.awt.*;
 import java.util.Vector;
 
 public class FormularioBuscarCliente {
-    Controlador controlador;
+    private Controlador controlador;
 
 
-    JTextField nombre = new JTextField(20);
-    JTextField dni = new JTextField(20);
-    JTextField direccion = new JTextField(40);
+    private JTextField nombre = new JTextField(20);
+    private JTextField dni = new JTextField(20);
+    private JTextField direccion = new JTextField(40);
 
-    JTextField correo = new JTextField(20);
-    JTextField tarifa = new JTextField(20);
+    private JTextField correo = new JTextField(20);
+    private JTextField tarifa = new JTextField(20);
 
 
-    FormularioBuscarCliente(Controlador controlador, Vector infoCliente){
+    FormularioBuscarCliente(Controlador controlador, Vector infoCliente) {
         this.controlador = controlador;
         JFrame formulario = new JFrame("Buscar Cliente");
         Image icono = Toolkit.getDefaultToolkit().getImage("src/media/info.png"); //Creamos una IMAGE
         formulario.setIconImage(icono); //Añadimos la IMAGE creada
 
-        formulario.setLayout(new GridLayout(5,2));
+        formulario.setLayout(new GridLayout(5, 2));
         Container contenedor = formulario.getContentPane();
 
         contenedor.add(new JLabel("Nombre completo:"));
@@ -56,10 +56,7 @@ public class FormularioBuscarCliente {
         formulario.setVisible(true);// hacemos la ventana visible
 
 
-
-
     }
-
 
 
 }

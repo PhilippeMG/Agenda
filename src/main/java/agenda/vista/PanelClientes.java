@@ -12,13 +12,12 @@ import java.io.IOException;
 import java.util.Vector;
 
 public class PanelClientes extends JPanel {
-    JTable tbl;
-    JScrollPane panel;
-    Controlador controlador;
-    Modelo modelo;
-    JTextArea areaDatosClientes = new JTextArea(20, 10);
-    JTextField dniCliente;
-    JFrame vista;
+
+    private Controlador controlador;
+    private Modelo modelo;
+    private JTextArea areaDatosClientes = new JTextArea(20, 10);
+    private JTextField dniCliente;
+    private JFrame vista;
 
     public PanelClientes(Controlador controlador, Modelo modelo, JFrame vista) {
         this.controlador = controlador;
@@ -36,7 +35,7 @@ public class PanelClientes extends JPanel {
         JLabel jDNI = new JLabel("DNI del cliente: ");
         dniCliente = new JTextField(10);
 
-        Vector datos = modelo.informacionClientes(modelo.getClientes());
+        String datos = modelo.informacionClientes(modelo.getClientes());
 
         JScrollPane panel = new JScrollPane(areaDatosClientes);
         panel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -109,18 +108,13 @@ public class PanelClientes extends JPanel {
     }
 
     public void actualizarClientes() {
-        Vector datos = modelo.informacionClientes(modelo.getClientes());
+        String datos = modelo.informacionClientes(modelo.getClientes());
         rellenarInformacion(datos);
     }
 
-    public void rellenarInformacion(Vector datos) {
+    public void rellenarInformacion(String datos) {
         areaDatosClientes.setText("");
-        areaDatosClientes.append("NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n");
-
-        for (int i = 0; i < datos.size(); i++) {
-            Vector dades = (Vector) datos.get(i);
-            areaDatosClientes.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\t" + dades.get(5) + "\n");
-        }
+        areaDatosClientes.append(datos);
 
     }
 

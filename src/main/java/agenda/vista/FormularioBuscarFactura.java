@@ -7,13 +7,13 @@ import java.awt.*;
 import java.util.Vector;
 
 public class FormularioBuscarFactura {
-    JTextField cod = new JTextField(10);
-    JTextField fIn = new JTextField(30);
-    JTextField fFin = new JTextField(30);
-    JTextField preu = new JTextField(10);
-    JTextField tarifa = new JTextField(10);
-    Controlador controlador;
-    Vector dades;
+    private JTextField cod = new JTextField(10);
+    private JTextField fIn = new JTextField(30);
+    private JTextField fFin = new JTextField(30);
+    private JTextField preu = new JTextField(10);
+    private JTextField tarifa = new JTextField(10);
+    private Controlador controlador;
+    private Vector dades;
 
     public FormularioBuscarFactura(Vector dades) {
         this.dades = dades;

@@ -9,21 +9,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Vector;
 
 public class PanelFacturas extends JPanel {
-    JButton bListarFacturas = new JButton("Listar facturas de un DNI");
-    JButton bEmitirFacturas = new JButton("Emitir factura");
-    JButton bBuscarFactura = new JButton("Buscar factura");
-    JButton bGuardar = new JButton("Guardar");
+    private JButton bListarFacturas = new JButton("Listar facturas de un DNI");
+    private JButton bEmitirFacturas = new JButton("Emitir factura");
+    private JButton bBuscarFactura = new JButton("Buscar factura");
+    private JButton bGuardar = new JButton("Guardar");
 
-    Controlador controlador;
-    Modelo modelo;
-    JTextArea areaDatos = new JTextArea(20, 10);
-    JButton bListarEntre2 = new JButton("Listar entre dos Fechas");
-    JTextField dniCliente;
-    JTextField codFact;
+    private Controlador controlador;
+    private Modelo modelo;
+    private JTextArea areaDatos = new JTextArea(20, 10);
+    private JButton bListarEntre2 = new JButton("Listar entre dos Fechas");
+    private JTextField dniCliente;
+    private JTextField codFact;
 
     JFrame vista;
 
@@ -60,7 +59,7 @@ public class PanelFacturas extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (!dniIsEmpty()) {
                     try {
-                        Vector datos = controlador.getFacturasCliente(dniCliente.getText());
+                        String datos = controlador.getFacturasCliente(dniCliente.getText());
                         rellenarInformacionFacturas(datos);
                     } catch (ClientNotFound clientNotFound) {
                         new PopUp("Cliente no encontrado.", vista, true);
@@ -122,15 +121,9 @@ public class PanelFacturas extends JPanel {
         return (codFact.getText().length() <= 0);
     }
 
-    public void rellenarInformacionFacturas(Vector datos) {
+    public void rellenarInformacionFacturas(String datos) {
         areaDatos.setText("");
-        areaDatos.append("Codigo\t Tarifa\tFecha Inicio\t\tFecha Final\t\tImporte\n");
-
-        for (int i = 0; i < datos.size(); i++) {
-            Vector dades = (Vector) datos.get(i);
-            // System.out.println(dades.toString());
-            areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t\t" + dades.get(3) + "\t\t" + dades.get(4) + "\n");
-        }
+        areaDatos.append(datos);
 
     }
 
@@ -141,7 +134,7 @@ public class PanelFacturas extends JPanel {
     public void actualizarFacturas() {
         if (!dniIsEmpty()) {
             try {
-                Vector datos = controlador.getFacturasCliente(dniCliente.getText());
+                String datos = controlador.getFacturasCliente(dniCliente.getText());
                 rellenarInformacionFacturas(datos);
 
             } catch (ClientNotFound clientNotFound) {

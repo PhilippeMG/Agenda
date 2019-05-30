@@ -8,23 +8,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.Vector;
 
-public class FormularioListarEntre2Fechas extends Formulario{
-    Controlador controlador;
-    JTextArea areaDatos = new JTextArea(20, 10);
-    String opcionListar = "";
-    JTextField diaIn = new JTextField(3);
-    JTextField mesIn = new JTextField(3);
-    JTextField anyIn = new JTextField(3);
-    JTextField diaFi = new JTextField(3);
-    JTextField mesFi = new JTextField(3);
-    JTextField anyFi = new JTextField(3);
-    JTextField dni = new JTextField(7);
+public class FormularioListarEntre2Fechas extends Formulario {
+    private Controlador controlador;
+    private JTextArea areaDatos = new JTextArea(20, 10);
+    private String opcionListar = "";
+    private JTextField diaIn = new JTextField(3);
+    private JTextField mesIn = new JTextField(3);
+    private JTextField anyIn = new JTextField(3);
+    private JTextField diaFi = new JTextField(3);
+    private JTextField mesFi = new JTextField(3);
+    private JTextField anyFi = new JTextField(3);
+    private JTextField dni = new JTextField(7);
 
     public FormularioListarEntre2Fechas(Controlador controlador) {
         this.controlador = controlador;
