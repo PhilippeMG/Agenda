@@ -10,6 +10,8 @@ import agenda.modelo.tarifa.CrearTarifa;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Vista implements InterfaceVista {
     //Atributos
@@ -46,6 +48,7 @@ public class Vista implements InterfaceVista {
         ventana.setVisible(true);// hacemos la ventsana visibel
 
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     public void actualizar() {
@@ -59,4 +62,6 @@ public class Vista implements InterfaceVista {
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
     }
+
+
 }

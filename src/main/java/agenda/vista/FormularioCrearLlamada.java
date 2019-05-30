@@ -73,7 +73,7 @@ public class FormularioCrearLlamada extends   Formulario{
 
 
     private boolean camposVacios() {
-        return (tamanyCampo(diaIn) <= 0 && tamanyCampo(dni) <= 0 && tamanyCampo(mesIn) <= 0 && tamanyCampo(numero) <= 0 && tamanyCampo(anyIn) <= 0 && tamanyCampo(duracion) <= 0);
+        return (isEmpty(diaIn) && isEmpty(dni) && isEmpty(mesIn)  && isEmpty(numero) && isEmpty(anyIn)  && isEmpty(duracion) );
     }
 
 
