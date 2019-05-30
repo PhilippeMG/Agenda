@@ -91,30 +91,33 @@ public class Controlador implements InterfaceControlador {
         modelo.cambiarTarifa(dni, precio);
     }
 
-    public Vector opcionDevolverClientesEntreFechas(int[] fechaInicio, int[] fechaFinal) {
+    public String opcionDevolverClientesEntreFechas(int[] fechaInicio, int[] fechaFinal) {
         Collection<Cliente> myCollection = modelo.getClientes().values();
         List<Cliente> list = new LinkedList<>(myCollection);
-        Vector datos = new Vector();
+        Vector dades = new Vector();
+        String datos = "";
 
         LocalDateTime inici = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
 
         LocalDateTime fi = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
 
 
-
         LinkedList<Cliente> clienteEntreFechas = modelo.devolverEntreFechas(list, inici, fi);
         if (clienteEntreFechas.isEmpty()) {
         } else {
+            datos += "NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n";
+
             for (Cliente client : clienteEntreFechas) {
-                datos.add(client.informacion());
+                dades = client.informacion();
+                datos += (dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\t" + dades.get(5) + "\n");
             }
         }
         return datos;
     }
 
-    public Vector opcionDevolverLlamadasEntreFechas(String dni, int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
-        Vector datos = new Vector();
-
+    public String opcionDevolverLlamadasEntreFechas(String dni, int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
+        Vector dades = new Vector();
+        String datos = "";
         LocalDateTime inici = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
 
         LocalDateTime fi = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
@@ -127,19 +130,23 @@ public class Controlador implements InterfaceControlador {
             throw new ClientNotFound();
         }
 
+        datos += "Num destino\t Duración\t Fecha de la llamada\n";
 
         if (llamadas.isEmpty()) {
         } else {
             for (Llamada llamada : llamadas) {
-                datos.add(llamada.informacion());
+                dades = llamada.informacion();
+                datos += (dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\n");
+
+
             }
         }
         return datos;
     }
 
-    public Vector opcionDevolverFacturaEntreFechas(String dni, int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
-        Vector datos = new Vector();
-
+    public String opcionDevolverFacturaEntreFechas(String dni, int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
+        Vector dades = new Vector();
+        String datos = "";
         LocalDateTime inici = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
 
         LocalDateTime fi = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
@@ -154,12 +161,14 @@ public class Controlador implements InterfaceControlador {
             throw new ClientNotFound();
         }
 
+        datos += "Codigo\t Tarifa\tFecha Inicio\t\tFecha Final\t\tImporte\n";
 
         if (facturas.isEmpty()) {
-            System.out.println("NO HAY FACTURAS ENTRE ESAS FECHAS");
         } else {
             for (Factura fact : facturas) {
-                datos.add(fact.informacion());
+                dades = fact.informacion();
+                datos += dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t\t" + dades.get(3) + "\t\t" + dades.get(4) + "\n";
+
             }
 
         }
@@ -180,7 +189,7 @@ public class Controlador implements InterfaceControlador {
     public String getFacturasCliente(String dni) throws ClientNotFound {
         Vector dades = new Vector();
         LinkedList<Factura> facturas;
-        String datos="";
+        String datos = "";
         if (modelo.getClientes().containsKey(dni)) {
             Cliente cliente = modelo.getClientes().get(dni);
             Collection<Factura> myCollection = cliente.getFacturas().values();
@@ -190,12 +199,12 @@ public class Controlador implements InterfaceControlador {
             throw new ClientNotFound();
         }
 
-        datos+="Codigo\t Tarifa\tFecha Inicio\t\tFecha Final\t\tImporte\n";
+        datos += "Codigo\t Tarifa\tFecha Inicio\t\tFecha Final\t\tImporte\n";
 
         if (!facturas.isEmpty()) {
             for (Factura fact : facturas) {
-                dades= fact.informacion();
-                datos+=dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t\t" + dades.get(3) + "\t\t" + dades.get(4) + "\n";
+                dades = fact.informacion();
+                datos += dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t\t" + dades.get(3) + "\t\t" + dades.get(4) + "\n";
             }
 
         }
@@ -216,7 +225,7 @@ public class Controlador implements InterfaceControlador {
 
     public String getLlamadasCliente(String dni) throws ClientNotFound {
         Vector dades = new Vector();
-        String datos="";
+        String datos = "";
         LinkedList<Llamada> llamadas;
 
         if (modelo.getClientes().containsKey(dni)) {
@@ -228,13 +237,13 @@ public class Controlador implements InterfaceControlador {
             throw new ClientNotFound();
         }
 
-        datos+="Num destino\t Duración\t Fecha de la llamada\n";
+        datos += "Num destino\t Duración\t Fecha de la llamada\n";
         if (!llamadas.isEmpty()) {
 
             for (Llamada llamada : llamadas) {
-               // datos.add(llamada.informacion());
-                dades=llamada.informacion();
-                datos+=(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\n");
+                // datos.add(llamada.informacion());
+                dades = llamada.informacion();
+                datos += (dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\n");
             }
 
         }

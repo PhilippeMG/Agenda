@@ -1,14 +1,12 @@
 package agenda.vista;
 
 import agenda.controlador.Controlador;
-import agenda.modelo.clientes.Cliente;
 import agenda.modelo.excepciones.ClientNotFound;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 public class FormularioListarEntre2Fechas extends Formulario {
     private Controlador controlador;
@@ -97,7 +95,6 @@ public class FormularioListarEntre2Fechas extends Formulario {
         rClientes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Clientes pulsado");
                 opcionListar = "Clientes";
                 dni.setEditable(false);
             }
@@ -106,7 +103,6 @@ public class FormularioListarEntre2Fechas extends Formulario {
         rLlamadas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Llamadas pulsado.");
                 opcionListar = "Llamadas";
                 dni.setEditable(true);
             }
@@ -115,7 +111,6 @@ public class FormularioListarEntre2Fechas extends Formulario {
         rFacturas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Facturas pulsado.");
                 opcionListar = "Facturas";
                 dni.setEditable(true);
             }
@@ -129,20 +124,20 @@ public class FormularioListarEntre2Fechas extends Formulario {
                     inicio[0] = convertirAInt(diaIn);
                     inicio[1] = convertirAInt(mesIn);
                     inicio[2] = convertirAInt(anyIn);
-                    Vector datos = new Vector();
+                    String datos = "";
                     int[] fin = new int[3];
                     fin[0] = convertirAInt(diaFi);
                     fin[1] = convertirAInt(mesFi);
                     fin[2] = convertirAInt(anyFi);
                     if (opcionListar.equals("Clientes")) {
                         datos = controlador.opcionDevolverClientesEntreFechas(inicio, fin);
-                        rellenarInformacionClientes(datos);
+                        rellenarInformacion(datos);
                     }
                     if (opcionListar.equals("Llamadas")) {
                         try {
                             datos = controlador.opcionDevolverLlamadasEntreFechas(dni.getText(), inicio, fin);
 
-                            rellenarInformacionLlamadas(datos);
+                            rellenarInformacion(datos);
                         } catch (ClientNotFound clientNotFound) {
                             new PopUp("Cliente no encontrado", formulario, true);
                         }
@@ -152,7 +147,7 @@ public class FormularioListarEntre2Fechas extends Formulario {
                         try {
                             datos = controlador.opcionDevolverFacturaEntreFechas(dni.getText(), inicio, fin);
 
-                            rellenarInformacionFacturas(datos);
+                            rellenarInformacion(datos);
                         } catch (ClientNotFound clientNotFound) {
                             new PopUp("Cliente no encontrado", formulario, true);
                         }
@@ -171,37 +166,9 @@ public class FormularioListarEntre2Fechas extends Formulario {
         return (tamanyCampo(diaIn) <= 0 && tamanyCampo(diaFi) <= 0 && tamanyCampo(mesIn) <= 0 && tamanyCampo(mesFi) <= 0 && tamanyCampo(anyIn) <= 0 && tamanyCampo(anyFi) <= 0);
     }
 
-    public void rellenarInformacionLlamadas(Vector datos) {
+    public void rellenarInformacion(String datos) {
         areaDatos.setText("");
-        areaDatos.append("Num destino\t Duración\t Fecha de la llamada\n");
-
-        for (int i = 0; i < datos.size(); i++) {
-            Vector dades = (Vector) datos.get(i);
-            areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\n");
-        }
-
-    }
-
-    public void rellenarInformacionClientes(Vector datos) {
-        areaDatos.setText("");
-        areaDatos.append("NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n");
-
-        for (int i = 0; i < datos.size(); i++) {
-            Vector dades = (Vector) datos.get(i);
-            areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\t" + dades.get(5) + "\n");
-        }
-
-    }
-
-    public void rellenarInformacionFacturas(Vector datos) {
-        areaDatos.setText("");
-        areaDatos.append("Codigo\t Tarifa\tFecha Inicio\t\tFecha Final\t\tImporte\n");
-
-        for (int i = 0; i < datos.size(); i++) {
-            Vector dades = (Vector) datos.get(i);
-            //  System.out.println(dades.toString());
-            areaDatos.append(dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t\t" + dades.get(3) + "\t\t" + dades.get(4) + "\n");
-        }
+        areaDatos.append(datos);
 
 
     }

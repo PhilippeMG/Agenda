@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Vector;
 
 public class PanelClientes extends JPanel {
@@ -23,7 +22,6 @@ public class PanelClientes extends JPanel {
         this.controlador = controlador;
         this.modelo = modelo;
         this.vista = vista;
-        // JButton bListarFacturas = new JButton("Añadir Cliente");
         JButton bBuscarCliente = new JButton("Buscar Cliente");
 
         JButton bInsetarCliente = new JButton("Añadir Cliente");
