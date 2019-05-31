@@ -99,7 +99,7 @@ public class FormularioCrearFactura extends Formulario {
 
 
     public boolean camposVacios() {
-        return (isEmpty(diaIn) && isEmpty(diaFi) && isEmpty(mesIn)  && isEmpty(mesFi) && isEmpty(anyIn) && isEmpty(anyFi));
+        return (isEmpty(diaIn) || isEmpty(diaFi) || isEmpty(mesIn)  || isEmpty(mesFi) || isEmpty(anyIn) || isEmpty(anyFi));
     }
 
 
