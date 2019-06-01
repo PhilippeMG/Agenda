@@ -14,7 +14,9 @@ import agenda.modelo.tarifa.Tarifa;
 import agenda.vista.Vista;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 public class Controlador implements InterfaceControlador {
@@ -105,11 +107,11 @@ public class Controlador implements InterfaceControlador {
         LinkedList<Cliente> clienteEntreFechas = modelo.devolverEntreFechas(list, inici, fi);
         if (clienteEntreFechas.isEmpty()) {
         } else {
-            datos += "NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n";
+            datos += "NIF\tNombre\tProvincia\tPoblación\tCP\tCorreo\tTarifa\tFecha de Alta\n";
 
             for (Cliente client : clienteEntreFechas) {
                 dades = client.informacion();
-                datos += (dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\t" + dades.get(5) + "\n");
+                datos += (dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\t" + dades.get(5)  +"\t" + dades.get(6) +"\t" + dades.get(7)+ "\n");
             }
         }
         return datos;
@@ -121,6 +123,7 @@ public class Controlador implements InterfaceControlador {
         LocalDateTime inici = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
 
         LocalDateTime fi = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
+
         LinkedList<Llamada> llamadas;
 
         if (modelo.getClientes().containsKey(dni)) {
@@ -150,6 +153,7 @@ public class Controlador implements InterfaceControlador {
         LocalDateTime inici = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
 
         LocalDateTime fi = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
+
         LinkedList<Factura> facturas;
 
         if (modelo.getClientes().containsKey(dni)) {
@@ -161,13 +165,13 @@ public class Controlador implements InterfaceControlador {
             throw new ClientNotFound();
         }
 
-        datos += "Codigo\t Tarifa\tFecha Inicio\t\tFecha Final\t\tImporte\n";
+        datos += "Codigo\t Tarifa\tFecha Inicio\t\tFecha Final\t\tImporte\tFecha Emisón\n";
 
         if (facturas.isEmpty()) {
         } else {
             for (Factura fact : facturas) {
                 dades = fact.informacion();
-                datos += dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t\t" + dades.get(3) + "\t\t" + dades.get(4) + "\n";
+                datos += dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t\t" + dades.get(3) + "\t\t" + dades.get(4) + "\t"+dades.get(5)+"\n";
 
             }
 
@@ -199,12 +203,12 @@ public class Controlador implements InterfaceControlador {
             throw new ClientNotFound();
         }
 
-        datos += "Codigo\t Tarifa\tFecha Inicio\t\tFecha Final\t\tImporte\n";
+        datos += "Codigo\t Tarifa\tFecha Inicio\t\tFecha Final\t\tImporte\tFecha Emisón\n";
 
         if (!facturas.isEmpty()) {
             for (Factura fact : facturas) {
                 dades = fact.informacion();
-                datos += dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t\t" + dades.get(3) + "\t\t" + dades.get(4) + "\n";
+                datos += dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t\t" + dades.get(3) + "\t\t" + dades.get(4) + "\t"+dades.get(5)+"\n";
             }
 
         }
@@ -252,11 +256,13 @@ public class Controlador implements InterfaceControlador {
 
     public void emitirFacturaCliente(String dni, int[] fechaInicio, int[] fechaFinal) throws ClientNotFound {
 
-        LocalDateTime inicio = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
+        LocalDateTime inici = modelo.crearFecha(fechaInicio[0], fechaInicio[1], fechaInicio[2]);
 
-        LocalDateTime fin = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
+        LocalDateTime fi = modelo.crearFecha(fechaFinal[0], fechaFinal[1], fechaFinal[2]);
+
+
         try {
-            modelo.emitirFactura(dni, inicio, fin);
+            modelo.emitirFactura(dni, inici, fi);
 
         } catch (Exception e) {
             throw new ClientNotFound();

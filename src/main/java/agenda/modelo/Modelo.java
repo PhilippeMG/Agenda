@@ -122,10 +122,10 @@ public class Modelo implements Serializable, InterfaceModelo {
             System.out.println("No hay clientes");
         } else {
             Iterator<Cliente> iterClientela = clientela.iterator();//.entrySet().iterator();
-            datos += "NIF\tNombre\tDirección\t\t\tCorreo\tTarifa\tFecha\n";
+            datos += "NIF\tNombre\tProvincia\tPoblación\tCP\tCorreo\tTarifa\tFecha de Alta\n";
             while (iterClientela.hasNext()) {
                 dades = (iterClientela.next().informacion());
-                datos += (dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\t" + dades.get(5) + "\n");
+                datos += (dades.get(0) + "\t" + dades.get(1) + "\t" + dades.get(2) + "\t" + dades.get(3) + "\t" + dades.get(4) + "\t" + dades.get(5)  +"\t" + dades.get(6) +"\t" + dades.get(7)+ "\n");
             }
         }
         return datos;
@@ -214,8 +214,8 @@ public class Modelo implements Serializable, InterfaceModelo {
     public <T extends GetFecha> LinkedList<T> devolverEntreFechas(List<T> lista, LocalDateTime inicio, LocalDateTime fin) {
         LinkedList<T> devolver = new LinkedList<>();
         for (T elemento : lista) {
-            if ((elemento.getFecha().isAfter(inicio) || elemento.getFecha().equals(inicio)) &&
-                    (elemento.getFecha().isBefore(fin) || elemento.getFecha().equals(fin))) {
+            if ((elemento.getFecha().toLocalDate().isAfter(inicio.toLocalDate()) || elemento.getFecha().toLocalDate().equals(inicio.toLocalDate())) &&
+                    (elemento.getFecha().toLocalDate().isBefore(fin.toLocalDate()) || elemento.getFecha().toLocalDate().equals(fin.toLocalDate()))) {
                 devolver.add(elemento);
             }
         }

@@ -163,7 +163,7 @@ public class FormularioListarEntre2Fechas extends Formulario {
 
 
     public boolean camposVacios() {
-        return (isEmpty(diaIn)&& isEmpty(diaFi)&& isEmpty(mesIn) && isEmpty(mesFi)&& isEmpty(anyIn)  && isEmpty(anyFi));
+        return (isEmpty(diaIn)|| isEmpty(diaFi)|| isEmpty(mesIn) || isEmpty(mesFi)|| isEmpty(anyIn) || isEmpty(anyFi));
     }
 
     public void rellenarInformacion(String datos) {

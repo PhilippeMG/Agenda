@@ -55,7 +55,7 @@ public class Llamada implements Serializable, GetFecha {
         Vector vector = new Vector();
         vector.add(getNumDestino());
         vector.add(getDuracion());
-        vector.add(getFecha().getDayOfMonth()+" "+getFecha().getMonth()+" "+getFecha().getYear());
+        vector.add(ajusteFecha(getFecha()));
         return vector;
     }
 }

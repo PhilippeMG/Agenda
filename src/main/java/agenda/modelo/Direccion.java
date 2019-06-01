@@ -1,6 +1,7 @@
 package agenda.modelo;
 
 import java.io.Serializable;
+import java.util.Vector;
 
 public class Direccion implements Serializable {
     private int CP;
@@ -31,4 +32,5 @@ public class Direccion implements Serializable {
                 ", provincia='" + provincia + '\'' +
                 ", poblacion='" + poblacion + "'";
     }
+
 }

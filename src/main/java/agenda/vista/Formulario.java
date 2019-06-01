@@ -11,5 +11,6 @@ public abstract class Formulario {
     }
     public boolean isEmpty(JTextField objeto) { return (tamanyCampo(objeto) <= 0);
     }
+    public abstract boolean camposVacios();
 
 }

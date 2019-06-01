@@ -44,11 +44,12 @@ public class Factura implements Serializable, GetFecha {
     }
 
     public Double importe(Cliente cliente, LocalDateTime inicio, LocalDateTime fin) {
+
         double importe = 0; //€/min
         if (cliente == null || cliente.getLlamadas() == null) return 0.0;
         for (Llamada llamada : cliente.getLlamadas()) {
             //si es igual a inicio o a fin o posterior a inicio o anteror a fin.
-            if ((llamada.getFecha().equals(inicio) || llamada.getFecha().isAfter(inicio)) && (llamada.getFecha().equals(fin) || llamada.getFecha().isBefore(fin))) {
+            if ((llamada.getFecha().equals(inicio.toLocalDate()) || llamada.getFecha().toLocalDate().isAfter(inicio.toLocalDate())) && (llamada.getFecha().equals(fin.toLocalDate()) || llamada.getFecha().toLocalDate().isBefore(fin.toLocalDate()))) {
                 importe += cliente.getTarifa().calculaPrecio(llamada);
             }
         }
@@ -75,10 +76,12 @@ public class Factura implements Serializable, GetFecha {
         Vector vector = new Vector();
         vector.add(getCod());
         vector.add(tipoTarifa.getPrecio());
-        vector.add(inicio.getDayOfMonth()+" "+inicio.getMonth()+" "+inicio.getYear());
-        vector.add(fin.getDayOfMonth()+" "+fin.getMonth()+" "+fin.getYear());
+        vector.add(ajusteFecha(inicio));
+        vector.add(ajusteFecha(fin));
         vector.add(getImporte());
+        vector.add(ajusteFecha(emision));
 
         return vector;
     }
+
 }

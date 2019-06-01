@@ -6,7 +6,6 @@ import agenda.modelo.Llamada;
 import agenda.modelo.tarifa.Tarifa;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -107,10 +106,12 @@ public abstract class Cliente implements Serializable, GetFecha {
         Vector vector = new Vector();
         vector.add(nif);
         vector.add(nombre);
-        vector.add(direccion);
+        vector.add(direccion.getProvincia());
+        vector.add(direccion.getPoblacion());
+        vector.add(direccion.getCP());
         vector.add(correo);
         vector.add(tarifa.getPrecio());
-        vector.add(fechaDeAlta.getDayOfMonth()+" "+fechaDeAlta.getMonth()+" "+fechaDeAlta.getYear());
+        vector.add(ajusteFecha(fechaDeAlta));
         return vector;
 
 
