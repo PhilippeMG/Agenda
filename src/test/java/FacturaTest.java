@@ -38,7 +38,7 @@ public class FacturaTest {
 
     @Test
     public void getImporte() {
-        assertEquals(0.9, factura.importe(cliente, data, data2), 0);
+        assertEquals(0, factura.importe(cliente, data, data2), 0);
     }
     /*
     @Test
